@@ -4,69 +4,96 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Página Especial para Ti</title>
-
-  <!-- Fallback pixel font desde Google (Press Start 2P) -->
+  <title>Página Mágica para Ti</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg1: #fff0f6;
       --bg2: #ffd7eb;
       --accent: #ff3b8d;
+      --accent-light: #ff73a7;
+      --accent-dark: #e5005e;
       --soft: rgba(255, 255, 255, 0.6);
       --glass: rgba(255, 255, 255, 0.18);
-      --shadow: 0 10px 30px rgba(255, 60, 130, 0.12);
-      --radius: 18px;
+      --shadow: 0 10px 30px rgba(255, 60, 130, 0.15);
+      --radius: 20px;
       --ui-pad: 14px;
     }
 
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      font-family: "Press Start 2P", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-      background: radial-gradient(1200px 800px at 10% 10%, #fff0f6 0%, transparent 30%), linear-gradient(180deg, var(--bg1), var(--bg2));
-      color: #2a2530;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
+    * {
+      box-sizing: border-box;
     }
 
-    /* Layout */
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Delius', cursive;
+      background: linear-gradient(135deg, #fff0f6 0%, #ffd7eb 100%);
+      color: #2a2530;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(255, 182, 193, 0.2) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(255, 192, 203, 0.2) 0%, transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(255, 182, 193, 0.2) 0%, transparent 25%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
     .wrap {
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 24px;
-      gap: 18px;
+      padding: 20px;
+      gap: 20px;
     }
 
     .card {
-      width: min(960px, 96%);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.75));
-      border-radius: calc(var(--radius) + 6px);
-      padding: clamp(16px, 3.5vw, 26px);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 20, 90, 0.06);
+      width: min(900px, 96%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 245, 250, 0.85) 100%);
+      border-radius: var(--radius);
+      padding: clamp(18px, 4vw, 28px);
+      box-shadow: var(--shadow), 0 0 0 1px rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 20, 90, 0.1);
       position: relative;
-      overflow: visible;
+      overflow: hidden;
     }
 
-    /* Header / title */
+    .card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #ff9ebb, #ff73a7, #ff3b8d);
+      border-radius: 10px 10px 0 0;
+    }
+
     .title-row {
       display: flex;
       align-items: center;
       gap: 12px;
       flex-wrap: wrap;
-      justify-content: space-between
+      justify-content: space-between;
+      margin-bottom: 15px;
     }
 
     h1 {
-      font-size: clamp(20px, 5vw, 34px);
+      font-size: clamp(24px, 6vw, 38px);
       margin: 0;
       color: var(--accent);
       letter-spacing: .02em;
@@ -74,99 +101,102 @@
       align-items: center;
       gap: .6rem;
       transform-origin: center;
-      animation: titlePop .9s ease;
-      text-shadow: 0 6px 18px rgba(255, 80, 150, 0.12);
+      animation: titlePop 1s ease;
+      text-shadow: 0 4px 12px rgba(255, 80, 150, 0.2);
+      font-family: 'Press Start 2P', cursive;
     }
 
     @keyframes titlePop {
-      from {
-        transform: scale(.96);
-        opacity: 0
-      }
-
-      to {
-        transform: scale(1);
-        opacity: 1
-      }
+      0% { transform: scale(.96); opacity: 0; }
+      70% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .sub {
       color: #6e6170;
       font-weight: 700;
       font-size: 12px;
+      font-family: 'Press Start 2P', cursive;
     }
 
-    /* Player and controls */
     .player {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 12px;
+      gap: 16px;
       align-items: center;
-      margin-top: 12px;
+      margin-top: 15px;
     }
 
     .play-card {
-      background: var(--glass);
-      padding: 10px;
-      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 16px;
+      border-radius: 16px;
       display: flex;
-      gap: 12px;
+      gap: 16px;
       align-items: center;
-      box-shadow: 0 8px 18px rgba(255, 50, 130, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 6px 16px rgba(255, 50, 130, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.6);
     }
 
     .big-btn {
-      background: linear-gradient(180deg, #ff8ab8, #ff4d94);
+      background: linear-gradient(180deg, var(--accent-light), var(--accent));
       color: white;
       border: 0;
-      padding: 10px 12px;
-      border-radius: 12px;
-      font-weight: 800;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 6px 16px rgba(255, 60, 140, 0.18);
+      box-shadow: 0 5px 15px rgba(255, 60, 140, 0.25);
       display: inline-flex;
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
+      font-family: 'Delius', cursive;
+      font-size: 15px;
     }
 
     .big-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(255, 60, 140, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 60, 140, 0.35);
     }
 
     .big-btn:active {
-      transform: translateY(1px) scale(.995)
+      transform: translateY(1px);
+      box-shadow: 0 3px 10px rgba(255, 60, 140, 0.2);
     }
 
     .seek {
-      width: 220px;
+      width: 100%;
       appearance: none;
-      height: 10px;
+      height: 8px;
       border-radius: 999px;
       background: linear-gradient(90deg, #ffd3ea, #ff9fd4);
       border: 1px solid rgba(255, 255, 255, 0.6);
       cursor: pointer;
+      margin-top: 8px;
     }
 
     .seek::-webkit-slider-thumb {
       appearance: none;
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: white;
       border: 3px solid var(--accent);
-      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.25);
+      box-shadow: 0 3px 10px rgba(255, 60, 130, 0.3);
       cursor: pointer;
+      transition: all 0.2s;
     }
 
-    /* Mini game panel */
+    .seek::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
     .game-panel {
-      margin-top: 16px;
+      margin-top: 20px;
       display: flex;
-      gap: 12px;
-      align-items: center;
+      gap: 16px;
+      align-items: stretch;
       justify-content: space-between;
       flex-wrap: wrap;
     }
@@ -174,141 +204,79 @@
     .game-card {
       flex: 1;
       min-width: 200px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.22));
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3));
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 6px 16px rgba(255, 50, 130, 0.08);
     }
 
     .score {
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 900;
-      color: var(--accent)
+      color: var(--accent);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .small {
-      font-size: 12px;
+      font-size: 13px;
       color: #7b6e78;
-      font-weight: 700
+      font-weight: 600;
+      line-height: 1.5;
     }
 
-    /* Game viewport (where hearts fall) */
     .game-viewport {
       width: 100%;
-      height: 340px;
-      border-radius: 12px;
+      height: 380px;
+      border-radius: 16px;
       overflow: hidden;
       position: relative;
-      background: linear-gradient(180deg, rgba(255, 230, 240, 0.9), rgba(255, 240, 246, 0.7));
-      border: 1px dashed rgba(255, 50, 120, 0.06);
-      margin-top: 12px;
+      background: linear-gradient(135deg, rgba(255, 230, 240, 0.9), rgba(255, 240, 246, 0.8));
+      border: 2px dashed rgba(255, 100, 150, 0.2);
+      margin-top: 15px;
       -webkit-tap-highlight-color: transparent;
+      box-shadow: inset 0 0 20px rgba(255, 100, 150, 0.1);
     }
 
     .hud-row {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       align-items: center;
     }
 
     .pixel-heart {
-      width: 22px;
-      height: 22px;
+      width: 26px;
+      height: 26px;
       display: inline-block;
-      filter: drop-shadow(0 6px 18px rgba(255, 90, 160, 0.12));
+      filter: drop-shadow(0 4px 8px rgba(255, 90, 160, 0.2));
       transform: translateY(0);
       animation: heartLift 3s ease-in-out infinite;
     }
 
     .pixel-heart:nth-child(2) {
-      animation-delay: .4s
+      animation-delay: .4s;
     }
 
     .pixel-heart:nth-child(3) {
-      animation-delay: .8s
+      animation-delay: .8s;
     }
 
     @keyframes heartLift {
-      0% {
-        transform: translateY(0) scale(.98)
-      }
-
-      50% {
-        transform: translateY(-6px) scale(1.03)
-      }
-
-      100% {
-        transform: translateY(0) scale(.98)
-      }
+      0% { transform: translateY(0) scale(.98); }
+      50% { transform: translateY(-6px) scale(1.03); }
+      100% { transform: translateY(0) scale(.98); }
     }
 
-    /* Footer */
     footer {
       width: 100%;
       text-align: center;
       color: #856f80;
       font-weight: 700;
-      font-size: 12px;
-      margin-top: 12px
+      font-size: 13px;
+      margin-top: 20px;
+      font-family: 'Press Start 2P', cursive;
     }
 
-    /* Mobile tweaks */
-    @media (max-width: 768px) {
-      .player {
-        grid-template-columns: 1fr;
-        align-items: center
-      }
-
-      .seek {
-        width: 100%
-      }
-
-      .game-viewport {
-        height: 280px
-      }
-
-      .wrap {
-        padding: 14px
-      }
-      
-      .title-row {
-        justify-content: center;
-        text-align: center;
-      }
-      
-      .game-panel {
-        flex-direction: column;
-      }
-      
-      .game-card {
-        width: 100%;
-      }
-      
-      h1 {
-        font-size: 24px;
-      }
-      
-      .sub {
-        font-size: 10px;
-      }
-    }
-    
-    @media (max-width: 520px) {
-      .game-viewport {
-        height: 220px
-      }
-      
-      h1 {
-        font-size: 20px;
-      }
-      
-      .big-btn {
-        padding: 8px 10px;
-        font-size: 12px;
-      }
-    }
-
-    /* little confetti when win */
     .confetti {
       position: absolute;
       inset: 0;
@@ -316,15 +284,13 @@
       overflow: visible;
     }
 
-    /* subtle vignette */
     .vignette {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.04) 100%)
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.03) 100%);
     }
     
-    /* Floating hearts background */
     .floating-hearts {
       position: fixed;
       top: 0;
@@ -337,10 +303,10 @@
     
     .floating-heart {
       position: absolute;
-      width: 24px;
-      height: 24px;
-      opacity: 0.5;
-      animation: float 15s infinite linear;
+      width: 28px;
+      height: 28px;
+      opacity: 0.6;
+      animation: float 18s infinite linear;
     }
     
     @keyframes float {
@@ -354,48 +320,47 @@
       }
     }
     
-    /* Audio error message */
     .audio-error {
       display: none;
       background: rgba(255, 200, 200, 0.8);
       border-radius: 8px;
       padding: 8px 12px;
       margin-top: 8px;
-      font-size: 10px;
+      font-size: 11px;
       color: #d32f2f;
     }
     
-    /* Secret message */
     .secret-message {
       position: fixed;
-      bottom: 10px;
+      bottom: 15px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.9);
-      padding: 10px 15px;
-      border-radius: 20px;
-      font-size: 11px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 12px 18px;
+      border-radius: 24px;
+      font-size: 13px;
       color: #ff3b8d;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       opacity: 0;
       transition: opacity 0.5s;
       z-index: 1000;
       text-align: center;
       max-width: 90%;
+      font-weight: 600;
+      border: 1px solid rgba(255, 100, 150, 0.2);
     }
     
-    /* Bubble de notas */
     .note-bubble {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 160px;
-      min-height: 40px;
+      width: 170px;
+      min-height: 45px;
       max-height: 200px;
-      background: rgba(255, 223, 235, 0.85);
+      background: rgba(255, 223, 235, 0.9);
       border: 2px dashed #ff3b8d;
-      border-radius: 16px;
-      padding: 8px;
+      border-radius: 18px;
+      padding: 10px;
       font-family: 'Press Start 2P', monospace;
       font-size: 11px;
       color: #2a2530;
@@ -403,15 +368,70 @@
       box-shadow: 0 6px 18px rgba(255, 50, 130, 0.2);
       z-index: 9999;
       cursor: grab;
-      line-height: 1.2;
+      line-height: 1.4;
     }
     
+    .sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 100;
+      animation: sparkle 1s forwards;
+    }
+    
+    @keyframes sparkle {
+      0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--tx), var(--ty)) scale(1.5);
+        opacity: 0;
+      }
+    }
+
     @media (max-width: 768px) {
+      .player {
+        grid-template-columns: 1fr;
+      }
+      
+      .play-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      
+      .game-panel {
+        flex-direction: column;
+      }
+      
+      .game-viewport {
+        height: 300px;
+      }
+      
+      h1 {
+        font-size: 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .game-viewport {
+        height: 250px;
+      }
+      
       .note-bubble {
-        right: 10px;
-        bottom: 10px;
         width: 140px;
         font-size: 10px;
+        right: 10px;
+        bottom: 10px;
+      }
+      
+      .big-btn {
+        padding: 10px 12px;
+        font-size: 14px;
       }
     }
   </style>
@@ -420,7 +440,7 @@
 <body>
   <!-- Burbuja decorativa -->
   <div class="note-bubble" id="noteBubble">
-    💌 pondre notitas cada dia aquí :3
+    💌 Pondré notitas cada día aquí :3
   </div>
 
   <!-- Floating hearts background -->
@@ -433,15 +453,14 @@
       <div class="title-row">
         <div style="display:flex;align-items:center;gap:12px">
           <h1>
-            <img src="https://art.pixilart.com/2d2ed65cc301.png" width="28" height="28" style="margin-right:6px">
-           PAGINITA PARA TI 
+            <img src="https://art.pixilart.com/2d2ed65cc301.png" width="32" height="32" style="margin-right:8px">
+            PAGINITA PARA TI 
           </h1>
 
           <div class="hud-row small">
-            <!-- decorative pixel hearts -->
-            <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="22" height="22" alt="Corazón">
-            <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="22" height="22" alt="Corazón">
-            <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="22" height="22" alt="Corazón">
+            <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26" alt="Corazón">
+            <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26" alt="Corazón">
+            <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26" alt="Corazón">
           </div>
         </div>
 
@@ -452,20 +471,19 @@
       </div>
 
       <!-- Player -->
-      <div class="player" style="margin-top:10px">
+      <div class="player" style="margin-top:15px">
         <div class="play-card" style="flex:1">
-          <div style="display:flex;flex-direction:column;gap:6px;flex:1">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+          <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
               <div style="display:flex;flex-direction:column">
-                <strong style="color:var(--accent);font-size:14px">My Kind of Woman</strong>
+                <strong style="color:var(--accent);font-size:16px">My Kind of Woman</strong>
                 <span class="small">Mac DeMarco</span>
               </div>
-              <div style="display:flex;gap:8px;align-items:center">
+              <div style="display:flex;gap:10px;align-items:center">
                 <button class="big-btn" id="playToggle">▶</button>
               </div>
             </div>
 
-            <!-- native audio hidden, we control it -->
             <audio id="audio" preload="metadata">
               <source src="mykindofwoman.mp3" type="audio/mpeg">
               Tu navegador no soporta audio.
@@ -479,23 +497,23 @@
           </div>
 
           <div style="width:160px;display:flex;flex-direction:column;align-items:flex-end">
-            <div style="font-weight:900;color:#7b6374">Ola reproduce esto</div>
-            <div class="small" style="margin-top:6px">Toca la pantalla para crear corazones</div>
+            <div style="font-weight:900;color:#7b6374;font-size:15px">Ola reproduce esto</div>
+            <div class="small" style="margin-top:8px">Toca la pantalla para crear corazones</div>
           </div>
         </div>
 
         <!-- side small panel -->
-        <div style="width:220px;display:flex;flex-direction:column;gap:8px">
+        <div style="width:220px;display:flex;flex-direction:column;gap:10px">
           <div class="game-card">
             <div style="display:flex;justify-content:space-between;align-items:center">
               <div class="small">Juego</div>
               <div class="score" id="score">0</div>
             </div>
-            <div style="margin-top:8px;font-size:12px;color:#6b5866">Atrapa corazones tocándolos Duración 25s, saca tu mejor puntuacion aca de chill</div>
-            <div style="display:flex;gap:8px;margin-top:12px">
-              <button class="big-btn" id="startGame" style="padding:8px 10px;font-size:12px">Jugar</button>
+            <div style="margin-top:10px;font-size:13px;color:#6b5866">Atrapa corazones tocándolos. Duración 25s, saca tu mejor puntuación acá de chill</div>
+            <div style="display:flex;gap:10px;margin-top:15px">
+              <button class="big-btn" id="startGame" style="padding:10px 12px;font-size:13px">Jugar</button>
               <button class="big-btn" id="resetGame"
-                style="padding:8px 10px;font-size:12px;background:linear-gradient(180deg,#fff,#ffd7ec);color:var(--accent)">Reset</button>
+                style="padding:10px 12px;font-size:13px;background:linear-gradient(180deg,#fff,#ffd7ec);color:var(--accent)">Reset</button>
             </div>
           </div>
         </div>
@@ -510,16 +528,17 @@
         </div>
 
         <div class="game-card" style="width:220px">
-          <div style="font-weight:900;color:var(--accent);font-size:18px">Logros</div>
-          <div style="margin-top:8px" id="achievements">
+          <div style="font-weight:900;color:var(--accent);font-size:20px">Logros</div>
+          <div style="margin-top:10px" id="achievements">
             <div class="small">— Toca para crear corazoncitos</div>
             <div class="small">— Aumenta la dificultad si llegas a 15 pts</div>
+            <div class="small">— Los corazones son más fáciles de atrapar ahora</div>
           </div>
         </div>
       </div>
 
-      <div style="display:flex;gap:8px;align-items:center;margin-top:12px">
-        <button class="big-btn" id="moreHearts">💗 +Hacer llovear corazones</button>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:15px;flex-wrap:wrap;">
+        <button class="big-btn" id="moreHearts">💗 +Hacer llover corazones</button>
         <button class="big-btn" id="miniConfetti"
           style="background:linear-gradient(180deg,#fff,#ffe6f2);color:var(--accent)"> Celebrar</button>
       </div>
@@ -529,7 +548,7 @@
 
     <footer>
       Hecho por el tonto de braw para emogato
-      <p style="font-size: 5px; color: gray; margin-top: 30px;">
+      <p style="font-size: 6px; color: gray; margin-top: 30px;">
         (Powered By BrauuStudiosSC)
       </p>
     </footer>
@@ -546,17 +565,36 @@
     // Inicializar corazones flotantes de fondo
     function initFloatingHearts() {
       const container = document.getElementById('floatingHearts');
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 20; i++) {
         const heart = document.createElement('img');
         heart.src = 'https://art.pixilart.com/2d2ed65cc301.png';
         heart.className = 'floating-heart';
         heart.style.left = Math.random() * 100 + '%';
-        heart.style.animationDelay = Math.random() * 15 + 's';
-        heart.style.animationDuration = (15 + Math.random() * 10) + 's';
-        heart.style.width = '24px';
-        heart.style.height = '24px';
+        heart.style.animationDelay = Math.random() * 20 + 's';
+        heart.style.animationDuration = (20 + Math.random() * 15) + 's';
+        heart.style.width = '28px';
+        heart.style.height = '28px';
         container.appendChild(heart);
       }
+    }
+    
+    // Efecto de destellos al hacer clic
+    function createSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = x + 'px';
+      sparkle.style.top = y + 'px';
+      
+      const tx = (Math.random() - 0.5) * 100;
+      const ty = (Math.random() - 0.5) * 100;
+      sparkle.style.setProperty('--tx', tx + 'px');
+      sparkle.style.setProperty('--ty', ty + 'px');
+      
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1000);
     }
     
     // Basic player controls
@@ -606,7 +644,7 @@
     const viewport = document.getElementById('viewport');
     const confettiLayer = document.getElementById('confetti');
 
-    function createFallingHeart(xPercent, size = 40, speed = 6000) {
+    function createFallingHeart(xPercent, size = 50, speed = 7000) {
       const heart = document.createElement('img');
       heart.src = 'https://art.pixilart.com/2d2ed65cc301.png';
       heart.style.position = 'absolute';
@@ -617,16 +655,30 @@
       heart.style.cursor = 'pointer';
       heart.style.zIndex = '5';
       heart.className = 'falling-heart';
+      heart.style.transition = 'transform 0.2s';
+      
+      // Hacer los corazones más fáciles de hacer clic
+      heart.style.pointerEvents = 'auto';
 
-      const drift = (Math.random() * 40) - 20;
+      const drift = (Math.random() * 30) - 15; // Menor deriva para hacerlos más predecibles
       const startY = -40;
       const endY = viewport.clientHeight + 60;
       const animation = heart.animate([
         { transform: `translate(-50%, ${startY}px)`, opacity: 1 },
         { transform: `translate(calc(-50% + ${drift}px), ${endY}px)`, opacity: 0.05 }
-      ], { duration: speed + (Math.random() * 1600), easing: 'cubic-bezier(.2,.7,.2,1)' });
+      ], { duration: speed + (Math.random() * 1000), easing: 'cubic-bezier(.2,.7,.2,1)' });
 
       animation.onfinish = () => { heart.remove(); };
+      
+      // Efecto de agrandamiento al pasar el mouse
+      heart.addEventListener('mouseover', () => {
+        heart.style.transform = 'translate(-50%, -10px) scale(1.15)';
+      });
+      
+      heart.addEventListener('mouseout', () => {
+        heart.style.transform = 'translate(-50%, -10px) scale(1)';
+      });
+      
       return heart;
     }
 
@@ -634,7 +686,7 @@
     const scoreEl = document.getElementById('score');
     let score = 0;
     let gameInterval = null;
-    let spawnInterval = 1200;
+    let spawnInterval = 1300; // Un poco más lento para que no sea abrumador
     let gameRunning = false;
     let gameTimeout = null;
 
@@ -654,7 +706,7 @@
       gameTimeout = setTimeout(endGame, 25000);
       
       // Mostrar mensaje secreto
-      showSecretMessage("¡A jugar! ❤️");
+      showSecretMessage("¡A jugar! ❤️ Toca los corazones que caen");
     }
 
     function endGame() {
@@ -662,11 +714,11 @@
       clearInterval(gameInterval);
       viewport.removeEventListener('click', onViewportClick);
       // confetti if score high
-      if (score >= 12) celebrate();
+      if (score >= 10) celebrate();
       
       // Mensaje personalizado según puntuación
       let message = "Juego terminado! Puntaje: " + score + " ";
-      if (score < 5) message += "💔 Puedes hacerlo mejor";
+      if (score < 5) message += "💔 Sigue intentando";
       else if (score < 10) message += "❤️ ¡Bien hecho!";
       else if (score < 15) message += "💖 ¡Excelente!";
       else message += "💕 ¡Eres increíble!";
@@ -685,16 +737,19 @@
 
     function spawnHeartRandom() {
       const x = Math.random() * 100;
-      const heart = createFallingHeart(x, 36, 4200 + Math.random() * 1800);
+      const heart = createFallingHeart(x, 50, 5000 + Math.random() * 2000); // Más grandes y más lentos
       // register tap to collect
       heart.addEventListener('click', (ev) => {
         ev.stopPropagation();
         collectHeart(heart);
       }, { passive: false });
       viewport.appendChild(heart);
-      // increase difficulty slowly
-      if (score >= 15) {
-        if (gameInterval) { clearInterval(gameInterval); gameInterval = setInterval(spawnHeartRandom, Math.max(280, spawnInterval - 300)); }
+      
+      // Aumentar dificultad gradualmente
+      if (score >= 15 && gameInterval) {
+        clearInterval(gameInterval); 
+        spawnInterval = Math.max(800, spawnInterval - 100);
+        gameInterval = setInterval(spawnHeartRandom, spawnInterval);
       }
     }
 
@@ -703,6 +758,11 @@
       node.remove();
       score += 1;
       scoreEl.textContent = score;
+      // Efecto de destello
+      createSparkle(
+        node.getBoundingClientRect().left + node.width/2,
+        node.getBoundingClientRect().top + node.height/2
+      );
       // small pop animation on confetti layer
       burstAt(node.getBoundingClientRect().left + node.clientWidth / 2, node.getBoundingClientRect().top + node.clientHeight / 2);
     }
@@ -711,10 +771,13 @@
       // if clicking empty space, spawn a decorative heart where tapped
       const rect = viewport.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const heart = createFallingHeart(x, 28, 2800 + Math.random() * 800);
+      const heart = createFallingHeart(x, 40, 3000 + Math.random() * 1000);
       viewport.appendChild(heart);
       // tap on it to collect
       heart.addEventListener('click', ev => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
+      
+      // Efecto de destello
+      createSparkle(e.clientX, e.clientY);
     }
 
     // small burst effect (tiny particles) used on collect
@@ -727,16 +790,16 @@
       c.style.top = (pageY - baseRect.top) + 'px';
       c.style.pointerEvents = 'none';
       // 6 tiny squares
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 8; i++) {
         const p = document.createElement('div');
         p.style.width = p.style.height = (6 + Math.random() * 6) + 'px';
         p.style.background = i % 2 == 0 ? '#ff6aa6' : '#ff2e81';
         p.style.position = 'absolute';
         p.style.left = '0px'; p.style.top = '0px';
-        p.style.borderRadius = '2px';
+        p.style.borderRadius = '50%';
         c.appendChild(p);
-        const dx = (Math.random() * 120 - 60);
-        const dy = (Math.random() * 120 - 80);
+        const dx = (Math.random() * 100 - 50);
+        const dy = (Math.random() * 100 - 60);
         p.animate([{ transform: 'translate(0,0)', opacity: 1 }, { transform: `translate(${dx}px, ${dy}px) scale(.4)`, opacity: 0 }], { duration: 700 + Math.random() * 300, easing: 'cubic-bezier(.2,.8,.2,1)' });
       }
       confettiLayer.appendChild(c);
@@ -749,13 +812,13 @@
 
     // more hearts button: spawn a burst of hearts
     document.getElementById('moreHearts').addEventListener('click', () => {
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 8; i++) {
         setTimeout(() => {
           const x = 10 + Math.random() * 80;
-          const heart = createFallingHeart(x, 36, 2800 + Math.random() * 1200);
+          const heart = createFallingHeart(x, 45, 3500 + Math.random() * 1500);
           heart.addEventListener('click', ev => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
           viewport.appendChild(heart);
-        }, i * 80);
+        }, i * 150);
       }
       showSecretMessage("¡Lluvia de corazones! 💖");
     });
@@ -763,7 +826,7 @@
     // confetti celebration (mini)
     function celebrate() {
       // small burst of colored confetti
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 40; i++) {
         const el = document.createElement('div');
         el.style.position = 'absolute';
         el.style.left = (Math.random() * 100) + '%';
@@ -771,6 +834,7 @@
         el.style.width = el.style.height = (6 + Math.random() * 8) + 'px';
         el.style.background = Math.random() > 0.5 ? '#ffd3ea' : '#ff8ab8';
         el.style.opacity = '0.95';
+        el.style.borderRadius = '50%';
         confettiLayer.appendChild(el);
         el.animate([{ transform: 'translateY(0) rotate(0)', opacity: 1 }, { transform: `translateY(260px) rotate(${Math.random() * 360}deg)`, opacity: 0 }], { duration: 1400 + Math.random() * 800, easing: 'cubic-bezier(.2,.7,.2,1)' });
         setTimeout(() => el.remove(), 2200);
@@ -804,17 +868,22 @@
       }, 3000);
     }
 
+    // Efecto de destello al hacer clic en cualquier lugar
+    document.addEventListener('click', (e) => {
+      createSparkle(e.clientX, e.clientY);
+    });
+
     // tap anywhere on card to spawn a decorative heart (not game)
     document.querySelector('.card').addEventListener('click', (e) => {
       // avoid clicks that are on game controls to reduce annoyance
       if (e.target.closest('.big-btn') || e.target.closest('input') || e.target.closest('button')) return;
       const rect = e.currentTarget.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const heart = createFallingHeart(x, 28, 2600 + Math.random() * 1000);
+      const heart = createFallingHeart(x, 35, 2600 + Math.random() * 1000);
       e.currentTarget.appendChild(heart);
     }, { passive: true });
 
-    // Accessibility: keyboard start game with "G"
+    // Atajos de teclado
     document.addEventListener('keydown', (e) => { 
       if (e.key.toLowerCase() === 'g') startGame(); 
       if (e.key.toLowerCase() === 'r') resetGame(); 
@@ -822,9 +891,9 @@
         for (let i = 0; i < 5; i++) {
           setTimeout(() => {
             const x = Math.random() * 100;
-            const heart = createFallingHeart(x, 28, 4200 + Math.random() * 1600); 
+            const heart = createFallingHeart(x, 40, 4200 + Math.random() * 1600); 
             document.querySelector('.card').appendChild(heart);
-          }, i * 180);
+          }, i * 200);
         }
         showSecretMessage("¡Hearts! 💖 Presiona 'G' para jugar");
       }
@@ -834,9 +903,9 @@
     for (let i = 0; i < 8; i++) {
       setTimeout(() => { 
         const x = Math.random() * 100; 
-        const heart = createFallingHeart(x, 28, 4200 + Math.random() * 1600); 
+        const heart = createFallingHeart(x, 35, 4200 + Math.random() * 1600); 
         document.querySelector('.card').appendChild(heart); 
-      }, i * 180);
+      }, i * 200);
     }
     
     // Inicializar corazones flotantes
@@ -844,7 +913,7 @@
     
     // Mensaje de bienvenida
     setTimeout(() => {
-      showSecretMessage("Bienvenida a tu página especial 💖 Presiona 'H' para corazones");
+      showSecretMessage("Bienvenida a tu página especial 💖 Los corazones son más fáciles de atrapar ahora");
     }, 1000);
 
     // Bubble drag logic
