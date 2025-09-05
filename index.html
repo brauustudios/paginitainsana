@@ -511,14 +511,29 @@
         min-width: 100%;
       }
     }
+    /* Estilo para la segunda burbuja en posición superior izquierda */
+.bubble-top-left {
+  top: 20px;
+  right: auto;
+  left: 20px;
+  bottom: auto;
+  width: 160px;
+  background: rgba(255, 236, 245, 0.9);
+  border: 2px dashed #ff73a7;
+}
   </style>
 </head>
 
 <body>
   <!-- Burbuja decorativa -->
   <div class="note-bubble" id="noteBubble">
-    💌 ola mariana, perdoname por todo, fui un tonto, te quiero mucho eso jamas lo dudes, y no dudes que si me interesas, claro que si, solo no me se expresar muy bien pero quisera darte todo el amor que tengo solamente parati. TE LO JURO QUE CUANDO DIGO QUE ERES LA MAS HERMOSA, ES PORQUE LO ERES. Ten un bonito dia asi como tu 💕
+    💌 ola mariana, perdoname por todo, fui un tonto, te quiero mucho eso jamas lo dudes, y no dudes que si me interesas, claro que si, solo no me se expresar muy bien pero quisera darte todo el amor que tengo solamente parati. TE LO JURO QUE CUANDO DIGO QUE ERES LA MAS HERMOSA, ES PORQUE LO ERES.
   </div>
+
+<!-- Burbuja decorativa 2 (nueva) -->
+<div class="note-bubble bubble-top-left" id="noteBubble2">
+  olaemo, ten un muy bonito dia y espero que te salga todo bien, recuerda no pienses en cosas que te puedan afectar <3
+</div>
 
   <!-- Floating hearts background -->
   <div class="floating-hearts" id="floatingHearts"></div>
@@ -546,7 +561,7 @@
             <3333
           </h2>
           <p style="font-family: 'Delius', cursive; color: #6e6170; font-size: 16px; margin-top: 15px; line-height: 1.5; padding: 0 10px;">
-            quiero que sepas que enserio me importas mucho, yo a ti te escojeria como primera opcion en todo, perdoname si no me se expresar mucho pero enserio me importas mucho y eso nadie lo cambiara.. <3
+            quiero que sepas que enserio me importas mucho, yo a ti te escojeria como primera opcion en todo, perdoname si no me se expresar mucho pero enserio me importas mucho.. <3
           </p>
         </div>
 
@@ -567,8 +582,8 @@
           <div style="display:flex;flex-direction:column;gap:8px;flex:1">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
               <div style="display:flex;flex-direction:column">
-                <strong style="color:var(--accent);font-size:16px">Amor Completo</strong>
-                <span class="small">Mon Laferte</span>
+                <strong style="color:var(--accent);font-size:16px">Alguien Como Tu</strong>
+                <span class="small">Josean Log</span>
               </div>
               <div style="display:flex;gap:10px;align-items:center">
                 <button class="big-btn" id="playToggle">▶</button>
@@ -1119,9 +1134,59 @@
     }
 
   </script>
+  <script>// Bubble drag logic for second bubble
+const bubble2 = document.getElementById('noteBubble2');
+let isDragging2 = false;
+let offsetX2 = 0;
+let offsetY2 = 0;
+
+bubble2.addEventListener('mousedown', (e) => {
+  isDragging2 = true;
+  offsetX2 = e.clientX - bubble2.offsetLeft;
+  offsetY2 = e.clientY - bubble2.offsetTop;
+  bubble2.style.cursor = 'grabbing';
+});
+
+document.addEventListener('mouseup', () => {
+  isDragging2 = false;
+  bubble2.style.cursor = 'grab';
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isDragging2) return;
+  moveBubble2(e.clientX, e.clientY);
+});
+
+// Touch for second bubble
+bubble2.addEventListener('touchstart', (e) => {
+  isDragging2 = true;
+  const touch = e.touches[0];
+  offsetX2 = touch.clientX - bubble2.offsetLeft;
+  offsetY2 = touch.clientY - bubble2.offsetTop;
+});
+
+document.addEventListener('touchend', () => {
+  isDragging2 = false;
+});
+
+document.addEventListener('touchmove', (e) => {
+  if (!isDragging2) return;
+  const touch = e.touches[0];
+  moveBubble2(touch.clientX, touch.clientY);
+});
+
+function moveBubble2(x, y) {
+  let left = x - offsetX2;
+  let top = y - offsetY2;
+
+  // limitar dentro de pantalla
+  left = Math.max(0, Math.min(window.innerWidth - bubble2.offsetWidth, left));
+  top = Math.max(0, Math.min(window.innerHeight - bubble2.offsetHeight, top));
+
+  bubble2.style.left = left + 'px';
+  bubble2.style.top = top + 'px';
+  bubble2.style.right = 'auto';
+}</script>
 </body>
 
 </html>
-
-
-
