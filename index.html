@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Pagina para emo <3 </title>
+  <title>Para emo 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png">
@@ -513,26 +513,44 @@
     }
     /* Estilo para la segunda burbuja en posición superior izquierda */
 .bubble-top-left {
-  top: 20px;
+  top: 50px;
   right: auto;
-  left: 20px;
+  left: 50px;
   bottom: auto;
   width: 160px;
   background: rgba(255, 236, 245, 0.9);
   border: 2px dashed #ff73a7;
 }
+#lastUpdate {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 182, 193, 0.85);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 2000;
+  animation: fadeIn 2s ease-in-out;
+}
+
   </style>
 </head>
 
 <body>
+  <div id="lastUpdate">Última actualización: ...</div>
+
   <!-- Burbuja decorativa -->
   <div class="note-bubble" id="noteBubble">
-    💌 ola mariana, perdoname por todo, fui un tonto, te quiero mucho eso jamas lo dudes, y no dudes que si me interesas, claro que si, solo no me se expresar muy bien pero quisera darte todo el amor que tengo solamente parati. TE LO JURO QUE CUANDO DIGO QUE ERES LA MAS HERMOSA, ES PORQUE LO ERES.
+    💌 olaemo, espero que hayas tenido un increible dia y lo hayas pasado demasiado bien, hice ese render ahorita que no tenia internet, pero ya porfin tuve un poco de tiempo para actualizarte la paginita <33
   </div>
 
 <!-- Burbuja decorativa 2 (nueva) -->
 <div class="note-bubble bubble-top-left" id="noteBubble2">
-  olaemo, tequiero mucho, enserio, voy a intentar dar lo mejor de mi para ti, espero que estés muy bien <3
+  tequieromucho <3
 </div>
 
   <!-- Floating hearts background -->
@@ -561,13 +579,13 @@
             <3333
           </h2>
           <p style="font-family: 'Delius', cursive; color: #6e6170; font-size: 16px; margin-top: 15px; line-height: 1.5; padding: 0 10px;">
-            quiero que sepas que enserio me importas mucho, yo a ti te escojeria como primera opcion en todo, perdoname si no me se expresar mucho pero enserio me importas mucho.. <3
+           RECUERDA LO BONITA QUE ERES SIEMPRE <3
           </p>
         </div>
 
               <!-- Imagen agregada debajo del texto -->
       <div style="text-align: center; margin: 20px 0;">
-        <img src="https://i.ibb.co/KjczJp33/skins.png" alt="rendersito" style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 5px 15px rgba(255, 255, 255, 0.25);">
+        <img src="http://imgfz.com/i/a1gVLjc.png" alt="rendersito" style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 5px 15px rgba(255, 255, 255, 0.25);">
       </div>
         
         <div style="display:flex;gap:10px;align-items:center">
@@ -582,7 +600,7 @@
           <div style="display:flex;flex-direction:column;gap:8px;flex:1">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
               <div style="display:flex;flex-direction:column">
-                <strong style="color:var(--accent);font-size:16px">Alguien Como Tu</strong>
+                <strong style="color:var(--accent);font-size:16px">Pruebame a ti</strong>
                 <span class="small">Josean Log</span>
               </div>
               <div style="display:flex;gap:10px;align-items:center">
@@ -959,7 +977,7 @@
 
     // Botón de pedir perdón
     document.getElementById('apologyBtn').addEventListener('click', () => {
-      showSecretMessage("💔 perdoname mariana, soy un tonto, enserio te quiero mucho, incluso mas, pero enserio perdoname, solamente no sabia si en verdad te interesaba, pido perdon, te juro que te mandare mensajes lo mas que pueda y ya no pensare que soy una molestia, teamo..");
+      showSecretMessage("ola, te quiero muchoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo, asi ymas enserio demasiado <3");
       
       // Efecto especial de corazones
       for (let i = 0; i < 15; i++) {
@@ -1132,6 +1150,20 @@
       bubble.style.left = left + 'px';
       bubble.style.top = top + 'px';
     }
+// Mostrar fecha/hora de última actualización
+function updateLastUpdate() {
+  const now = new Date();
+  const options = { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric', 
+    hour: '2-digit', 
+    minute: '2-digit' 
+  };
+  document.getElementById('lastUpdate').textContent = 
+    "Última actualización: " + now.toLocaleDateString('es-ES', options);
+}
+updateLastUpdate();
 
   </script>
   <script>// Bubble drag logic for second bubble
@@ -1190,4 +1222,3 @@ function moveBubble2(x, y) {
 </body>
 
 </html>
-
