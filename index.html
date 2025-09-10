@@ -1,708 +1,1209 @@
-<html lang="id"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina para emo <3 </title>
-         <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png">
-    <style>
-        /* Font imports */
-        @import url('https://fonts.googleapis.com/css2?family=Paytone+One&family=Bubblegum+Sans&family=Poppins:wght@300;400;500;600&display=swap');
-        
-        /* Base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Bubblegum Sans', cursive;
-            background-color: #ffc4e4;
-            color: #4a4a4a;
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background-image: url('rjq4b60sxz.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: repeat;
-        }
-        
-        /* Lace border */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" width="24" height="12"><path d="M0,0 Q6,0 12,12 Q18,0 24,0 Z" fill="%23ffb6c1" /></svg>') repeat-x;
-            background-size: 24px 12px;
-        }
-        
-        body::after {
-            content: "";
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" width="24" height="12"><path d="M0,12 Q6,12 12,0 Q18,12 24,12 Z" fill="%23ffb6c1" /></svg>') repeat-x;
-            background-size: 24px 12px;
-        }
-        
-        /* Page container */
-        .page {
-            width: 100%;
-            max-width: 800px;
-            min-height: 100vh;
-            padding: 40px 20px;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-        
-        .page.active {
-            display: flex;
-        }
-        
-        .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 25px 20px;
-            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
-            position: relative;
-            width: 90%;
-            max-width: 500px;
-            margin: 0 auto;
-            border: 2px solid #ffb6c1;
-        }
-        
-        /* Make envelope page container wider */
-        #page2 .container {
-            max-width: 550px;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px 15px;
-                width: 95%;
-            }
-        }
-        
-        .container::before {
-            content: "";
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            border: 2px dashed #ffb6c1;
-            border-radius: 24px;
-            pointer-events: none;
-        }
-        
-        /* Typography */
-        h1 {
-            font-family: 'Paytone One', sans-serif;
-            color: #ff85a2;
-            margin-bottom: 0.5em;
-            font-size: 2.5rem;
-            text-shadow: 3px 3px 0 #fff, 5px 5px 0 rgba(255, 133, 162, 0.3);
-        }
-        
-        h2 {
-            font-family: 'Bubblegum Sans', cursive;
-            color: #ff85a2;
-            margin-bottom: 0.5em;
-            font-size: 1.8rem;
-            max-width: 100%;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            text-align: center;
-        }
-        
-        /* Responsive text sizes */
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            p {
-                font-size: 1rem;
-            }
-        }
-        
-        p {
-            margin-bottom: 1.5em;
-            line-height: 1.6;
-            font-size: 1.2rem;
-            white-space: nowrap;
-        }
-        
-        /* Images */
-        .image-container {
-            width: 180px;
-            height: 180px;
-            margin: 20px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border: 3px solid #ffb6c1;
-            font-size: 0;
-            line-height: 0;
-        }
-        
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-            display: block;
-           
-        }
-        
-        /* Special styles for envelope container */
-        #page2 .image-container {
-            width: auto;
-            height: auto;
-            max-width: 85%;
-            background-color: #ffb6c1;
-        }
-        
-        #page2 .image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: contain;
-        }
-        
-        /* Special styles for crying character */
-        #page3 .image-container {
-            width: 200px;
-            height: 200px;
-        }
-        
-        /* Responsive adjustments for mobile */
-        @media (max-width: 480px) {
-            .image-container {
-                width: 150px;
-                height: 150px;
-            }
-            
-            #page3 .image-container {
-                width: 180px;
-                height: 180px;
-            }
-        }
-        
-        .image-container:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* Buttons */
-        .btn {
-            background-color: #ffb6c1;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            margin: 10px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.4);
-            font-family: 'Bubblegum Sans', cursive;
-            white-space: nowrap;
-        }
-        
-        /* Responsive button sizes */
-        @media (max-width: 480px) {
-            .btn {
-                padding: 8px 20px;
-                font-size: 1rem;
-            }
-        }
-        
-        .btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: all 0.6s ease;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.6);
-        }
-        
-        .btn:hover::before {
-            left: 100%;
-        }
-        
-        .btn:active {
-            transform: translateY(1px);
-        }
-        
-        .btn-green {
-            background-color: #77e0cb;
-        }
-        
-        /* Message text styling */
-        .message-text {
-            padding: 10px;
-            border-radius: 10px;
-            min-height: 100px;
-            margin-bottom: 15px;
-            text-align: left;
-            line-height: 1.6;
-        }
-        
-        /* Animation classes */
-        .bounce {
-            animation: bounce 0.5s;
-        }
-        
-        .shake {
-            animation: shake 0.5s;
-        }
-        
-        .pulse {
-            animation: pulse 0.5s;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-20px);}
-            60% {transform: translateY(-10px);}
-        }
-        
-        @keyframes shake {
-            0%, 100% {transform: translateX(0);}
-            10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
-            20%, 40%, 60%, 80% {transform: translateX(5px);}
-        }
-        
-        @keyframes pulse {
-            0% {transform: scale(1);}
-            50% {transform: scale(1.1);}
-            100% {transform: scale(1);}
-        }
-        
-        /* Audio button */
-        .audio-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background-color: #ffb6c1;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
-        
-        .audio-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .audio-btn i {
-            color: white;
-            font-size: 1.5rem;
-        }
-        
-        /* Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-        
-        .modal.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-        
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 20px;
-            max-width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            border: 3px solid #ffb6c1;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #ff85a2;
-        }
-        
-        /* Heart decorations */
-        .hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .heart {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="%23ffb6c1" /></svg>');
-            background-size: contain;
-            opacity: 0;
-            animation: float 6s linear infinite;
-        }
+<!DOCTYPE html>
+<html lang="es">
 
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        /* Special styling for message page */
-        .message-background {
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 5px solid #ffb6c1;
-            border-radius: 15px;
-            padding: 20px;
-            position: relative;
-        }
-        
-        .message-background::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(255, 255, 255, 0.5);
-            z-index: -1;
-            border-radius: 10px;
-        }
-        
-        .my-baby {
-            text-align: center !important;
-            display: block;
-            margin-bottom: 20px;
-            font-size: 2.2rem;
-            color: #ff85a2;
-            text-shadow: 2px 2px 0 #fff;
-            white-space: nowrap;
-        }
-        
-        .sad-text {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 1.5rem;
-            color: #ff85a2;
-            white-space: nowrap;
-        }
-        
-        /* Responsive text sizes */
-        @media (max-width: 480px) {
-            .my-baby {
-                font-size: 1.8rem;
-            }
-            
-            .sad-text {
-                font-size: 1.3rem;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pagina para emo <3 </title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png">
+  <style>
+    :root {
+      --bg1: #fff0f6;
+      --bg2: #ffd7eb;
+      --accent: #ff3b8d;
+      --accent-light: #ff73a7;
+      --accent-dark: #e5005e;
+      --soft: rgba(255, 255, 255, 0.6);
+      --glass: rgba(255, 255, 255, 0.18);
+      --shadow: 0 10px 30px rgba(255, 60, 130, 0.15);
+      --radius: 20px;
+      --ui-pad: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Delius', cursive;
+      background: linear-gradient(135deg, #fff0f6 0%, #ffd7eb 100%);
+      color: #2a2530;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(255, 182, 193, 0.2) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(255, 192, 203, 0.2) 0%, transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(255, 182, 193, 0.2) 0%, transparent 25%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .wrap {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .card {
+      width: min(900px, 96%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 245, 250, 0.85) 100%);
+      border-radius: var(--radius);
+      padding: clamp(18px, 4vw, 28px);
+      box-shadow: var(--shadow), 0 0 0 1px rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 20, 90, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #ff9ebb, #ff73a7, #ff3b8d);
+      border-radius: 10px 10px 0 0;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: clamp(24px, 6vw, 38px);
+      margin: 0;
+      color: var(--accent);
+      letter-spacing: .02em;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      transform-origin: center;
+      animation: titlePop 1s ease;
+      text-shadow: 0 4px 12px rgba(255, 80, 150, 0.2);
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    @keyframes titlePop {
+      0% { transform: scale(.96); opacity: 0; }
+      70% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .sub {
+      color: #6e6170;
+      font-weight: 700;
+      font-size: 12px;
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    .player {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .play-card {
+      background: rgba(255, 255, 255, 0.6);
+      padding: 16px;
+      border-radius: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      box-shadow: 0 6px 16px rgba(255, 50, 130, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .big-btn {
+      background: linear-gradient(180deg, var(--accent-light), var(--accent));
+      color: white;
+      border: 0;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 60, 140, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      font-family: 'Delius', cursive;
+      font-size: 15px;
+    }
+
+    .big-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 60, 140, 0.35);
+    }
+
+    .big-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 3px 10px rgba(255, 60, 140, 0.2);
+    }
+
+    .seek {
+      width: 100%;
+      appearance: none;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ffd3ea, #ff9fd4);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .seek::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid var(--accent);
+      box-shadow: 0 3px 10px rgba(255, 60, 130, 0.3);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .seek::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .game-panel {
+      margin-top: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: stretch;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .game-card {
+      flex: 1;
+      min-width: 200px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3));
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 6px 16px rgba(255, 50, 130, 0.08);
+    }
+
+    .score {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--accent);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .small {
+      font-size: 13px;
+      color: #7b6e78;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .game-viewport {
+      width: 100%;
+      height: 380px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, rgba(255, 230, 240, 0.9), rgba(255, 240, 246, 0.8));
+      border: 2px dashed rgba(255, 100, 150, 0.2);
+      margin-top: 15px;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: inset 0 0 20px rgba(255, 100, 150, 0.1);
+    }
+
+    .hud-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .pixel-heart {
+      width: 26px;
+      height: 26px;
+      display: inline-block;
+      filter: drop-shadow(0 4px 8px rgba(255, 90, 160, 0.2));
+      transform: translateY(0);
+      animation: heartLift 3s ease-in-out infinite;
+    }
+
+    .pixel-heart:nth-child(2) {
+      animation-delay: .4s;
+    }
+
+    .pixel-heart:nth-child(3) {
+      animation-delay: .8s;
+    }
+
+    @keyframes heartLift {
+      0% { transform: translateY(0) scale(.98); }
+      50% { transform: translateY(-6px) scale(1.03); }
+      100% { transform: translateY(0) scale(.98); }
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      color: #856f80;
+      font-weight: 700;
+      font-size: 13px;
+      margin-top: 20px;
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    .confetti {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .vignette {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.03) 100%);
+    }
+    
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .floating-heart {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      opacity: 0.6;
+      animation: float 18s infinite linear;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    .audio-error {
+      display: none;
+      background: rgba(255, 200, 200, 0.8);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: #d32f2f;
+    }
+    
+    .secret-message {
+      position: fixed;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 12px 18px;
+      border-radius: 24px;
+      font-size: 13px;
+      color: #ff3b8d;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 1000;
+      text-align: center;
+      max-width: 90%;
+      font-weight: 600;
+      border: 1px solid rgba(255, 100, 150, 0.2);
+    }
+    
+    .note-bubble {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 170px;
+      min-height: 45px;
+      max-height: 200px;
+      background: rgba(255, 223, 235, 0.9);
+      border: 2px dashed #ff3b8d;
+      border-radius: 18px;
+      padding: 10px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: #2a2530;
+      overflow-y: auto;
+      box-shadow: 0 6px 18px rgba(255, 50, 130, 0.2);
+      z-index: 9999;
+      cursor: grab;
+      line-height: 1.4;
+    }
+    
+    .sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 100;
+      animation: sparkle 1s forwards;
+    }
+    
+    @keyframes sparkle {
+      0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--tx), var(--ty)) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* Nuevos estilos para la sección de motivos */
+    .reasons-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+    
+    .reasons-title {
+      font-family: 'Press Start 2P', cursive;
+      color: var(--accent);
+      font-size: 18px;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(255, 80, 150, 0.2);
+    }
+    
+    .reasons-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .reason-card {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 12px;
+      padding: 15px;
+      width: calc(50% - 15px);
+      min-width: 250px;
+      box-shadow: 0 4px 10px rgba(255, 60, 140, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .reason-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .reason-number {
+      background: var(--accent);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      font-weight: bold;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+    }
+    
+    .reason-text {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    
+    .apology-btn {
+      margin-top: 20px;
+      background: linear-gradient(180deg, #ff9ebb, #ff73a7);
+    }
+
+    @media (max-width: 768px) {
+      .player {
+        grid-template-columns: 1fr;
+      }
+      
+      .play-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      
+      .game-panel {
+        flex-direction: column;
+      }
+      
+      .game-viewport {
+        height: 300px;
+      }
+      
+      h1 {
+        font-size: 20px;
+      }
+      
+      .reason-card {
+        width: 100%;
+      }
+      
+      .note-bubble {
+        width: 140px;
+        font-size: 9px;
+        right: 10px;
+        bottom: 10px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .game-viewport {
+        height: 250px;
+      }
+      
+      .note-bubble {
+        width: 130px;
+        font-size: 8px;
+        right: 5px;
+        bottom: 5px;
+      }
+      
+      .big-btn {
+        padding: 10px 12px;
+        font-size: 14px;
+      }
+      
+      .reason-card {
+        min-width: 100%;
+      }
+    }
+    /* Estilo para la segunda burbuja en posición superior izquierda */
+.bubble-top-left {
+  top: 50px;
+  right: auto;
+  left: 50px;
+  bottom: auto;
+  width: 160px;
+  background: rgba(255, 236, 245, 0.9);
+  border: 2px dashed #ff73a7;
+}
+#lastUpdate {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 182, 193, 0.85);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 2000;
+  animation: fadeIn 2s ease-in-out;
+}
+
+  </style>
 </head>
+
 <body>
-    <!-- Heart decorations -->
-    <div class="hearts" id="hearts"><div class="heart" style="left: 49.099vw; animation-duration: 8.38864s;"></div><div class="heart" style="left: 95.2122vw; animation-duration: 6.67835s;"></div><div class="heart" style="left: 80.6353vw; animation-duration: 8.4459s;"></div><div class="heart" style="left: 74.1986vw; animation-duration: 6.52095s;"></div><div class="heart" style="left: 7.07372vw; animation-duration: 7.31039s;"></div><div class="heart" style="left: 58.8375vw; animation-duration: 6.9438s;"></div><div class="heart" style="left: 47.8541vw; animation-duration: 8.00616s;"></div><div class="heart" style="left: 92.7901vw; animation-duration: 8.95739s;"></div><div class="heart" style="left: 80.5666vw; animation-duration: 6.15149s;"></div><div class="heart" style="left: 59.5295vw; animation-duration: 8.37276s;"></div><div class="heart" style="left: 94.2538vw; animation-duration: 8.58008s;"></div><div class="heart" style="left: 76.1834vw; animation-duration: 9.48734s;"></div><div class="heart" style="left: 77.7751vw; animation-duration: 9.68102s;"></div><div class="heart" style="left: 57.8853vw; animation-duration: 6.54947s;"></div><div class="heart" style="left: 28.1803vw; animation-duration: 9.67709s;"></div><div class="heart" style="left: 18.6414vw; animation-duration: 9.39445s;"></div><div class="heart" style="left: 92.7748vw; animation-duration: 8.03037s;"></div><div class="heart" style="left: 88.25vw; animation-duration: 9.06949s;"></div><div class="heart" style="left: 0.438394vw; animation-duration: 9.60079s;"></div><div class="heart" style="left: 97.8242vw; animation-duration: 7.94312s;"></div><div class="heart" style="left: 97.3038vw; animation-duration: 7.41262s;"></div><div class="heart" style="left: 63.9174vw; animation-duration: 6.34448s;"></div><div class="heart" style="left: 6.11709vw; animation-duration: 6.56729s;"></div><div class="heart" style="left: 20.5725vw; animation-duration: 7.14996s;"></div><div class="heart" style="left: 74.3004vw; animation-duration: 7.46519s;"></div><div class="heart" style="left: 23.2812vw; animation-duration: 9.64382s;"></div><div class="heart" style="left: 10.0681vw; animation-duration: 9.40543s;"></div><div class="heart" style="left: 43.9033vw; animation-duration: 9.62052s;"></div><div class="heart" style="left: 22.7263vw; animation-duration: 7.92768s;"></div><div class="heart" style="left: 54.551vw; animation-duration: 9.41596s;"></div><div class="heart" style="left: 84.703vw; animation-duration: 9.85703s;"></div><div class="heart" style="left: 4.88452vw; animation-duration: 6.74523s;"></div><div class="heart" style="left: 98.1407vw; animation-duration: 8.5607s;"></div></div>
+  <div id="lastUpdate">Última actualización: 11:03 AM 10/09/25</div>
 
-    <!-- Page 1: Main Page -->
-    <div class="page active" id="page1">
-        <div class="container">
-            <div class="image-container">
-                <img src="https://public.youware.com/image/e62dc7e5-6536-47fb-9d07-fd4a72a3c304/lgbygb2dva.jpg" alt="Cute">
-            </div>
-            <h1 class="yw_text_editable" >Holaaaap linda</h1>
-            <h2 class="my-baby yw_text_editable" >tequieromucho &lt;33</h2>
-            <p>(o◕‿◕o)</p>
-            <p class="yw_text_editable" >♥</p>
-            <button class="btn yw_text_editable pulse" id="nextBtn1" >Avanzar</button>
-        </div>
-    </div>
-    
-    <!-- Page 2: Envelope -->
-    <div class="page" id="page2">
-        <div class="container">
-            <div class="image-container" style="font-size: 0; line-height: 0;">
-                <img src="https://634ffa36-26c3-4418-9177-36ed2e225deb--1757476800--7a3e44f9.app.yourware.app/lxwe945jtp.jpeg" alt="Pink Envelope">
-            </div>
-            <h2 style="white-space: normal; word-break: break-word; text-align: center;">deseas abrirlo??<br>"ヾ(˃̶⺫˂̶)ノ"</h2>
-            <div>
-                <button class="btn" id="openBtn">Abrirlo</button>
-                <button class="btn btn-green" id="noBtn">No</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Page 3: Try Again -->
-    <div class="page" id="page3">
-        <div class="container">
-            <p class="sad-text" style="white-space: nowrap;">intentalo de nuevo ＞︿＜</p>
-            <button class="btn" id="againBtn">intentarlo nuevamente..?</button>
-        </div>
-    </div>
-    
-    <!-- Page 4: Message -->
-    <div class="page" id="page4">
-        <div class="container">
-            <h2 style="white-space: normal; word-break: break-word; text-align: center;">Omg un mensaje<br>(ノ◔◡◔)ノ♥ !!</h2>
-            <div class="message-background">
-                <h2 style="white-space: normal; word-break: break-word; text-align: center;">Hola bonitap<br>(^○^)</h2>
-                <div class="message-text">
-                    Eres la mejor del mundo, eso no lo olvides, solo quiero decirte que te quiero mucho mas que querer incluso
-                    <br>
-                    Amo todo de ti, TODO, en especial tu risa enserio me encanta es muy bella
-                    <br>
-                    Solo quiero decirte que enserio te amo..
-                </div>
-            </div>
-            <button class="btn" id="restartBtn">Comenzar de nuevo ♥</button>
-        </div>
-    </div>
-    
-    <!-- Audio Button -->
-    <div class="audio-btn" id="audioBtn"><i class="fas fa-pause"></i></div>
-    
-    <audio id="bgMusic" loop="" preload="auto" volume="0.7">
-        <source src="music.mp3" type="audio/mp3">
-    </audio>
-    
-    <script src="https://lib.youware.com/youware-lib-consumer.1756473351.js" id="yourware-lib"></script><script>
-        // DOM elements
-        const pages = document.querySelectorAll('.page');
-        const nextBtn1 = document.getElementById('nextBtn1');
-        const openBtn = document.getElementById('openBtn');
-        const noBtn = document.getElementById('noBtn');
-        const againBtn = document.getElementById('againBtn');
-        const restartBtn = document.getElementById('restartBtn');
-        const audioBtn = document.getElementById('audioBtn');
-        const bgMusic = document.getElementById('bgMusic');
-        const heartsContainer = document.getElementById('hearts');
-        
-        // Button audio effect - Cute pop sound
-        function playButtonSound() {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            
-            // Create pop sound
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            
-            // Higher pitch for cuter sound
-            oscillator.type = 'triangle';
-            oscillator.frequency.setValueAtTime(1200, audioCtx.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.08);
-            
-            // Quick attack and release for pop effect
-            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
-            
-            oscillator.start(audioCtx.currentTime);
-            oscillator.stop(audioCtx.currentTime + 0.08);
-        }
-        
-        // Create hearts animation
-        function createHearts() {
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = (6 + Math.random() * 4) + 's';
-                heartsContainer.appendChild(heart);
-                
-                // Remove heart after animation completes
-                setTimeout(() => {
-                    heart.remove();
-                }, 10000);
-            }, 300);
-        }
-        
-        // Button animations
-        function addButtonAnimations() {
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(btn => {
-                btn.addEventListener('mouseenter', () => {
-                    btn.classList.add('pulse');
-                    setTimeout(() => {
-                        btn.classList.remove('pulse');
-                    }, 500);
-                });
-            });
-        }
-        
-        // Navigate between pages
-        function navigateTo(pageIndex) {
-            pages.forEach((page, index) => {
-                if (index === pageIndex) {
-                    page.classList.add('active');
-                } else {
-                    page.classList.remove('active');
-                }
-            });
-            
-            // Add special animations based on page
-            if (pageIndex === 0) {
-                document.querySelector('#page1 .image-container').classList.add('bounce');
-                setTimeout(() => {
-                    document.querySelector('#page1 .image-container').classList.remove('bounce');
-                }, 500);
-            } else if (pageIndex === 3) {
-                document.querySelector('#page4 .container').classList.add('pulse');
-                setTimeout(() => {
-                    document.querySelector('#page4 .container').classList.remove('pulse');
-                }, 500);
-            }
-        }
-        
+  <!-- Burbuja decorativa -->
+  <div class="note-bubble" id="noteBubble">
+    💌 olalinda, espero te vaya muy bien hoy, recuerda siempre ver todo positivamente, te quiero demasiado ermoza 
+  </div>
 
-        
-        // Initialize
-        function init() {
-            // Event listeners
-            nextBtn1.addEventListener('click', () => navigateTo(1));
-            openBtn.addEventListener('click', () => navigateTo(3));
-            noBtn.addEventListener('click', () => navigateTo(2));
-            againBtn.addEventListener('click', () => navigateTo(1));
-            restartBtn.addEventListener('click', () => navigateTo(0));
-            
-            // Audio toggle
-            let isMusicPlaying = false;
-            
-            // Function to handle music playing
-            function handleMusicToggle() {
-                if (isMusicPlaying) {
-                    bgMusic.pause();
-                    audioBtn.innerHTML = '<i class="fas fa-music"></i>';
-                    isMusicPlaying = false;
-                } else {
-                    bgMusic.play()
-                        .then(() => {
-                            audioBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                            isMusicPlaying = true;
-                        })
-                        .catch(e => {
-                            console.error("Audio play failed:", e);
-                            alert("请再次点击播放音乐");
-                        });
-                }
-                audioBtn.classList.add('bounce');
-                setTimeout(() => {
-                    audioBtn.classList.remove('bounce');
-                }, 500);
-            }
-            
-            audioBtn.addEventListener('click', handleMusicToggle);
-            
-            // Auto-start background music on first user interaction
-            let autoPlayAttempted = false;
-            document.addEventListener('click', function startMusic() {
-                if (!autoPlayAttempted) {
-                    autoPlayAttempted = true;
-                    bgMusic.play()
-                        .then(() => {
-                            audioBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                            isMusicPlaying = true;
-                        })
-                        .catch(e => {
-                            console.log('Auto-play prevented, user needs to click music button');
-                            audioBtn.innerHTML = '<i class="fas fa-music"></i>';
-                            isMusicPlaying = false;
-                        });
-                }
-            }, { once: true });
-            
-            // Button animations
-            addButtonAnimations();
-            
-            // Hearts animation
-            createHearts();
-            
-            // Add shake animation to "No" button
-            noBtn.addEventListener('mouseenter', () => {
-                noBtn.classList.add('shake');
-                setTimeout(() => {
-                    noBtn.classList.remove('shake');
-                }, 500);
-            });
-            
-            // Add click sound to all clickable elements
-            document.addEventListener('click', (e) => {
-                if (e.target.matches('button, .btn, .audio-btn')) {
-                    playButtonSound();
-                }
-            });
-        }
-        
-        // Initialize when document is loaded
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
+<!-- Burbuja decorativa 2 (nueva) -->
+<div class="note-bubble bubble-top-left" id="noteBubble2">
+  tequieromucho <3
+</div>
 
-</body></html>
+  <!-- Floating hearts background -->
+  <div class="floating-hearts" id="floatingHearts"></div>
+
+  <div class="vignette"></div>
+
+  <div class="wrap">
+    <div class="card" role="region" aria-label="Dedicado">
+      <div class="title-row">
+        <div style="display:flex;align-items:center;gap:12px">
+          <h1>
+            <img src="https://art.pixilart.com/2d2ed65cc301.png" width="32" height="32" style="margin-right:8px">
+            PARA TI
+          </h1>
+
+          <div class="hud-row small">
+            <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26" alt="Corazón">
+            <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26" alt="Corazón">
+            <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26" alt="Corazón">
+          </div>
+        </div>
+        
+        <div class="texto-centrado" style="text-align: center; margin: 30px 0 20px 0;">
+          <h2 style="font-family: 'Press Start 2P', cursive; color: #ff3b8d; font-size: 24px; text-shadow: 0 4px 12px rgba(255, 80, 150, 0.3); line-height: 1.4;">
+            <3333
+          </h2>
+          <p style="font-family: 'Delius', cursive; color: #6e6170; font-size: 16px; margin-top: 15px; line-height: 1.5; padding: 0 10px;">
+           💌 Eres tan hermosa que hasta las palabras se quedan cortas para describirte <3
+          </p>
+        </div>
+
+              <!-- Imagen agregada debajo del texto -->
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="https://i.ibb.co/DHn2QYR6/xd.png" alt="rendersito" style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 5px 15px rgba(255, 255, 255, 0.25);">
+      </div>
+        
+        <div style="display:flex;gap:10px;align-items:center">
+          <div class="sub">emocat · my · special · girl</div>
+          <button class="big-btn" id="shareBtn" aria-label="Compartir">💌 Compartir</button>
+        </div>
+      </div>
+
+      <!-- Player -->
+      <div class="player" style="margin-top:15px">
+        <div class="play-card" style="flex:1">
+          <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+              <div style="display:flex;flex-direction:column">
+                <strong style="color:var(--accent);font-size:16px">On Melancholy Hill</strong>
+                <span class="small">Gorillaz</span>
+              </div>
+              <div style="display:flex;gap:10px;align-items:center">
+                <button class="big-btn" id="playToggle">▶</button>
+              </div>
+            </div>
+
+            <audio id="audio" preload="metadata">
+              <source src="music.mp3" type="audio/mpeg">
+              Tu navegador no soporta audio.
+            </audio>
+            
+            <div class="audio-error" id="audioError">
+              No se pudo cargar el audio. Asegúrate de tener conexión a internet.
+            </div>
+
+            <input type="range" id="seek" class="seek" min="0" step="0.1" value="0" aria-label="barra de progreso">
+          </div>
+
+          <div style="width:160px;display:flex;flex-direction:column;align-items:flex-end">
+            <div style="font-weight:900;color:#7b6374;font-size:15px">Reproduce esta canción</div>
+            <div class="small" style="margin-top:8px">Toca la pantalla para crear corazones</div>
+          </div>
+        </div>
+
+        <!-- side small panel -->
+        <div style="width:220px;display:flex;flex-direction:column;gap:10px">
+          <div class="game-card">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="small">Juego</div>
+              <div class="score" id="score">0</div>
+            </div>
+            <div style="margin-top:10px;font-size:13px;color:#6b5866">Atrapa corazones tocándolos. Duración 25s</div>
+            <div style="display:flex;gap:10px;margin-top:15px">
+              <button class="big-btn" id="startGame" style="padding:10px 12px;font-size:13px">Jugar</button>
+              <button class="big-btn" id="resetGame"
+                style="padding:10px 12px;font-size:13px;background:linear-gradient(180deg,#fff,#ffd7ec);color:var(--accent)">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game viewport -->
+      <div class="game-panel">
+        <div class="game-card" style="flex:1">
+          <div id="viewport" class="game-viewport" aria-label="Área de juego táctil">
+            <!-- falling hearts inserted here -->
+          </div>
+        </div>
+
+        <div class="game-card" style="width:220px">
+          <div style="font-weight:900;color:var(--accent);font-size:20px">Logros</div>
+          <div style="margin-top:10px" id="achievements">
+            <div class="small">— Toca para crear corazoncitos</div>
+            <div class="small">— Aumenta la dificultad a 15 pts</div>
+            <div class="small">— <33 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de motivos -->
+      <div class="reasons-section">
+        <div class="reasons-title">8 razones por las que me enamore de ti</div>
+        <div class="reasons-container">
+          <div class="reason-card">
+            <div class="reason-number">1</div>
+            <div class="reason-text">Primeramente, porque eres unica.</div>
+          </div>
+          <div class="reason-card">
+            <div class="reason-number">2</div>
+            <div class="reason-text">Me gusta hablar contigo.</div>
+          </div>
+          <div class="reason-card">
+            <div class="reason-number">3</div>
+            <div class="reason-text">Me encanta hablar solo contigo incluso cuando no tengo ganas de hacerlo.</div>
+          </div>
+          <div class="reason-card">
+            <div class="reason-number">4</div>
+            <div class="reason-text">Eres demasiado bonita (la mas bonita que eh conocido).</div>
+          </div>
+          <div class="reason-card">
+            <div class="reason-number">5</div>
+            <div class="reason-text">Tu voz, en serio es encantadora.</div>
+          </div>
+          <div class="reason-card">
+            <div class="reason-number">6</div>
+            <div class="reason-text">nunca habia sentido algo asi por alguien y eso te lo juro por mi vida.</div>
+          </div>
+          <div class="reason-card">
+            <div class="reason-number">7</div>
+            <div class="reason-text">Enserio Te quiero demasiado.</div>
+          </div>
+          <div class="reason-card">
+            <div class="reason-number">8</div>
+            <div class="reason-text">Simplemente eres tú, y eso es más que suficiente para mí.</div>
+          </div>
+        </div>
+        
+        <button class="big-btn apology-btn" id="apologyBtn">picale aqui JAJSJD</button>
+      </div>
+
+      <div style="display:flex;gap:10px;align-items:center;margin-top:15px;flex-wrap:wrap;">
+        <button class="big-btn" id="moreHearts">💗 +Hacer llover corazones</button>
+        <button class="big-btn" id="miniConfetti"
+          style="background:linear-gradient(180deg,#fff,#ffe6f2);color:var(--accent)"> Celebrar</button>
+      </div>
+
+      <div class="confetti" id="confetti"></div>
+    </div>
+
+    <footer>
+      Hecho con por braw para emo (tequieromucho mariana.)
+      <p style="font-size: 6px; color: gray; margin-top: 30px;">
+        Powered By BrauuStudiosSC
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Secret message -->
+  <div class="secret-message" id="secretMessage"></div>
+
+  <!-- Optional small vignette overlay -->
+  <div class="vignette" aria-hidden="true"></div>
+
+  <script>
+    // Inicializar corazones flotantes de fondo
+    function initFloatingHearts() {
+      const container = document.getElementById('floatingHearts');
+      for (let i = 0; i < 25; i++) {
+        const heart = document.createElement('img');
+        heart.src = 'https://art.pixilart.com/2d2ed65cc301.png';
+        heart.className = 'floating-heart';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDelay = Math.random() * 20 + 's';
+        heart.style.animationDuration = (15 + Math.random() * 15) + 's';
+        heart.style.width = '28px';
+        heart.style.height = '28px';
+        container.appendChild(heart);
+      }
+    }
+    
+    // Efecto de destellos al hacer clic
+    function createSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = x + 'px';
+      sparkle.style.top = y + 'px';
+      
+      const tx = (Math.random() - 0.5) * 100;
+      const ty = (Math.random() - 0.5) * 100;
+      sparkle.style.setProperty('--tx', tx + 'px');
+      sparkle.style.setProperty('--ty', ty + 'px');
+      
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1000);
+    }
+    
+    // Basic player controls
+    const audio = document.getElementById('audio');
+    const playToggle = document.getElementById('playToggle');
+    const seek = document.getElementById('seek');
+    const audioError = document.getElementById('audioError');
+
+    // Verificar si el audio se carga correctamente
+    audio.addEventListener('error', function() {
+      audioError.style.display = 'block';
+      console.error('Error al cargar el archivo de audio.');
+    });
+
+    // update duration when metadata ready
+    audio.addEventListener('loadedmetadata', () => {
+      seek.max = Math.floor(audio.duration || 0);
+    });
+
+    // play/pause
+    let playing = false;
+    playToggle.addEventListener('click', async () => {
+      if (!playing) {
+        try { 
+          await audio.play(); 
+          playing = true; 
+          playToggle.textContent = '⏸'; 
+        }
+        catch (e) { 
+          console.warn('No se pudo reproducir:', e); 
+          audioError.style.display = 'block';
+          audioError.textContent = 'No se pudo reproducir el audio. Haz clic para intentar de nuevo.';
+        }
+      } else { 
+        audio.pause(); 
+        playing = false; 
+        playToggle.textContent = '▶'; 
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      seek.value = Math.floor(audio.currentTime);
+    });
+    seek.addEventListener('input', () => { audio.currentTime = +seek.value; });
+
+    // Simple heart spawn on tap anywhere in viewport to make it feel interactive
+    const viewport = document.getElementById('viewport');
+    const confettiLayer = document.getElementById('confetti');
+
+    function createFallingHeart(xPercent, size = 50, speed = 7000) {
+      const heart = document.createElement('img');
+      heart.src = 'https://art.pixilart.com/2d2ed65cc301.png';
+      heart.style.position = 'absolute';
+      heart.style.left = xPercent + '%';
+      heart.style.width = size + 'px';
+      heart.style.height = size + 'px';
+      heart.style.transform = 'translate(-50%, -10px)';
+      heart.style.cursor = 'pointer';
+      heart.style.zIndex = '5';
+      heart.className = 'falling-heart';
+      heart.style.transition = 'transform 0.2s';
+      
+      // Hacer los corazones más fáciles de hacer clic
+      heart.style.pointerEvents = 'auto';
+
+      const drift = (Math.random() * 30) - 15;
+      const startY = -40;
+      const endY = viewport.clientHeight + 60;
+      const animation = heart.animate([
+        { transform: `translate(-50%, ${startY}px)`, opacity: 1 },
+        { transform: `translate(calc(-50% + ${drift}px), ${endY}px)`, opacity: 0.05 }
+      ], { duration: speed + (Math.random() * 1000), easing: 'cubic-bezier(.2,.7,.2,1)' });
+
+      animation.onfinish = () => { heart.remove(); };
+      
+      // Efecto de agrandamiento al pasar el mouse
+      heart.addEventListener('mouseover', () => {
+        heart.style.transform = 'translate(-50%, -10px) scale(1.15)';
+      });
+      
+      heart.addEventListener('mouseout', () => {
+        heart.style.transform = 'translate(-50%, -10px) scale(1)';
+      });
+      
+      return heart;
+    }
+
+    // Score + Game logic
+    const scoreEl = document.getElementById('score');
+    let score = 0;
+    let gameInterval = null;
+    let spawnInterval = 1300;
+    let gameRunning = false;
+    let gameTimeout = null;
+
+    function startGame() {
+      if (gameRunning) return;
+      score = 0; scoreEl.textContent = score;
+      gameRunning = true;
+      // spawn hearts faster if score grows
+      gameInterval = setInterval(() => {
+        spawnHeartRandom();
+      }, spawnInterval);
+
+      // allow tapping hearts to collect
+      viewport.addEventListener('click', onViewportClick);
+
+      // 25 seconds game
+      gameTimeout = setTimeout(endGame, 25000);
+      
+      // Mostrar mensaje secreto
+      showSecretMessage("❤️ Toca los corazones que caen");
+    }
+
+    function endGame() {
+      gameRunning = false;
+      clearInterval(gameInterval);
+      viewport.removeEventListener('click', onViewportClick);
+      // confetti if score high
+      if (score >= 10) celebrate();
+      
+      // Mensaje personalizado según puntuación
+      let message = "Juego terminado! Puntaje: " + score + " ";
+      if (score < 5) message += "💔 Sigue intentando";
+      else if (score < 10) message += "❤️ ¡Bien hecho!";
+      else if (score < 15) message += "💖 ¡Excelente!";
+      else message += "💕 ¡Eres increíble!";
+      
+      showSecretMessage(message);
+    }
+
+    function resetGame() {
+      score = 0; scoreEl.textContent = score;
+      gameRunning = false;
+      clearInterval(gameInterval);
+      if (gameTimeout) clearTimeout(gameTimeout);
+      // remove any hearts
+      document.querySelectorAll('.falling-heart').forEach(e => e.remove());
+    }
+
+    function spawnHeartRandom() {
+      const x = Math.random() * 100;
+      const heart = createFallingHeart(x, 50, 5000 + Math.random() * 2000);
+      // register tap to collect
+      heart.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        collectHeart(heart);
+      }, { passive: false });
+      viewport.appendChild(heart);
+      
+      // Aumentar dificultad gradualmente
+      if (score >= 15 && gameInterval) {
+        clearInterval(gameInterval); 
+        spawnInterval = Math.max(800, spawnInterval - 100);
+        gameInterval = setInterval(spawnHeartRandom, spawnInterval);
+      }
+    }
+
+    function collectHeart(node) {
+      // pop + score
+      node.remove();
+      score += 1;
+      scoreEl.textContent = score;
+      // Efecto de destello
+      createSparkle(
+        node.getBoundingClientRect().left + node.width/2,
+        node.getBoundingClientRect().top + node.height/2
+      );
+      // small pop animation on confetti layer
+      burstAt(node.getBoundingClientRect().left + node.clientWidth / 2, node.getBoundingClientRect().top + node.clientHeight / 2);
+    }
+
+    function onViewportClick(e) {
+      // if clicking empty space, spawn a decorative heart where tapped
+      const rect = viewport.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const heart = createFallingHeart(x, 40, 3000 + Math.random() * 1000);
+      viewport.appendChild(heart);
+      // tap on it to collect
+      heart.addEventListener('click', ev => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
+      
+      // Efecto de destello
+      createSparkle(e.clientX, e.clientY);
+    }
+
+    // small burst effect (tiny particles) used on collect
+    function burstAt(pageX, pageY) {
+      const c = document.createElement('div');
+      c.style.position = 'absolute';
+      // place relative to confettiLayer (which fills card); convert page coords
+      const baseRect = confettiLayer.getBoundingClientRect();
+      c.style.left = (pageX - baseRect.left) + 'px';
+      c.style.top = (pageY - baseRect.top) + 'px';
+      c.style.pointerEvents = 'none';
+      // 6 tiny squares
+      for (let i = 0; i < 8; i++) {
+        const p = document.createElement('div');
+        p.style.width = p.style.height = (6 + Math.random() * 6) + 'px';
+        p.style.background = i % 2 == 0 ? '#ff6aa6' : '#ff2e81';
+        p.style.position = 'absolute';
+        p.style.left = '0px'; p.style.top = '0px';
+        p.style.borderRadius = '50%';
+        c.appendChild(p);
+        const dx = (Math.random() * 100 - 50);
+        const dy = (Math.random() * 100 - 60);
+        p.animate([{ transform: 'translate(0,0)', opacity: 1 }, { transform: `translate(${dx}px, ${dy}px) scale(.4)`, opacity: 0 }], { duration: 700 + Math.random() * 300, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      }
+      confettiLayer.appendChild(c);
+      setTimeout(() => c.remove(), 1100);
+    }
+
+    // UI buttons
+    document.getElementById('startGame').addEventListener('click', startGame);
+    document.getElementById('resetGame').addEventListener('click', resetGame);
+
+    // Botón de pedir perdón
+    document.getElementById('apologyBtn').addEventListener('click', () => {
+      showSecretMessage("ola, te quiero muchoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo, asi ymas enserio demasiado <3");
+      
+      // Efecto especial de corazones
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          const x = 10 + Math.random() * 80;
+          const heart = createFallingHeart(x, 45, 3500 + Math.random() * 1500);
+          heart.addEventListener('click', ev => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
+          viewport.appendChild(heart);
+        }, i * 150);
+      }
+      
+      celebrate();
+    });
+
+    // more hearts button: spawn a burst of hearts
+    document.getElementById('moreHearts').addEventListener('click', () => {
+      for (let i = 0; i < 8; i++) {
+        setTimeout(() => {
+          const x = 10 + Math.random() * 80;
+          const heart = createFallingHeart(x, 45, 3500 + Math.random() * 1500);
+          heart.addEventListener('click', ev => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
+          viewport.appendChild(heart);
+        }, i * 150);
+      }
+      showSecretMessage("¡Lluvia de corazones! 💖");
+    });
+
+    // confetti celebration (mini)
+    function celebrate() {
+      // small burst of colored confetti
+      for (let i = 0; i < 40; i++) {
+        const el = document.createElement('div');
+        el.style.position = 'absolute';
+        el.style.left = (Math.random() * 100) + '%';
+        el.style.top = (Math.random() * 30) + '%';
+        el.style.width = el.style.height = (6 + Math.random() * 8) + 'px';
+        el.style.background = Math.random() > 0.5 ? '#ffd3ea' : '#ff8ab8';
+        el.style.opacity = '0.95';
+        el.style.borderRadius = '50%';
+        confettiLayer.appendChild(el);
+        el.animate([{ transform: 'translateY(0) rotate(0)', opacity: 1 }, { transform: `translateY(260px) rotate(${Math.random() * 360}deg)`, opacity: 0 }], { duration: 1400 + Math.random() * 800, easing: 'cubic-bezier(.2,.7,.2,1)' });
+        setTimeout(() => el.remove(), 2200);
+      }
+    }
+
+    document.getElementById('miniConfetti').addEventListener('click', function() {
+      celebrate();
+      showSecretMessage("🎉");
+    });
+
+    // share / add to home (simple share)
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+      const shareData = { title: 'PAGINITA', text: 'Mira esto', url: location.href };
+      try {
+        if (navigator.share) { await navigator.share(shareData); }
+        else { 
+          showSecretMessage("Copia el enlace para compartir 📋"); 
+        }
+      } catch (e) { console.warn(e); }
+    });
+
+    // Mostrar mensaje secreto
+    function showSecretMessage(text) {
+      const messageEl = document.getElementById('secretMessage');
+      messageEl.textContent = text;
+      messageEl.style.opacity = '1';
+      
+      setTimeout(() => {
+        messageEl.style.opacity = '0';
+      }, 3000);
+    }
+
+    // Efecto de destello al hacer clic en cualquier lugar
+    document.addEventListener('click', (e) => {
+      createSparkle(e.clientX, e.clientY);
+    });
+
+    // tap anywhere on card to spawn a decorative heart (not game)
+    document.querySelector('.card').addEventListener('click', (e) => {
+      // avoid clicks that are on game controls to reduce annoyance
+      if (e.target.closest('.big-btn') || e.target.closest('input') || e.target.closest('button')) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const heart = createFallingHeart(x, 35, 2600 + Math.random() * 1000);
+      e.currentTarget.appendChild(heart);
+    }, { passive: true });
+
+    // Atajos de teclado
+    document.addEventListener('keydown', (e) => { 
+      if (e.key.toLowerCase() === 'g') startGame(); 
+      if (e.key.toLowerCase() === 'r') resetGame(); 
+      if (e.key.toLowerCase() === 'h') {
+        for (let i = 0; i < 5; i++) {
+          setTimeout(() => {
+            const x = Math.random() * 100;
+            const heart = createFallingHeart(x, 40, 4200 + Math.random() * 1600); 
+            document.querySelector('.card').appendChild(heart);
+          }, i * 200);
+        }
+        showSecretMessage("¡Hearts! 💖 Presiona 'G' para jugar");
+      }
+    });
+
+    // On load: small intro hearts
+    for (let i = 0; i < 8; i++) {
+      setTimeout(() => { 
+        const x = Math.random() * 100; 
+        const heart = createFallingHeart(x, 35, 4200 + Math.random() * 1600); 
+        document.querySelector('.card').appendChild(heart); 
+      }, i * 200);
+    }
+    
+    // Inicializar corazones flotantes
+    initFloatingHearts();
+    
+    // Mensaje de bienvenida
+    setTimeout(() => {
+      showSecretMessage("Hice esto con mucho cariño mariana bienvenida <33");
+    }, 1000);
+
+    // Bubble drag logic
+    const bubble = document.getElementById('noteBubble');
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    bubble.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      offsetX = e.clientX - bubble.offsetLeft;
+      offsetY = e.clientY - bubble.offsetTop;
+      bubble.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+      bubble.style.cursor = 'grab';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      moveBubble(e.clientX, e.clientY);
+    });
+
+    // Touch
+    bubble.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      const touch = e.touches[0];
+      offsetX = touch.clientX - bubble.offsetLeft;
+      offsetY = touch.clientY - bubble.offsetTop;
+    });
+
+    document.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const touch = e.touches[0];
+      moveBubble(touch.clientX, touch.clientY);
+    });
+
+    function moveBubble(x, y) {
+      let left = x - offsetX;
+      let top = y - offsetY;
+
+      // limitar dentro de pantalla
+      left = Math.max(0, Math.min(window.innerWidth - bubble.offsetWidth, left));
+      top = Math.max(0, Math.min(window.innerHeight - bubble.offsetHeight, top));
+
+      bubble.style.left = left + 'px';
+      bubble.style.top = top + 'px';
+    }
+  </script>
+  <script>// Bubble drag logic for second bubble
+const bubble2 = document.getElementById('noteBubble2');
+let isDragging2 = false;
+let offsetX2 = 0;
+let offsetY2 = 0;
+
+bubble2.addEventListener('mousedown', (e) => {
+  isDragging2 = true;
+  offsetX2 = e.clientX - bubble2.offsetLeft;
+  offsetY2 = e.clientY - bubble2.offsetTop;
+  bubble2.style.cursor = 'grabbing';
+});
+
+document.addEventListener('mouseup', () => {
+  isDragging2 = false;
+  bubble2.style.cursor = 'grab';
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isDragging2) return;
+  moveBubble2(e.clientX, e.clientY);
+});
+
+// Touch for second bubble
+bubble2.addEventListener('touchstart', (e) => {
+  isDragging2 = true;
+  const touch = e.touches[0];
+  offsetX2 = touch.clientX - bubble2.offsetLeft;
+  offsetY2 = touch.clientY - bubble2.offsetTop;
+});
+
+document.addEventListener('touchend', () => {
+  isDragging2 = false;
+});
+
+document.addEventListener('touchmove', (e) => {
+  if (!isDragging2) return;
+  const touch = e.touches[0];
+  moveBubble2(touch.clientX, touch.clientY);
+});
+
+function moveBubble2(x, y) {
+  let left = x - offsetX2;
+  let top = y - offsetY2;
+
+  // limitr pantalla
+  left = Math.max(0, Math.min(window.innerWidth - bubble2.offsetWidth, left));
+  top = Math.max(0, Math.min(window.innerHeight - bubble2.offsetHeight, top));
+
+  bubble2.style.left = left + 'px';
+  bubble2.style.top = top + 'px';
+  bubble2.style.right = 'auto';
+}</script>
+</body>
+
+</html>
