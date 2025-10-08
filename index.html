@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pantalla inicial 💗</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Delius&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Delius", cursive;
+      background: #ffe6f7;
+      overflow: hidden;
+    }
+
+    /* Pantalla rosita */
+    .intro-screen {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #ffd1ec, #ffe6f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      transition: opacity 0.6s ease;
+      overflow: hidden;
+    }
+
+    /* Popup flotante */
+    .intro-content {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 80, 150, 0.3);
+      border: 3px solid #ff96d5;
+      animation: floatPopup 1s ease;
+      width: 85%;
+      max-width: 340px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .intro-content h1 {
+      font-family: "Press Start 2P", cursive;
+      color: #ff3b8d;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .intro-content p {
+      color: #6e6170;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .intro-content button {
+      background: #ffb2ec;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      font-size: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: "Press Start 2P", cursive;
+      transition: all 0.3s ease;
+    }
+
+    .intro-content button:hover {
+      background: #ff8fd4;
+      transform: scale(1.05);
+    }
+
+    .fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Animaciones popup */
+    @keyframes floatPopup {
+      0% { transform: scale(0.6) translateY(50px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    /* corazones pixelados */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://art.pixilart.com/2d2ed65cc301.png') no-repeat center/contain;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+      filter: drop-shadow(0 0 6px rgba(255, 100, 160, 0.4));
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.7); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .intro-content h1 { font-size: 14px; }
+      .intro-content p { font-size: 13px; }
+      .intro-content button { font-size: 13px; padding: 10px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Pantalla inicial -->
+  <div class="intro-screen" id="introScreen">
+    <div class="intro-content">
+      <h1>💗 Bienvenida 💗</h1>
+      <p>Bienvenidabonitalindahermosa</p>
+      <button id="enterBtn">Entrar</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
+    // Config Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
+      authDomain: "pagina-81a41.firebaseapp.com",
+      databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
+      projectId: "pagina-81a41",
+      storageBucket: "pagina-81a41.firebasestorage.app",
+      messagingSenderId: "803503362455",
+      appId: "1:803503362455:web:ebf1271cf65943210174d2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const introScreen = document.getElementById("introScreen");
+    const enterBtn = document.getElementById("enterBtn");
+
+    // Función para registrar visita en Firebase automáticamente
+    async function registrarVisita() {
+      try {
+        await push(ref(db, "visitas_brauu"), {
+          mensaje: "Alguien abrió la página 💗",
+          timestamp: new Date().toISOString()
+        });
+      } catch (e) {
+        console.error("Error registrando visita:", e);
+      }
+    }
+
+    // Registrar visita al cargar la página
+    registrarVisita();
+
+    // Corazones pixelados flotando
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      const size = 16 + Math.random() * 14;
+      heart.style.width = size + "px";
+      heart.style.height = size + "px";
+      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+    setInterval(createHeart, 400);
+
+    // Click del botón
+    enterBtn.addEventListener("click", () => {
+      introScreen.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = "pagina.html";
+      }, 800);
+    });
+  </script>
+</body>
+</html>
