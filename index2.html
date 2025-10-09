@@ -832,23 +832,19 @@
 </head>
 
 <body>
-  <div id="lastUpdate">Última actualización: 4:37 AM 07/10/25</div>
+  <div id="lastUpdate">Última actualización: 09:04 PM 08/10/25</div>
 
   <!-- Burbuja decorativa -->
   <div class="note-bubble" id="noteBubble">
-    💌 olaaaaa por si un dia no alcanzas a ver la paginita puse un boton abajo para que puedas retroceder la pagina al
-    dia anterior KAKJSDJK pero el punto es que ojala hoy te vaya demasiado bien asi bien bonito, espero ya este mejor de
-    tu salud, te quiero muchisismo recuerda que eres alguien muy bonita, fuerte y puedes con todo lo que venga
-    lindahermosabonita<3 </div>
+    💌  💌 olap, espero hoy te vaya demasiado asi bien, recuerda que eres mui bonita, linda,hermosa ayer si tuve un dia muy feo pero cuando vi tu mensaje me puse muy feliz y yo creo que eso demuestra lo que vales para mi, recuerda ver todo positivamente no te rindas en nada BONITAHERMOSALINDAPRECIOSA <3 </div>
 
       <!-- Burbuja decorativa 2 (nueva) -->
       <div class="note-bubble bubble-top-left" id="noteBubble2">
-        RECUERDA QUE eres muy BONITAAA, eres simplemente perfecta no importa lo que digan o lo que digas para mi lo
-        eres, teextraño
-        <img src="https://i.pinimg.com/474x/f1/f8/e5/f1f8e5fdf39759b5da0dbc65cc6d64c5.jpg" alt="emoji"
+        Mira te voy a contar un chiste en esta burbuja ¿que hace un perro llamado pegamento?....
+        se cae JAJAJ rieteporfaborbb
+        <img src="https://s-media-cache-ak0.pinimg.com/originals/ba/70/69/ba7069927ba276d00712b3a8d7bfea97.jpg" alt="emoji"
           style="width:35px; height:25px; vertical-align:middle;">
       </div>
-
 
       <!-- Floating hearts background -->
       <div class="floating-hearts" id="floatingHearts"></div>
@@ -902,10 +898,10 @@
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
                   <div style="display:flex;flex-direction:column">
                     <strong
-                      style="color:var(--accent);font-size:16px; animation: subtleFloat 8s ease-in-out infinite;">Do Better</strong>
-                    <span class="small">Cuco</span>
+                      style="color:var(--accent);font-size:16px; animation: subtleFloat 8s ease-in-out infinite;">Labios Rotos</strong>
+                    <span class="small">Zoé</span>
                     <!-- Imagen del debajo del texto -->
-                    <img src="https://th.bing.com/th/id/OIP.WpEnlBwB3MoznDpEUiAgTQHaHa?o=7&cb=12rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Portada del álbum"
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.epygtYEtD6p6-3xCPp3cQgAAAA?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Portada del álbum"
                       class="album-cover">
 
                   </div>
@@ -915,7 +911,7 @@
                 </div>
 
                 <audio id="audio" preload="metadata">
-                  <source src="cancion1.mp3" type="audio/mpeg">
+                  <source src="cancion2.mp3" type="audio/mpeg">
                   Tu navegador no soporta audio.
                 </audio>
 
@@ -1015,10 +1011,6 @@
                 style="display:inline-block;padding:10px 15px;background:#ff3b8d;color:white;border-radius:8px;text-decoration:none;">Ver
                 pagina actual</a>
 
-                <a href="index3.html"
-                style="display:inline-block;padding:10px 15px;background:#ff3b8d;color:white;border-radius:8px;text-decoration:none;">Ver
-                pagina del dia 6 de octubre</a>
-
 
 
               <div>
@@ -1026,38 +1018,53 @@
               </div>
 
               <script type="module">
-                // Importa Firebase desde el CDN
-                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-                import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+  // Importar Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 
-                // Tu configuración de Firebase
-                const firebaseConfig = {
-                  apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
-                  authDomain: "pagina-81a41.firebaseapp.com",
-                  databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
-                  projectId: "pagina-81a41",
-                  storageBucket: "pagina-81a41.firebasestorage.app",
-                  messagingSenderId: "803503362455",
-                  appId: "1:803503362455:web:ebf1271cf65943210174d2"
-                };
+  // Config Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
+    authDomain: "pagina-81a41.firebaseapp.com",
+    databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
+    projectId: "pagina-81a41",
+    storageBucket: "pagina-81a41.firebasestorage.app",
+    messagingSenderId: "803503362455",
+    appId: "1:803503362455:web:ebf1271cf65943210174d2"
+  };
 
-                // Inicializa Firebase
-                const app = initializeApp(firebaseConfig);
-                const db = getDatabase(app);
+  // Inicializar Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
 
-                // Evento del botón
-                document.getElementById("apologyBtn").addEventListener("click", async () => {
-                  try {
-                    await push(ref(db, "clicks_brauu"), {
-                      mensaje: "Alguien le picó al botón JAJSJD",
-                      timestamp: new Date().toISOString()
-                    });
-                  } catch (e) {
-                    console.error("Error al guardar clic en Realtime Database:", e);
-                  }
-                });
-              </script>
+  // 1️⃣ Registrar visita automáticamente al abrir la página
+  async function registrarVisita() {
+    try {
+      await push(ref(db, "visitas_brauu"), {
+        mensaje: "Alguien abrió la página 💗",
+        timestamp: new Date().toISOString()
+      });
+    } catch (e) {
+      console.error("Error registrando visita:", e);
+    }
+  }
+  registrarVisita();
 
+  // 2️⃣ Registrar clic en botón
+  const boton = document.getElementById("apologyBtn");
+  if (boton) {
+    boton.addEventListener("click", async () => {
+      try {
+        await push(ref(db, "clicks_brauu"), {
+          mensaje: "Alguien le picó al botón JAJSJD",
+          timestamp: new Date().toISOString()
+        });
+      } catch (e) {
+        console.error("Error al guardar clic en Realtime Database:", e);
+      }
+    });
+  }
+</script>
 
               <div style="display:flex;gap:10px;align-items:center;margin-top:15px;flex-wrap:wrap;">
                 <button class="big-btn" id="moreHearts">💗 +Hacer llover corazones</button>
@@ -1599,9 +1606,10 @@
               bubble2.style.top = top + 'px';
               bubble2.style.right = 'auto';
             }
+
+
+            
           </script>
 </body>
 
-
 </html>
-
