@@ -523,7 +523,6 @@
           }
         }
 
-        /* Nuevos estilos para la sección de motivos */
         .reasons-section {
           margin-top: 30px;
           text-align: center;
@@ -601,7 +600,6 @@
           background: linear-gradient(180deg, #ff9ebb, #ff73a7);
         }
 
-        /* Estilo para la segunda burbuja en posición superior izquierda */
         .bubble-top-left {
           top: 50px;
           right: auto;
@@ -639,7 +637,6 @@
           }
         }
 
-        /* Efecto de escritura para el título */
         .typewriter {
           overflow: hidden;
           border-right: 2px solid var(--accent);
@@ -670,7 +667,6 @@
           }
         }
 
-        /* Mejoras para corazones */
         .falling-heart {
           transition: transform 0.3s ease, filter 0.3s ease;
         }
@@ -749,7 +745,6 @@
           }
         }
 
-        /* Mensaje persistente con botón de cerrar */
         .persistent-message {
           position: fixed;
           top: 0;
@@ -828,30 +823,189 @@
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
           animation: subtleFloat 10s ease-in-out infinite;
         }
+
+        .chat-section {
+          margin-top: 30px;
+          text-align: center;
+          width: 100%;
+        }
+
+        .chat-container {
+          background: rgba(255, 255, 255, 0.7);
+          border-radius: 12px;
+          padding: 20px;
+          box-shadow: 0 4px 10px rgba(255, 60, 140, 0.1);
+          margin-top: 15px;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .chat-messages {
+          height: 200px;
+          overflow-y: auto;
+          border: 2px dashed rgba(255, 100, 150, 0.2);
+          border-radius: 10px;
+          padding: 10px;
+          margin-bottom: 15px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .chat-message {
+          padding: 8px 12px;
+          border-radius: 15px;
+          margin-bottom: 8px;
+          max-width: 70%;
+          font-size: 14px;
+          position: relative;
+          animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-message.sent {
+          background: var(--accent);
+          color: white;
+          align-self: flex-end;
+          text-align: right;
+        }
+        
+        .chat-message.received {
+            background: #e9e9eb;
+            color: #2a2530;
+            align-self: flex-start;
+            text-align: left;
+        }
+        
+        .message-author {
+            font-size: 10px;
+            font-weight: bold;
+            color: var(--accent-light);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .chat-input-area {
+          display: flex;
+          gap: 10px;
+          margin-top: 15px;
+        }
+        
+        .recipient-selection {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+        }
+
+        #recipientSelect {
+            border: 2px solid rgba(255, 100, 150, 0.2);
+            border-radius: 10px;
+            padding: 8px;
+            font-family: 'Delius', cursive;
+            font-size: 12px;
+        }
+
+        #chatInput {
+          flex: 1;
+          border: 2px solid rgba(255, 100, 150, 0.2);
+          border-radius: 10px;
+          padding: 10px;
+          font-family: 'Delius', cursive;
+          font-size: 14px;
+        }
+
+        #chatInput:focus, #recipientSelect:focus {
+          outline: none;
+          border-color: var(--accent);
+        }
+
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.5s;
+        }
+
+        #loginBox {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: floatPopup 1s ease;
+        }
+        
+        #usernameInput {
+            border: 2px solid rgba(255, 100, 150, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+            font-family: 'Delius', cursive;
+            font-size: 16px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        #usernameError {
+            color: red;
+            font-size: 12px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        #logoutBtn {
+            background: #ff73a7;
+            font-size: 12px;
+            padding: 8px 12px;
+            margin-top: 15px;
+        }
+
       </style>
 </head>
 
 <body>
+
+  <div id="loginOverlay">
+      <div id="loginBox">
+          <h2 class="reasons-title">Bienvenida <3</h2>
+          <p>Por favor, introduce tu nombre para entrar.</p>
+          <input type="text" id="usernameInput" placeholder="Tu nombre...">
+          <p id="usernameError">Ese nombre ya está en uso. Intenta con otro.</p>
+          <button class="big-btn" id="loginBtn">Entrar</button>
+      </div>
+  </div>
+
   <div id="lastUpdate">Última actualización: 4:12 PM 08/10/25</div>
 
-  <!-- Burbuja decorativa -->
   <div class="note-bubble" id="noteBubble">
-    💌 olap, espero hoy te vaya demasiado asi bien, recuerda que eres mui bonita, linda,hermosa ayer si tuve un dia muy feo pero cuando vi tu mensaje me puse muy feliz y yo creo que eso demuestra lo que vales para mi, recuerda ver todo positivamente no te rindas en nada BONITAHERMOSALINDAPRECIOSA <3 </div>
+    💌 olap, ojala hoy te vaya muy bien en tu examen te esforzaste un monton asi que sisisis te va ir muy bien, recuerda lo hermosa que eres todos los dias, lo mucho que eres para mi tequieromucho mariana<3 </div>
 
-      <!-- Burbuja decorativa 2 (nueva) -->
       <div class="note-bubble bubble-top-left" id="noteBubble2">
         Ola yo se que me odias mucho pero me vale yo te quiero muchisimo y te extraño quiero abrazarte 🥺
         <img src="https://s-media-cache-ak0.pinimg.com/originals/ba/70/69/ba7069927ba276d00712b3a8d7bfea97.jpg" alt="emoji"
           style="width:35px; height:25px; vertical-align:middle;">
       </div>
 
-      <!-- Floating hearts background -->
       <div class="floating-hearts" id="floatingHearts"></div>
 
       <div class="vignette"></div>
 
-      <div class="wrap">
-        <div class="card" role="region" aria-label="Dedicado">
+      <div class="wrap" style="display: none;"> <div class="card" role="region" aria-label="Dedicado">
+          
           <div class="title-row">
             <div style="display:flex;align-items:center;gap:12px">
               <h1>
@@ -878,7 +1032,6 @@
                     💌 ERES LAMAS HERMOSA <3333 </p>
             </div>
 
-            <!-- Imagen agregada debajo del texto -->
             <div style="text-align: center; margin: 20px 0;">
               <img src="https://i.ibb.co/21npLkTH/7cbaa984e87790964fe0dd4da52fd4b3.jpg" alt="rendersito"
                 style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 5px 15px rgba(255, 255, 255, 0.25); transition: transform 0.5s ease, box-shadow 0.5s ease;">
@@ -890,7 +1043,6 @@
             </div>
           </div>
 
-          <!-- Player -->
           <div class="player" style="margin-top:15px">
             <div class="play-card">
               <div style="display:flex;flex-direction:column;gap:8px;flex:1">
@@ -899,28 +1051,22 @@
                     <strong
                       style="color:var(--accent);font-size:16px; animation: subtleFloat 8s ease-in-out infinite;">Labios Rotos</strong>
                     <span class="small">Zoé</span>
-                    <!-- Imagen del debajo del texto -->
                     <img src="https://tse1.mm.bing.net/th/id/OIP.epygtYEtD6p6-3xCPp3cQgAAAA?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Portada del álbum"
                       class="album-cover">
-
                   </div>
                   <div style="display:flex;gap:10px;align-items:center">
                     <button class="big-btn" id="playToggle">▶</button>
                   </div>
                 </div>
-
                 <audio id="audio" preload="metadata">
-                  <source src="cancion2.mp3" type="audio/mpeg">
+                  <source src="cancion3.mp3" type="audio/mpeg">
                   Tu navegador no soporta audio.
                 </audio>
-
                 <div class="audio-error" id="audioError">
                   No se pudo cargar el audio. Asegúrate de tener conexión a internet.
                 </div>
-
                 <input type="range" id="seek" class="seek" min="0" step="0.1" value="0" aria-label="barra de progreso">
               </div>
-
               <div style="width:160px;display:flex;flex-direction:column;align-items:flex-end">
                 <div
                   style="font-weight:900;color:#7b6374;font-size:15px; animation: subtleFloat 9s ease-in-out infinite;">
@@ -929,7 +1075,6 @@
               </div>
             </div>
 
-            <!-- side small panel -->
             <div style="width:220px;display:flex;flex-direction:column;gap:10px">
               <div class="game-card">
                 <div style="display:flex;justify-content:space-between;align-items:center">
@@ -947,14 +1092,11 @@
             </div>
           </div>
 
-          <!-- Game viewport -->
           <div class="game-panel">
             <div class="game-card" style="flex:1">
               <div id="viewport" class="game-viewport" aria-label="Área de juego táctil">
-                <!-- falling hearts inserted here -->
               </div>
             </div>
-
             <div class="game-card" style="width:220px">
               <div
                 style="font-weight:900;color:var(--accent);font-size:20px; animation: textGlow 3s ease-in-out infinite alternate;">
@@ -967,7 +1109,6 @@
               </div>
             </div>
 
-            <!-- Sección de motivos -->
             <div class="reasons-section">
               <div class="reasons-title">8 razones por las que me enamore de ti</div>
               <div class="reasons-container">
@@ -1005,94 +1146,233 @@
                   <div class="reason-text">Simplemente eres tú, y eso es más que suficiente para mí.</div>
                 </div>
               </div>
-
               <a href="index2.html"
                 style="display:inline-block;padding:10px 15px;background:#ff3b8d;color:white;border-radius:8px;text-decoration:none;">Ver
-                página del día 7 de octubre</a>
-
-
-
+                página del día 8 de octubre</a>
               <div>
                 <button class="big-btn apology-btn" id="apologyBtn">picale aqui JAJSJD</button>
               </div>
+            </div>
 
-              <script type="module">
-  // Importar Firebase
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
-
-  // Config Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
-    authDomain: "pagina-81a41.firebaseapp.com",
-    databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
-    projectId: "pagina-81a41",
-    storageBucket: "pagina-81a41.firebasestorage.app",
-    messagingSenderId: "803503362455",
-    appId: "1:803503362455:web:ebf1271cf65943210174d2"
-  };
-
-  // Inicializar Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-
-  // 1️⃣ Registrar visita automáticamente al abrir la página
-  async function registrarVisita() {
-    try {
-      await push(ref(db, "visitas_brauu"), {
-        mensaje: "Alguien abrió la página 💗",
-        timestamp: new Date().toISOString()
-      });
-    } catch (e) {
-      console.error("Error registrando visita:", e);
-    }
-  }
-  registrarVisita();
-
-  // 2️⃣ Registrar clic en botón
-  const boton = document.getElementById("apologyBtn");
-  if (boton) {
-    boton.addEventListener("click", async () => {
-      try {
-        await push(ref(db, "clicks_brauu"), {
-          mensaje: "Alguien le picó al botón JAJSJD",
-          timestamp: new Date().toISOString()
-        });
-      } catch (e) {
-        console.error("Error al guardar clic en Realtime Database:", e);
-      }
-    });
-  }
-</script>
-
-
-
-              <div style="display:flex;gap:10px;align-items:center;margin-top:15px;flex-wrap:wrap;">
+            <div class="chat-section">
+              <h2 class="reasons-title">CHATSITO <33 </h2>
+              <p id="currentUserDisplay" style="font-family: 'Press Start 2P', cursive; font-size: 12px; color: var(--accent-dark);"></p>
+              <div class="chat-container">
+                <div class="recipient-selection">
+                    <span>Enviar a:</span>
+                    <select id="recipientSelect">
+                        <option value="">Selecciona a alguien</option>
+                    </select>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                </div>
+                <div class="chat-input-area">
+                  <input type="text" id="chatInput" placeholder="Escribe algo bonito...">
+                  <button class="big-btn" id="sendMessageBtn">Enviar</button>
+                </div>
+              </div>
+              <button class="big-btn" id="logoutBtn">Cerrar Sesión</button>
+            </div>
+            
+            <div style="display:flex;gap:10px;align-items:center;margin-top:15px;flex-wrap:wrap;">
                 <button class="big-btn" id="moreHearts">💗 +Hacer llover corazones</button>
                 <button class="big-btn" id="miniConfetti"
                   style="background:linear-gradient(180deg,#fff,#ffe6f2);color:var(--accent)"> Celebrar</button>
-              </div>
-
-              <div class="confetti" id="confetti"></div>
             </div>
-
+            <div class="confetti" id="confetti"></div>
+          
             <footer>
               Hecho con por braw para emo (tequieromucho mariana.)
               <p style="font-size: 6px; color: gray; margin-top: 30px;">
                 Powered By BrauuStudiosSC
               </p>
             </footer>
-
           </div>
 
-          <!-- Secret message -->
           <div class="secret-message" id="secretMessage"></div>
 
-          <!-- Optional small vignette overlay -->
           <div class="vignette" aria-hidden="true"></div>
 
+          <script type="module">
+              import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+              import { getDatabase, ref, push, onValue, get, set, off } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
+              const firebaseConfig = {
+                apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
+                authDomain: "pagina-81a41.firebaseapp.com",
+                databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
+                projectId: "pagina-81a41",
+                storageBucket: "pagina-81a41.firebasestorage.app",
+                messagingSenderId: "803503362455",
+                appId: "1:803503362455:web:ebf1271cf65943210174d2"
+              };
+
+              const app = initializeApp(firebaseConfig);
+              const db = getDatabase(app);
+              
+              let currentUser = localStorage.getItem('username');
+              let currentChatRoomId = null;
+              let messagesRef = null;
+
+              const loginOverlay = document.getElementById('loginOverlay');
+              const usernameInput = document.getElementById('usernameInput');
+              const loginBtn = document.getElementById('loginBtn');
+              const usernameError = document.getElementById('usernameError');
+              const wrap = document.querySelector('.wrap');
+              const logoutBtn = document.getElementById('logoutBtn');
+
+              async function login() {
+                  const username = usernameInput.value.trim().toLowerCase();
+                  if (username === '') return;
+
+                  const usersRef = ref(db, 'users/' + username);
+                  const snapshot = await get(usersRef);
+
+                  if (snapshot.exists()) {
+                      usernameError.style.display = 'block';
+                  } else {
+                      await set(usersRef, true);
+                      localStorage.setItem('username', username);
+                      currentUser = username;
+                      loginOverlay.style.display = 'none';
+                      wrap.style.display = 'flex';
+                      initializeAppLogic();
+                  }
+              }
+
+              function logout() {
+                localStorage.removeItem('username');
+                window.location.reload();
+              }
+
+              loginBtn.addEventListener('click', login);
+              logoutBtn.addEventListener('click', logout);
+              usernameInput.addEventListener('keydown', (e) => {
+                  if (e.key === 'Enter') login();
+              });
+
+              if (currentUser) {
+                  loginOverlay.style.display = 'none';
+                  wrap.style.display = 'flex';
+                  initializeAppLogic();
+              }
+              
+              function initializeAppLogic() {
+                document.getElementById('currentUserDisplay').textContent = `${currentUser}`;
+                const recipientSelect = document.getElementById('recipientSelect');
+                const usersRef = ref(db, 'users');
+
+                onValue(usersRef, (snapshot) => {
+                    const currentRecipient = recipientSelect.value;
+                    recipientSelect.innerHTML = '<option value="">Selecciona a alguien</option>';
+                    const users = snapshot.val();
+                    if(users) {
+                        Object.keys(users).forEach(user => {
+                            if(user !== currentUser) {
+                                const option = document.createElement('option');
+                                option.value = user;
+                                option.textContent = user;
+                                recipientSelect.appendChild(option);
+                            }
+                        });
+                    }
+                    if (currentRecipient) {
+                        recipientSelect.value = currentRecipient;
+                    }
+                });
+                
+                recipientSelect.addEventListener('change', () => loadChat(recipientSelect.value));
+
+                const sendMessageBtn = document.getElementById('sendMessageBtn');
+                const chatInput = document.getElementById('chatInput');
+                
+                async function sendMessage() {
+                    const recipient = recipientSelect.value;
+                    const messageText = chatInput.value.trim();
+                    if (recipient && messageText) {
+                        const chatRoomId = [currentUser, recipient].sort().join('_');
+                        try {
+                            await push(ref(db, `chats/${chatRoomId}`), {
+                                text: messageText,
+                                author: currentUser,
+                                timestamp: new Date().toISOString()
+                            });
+                            chatInput.value = '';
+                        } catch(e) {
+                            console.error("Error al enviar mensaje:", e);
+                        }
+                    }
+                }
+
+                sendMessageBtn.addEventListener('click', sendMessage);
+                chatInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') sendMessage();
+                });
+              }
+
+              function loadChat(recipient) {
+                const chatMessages = document.getElementById('chatMessages');
+                if (messagesRef) {
+                    off(messagesRef);
+                }
+                chatMessages.innerHTML = '';
+
+                if (recipient) {
+                    currentChatRoomId = [currentUser, recipient].sort().join('_');
+                    messagesRef = ref(db, `chats/${currentChatRoomId}`);
+
+                    onValue(messagesRef, (snapshot) => {
+                        chatMessages.innerHTML = '';
+                        const data = snapshot.val();
+                        if (data) {
+                            Object.values(data).sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp)).forEach(message => {
+                                const messageElement = document.createElement('div');
+                                messageElement.classList.add('chat-message');
+                                
+                                const authorElement = document.createElement('span');
+                                authorElement.classList.add('message-author');
+                                authorElement.textContent = message.author;
+                                
+                                messageElement.textContent = message.text;
+
+                                if (message.author === currentUser) {
+                                    messageElement.classList.add('sent');
+                                } else {
+                                    messageElement.classList.add('received');
+                                    messageElement.prepend(authorElement);
+                                }
+                                chatMessages.appendChild(messageElement);
+                            });
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                        }
+                    });
+                }
+              }
+
+              async function registrarVisita() {
+                try {
+                  await push(ref(db, "visitas_brauu"), {
+                    mensaje: "Alguien abrió la página 💗",
+                    timestamp: new Date().toISOString()
+                  });
+                } catch (e) { console.error("Error registrando visita:", e); }
+              }
+              registrarVisita();
+
+              const boton = document.getElementById("apologyBtn");
+              if (boton) {
+                boton.addEventListener("click", async () => {
+                  try {
+                    await push(ref(db, "clicks_brauu"), {
+                      mensaje: "Alguien le picó al botón JAJSJD",
+                      timestamp: new Date().toISOString()
+                    });
+                  } catch (e) { console.error("Error al guardar clic:", e); }
+                });
+              }
+          </script>
+
           <script>
-            // Inicializar corazones flotantes de fondo
             function initFloatingHearts() {
               const container = document.getElementById('floatingHearts');
               for (let i = 0; i < 25; i++) {
@@ -1108,7 +1388,6 @@
               }
             }
 
-            // Efecto de destellos al hacer clic
             function createSparkle(x, y) {
               const sparkle = document.createElement('div');
               sparkle.className = 'sparkle';
@@ -1127,24 +1406,20 @@
               }, 1000);
             }
 
-            // Basic player controls
             const audio = document.getElementById('audio');
             const playToggle = document.getElementById('playToggle');
             const seek = document.getElementById('seek');
             const audioError = document.getElementById('audioError');
 
-            // Verificar si el audio se carga correctamente
             audio.addEventListener('error', function () {
               audioError.style.display = 'block';
               console.error('Error al cargar el archivo de audio.');
             });
 
-            // update duration when metadata ready
             audio.addEventListener('loadedmetadata', () => {
               seek.max = Math.floor(audio.duration || 0);
             });
 
-            // play/pause
             let playing = false;
             playToggle.addEventListener('click', async () => {
               if (!playing) {
@@ -1170,7 +1445,6 @@
             });
             seek.addEventListener('input', () => { audio.currentTime = +seek.value; });
 
-            // Simple heart spawn on tap anywhere in viewport to make it feel interactive
             const viewport = document.getElementById('viewport');
             const confettiLayer = document.getElementById('confetti');
 
@@ -1186,8 +1460,6 @@
               heart.style.zIndex = '5';
               heart.className = 'falling-heart';
               heart.style.transition = 'transform 0.2s, filter 0.2s';
-
-              // Hacer los corazones más fáciles de hacer clic
               heart.style.pointerEvents = 'auto';
 
               const drift = (Math.random() * 30) - 15;
@@ -1200,7 +1472,6 @@
 
               animation.onfinish = () => { heart.remove(); };
 
-              // Efecto de agrandamiento al pasar el mouse
               heart.addEventListener('mouseover', () => {
                 heart.style.transform = 'translate(-50%, -10px) scale(1.15)';
                 heart.style.filter = 'brightness(1.2) drop-shadow(0 0 8px rgba(255, 100, 180, 0.5))';
@@ -1214,7 +1485,6 @@
               return heart;
             }
 
-            // Score + Game logic
             const scoreEl = document.getElementById('score');
             let score = 0;
             let gameInterval = null;
@@ -1226,18 +1496,11 @@
               if (gameRunning) return;
               score = 0; scoreEl.textContent = score;
               gameRunning = true;
-              // spawn hearts faster if score grows
               gameInterval = setInterval(() => {
                 spawnHeartRandom();
               }, spawnInterval);
-
-              // allow tapping hearts to collect
               viewport.addEventListener('click', onViewportClick);
-
-              // 25 seconds game
               gameTimeout = setTimeout(endGame, 25000);
-
-              // Mostrar mensaje secreto
               showSecretMessage("❤️ Toca los corazones que caen");
             }
 
@@ -1245,16 +1508,12 @@
               gameRunning = false;
               clearInterval(gameInterval);
               viewport.removeEventListener('click', onViewportClick);
-              // confetti if score high
               if (score >= 10) celebrate();
-
-              // Mensaje personalizado según puntuación
               let message = "Juego terminado! Puntaje: " + score + " ";
               if (score < 5) message += "💔 Sigue intentando";
               else if (score < 10) message += "❤️ Bien";
               else if (score < 15) message += "💖 Excelente";
               else message += "💕";
-
               showSecretMessage(message);
             }
 
@@ -1263,21 +1522,17 @@
               gameRunning = false;
               clearInterval(gameInterval);
               if (gameTimeout) clearTimeout(gameTimeout);
-              // remove any hearts
               document.querySelectorAll('.falling-heart').forEach(e => e.remove());
             }
 
             function spawnHeartRandom() {
               const x = Math.random() * 100;
               const heart = createFallingHeart(x, 50, 5000 + Math.random() * 2000);
-              // register tap to collect
               heart.addEventListener('click', (ev) => {
                 ev.stopPropagation();
                 collectHeart(heart);
               }, { passive: false });
               viewport.appendChild(heart);
-
-              // Aumentar dificultad gradualmente
               if (score >= 15 && gameInterval) {
                 clearInterval(gameInterval);
                 spawnInterval = Math.max(800, spawnInterval - 100);
@@ -1286,42 +1541,32 @@
             }
 
             function collectHeart(node) {
-              // pop + score
               node.remove();
               score += 1;
               scoreEl.textContent = score;
-              // Efecto de destello
               createSparkle(
                 node.getBoundingClientRect().left + node.width / 2,
                 node.getBoundingClientRect().top + node.height / 2
               );
-              // small pop animation on confetti layer
               burstAt(node.getBoundingClientRect().left + node.clientWidth / 2, node.getBoundingClientRect().top + node.clientHeight / 2);
             }
 
             function onViewportClick(e) {
-              // if clicking empty space, spawn a decorative heart where tapped
               const rect = viewport.getBoundingClientRect();
               const x = ((e.clientX - rect.left) / rect.width) * 100;
               const heart = createFallingHeart(x, 40, 3000 + Math.random() * 1000);
               viewport.appendChild(heart);
-              // tap on it to collect
               heart.addEventListener('click', ev => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
-
-              // Efecto de destello
               createSparkle(e.clientX, e.clientY);
             }
 
-            // small burst effect (tiny particles) used on collect
             function burstAt(pageX, pageY) {
               const c = document.createElement('div');
               c.style.position = 'absolute';
-              // place relative to confettiLayer (which fills card); convert page coords
               const baseRect = confettiLayer.getBoundingClientRect();
               c.style.left = (pageX - baseRect.left) + 'px';
               c.style.top = (pageY - baseRect.top) + 'px';
               c.style.pointerEvents = 'none';
-              // 6 tiny squares
               for (let i = 0; i < 8; i++) {
                 const p = document.createElement('div');
                 p.style.width = p.style.height = (6 + Math.random() * 6) + 'px';
@@ -1338,41 +1583,29 @@
               setTimeout(() => c.remove(), 1100);
             }
 
-            // UI buttons
             document.getElementById('startGame').addEventListener('click', startGame);
             document.getElementById('resetGame').addEventListener('click', resetGame);
-
-            // Botón
+            
             document.getElementById('apologyBtn').addEventListener('click', () => {
-              const messageText = "ola, si si le picaste quiero decirte que te quiero muchisimo, aier te extrañemucho espero que hoy te salga muy bien todo todo todo, ante mis ojos eres la persona mas bonita de este mundo, eres unica, se que soy un tonto pero te lo digo demasiado enserio, quiero estar contigo y dartebesitosabrazarteydecirtecosasbonitas, ya te actualizare todos los dias esta pagina no importa la hora para que cuando la veas ya este actualizada KADSJASK, ahorita mismo son las 4 am JSAAS, pero noimporta quiero que te sientas feliz al ver esta paginita rembember that i love you, cuidate mucho y que te vaya muy pero muy muy bien hoy mar <33";
-
-              
-              // Crear mensaje con botón de cerrar
+              const messageText = "olaaaaa OMG SI LE PICASTE AJJSDJASDJAK, sabes que te quiero mucho y eres mui linda cierto? ereslamejor, asi muy cabron, es que enserio estoy demasiado enamorado de ti quepedo que me paso yo antes era ice cold dame tu cosita, y ahora puedo ser tan cursi como no tienes una idea, recierda es que eres tan linda que quisiera comerteabesitos, ten muy buen dia hermosalinda<33";
               const persistentMessage = document.createElement('div');
               persistentMessage.className = 'persistent-message';
               persistentMessage.innerHTML = `
-        <div class="message-content">
-          <button class="close-btn">✕</button>
-          <div class="message-text">${messageText}</div>
-        </div>
-      `;
-
+                <div class="message-content">
+                  <button class="close-btn">✕</button>
+                  <div class="message-text">${messageText}</div>
+                </div>
+              `;
               document.body.appendChild(persistentMessage);
-
-              // Animación de entrada
               setTimeout(() => {
                 persistentMessage.classList.add('show');
               }, 10);
-
-              // Cerrar al hacer clic en la X
               persistentMessage.querySelector('.close-btn').addEventListener('click', () => {
                 persistentMessage.classList.remove('show');
                 setTimeout(() => {
                   persistentMessage.remove();
                 }, 300);
               });
-
-              // Cerrar al hacer clic fuera del mensaje
               persistentMessage.addEventListener('click', (e) => {
                 if (e.target === persistentMessage) {
                   persistentMessage.classList.remove('show');
@@ -1381,8 +1614,6 @@
                   }, 300);
                 }
               });
-
-              // Efecto especial de corazones
               for (let i = 0; i < 15; i++) {
                 setTimeout(() => {
                   const x = 10 + Math.random() * 80;
@@ -1391,11 +1622,9 @@
                   viewport.appendChild(heart);
                 }, i * 150);
               }
-
               celebrate();
             });
 
-            // more hearts button: spawn a burst of hearts
             document.getElementById('moreHearts').addEventListener('click', () => {
               for (let i = 0; i < 8; i++) {
                 setTimeout(() => {
@@ -1408,9 +1637,7 @@
               showSecretMessage("¡Lluvia de corazones! 💖");
             });
 
-            // confetti celebration (mini)
             function celebrate() {
-              // small burst of colored confetti
               for (let i = 0; i < 40; i++) {
                 const el = document.createElement('div');
                 el.style.position = 'absolute';
@@ -1431,7 +1658,6 @@
               showSecretMessage("🎉");
             });
 
-            // share / add to home (simple share)
             document.getElementById('shareBtn').addEventListener('click', async () => {
               const shareData = { title: 'PAGINITA', text: 'Mira esto', url: location.href };
               try {
@@ -1442,25 +1668,20 @@
               } catch (e) { console.warn(e); }
             });
 
-            // Mostrar mensaje secreto
             function showSecretMessage(text) {
               const messageEl = document.getElementById('secretMessage');
               messageEl.textContent = text;
               messageEl.style.opacity = '1';
-
               setTimeout(() => {
                 messageEl.style.opacity = '0';
               }, 3000);
             }
 
-            // Efecto de destello al hacer clic en cualquier lugar
             document.addEventListener('click', (e) => {
               createSparkle(e.clientX, e.clientY);
             });
 
-            // tap anywhere on card to spawn a decorative heart (not game)
             document.querySelector('.card').addEventListener('click', (e) => {
-              // avoid clicks that are on game controls to reduce annoyance
               if (e.target.closest('.big-btn') || e.target.closest('input') || e.target.closest('button')) return;
               const rect = e.currentTarget.getBoundingClientRect();
               const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -1468,7 +1689,6 @@
               e.currentTarget.appendChild(heart);
             }, { passive: true });
 
-            // Atajos de teclado
             document.addEventListener('keydown', (e) => {
               if (e.key.toLowerCase() === 'g') startGame();
               if (e.key.toLowerCase() === 'r') resetGame();
@@ -1484,7 +1704,6 @@
               }
             });
 
-            // On load: small intro hearts
             for (let i = 0; i < 8; i++) {
               setTimeout(() => {
                 const x = Math.random() * 100;
@@ -1493,15 +1712,12 @@
               }, i * 200);
             }
 
-            // Inicializar corazones flotantes
             initFloatingHearts();
 
-            // Mensaje de bienvenida
             setTimeout(() => {
               showSecretMessage("Hice esto con mucho cariño mariana bienvenida <33");
             }, 1000);
 
-            // Bubble drag logic
             const bubble = document.getElementById('noteBubble');
             let isDragging = false;
             let offsetX = 0;
@@ -1524,7 +1740,6 @@
               moveBubble(e.clientX, e.clientY);
             });
 
-            // Touch
             bubble.addEventListener('touchstart', (e) => {
               isDragging = true;
               const touch = e.touches[0];
@@ -1545,16 +1760,12 @@
             function moveBubble(x, y) {
               let left = x - offsetX;
               let top = y - offsetY;
-
-              // limitar dentro de pantalla
               left = Math.max(0, Math.min(window.innerWidth - bubble.offsetWidth, left));
               top = Math.max(0, Math.min(window.innerHeight - bubble.offsetHeight, top));
-
               bubble.style.left = left + 'px';
               bubble.style.top = top + 'px';
             }
 
-            // Bubble drag logic for second bubble
             const bubble2 = document.getElementById('noteBubble2');
             let isDragging2 = false;
             let offsetX2 = 0;
@@ -1577,7 +1788,6 @@
               moveBubble2(e.clientX, e.clientY);
             });
 
-            // Touch for second bubble
             bubble2.addEventListener('touchstart', (e) => {
               isDragging2 = true;
               const touch = e.touches[0];
@@ -1598,18 +1808,12 @@
             function moveBubble2(x, y) {
               let left = x - offsetX2;
               let top = y - offsetY2;
-
-              // limitr pantalla
               left = Math.max(0, Math.min(window.innerWidth - bubble2.offsetWidth, left));
               top = Math.max(0, Math.min(window.innerHeight - bubble2.offsetHeight, top));
-
               bubble2.style.left = left + 'px';
               bubble2.style.top = top + 'px';
               bubble2.style.right = 'auto';
             }
-
-
-            
           </script>
 </body>
 
