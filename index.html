@@ -992,11 +992,11 @@
   <div id="lastUpdate">Última actualización: 09:12 AM 08/10/25</div>
 
   <div class="note-bubble" id="noteBubble">
-    💌 olap, ojala hoy te vaya muy bien en tu examen te esforzaste un monton asi que sisisis te va ir muy bien, recuerda lo hermosa que eres todos los dias, lo mucho que eres para mi tequieromucho mariana<3 </div>
+    💌 olaaaaaaaaaaaaaaaaa, quiero decirte quetequiermucho asi demasiado, ojala hoy te vaya  y te salga tododo muy pero muy bien, si te sientes cansadita en un momento intenta descansar lo mas posiblelinda </div>
 
       <div class="note-bubble bubble-top-left" id="noteBubble2">
-        Ola yo se que me odias mucho pero me vale yo te quiero muchisimo y te extraño quiero abrazarte 🥺
-        <img src="https://s-media-cache-ak0.pinimg.com/originals/ba/70/69/ba7069927ba276d00712b3a8d7bfea97.jpg" alt="emoji"
+        mira soy este AJDSKAAJSD
+        <img src="https://i.pinimg.com/236x/24/d3/61/24d361ad088bfa10008c2c4eea021e54.jpg" alt="emoji"
           style="width:35px; height:25px; vertical-align:middle;">
       </div>
 
@@ -1049,9 +1049,9 @@
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
                   <div style="display:flex;flex-direction:column">
                     <strong
-                      style="color:var(--accent);font-size:16px; animation: subtleFloat 8s ease-in-out infinite;">Labios Rotos</strong>
-                    <span class="small">Zoé</span>
-                    <img src="https://tse1.mm.bing.net/th/id/OIP.epygtYEtD6p6-3xCPp3cQgAAAA?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Portada del álbum"
+                      style="color:var(--accent);font-size:16px; animation: subtleFloat 8s ease-in-out infinite;">Trivia 承 : Love</strong>
+                    <span class="small">BTS</span>
+                    <img src="https://soulpnuts.jp/wp-content/uploads/2018/09/3d44d376509d1d724bce22f6cfe59fdc-500x485.jpg" alt="Portada del álbum"
                       class="album-cover">
                   </div>
                   <div style="display:flex;gap:10px;align-items:center">
@@ -1059,7 +1059,7 @@
                   </div>
                 </div>
                 <audio id="audio" preload="metadata">
-                  <source src="cancion3.mp3" type="audio/mpeg">
+                  <source src="cancion4.mp3" type="audio/mpeg">
                   Tu navegador no soporta audio.
                 </audio>
                 <div class="audio-error" id="audioError">
@@ -1146,9 +1146,7 @@
                   <div class="reason-text">Simplemente eres tú, y eso es más que suficiente para mí.</div>
                 </div>
               </div>
-              <a href="index2.html"
-                style="display:inline-block;padding:10px 15px;background:#ff3b8d;color:white;border-radius:8px;text-decoration:none;">Ver
-                página del día 8 de octubre</a>
+            
               <div>
                 <button class="big-btn apology-btn" id="apologyBtn">picale aqui JAJSJD</button>
               </div>
@@ -1308,6 +1306,31 @@
                 chatInput.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') sendMessage();
                 });
+
+                // --- LÓGICA DE REGISTRO DE EVENTOS (AHORA CON USUARIO) ---
+                async function registrarVisitaConUsuario() {
+                    try {
+                        await push(ref(db, "visitas_brauu"), {
+                            user: currentUser,
+                            mensaje: `${currentUser} abrió la página 💗`,
+                            timestamp: new Date().toISOString()
+                        });
+                    } catch (e) { console.error("Error registrando visita:", e); }
+                }
+                registrarVisitaConUsuario();
+
+                const boton = document.getElementById("apologyBtn");
+                if (boton) {
+                    boton.addEventListener("click", async () => {
+                        try {
+                            await push(ref(db, "clicks_brauu"), {
+                                user: currentUser,
+                                mensaje: `${currentUser} le picó al botón JAJSJD`,
+                                timestamp: new Date().toISOString()
+                            });
+                        } catch (e) { console.error("Error al guardar clic:", e); }
+                    });
+                }
               }
 
               function loadChat(recipient) {
@@ -1347,28 +1370,6 @@
                         }
                     });
                 }
-              }
-
-              async function registrarVisita() {
-                try {
-                  await push(ref(db, "visitas_brauu"), {
-                    mensaje: "Alguien abrió la página 💗",
-                    timestamp: new Date().toISOString()
-                  });
-                } catch (e) { console.error("Error registrando visita:", e); }
-              }
-              registrarVisita();
-
-              const boton = document.getElementById("apologyBtn");
-              if (boton) {
-                boton.addEventListener("click", async () => {
-                  try {
-                    await push(ref(db, "clicks_brauu"), {
-                      mensaje: "Alguien le picó al botón JAJSJD",
-                      timestamp: new Date().toISOString()
-                    });
-                  } catch (e) { console.error("Error al guardar clic:", e); }
-                });
               }
           </script>
 
@@ -1818,4 +1819,3 @@
 </body>
 
 </html>
-
