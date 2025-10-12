@@ -1220,6 +1220,8 @@
               const wrap = document.querySelector('.wrap');
               const logoutBtn = document.getElementById('logoutBtn');
 
+              let sessionStartTime = null;
+
               async function login() {
                   const username = usernameInput.value.trim().toLowerCase();
                   if (username === '') return;
@@ -1240,6 +1242,9 @@
               }
 
               function logout() {
+                const sessionDurationSeconds = Math.round((Date.now() - sessionStartTime) / 1000);
+                logUserActivity('SESSION_END', { durationSeconds: sessionDurationSeconds });
+                logUserActivity('LOGOUT');
                 localStorage.removeItem('username');
                 window.location.reload();
               }
@@ -1256,11 +1261,53 @@
                   initializeAppLogic();
               }
               
+              async function logUserActivity(eventType, details = {}) {
+                  if (!currentUser) return;
+                  try {
+                      await push(ref(db, "user_logs"), {
+                          user: currentUser,
+                          eventType: eventType,
+                          details: details,
+                          timestamp: new Date().toISOString(),
+                          url: window.location.href
+                      });
+                  } catch (e) {
+                      console.error(`Error al registrar el evento '${eventType}':`, e);
+                  }
+              }
+              
               function initializeAppLogic() {
                 document.getElementById('currentUserDisplay').textContent = `${currentUser}`;
                 const recipientSelect = document.getElementById('recipientSelect');
                 const usersRef = ref(db, 'users');
+                const chatInput = document.getElementById('chatInput');
+                const sendMessageBtn = document.getElementById('sendMessageBtn');
 
+                // --- INICIO DE SESIÓN Y REGISTRO DE EVENTOS ---
+                
+                // 1. Inicia el contador de sesión y registra la visita
+                sessionStartTime = Date.now();
+                logUserActivity('LOGIN_SUCCESS');
+                
+                // 2. Registra la visita en el sistema ANTIGUO
+                async function registrarVisitaAntigua() {
+                    try {
+                        await push(ref(db, "visitas_brauu"), {
+                            user: currentUser,
+                            mensaje: `${currentUser} abrió la página 💗`,
+                            timestamp: new Date().toISOString()
+                        });
+                    } catch (e) { console.error("Error registrando visita (sistema antiguo):", e); }
+                }
+                registrarVisitaAntigua();
+
+                // 3. Registra cuando el usuario cierra o recarga la página
+                window.addEventListener('beforeunload', () => {
+                    const sessionDurationSeconds = Math.round((Date.now() - sessionStartTime) / 1000);
+                    logUserActivity('SESSION_END', { durationSeconds: sessionDurationSeconds });
+                });
+
+                // --- LÓGICA DEL CHAT Y SUS EVENTOS ---
                 onValue(usersRef, (snapshot) => {
                     const currentRecipient = recipientSelect.value;
                     recipientSelect.innerHTML = '<option value="">Selecciona a alguien</option>';
@@ -1280,10 +1327,17 @@
                     }
                 });
                 
-                recipientSelect.addEventListener('change', () => loadChat(recipientSelect.value));
+                recipientSelect.addEventListener('change', () => {
+                    const selectedUser = recipientSelect.value;
+                    if (selectedUser) {
+                        logUserActivity('CHAT_SELECT_RECIPIENT', { recipient: selectedUser });
+                    }
+                    loadChat(selectedUser);
+                });
 
-                const sendMessageBtn = document.getElementById('sendMessageBtn');
-                const chatInput = document.getElementById('chatInput');
+                chatInput.addEventListener('focus', () => {
+                    logUserActivity('CHAT_INPUT_FOCUS');
+                });
                 
                 async function sendMessage() {
                     const recipient = recipientSelect.value;
@@ -1296,6 +1350,7 @@
                                 author: currentUser,
                                 timestamp: new Date().toISOString()
                             });
+                            logUserActivity('CHAT_MESSAGE_SENT', { recipient: recipient, messageLength: messageText.length });
                             chatInput.value = '';
                         } catch(e) {
                             console.error("Error al enviar mensaje:", e);
@@ -1308,30 +1363,36 @@
                     if (e.key === 'Enter') sendMessage();
                 });
 
-                // --- LÓGICA DE REGISTRO DE EVENTOS (AHORA CON USUARIO) ---
-                async function registrarVisitaConUsuario() {
-                    try {
-                        await push(ref(db, "visitas_brauu"), {
-                            user: currentUser,
-                            mensaje: `${currentUser} abrió la página 💗`,
-                            timestamp: new Date().toISOString()
-                        });
-                    } catch (e) { console.error("Error registrando visita:", e); }
-                }
-                registrarVisitaConUsuario();
-
-                const boton = document.getElementById("apologyBtn");
-                if (boton) {
-                    boton.addEventListener("click", async () => {
+                // --- REGISTRO DE CLICS EN BOTONES ---
+                const apologyButton = document.getElementById("apologyBtn");
+                if (apologyButton) {
+                    apologyButton.addEventListener("click", async () => {
+                        // Nuevo sistema de logs
+                        logUserActivity('BUTTON_CLICK', { buttonId: 'apologyBtn' });
+                        // Antiguo sistema de logs
                         try {
                             await push(ref(db, "clicks_brauu"), {
                                 user: currentUser,
                                 mensaje: `${currentUser} le picó al botón JAJSJD`,
                                 timestamp: new Date().toISOString()
                             });
-                        } catch (e) { console.error("Error al guardar clic:", e); }
+                        } catch (e) { console.error("Error al guardar clic (sistema antiguo):", e); }
                     });
                 }
+                
+                document.getElementById("moreHearts").addEventListener("click", () => logUserActivity('BUTTON_CLICK', { buttonId: 'moreHearts' }));
+                document.getElementById("miniConfetti").addEventListener("click", () => logUserActivity('BUTTON_CLICK', { buttonId: 'miniConfetti' }));
+                document.getElementById("shareBtn").addEventListener("click", () => logUserActivity('BUTTON_CLICK', { buttonId: 'shareBtn' }));
+
+                // --- REGISTRO DE EVENTOS DEL JUEGO ---
+                document.getElementById("startGame").addEventListener("click", () => logUserActivity('GAME_START'));
+                document.getElementById("resetGame").addEventListener("click", () => logUserActivity('GAME_RESET'));
+                // El evento GAME_END se registra desde la función endGame() en el otro script.
+
+                // --- REGISTRO DE EVENTOS DEL AUDIO ---
+                const audioPlayer = document.getElementById('audio');
+                audioPlayer.addEventListener('play', () => logUserActivity('AUDIO_PLAY'));
+                audioPlayer.addEventListener('pause', () => logUserActivity('AUDIO_PAUSE'));
               }
 
               function loadChat(recipient) {
@@ -1493,6 +1554,24 @@
             let spawnInterval = 1300;
             let gameRunning = false;
             let gameTimeout = null;
+            
+            // --- CÓDIGO ACTUALIZADO PARA REGISTRAR EVENTOS DEL JUEGO ---
+            // Usaremos una función global para poder llamarla desde el otro script
+            window.logUserActivityForGame = async function(eventType, details = {}) {
+                const currentUser = localStorage.getItem('username');
+                if (!currentUser) return;
+                try {
+                    // Re-importamos 'push' y 'ref' porque este script no es un módulo
+                    const { getDatabase, ref, push } = await import("https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js");
+                    const db = getDatabase();
+                    await push(ref(db, "user_logs"), {
+                        user: currentUser,
+                        eventType: eventType,
+                        details: details,
+                        timestamp: new Date().toISOString()
+                    });
+                } catch(e) { console.error("Error registrando evento de juego:", e); }
+            }
 
             function startGame() {
               if (gameRunning) return;
@@ -1517,6 +1596,8 @@
               else if (score < 15) message += "💖 Excelente";
               else message += "💕";
               showSecretMessage(message);
+              // --- REGISTRO DEL FIN DEL JUEGO ---
+              window.logUserActivityForGame('GAME_END', { finalScore: score });
             }
 
             function resetGame() {
@@ -1820,4 +1901,3 @@
 </body>
 
 </html>
-
