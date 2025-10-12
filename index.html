@@ -989,7 +989,7 @@
       </div>
   </div>
 
-  <div id="lastUpdate">Última actualización: 10:12 AM 12/10/25</div>
+  <div id="lastUpdate">Última actualización: 03:40 PM 12/10/25</div>
 
   <div class="note-bubble" id="noteBubble">
     💌 ola, ahorita hare unas cositas que se qq te gustara mucho, ten muy buen dia recuerda que eres demasiado hermosa asimucho, tu puedes con todo, que te salga asi bn bnbnbn todo, hoy no hare casi nada por si gustas hablar ahorita, tequieromuchisimolinda.</div>
@@ -1005,8 +1005,8 @@
 
       <div class="vignette"></div>
 
-      <div class="wrap" style="display: none;"> <div class="card" role="region" aria-label="Dedicado">
-          
+      <div class="wrap" style="display: none;">
+        <div class="card" role="region" aria-label="Dedicado">
           <div class="title-row">
             <div style="display:flex;align-items:center;gap:12px">
               <h1>
@@ -1043,36 +1043,36 @@
               <button class="big-btn" id="shareBtn" aria-label="Compartir">💌 Compartir</button>
             </div>
           </div>
-
+          
           <div class="player" style="margin-top:15px">
             <div class="play-card">
               <div style="display:flex;flex-direction:column;gap:8px;flex:1">
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
-                  <div style="display:flex;flex-direction:column">
-                    <strong
-                      style="color:var(--accent);font-size:16px; animation: subtleFloat 8s ease-in-out infinite;">ICNBYH</strong>
-                    <span class="small">Cuco</span>
-                    <img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ff/6b/23/ff6b23a2-613a-98f2-6098-008412568e71/25UMGIM05523.rgb.jpg/1200x1200bf-60.jpg" alt="Portada del álbum"
-                      class="album-cover">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                      <div style="display:flex;flex-direction:column">
+                          <strong id="songTitle" style="color:var(--accent);font-size:16px; animation: subtleFloat 8s ease-in-out infinite;">ICNBYH</strong>
+                          <span id="songArtist" class="small">Cuco</span>
+                          <img id="albumCoverImg" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ff/6b/23/ff6b23a2-613a-98f2-6098-008412568e71/25UMGIM05523.rgb.jpg/1200x1200bf-60.jpg" alt="Portada del álbum" class="album-cover">
+                      </div>
+                      <div style="display:flex;gap:10px;align-items:center">
+                          <button class="big-btn" id="prevBtn" style="font-size: 20px; padding: 8px 14px;">⏪</button>
+                          <button class="big-btn" id="playToggle">▶</button>
+                          <button class="big-btn" id="nextBtn" style="font-size: 20px; padding: 8px 14px;">⏩</button>
+                      </div>
                   </div>
-                  <div style="display:flex;gap:10px;align-items:center">
-                    <button class="big-btn" id="playToggle">▶</button>
+                  <audio id="audio" preload="metadata">
+                      <source src="" type="audio/mpeg">
+                      Tu navegador no soporta audio.
+                  </audio>
+                  <div class="audio-error" id="audioError">
+                      No se pudo cargar el audio. Asegúrate de tener conexión a internet.
                   </div>
-                </div>
-                <audio id="audio" preload="metadata">
-                  <source src="cancion5.mp3" type="audio/mpeg">
-                  Tu navegador no soporta audio.
-                </audio>
-                <div class="audio-error" id="audioError">
-                  No se pudo cargar el audio. Asegúrate de tener conexión a internet.
-                </div>
-                <input type="range" id="seek" class="seek" min="0" step="0.1" value="0" aria-label="barra de progreso">
+                  <input type="range" id="seek" class="seek" min="0" step="0.1" value="0" aria-label="barra de progreso">
               </div>
               <div style="width:160px;display:flex;flex-direction:column;align-items:flex-end">
-                <div
-                  style="font-weight:900;color:#7b6374;font-size:15px; animation: subtleFloat 9s ease-in-out infinite;">
-                  Reproduce esta canción (todas estas cancioncitas te las dedico) </div>
-                <div class="small" style="margin-top:8px">Toca la pantalla para crear corazones</div>
+                  <div style="font-weight:900;color:#7b6374;font-size:15px; animation: subtleFloat 9s ease-in-out infinite;">
+                      Reproduce esta canción (todas estas cancioncitas te las dedico)
+                  </div>
+                  <div class="small" style="margin-top:8px">Toca la pantalla para crear corazones</div>
               </div>
             </div>
 
@@ -1092,7 +1092,6 @@
               </div>
             </div>
           </div>
-
           <div class="game-panel">
             <div class="game-card" style="flex:1">
               <div id="viewport" class="game-viewport" aria-label="Área de juego táctil">
@@ -1147,7 +1146,7 @@
                   <div class="reason-text">Simplemente eres tú, y eso es más que suficiente para mí.</div>
                 </div>
               </div>
-            
+              
               <div>
                 <button class="big-btn apology-btn" id="apologyBtn">picale aqui JAJSJD</button>
               </div>
@@ -1179,7 +1178,7 @@
                   style="background:linear-gradient(180deg,#fff,#ffe6f2);color:var(--accent)"> Celebrar</button>
             </div>
             <div class="confetti" id="confetti"></div>
-          
+            
             <footer>
               Hecho con por braw para emo (tequieromucho mariana.)
               <p style="font-size: 6px; color: gray; margin-top: 30px;">
@@ -1469,44 +1468,125 @@
               }, 1000);
             }
 
+            // --- INICIO DE LA LÓGICA DE LA PLAYLIST ---
+
+            // 1. Define tu playlist aquí. Agrega tantas canciones como quieras.
+            // Asegúrate de que los nombres de los archivos (src) sean correctos.
+            const playlist = [
+              {
+                title: 'ICNBYH',
+                artist: 'Cuco',
+                src: 'cancion5.mp3', // La canción que ya tenías
+                cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ff/6b/23/ff6b23a2-613a-98f2-6098-008412568e71/25UMGIM05523.rgb.jpg/1200x1200bf-60.jpg'
+              },
+              {
+                title: 'Para Ti',
+                artist: 'Cuco',
+                src: 'cancion6.mp3', // Reemplaza con el nombre de tu archivo
+                cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ff/6b/23/ff6b23a2-613a-98f2-6098-008412568e71/25UMGIM05523.rgb.jpg/1200x1200bf-60.jpg' // Reemplaza con la URL de la portada
+              },
+              {
+                title: 'Amor de siempre',
+                artist: 'Cuco',
+                src: 'cancion7.mp3', // Reemplaza con el nombre de tu archivo
+                cover: 'https://i.scdn.co/image/ab67616d0000b273b1c091e32aad5310ebbdd558' // Reemplaza con la URL de la portada
+              }
+              // Puedes agregar más canciones aquí...
+              // { title: '...', artist: '...', src: '...', cover: '...' }
+            ];
+
+            // 2. Variables para controlar el estado
+            let currentSongIndex = 0;
+            let isPlaying = false;
+
+            // 3. Referencias a los elementos del DOM (HTML)
             const audio = document.getElementById('audio');
+            const audioSource = audio.querySelector('source');
             const playToggle = document.getElementById('playToggle');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
             const seek = document.getElementById('seek');
             const audioError = document.getElementById('audioError');
+            const songTitleEl = document.getElementById('songTitle');
+            const songArtistEl = document.getElementById('songArtist');
+            const albumCoverImgEl = document.getElementById('albumCoverImg');
+
+            // 4. Función para cargar una canción
+            function loadSong(songIndex) {
+              const song = playlist[songIndex];
+              songTitleEl.textContent = song.title;
+              songArtistEl.textContent = song.artist;
+              albumCoverImgEl.src = song.cover;
+              audioSource.src = song.src;
+              audio.load(); // Carga el nuevo archivo de audio
+              seek.value = 0; // Reinicia la barra de progreso
+            }
+
+            // 5. Funciones para reproducir y pausar
+            function playSong() {
+              audio.play().then(() => {
+                isPlaying = true;
+                playToggle.textContent = '⏸';
+              }).catch(e => {
+                  console.warn('No se pudo reproducir:', e);
+                  audioError.style.display = 'block';
+                  audioError.textContent = 'No se pudo reproducir el audio. Haz clic para intentar de nuevo.';
+              });
+            }
+
+            function pauseSong() {
+              audio.pause();
+              isPlaying = false;
+              playToggle.textContent = '▶';
+            }
+
+            // 6. Lógica para los botones
+            playToggle.addEventListener('click', () => {
+              if (isPlaying) {
+                pauseSong();
+              } else {
+                playSong();
+              }
+            });
+
+            nextBtn.addEventListener('click', () => {
+              currentSongIndex = (currentSongIndex + 1) % playlist.length; // Va a la siguiente y vuelve al inicio si es la última
+              loadSong(currentSongIndex);
+              if(isPlaying) playSong(); // Si estaba sonando, reproduce la nueva canción
+            });
+
+            prevBtn.addEventListener('click', () => {
+              currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length; // Va a la anterior y a la última si es la primera
+              loadSong(currentSongIndex);
+              if(isPlaying) playSong(); // Si estaba sonando, reproduce la nueva canción
+            });
+
+            // 7. Actualizar la barra de progreso
+            audio.addEventListener('timeupdate', () => {
+              if (audio.duration) {
+                seek.value = audio.currentTime;
+                seek.max = audio.duration;
+              }
+            });
+
+            seek.addEventListener('input', () => {
+              audio.currentTime = seek.value;
+            });
+
+            // 8. Pasar a la siguiente canción automáticamente cuando termina una
+            audio.addEventListener('ended', () => {
+              nextBtn.click(); // Simula un clic en el botón de siguiente
+            });
 
             audio.addEventListener('error', function () {
               audioError.style.display = 'block';
               console.error('Error al cargar el archivo de audio.');
             });
 
-            audio.addEventListener('loadedmetadata', () => {
-              seek.max = Math.floor(audio.duration || 0);
-            });
+            // 9. Cargar la primera canción al iniciar la página
+            loadSong(currentSongIndex);
 
-            let playing = false;
-            playToggle.addEventListener('click', async () => {
-              if (!playing) {
-                try {
-                  await audio.play();
-                  playing = true;
-                  playToggle.textContent = '⏸';
-                }
-                catch (e) {
-                  console.warn('No se pudo reproducir:', e);
-                  audioError.style.display = 'block';
-                  audioError.textContent = 'No se pudo reproducir el audio. Haz clic para intentar de nuevo.';
-                }
-              } else {
-                audio.pause();
-                playing = false;
-                playToggle.textContent = '▶';
-              }
-            });
-
-            audio.addEventListener('timeupdate', () => {
-              seek.value = Math.floor(audio.currentTime);
-            });
-            seek.addEventListener('input', () => { audio.currentTime = +seek.value; });
+            // --- FIN DE LA LÓGICA DE LA PLAYLIST ---
 
             const viewport = document.getElementById('viewport');
             const confettiLayer = document.getElementById('confetti');
