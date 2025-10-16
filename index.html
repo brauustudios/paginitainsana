@@ -21,6 +21,7 @@
           --shadow: 0 10px 30px rgba(255, 60, 130, 0.15);
           --radius: 20px;
           --ui-pad: 14px;
+          --text-main: #2a2530; /* Color de texto principal */
         }
 
         * {
@@ -32,10 +33,11 @@
           height: 100%;
           margin: 0;
           font-family: 'Delius', cursive;
-          background: linear-gradient(135deg, #fff0f6 0%, #ffd7eb 100%);
-          color: #2a2530;
+          background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+          color: var(--text-main);
           overflow-x: hidden;
           position: relative;
+          transition: background 0.5s ease, color 0.5s ease;
         }
 
         body::before {
@@ -52,6 +54,80 @@
           pointer-events: none;
           z-index: -1;
         }
+        
+        /* --- TEMA OSCURO --- */
+        body.dark-theme {
+          --bg1: #2a2530; /* Fondo principal oscuro */
+          --bg2: #3c3542; /* Fondo degradado más claro */
+          --accent: #ff8acb; /* Rosa neón principal */
+          --accent-light: #ffacec; /* Rosa más claro */
+          --accent-dark: #e560a8; /* Rosa más intenso */
+          --soft: rgba(0, 0, 0, 0.4);
+          --glass: rgba(50, 40, 60, 0.25);
+          --shadow: 0 10px 30px rgba(255, 138, 203, 0.1);
+          --text-main: #e2dce4; /* Color de texto principal */
+        }
+        
+        .dark-theme .card {
+          background: linear-gradient(135deg, rgba(48, 42, 58, 0.85), rgba(40, 35, 49, 0.85));
+          border-color: rgba(255, 138, 203, 0.2);
+          box-shadow: var(--shadow), 0 0 0 1px rgba(0, 0, 0, 0.4);
+        }
+
+        .dark-theme .sub, .dark-theme .small { color: #a899ae; }
+        .dark-theme .play-card, .dark-theme .game-card, .dark-theme .reason-card, .dark-theme .chat-container {
+          background: rgba(0, 0, 0, 0.2);
+          border-color: rgba(255, 255, 255, 0.1);
+        }
+        .dark-theme .note-bubble {
+            background: rgba(60, 53, 66, 0.9);
+            border-color: var(--accent);
+            color: #e2dce4;
+        }
+        .dark-theme #resetGame {
+            background: linear-gradient(180deg, #4d4554, #3c3542);
+            color: var(--accent);
+        }
+        .dark-theme .chat-message.received {
+            background: #4a4153;
+            color: #e2dce4;
+        }
+        .dark-theme #usernameInput, .dark-theme #chatInput, .dark-theme #recipientSelect {
+            background-color: #3c3542;
+            color: var(--text-main);
+            border-color: rgba(255, 138, 203, 0.4);
+        }
+
+        /* --- EFECTO LLUVIA DE PIXELES --- */
+        #pixel-rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            overflow: hidden;
+        }
+        .pixel {
+            position: absolute;
+            background-color: var(--accent-light);
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            animation: fall linear infinite;
+            opacity: 0;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            from {
+                opacity: 0.7;
+            }
+        }
+
 
         .wrap {
           min-height: 100dvh;
@@ -73,6 +149,7 @@
           border: 1px solid rgba(255, 20, 90, 0.1);
           position: relative;
           overflow: hidden;
+          transition: background 0.5s ease, border-color 0.5s ease;
         }
 
         .card::after {
@@ -173,7 +250,7 @@
           align-items: center;
           box-shadow: 0 6px 16px rgba(255, 50, 130, 0.08);
           border: 1px solid rgba(255, 255, 255, 0.6);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
         }
 
         .play-card:hover {
@@ -275,7 +352,7 @@
           border-radius: 16px;
           border: 1px solid rgba(255, 255, 255, 0.4);
           box-shadow: 0 6px 16px rgba(255, 50, 130, 0.08);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
         }
 
         .game-card:hover {
@@ -486,6 +563,7 @@
           cursor: grab;
           line-height: 1.4;
           animation: bubbleFloat 8s ease-in-out infinite;
+          transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease;
         }
 
         @keyframes bubbleFloat {
@@ -552,7 +630,7 @@
           width: calc(50% - 15px);
           min-width: 250px;
           box-shadow: 0 4px 10px rgba(255, 60, 140, 0.1);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
           animation: cardAppear 0.5s ease-out;
         }
 
@@ -839,6 +917,7 @@
           max-width: 600px;
           margin-left: auto;
           margin-right: auto;
+          transition: background 0.5s ease;
         }
 
         .chat-messages {
@@ -879,6 +958,7 @@
             color: #2a2530;
             align-self: flex-start;
             text-align: left;
+            transition: background 0.5s ease, color 0.5s ease;
         }
         
         .message-author {
@@ -989,10 +1069,12 @@
       </div>
   </div>
 
-  <div id="lastUpdate">Última actualización:12:56 PM 14/10/25</div>
+  <div id="lastUpdate">Última actualización:12:38 PM 16/10/25</div>
+
+  <div id="pixel-rain-container"></div>
 
   <div class="note-bubble" id="noteBubble">
-    💌 ESPERO HOY TE VAYA DEMASIADO BIENBONITAHERMOSALINDA, RECUERDA QUE ESTAS MUY BONITA AUNQUE ESO YA LO SABES, ESPERO TE VAYUA MUY BIEN HOY Y DISCULPAME POR NO ACTUALIZAR LA PAGINA AHORITA ES QUE ME OCUPE MUCHO PERO YA ME DI EL TIEMPO PARA ACTUALIZAR LA PAGINITA, AHORITA QUE LLEGUE TE MANDO MENSAJE BONITA <33</div>
+    💌 ESPERO HOY TE VAYA DEMASIADO BIENBONITAHERMOSALINDA, ESPERO TE VAYA MUY BIEN HOY TEQUIEROMUCHOMUCHO RECUERDA QUE SIEMPRE ESTARE PARA TI PARA LO QUE SEA, ERES DEMASIADO BUENA EN TODO LO QUE HACES LINDAP, ERES INCREIBLE TEQUIEROMUCHISIMO ERMOSA <33 </div>
 
       <div class="note-bubble bubble-top-left" id="noteBubble2">
         ME GUSTAS MUCHO QUE TE PASA, QUISIERA ESTAR AHORA MISMO CONTIGO, MIRA AHI TE VA UN CHISTE: ¿que le dice un perro a otro?...
@@ -1041,6 +1123,7 @@
             <div style="display:flex;gap:10px;align-items:center">
               <div class="sub">emocat · my · special · girl</div>
               <button class="big-btn" id="shareBtn" aria-label="Compartir">💌 Compartir</button>
+              <button id="themeToggleBtn" class="big-btn" style="background: #7b6e70; padding: 8px 12px; font-size: 14px;">🌙</button>
             </div>
           </div>
           
@@ -1491,15 +1574,11 @@
                 src: 'cancion7.mp3', // Reemplaza con el nombre de tu archivo
                 cover: 'https://i.scdn.co/image/ab67616d0000b273b1c091e32aad5310ebbdd558' // Reemplaza con la URL de la portada
               }
-              // Puedes agregar más canciones aquí...
-              // { title: '...', artist: '...', src: '...', cover: '...' }
             ];
 
-            // 2. Variables para controlar el estado
             let currentSongIndex = 0;
             let isPlaying = false;
 
-            // 3. Referencias a los elementos del DOM (HTML)
             const audio = document.getElementById('audio');
             const audioSource = audio.querySelector('source');
             const playToggle = document.getElementById('playToggle');
@@ -1511,18 +1590,16 @@
             const songArtistEl = document.getElementById('songArtist');
             const albumCoverImgEl = document.getElementById('albumCoverImg');
 
-            // 4. Función para cargar una canción
             function loadSong(songIndex) {
               const song = playlist[songIndex];
               songTitleEl.textContent = song.title;
               songArtistEl.textContent = song.artist;
               albumCoverImgEl.src = song.cover;
               audioSource.src = song.src;
-              audio.load(); // Carga el nuevo archivo de audio
-              seek.value = 0; // Reinicia la barra de progreso
+              audio.load();
+              seek.value = 0;
             }
 
-            // 5. Funciones para reproducir y pausar
             function playSong() {
               audio.play().then(() => {
                 isPlaying = true;
@@ -1540,7 +1617,6 @@
               playToggle.textContent = '▶';
             }
 
-            // 6. Lógica para los botones
             playToggle.addEventListener('click', () => {
               if (isPlaying) {
                 pauseSong();
@@ -1550,18 +1626,17 @@
             });
 
             nextBtn.addEventListener('click', () => {
-              currentSongIndex = (currentSongIndex + 1) % playlist.length; // Va a la siguiente y vuelve al inicio si es la última
+              currentSongIndex = (currentSongIndex + 1) % playlist.length;
               loadSong(currentSongIndex);
-              if(isPlaying) playSong(); // Si estaba sonando, reproduce la nueva canción
+              if(isPlaying) playSong();
             });
 
             prevBtn.addEventListener('click', () => {
-              currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length; // Va a la anterior y a la última si es la primera
+              currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
               loadSong(currentSongIndex);
-              if(isPlaying) playSong(); // Si estaba sonando, reproduce la nueva canción
+              if(isPlaying) playSong();
             });
 
-            // 7. Actualizar la barra de progreso
             audio.addEventListener('timeupdate', () => {
               if (audio.duration) {
                 seek.value = audio.currentTime;
@@ -1573,9 +1648,8 @@
               audio.currentTime = seek.value;
             });
 
-            // 8. Pasar a la siguiente canción automáticamente cuando termina una
             audio.addEventListener('ended', () => {
-              nextBtn.click(); // Simula un clic en el botón de siguiente
+              nextBtn.click();
             });
 
             audio.addEventListener('error', function () {
@@ -1583,7 +1657,6 @@
               console.error('Error al cargar el archivo de audio.');
             });
 
-            // 9. Cargar la primera canción al iniciar la página
             loadSong(currentSongIndex);
 
             // --- FIN DE LA LÓGICA DE LA PLAYLIST ---
@@ -1635,13 +1708,10 @@
             let gameRunning = false;
             let gameTimeout = null;
             
-            // --- CÓDIGO ACTUALIZADO PARA REGISTRAR EVENTOS DEL JUEGO ---
-            // Usaremos una función global para poder llamarla desde el otro script
             window.logUserActivityForGame = async function(eventType, details = {}) {
                 const currentUser = localStorage.getItem('username');
                 if (!currentUser) return;
                 try {
-                    // Re-importamos 'push' y 'ref' porque este script no es un módulo
                     const { getDatabase, ref, push } = await import("https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js");
                     const db = getDatabase();
                     await push(ref(db, "user_logs"), {
@@ -1676,7 +1746,6 @@
               else if (score < 15) message += "💖 Excelente";
               else message += "💕";
               showSecretMessage(message);
-              // --- REGISTRO DEL FIN DEL JUEGO ---
               window.logUserActivityForGame('GAME_END', { finalScore: score });
             }
 
@@ -1750,7 +1819,7 @@
             document.getElementById('resetGame').addEventListener('click', resetGame);
             
             document.getElementById('apologyBtn').addEventListener('click', () => {
-              const messageText = "OSTIA LE PICASTE, QUIERO ESTAR CONTIGO, QUIERO AMARTE QUIERO DARTE MUCHOS REGALITOS, QUIERO DARTE TODO MI CARIÑO ES QUE TE QUIERO DEMASIADO, TE AMO, QUEHERMOSAESTAS ESTAS BIEN BONITA DIOSMIO. quiero que recuerdes que siempre voy a estar aqui para ti si? enserio quiero darte todo mi cariño, tu sabes lo mucho que me estoy esforzando por mi persona aunque ahorita no pueda hacer muchas cosas por todo lo que tengo que hacer en un poco tiempo sera posible, estoy bastante feliz conmigo mismo y quiero darte todo mi amor, todo todo, quiero hacer demasiadas cosas por ti, la vida me esta dando muchas oportunidades que quisiera compartir lo que sigue contigo <3";
+              const messageText = "omg si le picasteee, perdoname por no haber actualizado la paginita ayer tuve muchas cositas ayer pero puse un botonsito por si se te cansa la vista y quieres un modo mas oscuro de la pagina <33 y recuerda que te quiero muchisimo mucho mucho y eres la mas bonita ante mis ojos estas demasiado hermosa en todo aspecto eres totalmente bella <33";
               const persistentMessage = document.createElement('div');
               persistentMessage.className = 'persistent-message';
               persistentMessage.innerHTML = `
@@ -1876,6 +1945,54 @@
             }
 
             initFloatingHearts();
+            
+            // --- INICIALIZACIÓN DE NUEVAS FUNCIONES ---
+
+            // 1. Lluvia de Píxeles
+            function initPixelRain() {
+                const container = document.getElementById('pixel-rain-container');
+                setInterval(() => {
+                    const pixel = document.createElement('div');
+                    pixel.classList.add('pixel');
+                    pixel.style.left = `${Math.random() * 100}%`;
+                    const duration = Math.random() * 5 + 5; // Duración entre 5 y 10 segundos
+                    pixel.style.animationDuration = `${duration}s`;
+                    container.appendChild(pixel);
+                    setTimeout(() => {
+                        pixel.remove();
+                    }, duration * 1000);
+                }, 100); // Crea un nuevo píxel cada 100ms
+            }
+            initPixelRain();
+
+            // 2. Lógica del Tema Oscuro
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const body = document.body;
+
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    body.classList.add('dark-theme');
+                    themeToggleBtn.innerHTML = '☀️';
+                } else {
+                    body.classList.remove('dark-theme');
+                    themeToggleBtn.innerHTML = '🌙';
+                }
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = body.classList.contains('dark-theme') ? 'light' : 'dark';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+                // Opcional: registrar el cambio de tema
+                if (window.logUserActivity) { // Verifica si la función de log existe
+                    window.logUserActivity('THEME_CHANGE', { theme: newTheme });
+                }
+            });
+
+            // Aplicar tema guardado al cargar la página
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(savedTheme);
+
 
             setTimeout(() => {
               showSecretMessage("Hice esto con mucho cariño mariana bienvenida <33");
@@ -1979,6 +2096,4 @@
             }
           </script>
 </body>
-
 </html>
-
