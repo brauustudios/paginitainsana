@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¿Me perdonas mariana?</title>
+<title>perdoname.</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
-<link rel="icon" type="image/x-icon"
-        href="https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png">
+<link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png">
 <style>
     :root {
       --bg1: #FFDDF4; /* Rosa muy claro */
@@ -30,28 +29,61 @@
       font-family: 'Delius', cursive;
       background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
       color: #333;
-      overflow: hidden;
+      overflow: hidden; /* Oculta el overflow para el efecto de fondo */
       padding: 15px;
+      position: relative; /* Necesario para los elementos de fondo */
+    }
+
+    /* Animación de fondo (burbujas o estrellas suaves) */
+    .background-effect span {
+        position: absolute;
+        bottom: -50px; /* Inician desde abajo */
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        animation: floatUp 15s infinite ease-in; /* Animación de flotar */
+        opacity: 0;
+        filter: blur(2px);
+    }
+    .background-effect span:nth-child(even) { background-color: rgba(255, 230, 240, 0.4); }
+
+    .background-effect span:nth-child(1) { left: 10%; width: 20px; height: 20px; animation-duration: 12s; animation-delay: 0s; }
+    .background-effect span:nth-child(2) { left: 20%; width: 30px; height: 30px; animation-duration: 15s; animation-delay: 1s; }
+    .background-effect span:nth-child(3) { left: 25%; width: 15px; height: 15px; animation-duration: 10s; animation-delay: 2s; }
+    .background-effect span:nth-child(4) { left: 40%; width: 25px; height: 25px; animation-duration: 13s; animation-delay: 3s; }
+    .background-effect span:nth-child(5) { left: 50%; width: 35px; height: 35px; animation-duration: 18s; animation-delay: 4s; }
+    .background-effect span:nth-child(6) { left: 60%; width: 22px; height: 22px; animation-duration: 11s; animation-delay: 5s; }
+    .background-effect span:nth-child(7) { left: 70%; width: 28px; height: 28px; animation-duration: 16s; animation-delay: 6s; }
+    .background-effect span:nth-child(8) { left: 80%; width: 18px; height: 18px; animation-duration: 9s; animation-delay: 7s; }
+    .background-effect span:nth-child(9) { left: 85%; width: 27px; height: 27px; animation-duration: 14s; animation-delay: 8s; }
+    .background-effect span:nth-child(10) { left: 95%; width: 32px; height: 32px; animation-duration: 17s; animation-delay: 9s; }
+    
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 0; }
+        50% { opacity: 1; }
+        100% { transform: translateY(-100vh); opacity: 0; }
     }
 
     .card {
-      width: min(500px, 95%);
+      width: min(600px, 95%); /* Un poco más ancho para el texto largo */
+      max-height: 90vh; /* Limita la altura en pantallas pequeñas */
+      overflow-y: auto; /* Permite scroll si el contenido es muy largo */
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 230, 240, 0.9) 100%);
       border-radius: var(--radius);
-      padding: clamp(20px, 5vw, 40px);
+      padding: clamp(25px, 5vw, 40px);
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       text-align: center;
+      position: relative; /* Para que esté por encima del fondo */
+      z-index: 10;
     }
 
     h1 {
       font-family: 'Press Start 2P', cursive;
-      font-size: clamp(20px, 6vw, 28px);
+      font-size: clamp(20px, 5vw, 26px);
       color: var(--accent-text);
       margin-top: 0;
       margin-bottom: 20px;
-      line-height: 1.4;
       animation: textGlow 2s ease-in-out infinite alternate;
     }
 
@@ -59,28 +91,34 @@
         from { text-shadow: 0 0 5px #ffc4e1; }
         to { text-shadow: 0 0 15px #ff73a7, 0 0 25px #ff3b8d; }
     }
+    
+    .apology-text {
+        font-family: 'Delius', cursive;
+        font-size: clamp(15px, 3vw, 17px);
+        line-height: 1.6;
+        color: #6a4c5a;
+        margin: 25px 0;
+        text-align: justify; /* Justifica el texto para una mejor lectura */
+    }
 
     #catImage {
-      width: clamp(150px, 40vw, 200px);
+      width: clamp(120px, 30vw, 150px);
       height: auto;
       border-radius: 15px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      margin-bottom: 25px;
-      transition: transform 0.5s ease;
+      margin: 10px 0 25px 0;
+      animation: floatImage 3s ease-in-out infinite alternate; /* Animación de flotar para la imagen */
     }
-    
-    #catImage:hover { transform: scale(1.05); }
 
-    .button-container {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        flex-wrap: wrap;
+    @keyframes floatImage {
+        0% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(2deg); }
+        100% { transform: translateY(0px) rotate(-2deg); }
     }
 
     button {
       color: white;
-      padding: 12px 25px;
+      padding: 15px 30px;
       font-family: 'Press Start 2P', cursive;
       font-size: 14px;
       border: none;
@@ -89,43 +127,39 @@
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       text-transform: uppercase;
-    }
-
-    #yesButton {
       background-color: var(--accent-btn);
     }
-    #yesButton:hover {
+    button:hover {
       background-color: var(--accent-btn-hover);
       transform: translateY(-3px);
     }
-
-    #noButton {
-      background-color: #ffb6c1;
-      color: #333;
-    }
-    
-    .confetti-container {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        pointer-events: none;
-        overflow: hidden;
-    }
+    a { text-decoration: none; }
 
 </style>
 </head>
 <body>
 
+<div class="background-effect">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+</div>
+
 <div class="card" id="mainCard">
-    <div class="confetti-container" id="confetti"></div>
-    <div id="content">
-        <h1><span id="userName"></span>, <br>¿me perdonas?</h1>
-        <img id="catImage" src="https://i0.wp.com/c.tenor.com/L6r2e_vpVAIAAAAM/sad-crying.gif" alt="Gatito triste">
-        <div class="button-container">
-            <button id="yesButton">SI</button>
-            <button id="noButton">No</button>
-        </div>
-    </div>
+    <h1></span>:(</h1>
+    
+    <p class="apology-text">
+        perdon se que a veces mis palabras pueden ser tontas y sin intencion de hacerte sentir mal. No hay excusa para ello, y lo lamento profundamente. La verdad es que lo último que quiero es verte triste o sentirte mal por algo que yo haya dicho, perdoname.
+        <br><br>
+        Cada palabra que te escribo ahora sale de lo más sincero de mi alma. Realmente te quiero muchísimo, eres la persona más linda, hermosa y valiosa para mí. No hay nada en el mundo que cambie eso. Te pido, con toda la humildad de mi ser, que me perdones. No fue mi intención, de verdad, miniña.
+        <br><br>
+        Sé que las palabras puede que no ayuden, pero quiero que sepas que siempre, siempre, estaré aquí para ti, pase lo que pase. ya no sere un tonto. Tu felicidad es una prioridad para mi. Por favor, perdóname, Te adoro.
+    </p>
+
+    <img id="catImage" src="https://i.pinimg.com/736x/99/ee/89/99ee898fe84362f3d5c7f0893df8b385.jpg" alt="Gatito tierno">
+
+    <a href="index6.html">
+        <button>Regresar al inicio</button>
+    </a>
 </div>
 
 <script type="module">
@@ -134,19 +168,15 @@
 
     // --- CONFIGURACIÓN DE FIREBASE ---
     const firebaseConfig = {
-      apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
-      authDomain: "pagina-81a41.firebaseapp.com",
-      databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
-      projectId: "pagina-81a41",
-      storageBucket: "pagina-81a41.firebasestorage.app",
-      messagingSenderId: "803503362455",
+      apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM", authDomain: "pagina-81a41.firebaseapp.com",
+      databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com", projectId: "pagina-81a41",
+      storageBucket: "pagina-81a41.firebasestorage.app", messagingSenderId: "803503362455",
       appId: "1:803503362455:web:ebf1271cf65943210174d2"
     };
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     
-    // --- OBTENER NOMBRE Y REGISTRAR VISITA ---
     const userNameElement = document.getElementById('userName');
     let savedUsername = localStorage.getItem('username');
 
@@ -157,12 +187,11 @@
         userNameElement.textContent = "Tú"; 
     }
 
-    async function logApologyEvent(eventType, details = {}) {
+    async function logEvent(eventType) {
         try {
             await push(ref(db, "apology_page_events"), {
                 eventType: eventType,
                 visitor: savedUsername || "unknown_visitor",
-                details: details,
                 timestamp: new Date().toISOString()
             });
         } catch (e) {
@@ -170,91 +199,9 @@
         }
     }
     
-    logApologyEvent('PAGE_VISIT');
+    logEvent('APOLOGY_MESSAGE_VIEWED_V2'); // Evento actualizado para esta versión
 
-    // --- LÓGICA DE LA PÁGINA ---
-    const yesButton = document.getElementById('yesButton');
-    const noButton = document.getElementById('noButton');
-    const content = document.getElementById('content');
-    const catImage = document.getElementById('catImage');
-    const confettiLayer = document.getElementById('confetti');
-
-    const buttonTexts = [
-        "Por favor",
-        "Di que si",
-        "no seas malita",
-        "Por fis",
-        "¿Es un si?",
-        "¿Ahora si?",
-        "Porfaborsi?",
-        "chi?",
-        "yo te quiero mucho",
-        "ya no te dejare picarle al no >:)",
-        "weno si pero porfis",
-        "perdoname andale 😢",
-        "Por favor",
-        "Di que si",
-        "no seas malita",
-        "Por fis",
-        "¿Es un si?",
-        "¿Ahora si?",
-        "Porfaborsi?",
-        "chi?",
-        "yo te quiero mucho",
-        "ya no te dejare picarle al no >:)",
-        "weno si pero porfis",
-        "perdoname andale 😢"
-    ];
-
-    let clickIndex = 0;
-
-    noButton.addEventListener('click', function() {
-        if (clickIndex < buttonTexts.length) {
-            yesButton.textContent = buttonTexts[clickIndex];
-            
-            let currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
-            if (currentFontSize < 30) { // Límite de tamaño para que no se salga
-                yesButton.style.fontSize = (currentFontSize + 2) + 'px';
-            }
-            clickIndex++;
-        }
-        logApologyEvent('NO_BUTTON_CLICKED', { click_count: clickIndex });
-    });
-
-    yesButton.addEventListener('click', function() {
-        logApologyEvent('FORGIVENESS_ACCEPTED', { after_no_clicks: clickIndex });
-        
-        content.innerHTML = `
-            <h1>Graciasssssss Te Quiero Mucho ERMOZA BELLA BONITA <33 </h1>
-            <h3>enserio te quiero muchisimo, no quiero que te enojes conmigo lindabonitahermosa tu sabes que te quiero mucho no era mi intencion hacerte sentir asi, enserio perdoname te lo pido con todo mi corazon siempre contaras conmigo, se que hice mal en decir eso pero no lo dije con esa intencion incluso estaba escribiendo un mensajito pero me detuve al ver que lo interpetraste de esa manera, no era mi intencion enserio disculpame miniña si te hice sentir mal, sabes que siempre estare para ti pase lo que pase <3 te pido una gran disculpa enserio :,( </h3>
-            <img id="catImage" src="https://i.pinimg.com/736x/99/ee/89/99ee898fe84362f3d5c7f0893df8b385.jpg" alt="Gatito feliz">
-        `;
-        celebrate();
-    });
-
-    function celebrate() {
-        for (let i = 0; i < 80; i++) {
-            const el = document.createElement('div');
-            el.style.position = 'absolute';
-            el.style.left = `${Math.random() * 100}%`;
-            el.style.top = `${Math.random() * 100}%`;
-            el.style.width = el.style.height = `${Math.random() * 8 + 6}px`;
-            el.style.background = Math.random() > 0.5 ? '#FFC4E1' : '#FF73A7';
-            el.style.borderRadius = '50%';
-            confettiLayer.appendChild(el);
-            
-            el.animate(
-                [{ transform: 'translateY(0) rotate(0)', opacity: 1 }, 
-                 { transform: `translateY(150px) rotate(${Math.random() * 360}deg)`, opacity: 0 }], 
-                { duration: Math.random() * 800 + 1400, easing: 'ease-out' }
-            );
-            setTimeout(() => el.remove(), 2200);
-        }
-    }
 </script>
 
 </body>
 </html>
-
-
-
