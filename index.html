@@ -1769,7 +1769,7 @@
                 // Buscar en YouTube
                 async function searchYoutube(query) {
                     if (!query || !YOUTUBE_API_KEY || YOUTUBE_API_KEY === "AQUI_VA_TU_CLAVE_DE_API") {
-                        searchResultsContainer.innerHTML = `<p class="small" style="text-align:center;">API Key de YouTube no configurada.</p>`;
+                        searchResultsContainer.innerHTML = `<p class="small" style="text-align:center;"></p>`;
                         return;
                     }
                     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=10&key=${YOUTUBE_API_KEY}`;
@@ -2367,4 +2367,5 @@
           </script>
 </body>
 </html>
+
 
