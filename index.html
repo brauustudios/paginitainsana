@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BSVCSERVER ERROR</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png">
+  <style>
+    :root{
+      --bg1:#fff0f6;--bg2:#ffd7eb;--accent:#ff3b8d;--accent-light:#ff73a7;--soft:rgba(255,255,255,.7);
+      --glass:rgba(255,255,255,.18);--shadow:0 10px 30px rgba(255,60,130,.15);--radius:22px
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Delius',cursive;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 100%);color:#2a2530;overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:
+      radial-gradient(circle at 15% 50%, rgba(255,182,193,.22) 0%, transparent 26%),
+      radial-gradient(circle at 85% 30%, rgba(255,192,203,.22) 0%, transparent 26%),
+      radial-gradient(circle at 50% 80%, rgba(255,182,193,.22) 0%, transparent 26%)}
+    .wrap{min-height:100dvh;display:grid;place-items:center;padding:24px}
+    .card{width:min(820px,96%);background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(255,245,250,.88));border-radius:var(--radius);padding:clamp(20px,4vw,34px);box-shadow:var(--shadow),0 0 0 1px rgba(255,255,255,.55);backdrop-filter:blur(10px);border:1px solid rgba(255,20,90,.1);position:relative;overflow:hidden}
+    .card::after{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:linear-gradient(90deg,#ff9ebb,#ff73a7,#ff3b8d)}
+    .badge{display:inline-block;font-family:'Press Start 2P',cursive;font-size:10px;letter-spacing:.02em;color:#7b6e78;background:rgba(255,255,255,.85);border:1px solid rgba(255,100,150,.25);padding:8px 10px;border-radius:999px;box-shadow:0 4px 12px rgba(255,60,130,.12)}
+    h1{margin:14px 0 8px 0;font-family:'Press Start 2P',cursive;font-size:clamp(22px,5vw,36px);color:var(--accent);text-shadow:0 6px 18px rgba(255,80,150,.18);display:flex;align-items:center;gap:10px}
+    .sub{color:#6e6170;font-weight:700;font-size:12px;font-family:'Press Start 2P',cursive}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .pixel-heart{width:26px;height:26px;filter:drop-shadow(0 4px 8px rgba(255,90,160,.22));animation:float 3.2s ease-in-out infinite}
+    .pixel-heart:nth-child(2){animation-delay:.4s}.pixel-heart:nth-child(3){animation-delay:.8s}
+    .panel{margin-top:12px;background:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.6);border-radius:18px;padding:14px;box-shadow:0 6px 16px rgba(255,50,130,.08)}
+    footer{margin-top:18px;text-align:center;font-family:'Press Start 2P',cursive;color:#856f80;font-size:12px}
+    .copyright{margin-top:6px;font-size:10px;color:#a3959f;font-family:'Press Start 2P',cursive}
+    .floating-hearts{position:fixed;inset:0;pointer-events:none;z-index:-1}
+    .floating-heart{position:absolute;width:28px;height:28px;opacity:.6;animation:rise linear infinite}
+    @keyframes float{0%{transform:translateY(0) scale(.98)}50%{transform:translateY(-6px) scale(1.03)}100%{transform:translateY(0) scale(.98)}}
+    @keyframes rise{0%{transform:translateY(100vh) rotate(0);opacity:.7}100%{transform:translateY(-120px) rotate(360deg);opacity:0}}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,var(--accent-light),var(--accent));color:#fff;border:0;border-radius:14px;padding:10px 14px;font-weight:700;box-shadow:0 5px 15px rgba(255,60,140,.25);cursor:pointer}
+    .btn:active{transform:translateY(1px)}
+    @media (max-width:520px){h1{font-size:22px}.sub{font-size:11px}}
+  </style>
+</head>
+<body>
+  <div class="floating-hearts" id="bgHearts" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <section class="card" role="region" aria-label="Estado del sitio">
+      <div class="row">
+        <span class="badge" aria-label="estado">BSVC servers under maintenance</span>
+        <div class="hud" aria-hidden="true">
+          <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" alt=""/>
+          <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" alt=""/>
+          <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" alt=""/>
+        </div>
+      </div>
+
+      <h1>
+        <img src="https://art.pixilart.com/2d2ed65cc301.png" width="30" height="30" alt="Corazón"/>
+        Under Maintenance
+      </h1>
+      <p class="sub">We'll be right back. Taking a tiny break</p>
+
+      <div class="panel">
+        <p style="margin:0;line-height:1.6">Our services are temporarily unavailable as we're performing some scheduled maintenance. We apologize for any inconvenience.</p>
+        <p class="sub" id="visitCounter" style="margin-top:12px; text-align:center;">Loading stats...</p>
+      </div>
+
+      <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn" id="refresh">↻ Try again</button>
+      </div>
+
+      <footer>
+        Powered by BrauuStudiosVC
+        <div class="copyright">© BSVC</div>
+      </footer>
+    </section>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+    import { getDatabase, ref, push, get } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
+      authDomain: "pagina-81a41.firebaseapp.com",
+      databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
+      projectId: "pagina-81a41",
+      storageBucket: "pagina-81a41.appspot.com",
+      messagingSenderId: "803503362455",
+      appId: "1:803503362455:web:ebf1271cf65943210174d2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    async function initializePage() {
+      // Primero: Registra la visita actual (como antes)
+      try {
+        const lastUser = localStorage.getItem('username');
+        const visitorIdentifier = lastUser || 'unknown_visitor';
+        const visitsRef = ref(db, 'maintenance_page_visits');
+        
+        await push(visitsRef, {
+          user: visitorIdentifier,
+          timestamp: new Date().toISOString()
+        });
+        console.log(`Visit by '${visitorIdentifier}' logged successfully.`);
+      } catch (error) {
+        console.error("Error logging visit:", error);
+      }
+
+      // Segundo: Obtiene el conteo total y lo muestra
+      try {
+        const visitsRef = ref(db, 'maintenance_page_visits');
+        const snapshot = await get(visitsRef);
+        const visitCounterElement = document.getElementById('visitCounter');
+
+        if (snapshot.exists()) {
+          const count = snapshot.size; // .size nos da el número total de registros
+          visitCounterElement.textContent = `: ${count}`;
+        } else {
+          visitCounterElement.textContent = "!";
+        }
+      } catch (error) {
+        console.error("Error fetching visit count:", error);
+        document.getElementById('visitCounter').textContent = "Could not load stats.";
+      }
+    }
+
+    initializePage();
+  </script>
+  
+  <script>
+    const c = document.getElementById('bgHearts');
+    for (let i = 0; i < 18; i++) {
+      const h = document.createElement('img');
+      h.src = 'https://art.pixilart.com/2d2ed65cc301.png';
+      h.className = 'floating-heart';
+      h.style.left = Math.random()*100 + '%';
+      h.style.animationDuration = (18 + Math.random()*14) + 's';
+      h.style.animationDelay = (Math.random()*20) + 's';
+      c.appendChild(h);
+    }
+    document.getElementById('refresh').addEventListener('click', () => location.reload());
+  </script>
+</body>
+</html>
