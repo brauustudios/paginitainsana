@@ -1,147 +1,2349 @@
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BSVCSERVER ERROR</title>
-  <meta name="robots" content="noindex, nofollow" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png">
-  <style>
-    :root{
-      --bg1:#fff0f6;--bg2:#ffd7eb;--accent:#ff3b8d;--accent-light:#ff73a7;--soft:rgba(255,255,255,.7);
-      --glass:rgba(255,255,255,.18);--shadow:0 10px 30px rgba(255,60,130,.15);--radius:22px
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:'Delius',cursive;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 100%);color:#2a2530;overflow-x:hidden}
-    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:
-      radial-gradient(circle at 15% 50%, rgba(255,182,193,.22) 0%, transparent 26%),
-      radial-gradient(circle at 85% 30%, rgba(255,192,203,.22) 0%, transparent 26%),
-      radial-gradient(circle at 50% 80%, rgba(255,182,193,.22) 0%, transparent 26%)}
-    .wrap{min-height:100dvh;display:grid;place-items:center;padding:24px}
-    .card{width:min(820px,96%);background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(255,245,250,.88));border-radius:var(--radius);padding:clamp(20px,4vw,34px);box-shadow:var(--shadow),0 0 0 1px rgba(255,255,255,.55);backdrop-filter:blur(10px);border:1px solid rgba(255,20,90,.1);position:relative;overflow:hidden}
-    .card::after{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:linear-gradient(90deg,#ff9ebb,#ff73a7,#ff3b8d)}
-    .badge{display:inline-block;font-family:'Press Start 2P',cursive;font-size:10px;letter-spacing:.02em;color:#7b6e78;background:rgba(255,255,255,.85);border:1px solid rgba(255,100,150,.25);padding:8px 10px;border-radius:999px;box-shadow:0 4px 12px rgba(255,60,130,.12)}
-    h1{margin:14px 0 8px 0;font-family:'Press Start 2P',cursive;font-size:clamp(22px,5vw,36px);color:var(--accent);text-shadow:0 6px 18px rgba(255,80,150,.18);display:flex;align-items:center;gap:10px}
-    .sub{color:#6e6170;font-weight:700;font-size:12px;font-family:'Press Start 2P',cursive}
-    .row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-    .pixel-heart{width:26px;height:26px;filter:drop-shadow(0 4px 8px rgba(255,90,160,.22));animation:float 3.2s ease-in-out infinite}
-    .pixel-heart:nth-child(2){animation-delay:.4s}.pixel-heart:nth-child(3){animation-delay:.8s}
-    .panel{margin-top:12px;background:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.6);border-radius:18px;padding:14px;box-shadow:0 6px 16px rgba(255,50,130,.08)}
-    footer{margin-top:18px;text-align:center;font-family:'Press Start 2P',cursive;color:#856f80;font-size:12px}
-    .copyright{margin-top:6px;font-size:10px;color:#a3959f;font-family:'Press Start 2P',cursive}
-    .floating-hearts{position:fixed;inset:0;pointer-events:none;z-index:-1}
-    .floating-heart{position:absolute;width:28px;height:28px;opacity:.6;animation:rise linear infinite}
-    @keyframes float{0%{transform:translateY(0) scale(.98)}50%{transform:translateY(-6px) scale(1.03)}100%{transform:translateY(0) scale(.98)}}
-    @keyframes rise{0%{transform:translateY(100vh) rotate(0);opacity:.7}100%{transform:translateY(-120px) rotate(360deg);opacity:0}}
-    .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,var(--accent-light),var(--accent));color:#fff;border:0;border-radius:14px;padding:10px 14px;font-weight:700;box-shadow:0 5px 15px rgba(255,60,140,.25);cursor:pointer}
-    .btn:active{transform:translateY(1px)}
-    @media (max-width:520px){h1{font-size:22px}.sub{font-size:11px}}
-  </style>
-</head>
-<body>
-  <div class="floating-hearts" id="bgHearts" aria-hidden="true"></div>
-
-  <main class="wrap">
-    <section class="card" role="region" aria-label="Estado del sitio">
-      <div class="row">
-        <span class="badge" aria-label="estado">BSVC servers under maintenance</span>
-        <div class="hud" aria-hidden="true">
-          <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" alt=""/>
-          <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" alt=""/>
-          <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" alt=""/>
-        </div>
-      </div>
-
-      <h1>
-        <img src="https://art.pixilart.com/2d2ed65cc301.png" width="30" height="30" alt="Corazón"/>
-        Under Maintenance
-      </h1>
-      <p class="sub">We'll be right back. Taking a tiny break</p>
-
-      <div class="panel">
-        <p style="margin:0;line-height:1.6">Our services are temporarily unavailable as we're performing some scheduled maintenance. We apologize for any inconvenience.</p>
-        <p class="sub" id="visitCounter" style="margin-top:12px; text-align:center;">Loading stats...</p>
-      </div>
-
-      <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-        <button class="btn" id="refresh">↻ Try again</button>
-      </div>
-
-      <footer>
-        Powered by BrauuStudiosVC
-        <div class="copyright">© BSVC</div>
-      </footer>
-    </section>
-  </main>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-    import { getDatabase, ref, push, get } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
-      authDomain: "pagina-81a41.firebaseapp.com",
-      databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
-      projectId: "pagina-81a41",
-      storageBucket: "pagina-81a41.appspot.com",
-      messagingSenderId: "803503362455",
-      appId: "1:803503362455:web:ebf1271cf65943210174d2"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    async function initializePage() {
-      // Primero: Registra la visita actual (como antes)
-      try {
-        const lastUser = localStorage.getItem('username');
-        const visitorIdentifier = lastUser || 'unknown_visitor';
-        const visitsRef = ref(db, 'maintenance_page_visits');
-        
-        await push(visitsRef, {
-          user: visitorIdentifier,
-          timestamp: new Date().toISOString()
-        });
-        console.log(`Visit by '${visitorIdentifier}' logged successfully.`);
-      } catch (error) {
-        console.error("Error logging visit:", error);
-      }
-
-      // Segundo: Obtiene el conteo total y lo muestra
-      try {
-        const visitsRef = ref(db, 'maintenance_page_visits');
-        const snapshot = await get(visitsRef);
-        const visitCounterElement = document.getElementById('visitCounter');
-
-        if (snapshot.exists()) {
-          const count = snapshot.size; // .size nos da el número total de registros
-          visitCounterElement.textContent = `: ${count}`;
-        } else {
-          visitCounterElement.textContent = "!";
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pagina para emo <3 </title>
+      <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+      <link rel="icon" type="image/x-icon"
+        href="https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png">
+      <style>
+        :root {
+          --bg1: #fff0f6;
+          --bg2: #ffd7eb;
+          --accent: #ff3b8d;
+          --accent-light: #ff73a7;
+          --accent-dark: #e5005e;
+          --soft: rgba(255, 255, 255, 0.6);
+          --glass: rgba(255, 255, 255, 0.18);
+          --shadow: 0 10px 30px rgba(255, 60, 130, 0.15);
+          --radius: 20px;
+          --ui-pad: 14px;
+          --text-main: #2a2530;
         }
-      } catch (error) {
-        console.error("Error fetching visit count:", error);
-        document.getElementById('visitCounter').textContent = "Could not load stats.";
-      }
-    }
 
-    initializePage();
-  </script>
-  
-  <script>
-    const c = document.getElementById('bgHearts');
-    for (let i = 0; i < 18; i++) {
-      const h = document.createElement('img');
-      h.src = 'https://art.pixilart.com/2d2ed65cc301.png';
-      h.className = 'floating-heart';
-      h.style.left = Math.random()*100 + '%';
-      h.style.animationDuration = (18 + Math.random()*14) + 's';
-      h.style.animationDelay = (Math.random()*20) + 's';
-      c.appendChild(h);
-    }
-    document.getElementById('refresh').addEventListener('click', () => location.reload());
-  </script>
+        * {
+          box-sizing: border-box;
+        }
+
+        html,
+        body {
+          height: 100%;
+          margin: 0;
+          font-family: 'Delius', cursive;
+          background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+          color: var(--text-main);
+          overflow-x: hidden;
+          position: relative;
+          transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        body::before {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image:
+            radial-gradient(circle at 15% 50%, rgba(255, 182, 193, 0.2) 0%, transparent 25%),
+            radial-gradient(circle at 85% 30%, rgba(255, 192, 203, 0.2) 0%, transparent 25%),
+            radial-gradient(circle at 50% 80%, rgba(255, 182, 193, 0.2) 0%, transparent 25%);
+          pointer-events: none;
+          z-index: -1;
+        }
+        
+        /* --- TEMA OSCURO --- */
+        body.dark-theme {
+          --bg1: #2a2530;
+          --bg2: #3c3542;
+          --accent: #ff8acb;
+          --accent-light: #ffacec;
+          --accent-dark: #e560a8;
+          --soft: rgba(0, 0, 0, 0.4);
+          --glass: rgba(50, 40, 60, 0.25);
+          --shadow: 0 10px 30px rgba(255, 138, 203, 0.1);
+          --text-main: #e2dce4;
+        }
+        
+        .dark-theme .card {
+          background: linear-gradient(135deg, rgba(48, 42, 58, 0.85), rgba(40, 35, 49, 0.85));
+          border-color: rgba(255, 138, 203, 0.2);
+          box-shadow: var(--shadow), 0 0 0 1px rgba(0, 0, 0, 0.4);
+        }
+
+        .dark-theme .sub, .dark-theme .small { color: #a899ae; }
+        .dark-theme .play-card, .dark-theme .game-card, .dark-theme .reason-card, .dark-theme .chat-container, .dark-theme .music-search-card {
+          background: rgba(0, 0, 0, 0.2);
+          border-color: rgba(255, 255, 255, 0.1);
+        }
+        .dark-theme .note-bubble {
+            background: rgba(60, 53, 66, 0.9);
+            border-color: var(--accent);
+            color: #e2dce4;
+        }
+        .dark-theme #resetGame {
+            background: linear-gradient(180deg, #4d4554, #3c3542);
+            color: var(--accent);
+        }
+        .dark-theme .chat-message.received {
+            background: #4a4153;
+            color: #e2dce4;
+        }
+        .dark-theme #usernameInput, .dark-theme #chatInput, .dark-theme #recipientSelect, .dark-theme .form-input {
+            background-color: #3c3542;
+            color: var(--text-main);
+            border-color: rgba(255, 138, 203, 0.4);
+        }
+
+        /* --- EFECTO LLUVIA DE PIXELES --- */
+        #pixel-rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            overflow: hidden;
+        }
+        .pixel {
+            position: absolute;
+            background-color: var(--accent-light);
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            animation: fall linear infinite;
+            opacity: 0;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            from {
+                opacity: 0.7;
+            }
+        }
+
+
+        .wrap {
+          min-height: 100dvh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          padding: 20px;
+          gap: 20px;
+        }
+
+        .card {
+          width: min(900px, 96%);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 245, 250, 0.85) 100%);
+          border-radius: var(--radius);
+          padding: clamp(18px, 4vw, 28px);
+          box-shadow: var(--shadow), 0 0 0 1px rgba(255, 255, 255, 0.5);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 20, 90, 0.1);
+          position: relative;
+          overflow: hidden;
+          transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .card::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 6px;
+          background: linear-gradient(90deg, #ff9ebb, #ff73a7, #ff3b8d);
+          border-radius: 10px 10px 0 0;
+        }
+
+        .title-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          margin-bottom: 15px;
+        }
+
+        h1 {
+          font-size: clamp(24px, 6vw, 38px);
+          margin: 0;
+          color: var(--accent);
+          letter-spacing: .02em;
+          display: flex;
+          align-items: center;
+          gap: .6rem;
+          transform-origin: center;
+          animation: titlePop 1s ease, textGlow 3s ease-in-out infinite alternate;
+          text-shadow: 0 4px 12px rgba(255, 80, 150, 0.2);
+          font-family: 'Press Start 2P', cursive;
+          position: relative;
+        }
+
+        @keyframes titlePop {
+          0% {
+            transform: scale(.96);
+            opacity: 0;
+          }
+
+          70% {
+            transform: scale(1.05);
+          }
+
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes textGlow {
+          0% {
+            text-shadow: 0 4px 12px rgba(255, 80, 150, 0.2);
+          }
+
+          100% {
+            text-shadow: 0 4px 20px rgba(255, 80, 150, 0.5), 0 0 10px rgba(255, 100, 180, 0.3);
+          }
+        }
+
+        .sub {
+          color: #6e6170;
+          font-weight: 700;
+          font-size: 12px;
+          font-family: 'Press Start 2P', cursive;
+          animation: subtleFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes subtleFloat {
+
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+
+          50% {
+            transform: translateY(-3px);
+          }
+        }
+
+        .player {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 16px;
+          align-items: center;
+          margin-top: 15px;
+        }
+
+        .play-card {
+          background: rgba(255, 255, 255, 0.6);
+          padding: 16px;
+          border-radius: 16px;
+          display: flex;
+          gap: 16px;
+          align-items: center;
+          box-shadow: 0 6px 16px rgba(255, 50, 130, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.6);
+          transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+        }
+
+        .play-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px rgba(255, 50, 130, 0.15);
+        }
+
+        .big-btn {
+          background: linear-gradient(180deg, var(--accent-light), var(--accent));
+          color: white;
+          border: 0;
+          padding: 12px 16px;
+          border-radius: 14px;
+          font-weight: bold;
+          cursor: pointer;
+          box-shadow: 0 5px 15px rgba(255, 60, 140, 0.25);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.2s ease;
+          font-family: 'Delius', cursive;
+          font-size: 15px;
+          position: relative;
+          overflow: hidden;
+        }
+		
+		.big-btn:disabled {
+			background: #c7a9b6;
+			cursor: not-allowed;
+			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+			transform: translateY(1px);
+		}
+
+        .big-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+          transition: left 0.5s;
+        }
+
+        .big-btn:hover::before {
+          left: 100%;
+        }
+
+        .big-btn:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba(255, 60, 140, 0.35);
+        }
+
+        .big-btn:active {
+          transform: translateY(1px);
+          box-shadow: 0 3px 10px rgba(255, 60, 140, 0.2);
+        }
+
+        .seek {
+          width: 100%;
+          appearance: none;
+          height: 8px;
+          border-radius: 999px;
+          background: linear-gradient(90deg, #ffd3ea, #ff9fd4);
+          border: 1px solid rgba(255, 255, 255, 0.6);
+          cursor: pointer;
+          margin-top: 8px;
+          transition: all 0.3s ease;
+        }
+
+        .seek:hover {
+          height: 10px;
+        }
+
+        .seek::-webkit-slider-thumb {
+          appearance: none;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: white;
+          border: 3px solid var(--accent);
+          box-shadow: 0 3px 10px rgba(255, 60, 130, 0.3);
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .seek::-webkit-slider-thumb:hover {
+          transform: scale(1.15);
+          box-shadow: 0 5px 15px rgba(255, 60, 130, 0.5);
+        }
+
+        .game-panel {
+          margin-top: 20px;
+          display: flex;
+          gap: 16px;
+          align-items: stretch;
+          justify-content: space-between;
+          flex-wrap: wrap;
+        }
+
+        .game-card {
+          flex: 1;
+          min-width: 200px;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3));
+          padding: 18px;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.4);
+          box-shadow: 0 6px 16px rgba(255, 50, 130, 0.08);
+          transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+        }
+
+        .game-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px rgba(255, 50, 130, 0.15);
+        }
+
+        .score {
+          font-size: 24px;
+          font-weight: 900;
+          color: var(--accent);
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+          }
+
+          50% {
+            transform: scale(1.05);
+          }
+
+          100% {
+            transform: scale(1);
+          }
+        }
+
+        .small {
+          font-size: 13px;
+          color: #7b6e78;
+          font-weight: 600;
+          line-height: 1.5;
+          animation: subtleFloat 8s ease-in-out infinite;
+        }
+
+        .game-viewport {
+          width: 100%;
+          height: 380px;
+          border-radius: 16px;
+          overflow: hidden;
+          position: relative;
+          background: linear-gradient(135deg, rgba(255, 230, 240, 0.9), rgba(255, 240, 246, 0.8));
+          border: 2px dashed rgba(255, 100, 150, 0.2);
+          margin-top: 15px;
+          -webkit-tap-highlight-color: transparent;
+          box-shadow: inset 0 0 20px rgba(255, 100, 150, 0.1);
+          transition: all 0.3s ease;
+        }
+
+        .game-viewport:hover {
+          box-shadow: inset 0 0 30px rgba(255, 100, 150, 0.2);
+        }
+
+        .hud-row {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+        }
+
+        .pixel-heart {
+          width: 26px;
+          height: 26px;
+          display: inline-block;
+          filter: drop-shadow(0 4px 8px rgba(255, 90, 160, 0.2));
+          transform: translateY(0);
+          animation: heartLift 3s ease-in-out infinite;
+        }
+
+        .pixel-heart:nth-child(2) {
+          animation-delay: .4s;
+        }
+
+        .pixel-heart:nth-child(3) {
+          animation-delay: .8s;
+        }
+
+        @keyframes heartLift {
+          0% {
+            transform: translateY(0) scale(.98);
+          }
+
+          50% {
+            transform: translateY(-6px) scale(1.03);
+          }
+
+          100% {
+            transform: translateY(0) scale(.98);
+          }
+        }
+
+        footer {
+          width: 100%;
+          text-align: center;
+          color: #856f80;
+          font-weight: 700;
+          font-size: 13px;
+          margin-top: 20px;
+          font-family: 'Press Start 2P', cursive;
+          animation: subtleFloat 10s ease-in-out infinite;
+        }
+
+        .confetti {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          overflow: visible;
+        }
+
+        .vignette {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.03) 100%);
+        }
+
+        .floating-hearts {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: -1;
+        }
+
+        .floating-heart {
+          position: absolute;
+          width: 28px;
+          height: 28px;
+          opacity: 0.6;
+          animation: float 18s infinite linear;
+        }
+
+        @keyframes float {
+          0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0.7;
+          }
+
+          100% {
+            transform: translateY(-100px) rotate(360deg);
+            opacity: 0;
+          }
+        }
+
+        .audio-error {
+          display: none;
+          background: rgba(255, 200, 200, 0.8);
+          border-radius: 8px;
+          padding: 8px 12px;
+          margin-top: 8px;
+          font-size: 11px;
+          color: #d32f2f;
+        }
+
+        .secret-message {
+          position: fixed;
+          bottom: 15px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(255, 255, 255, 0.95);
+          padding: 12px 18px;
+          border-radius: 24px;
+          font-size: 13px;
+          color: #ff3b8d;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          opacity: 0;
+          transition: opacity 0.5s;
+          z-index: 1000;
+          text-align: center;
+          max-width: 90%;
+          font-weight: 600;
+          border: 1px solid rgba(255, 100, 150, 0.2);
+          animation: messageFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes messageFloat {
+
+          0%,
+          100% {
+            transform: translateX(-50%) translateY(0);
+          }
+
+          50% {
+            transform: translateX(-50%) translateY(-5px);
+          }
+        }
+
+        .note-bubble {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          width: 170px;
+          min-height: 45px;
+          max-height: 200px;
+          background: rgba(255, 223, 235, 0.9);
+          border: 2px dashed #ff3b8d;
+          border-radius: 18px;
+          padding: 10px;
+          font-family: 'Press Start 2P', monospace;
+          font-size: 11px;
+          color: #2a2530;
+          overflow-y: auto;
+          box-shadow: 0 6px 18px rgba(255, 50, 130, 0.2);
+          z-index: 9999;
+          cursor: grab;
+          line-height: 1.4;
+          animation: bubbleFloat 8s ease-in-out infinite;
+          transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+        }
+
+        @keyframes bubbleFloat {
+
+          0%,
+          100% {
+            transform: translateY(0) rotate(-1deg);
+          }
+
+          50% {
+            transform: translateY(-10px) rotate(1deg);
+          }
+        }
+
+        .sparkle {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          background: #fff;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 100;
+          animation: sparkle 1s forwards;
+        }
+
+        @keyframes sparkle {
+          0% {
+            transform: translate(0, 0) scale(0);
+            opacity: 1;
+          }
+
+          100% {
+            transform: translate(var(--tx), var(--ty)) scale(1.5);
+            opacity: 0;
+          }
+        }
+
+        .reasons-section {
+          margin-top: 30px;
+          text-align: center;
+        }
+
+        .reasons-title {
+          font-family: 'Press Start 2P', cursive;
+          color: var(--accent);
+          font-size: 18px;
+          margin-bottom: 20px;
+          text-shadow: 0 2px 4px rgba(255, 80, 150, 0.2);
+          animation: textGlow 3s ease-in-out infinite alternate, subtleFloat 7s ease-in-out infinite;
+        }
+
+        .reasons-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 15px;
+          margin-top: 15px;
+        }
+
+        .reason-card {
+          background: rgba(255, 255, 255, 0.7);
+          border-radius: 12px;
+          padding: 15px;
+          width: calc(50% - 15px);
+          min-width: 250px;
+          box-shadow: 0 4px 10px rgba(255, 60, 140, 0.1);
+          transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+          animation: cardAppear 0.5s ease-out;
+        }
+
+        @keyframes cardAppear {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .reason-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 20px rgba(255, 60, 140, 0.2);
+        }
+
+        .reason-number {
+          background: var(--accent);
+          color: white;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 10px;
+          font-weight: bold;
+          font-family: 'Press Start 2P', cursive;
+          font-size: 10px;
+          animation: pulse 2s infinite;
+        }
+
+        .reason-text {
+          font-size: 14px;
+          line-height: 1.4;
+          animation: subtleFloat 9s ease-in-out infinite;
+        }
+
+        .apology-btn {
+          margin-top: 20px;
+          background: linear-gradient(180deg, #ff9ebb, #ff73a7);
+        }
+
+        .bubble-top-left {
+          top: 50px;
+          right: auto;
+          left: 50px;
+          bottom: auto;
+          width: 160px;
+          background: rgba(255, 236, 245, 0.9);
+          border: 2px dashed #ff73a7;
+          animation: bubbleFloat 7s ease-in-out infinite reverse;
+        }
+
+        #lastUpdate {
+          position: fixed;
+          top: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(255, 182, 193, 0.85);
+          color: white;
+          font-family: 'Arial', sans-serif;
+          font-size: 11px;
+          padding: 6px 12px;
+          border-radius: 20px;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+          z-index: 2000;
+          animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+          }
+
+          100% {
+            opacity: 1;
+          }
+        }
+
+        .typewriter {
+          overflow: hidden;
+          border-right: 2px solid var(--accent);
+          white-space: nowrap;
+          margin: 0 auto;
+          animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+          from {
+            width: 0
+          }
+
+          to {
+            width: 100%
+          }
+        }
+
+        @keyframes blink-caret {
+
+          from,
+          to {
+            border-color: transparent
+          }
+
+          50% {
+            border-color: var(--accent);
+          }
+        }
+
+        .falling-heart {
+          transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .falling-heart:hover {
+          transform: scale(1.2) !important;
+          filter: brightness(1.2) drop-shadow(0 0 8px rgba(255, 100, 180, 0.5));
+        }
+
+        @media (max-width: 768px) {
+          .player {
+            grid-template-columns: 1fr;
+          }
+
+          .play-card {
+            flex-direction: column;
+            text-align: center;
+            gap: 12px;
+          }
+
+          .game-panel {
+            flex-direction: column;
+          }
+
+          .game-viewport {
+            height: 300px;
+          }
+
+          h1 {
+            font-size: 20px;
+          }
+
+          .reason-card {
+            width: 100%;
+          }
+
+          .note-bubble {
+            width: 140px;
+            font-size: 9px;
+            right: 10px;
+            bottom: 10px;
+          }
+
+          .bubble-top-left {
+            left: 10px;
+            top: 10px;
+            width: 130px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .game-viewport {
+            height: 250px;
+          }
+
+          .note-bubble {
+            width: 130px;
+            font-size: 8px;
+            right: 5px;
+            bottom: 5px;
+          }
+
+          .big-btn {
+            padding: 10px 12px;
+            font-size: 14px;
+          }
+
+          .reason-card {
+            min-width: 100%;
+          }
+
+          .bubble-top-left {
+            left: 5px;
+            top: 5px;
+            width: 120px;
+          }
+        }
+
+        .persistent-message {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10000;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+        }
+
+        .persistent-message.show {
+          opacity: 1;
+		  pointer-events: auto;
+        }
+
+        .message-content {
+          background: rgba(255, 255, 255, 0.95);
+          padding: 30px;
+          border-radius: 20px;
+          max-width: 500px;
+          width: 90%;
+          box-shadow: 0 15px 35px rgba(255, 60, 140, 0.3);
+          border: 3px solid #ff73a7;
+          position: relative;
+          transform: scale(0.8);
+          transition: transform 0.3s ease;
+        }
+
+        .persistent-message.show .message-content {
+          transform: scale(1);
+        }
+
+        .close-btn {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          background: #ff3b8d;
+          color: white;
+          border: none;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          cursor: pointer;
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+          background: #e5005e;
+          transform: scale(1.1);
+        }
+
+        .message-text {
+          font-family: 'Delius', cursive;
+          color: #2a2530;
+          font-size: 16px;
+          line-height: 1.6;
+          text-align: center;
+          margin-top: 10px;
+          margin-bottom: 20px; /* Espacio para los botones */
+        }
+
+        .album-cover {
+          width: 80px;
+          height: 80px;
+          border-radius: 12px;
+          object-fit: cover;
+          margin-top: 8px;
+          align-self: flex-start;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+          animation: subtleFloat 10s ease-in-out infinite;
+        }
+
+        .chat-section {
+          margin-top: 30px;
+          text-align: center;
+          width: 100%;
+        }
+
+        .chat-container {
+          background: rgba(255, 255, 255, 0.7);
+          border-radius: 12px;
+          padding: 20px;
+          box-shadow: 0 4px 10px rgba(255, 60, 140, 0.1);
+          margin-top: 15px;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+          transition: background 0.5s ease;
+        }
+
+        .chat-messages {
+          height: 200px;
+          overflow-y: auto;
+          border: 2px dashed rgba(255, 100, 150, 0.2);
+          border-radius: 10px;
+          padding: 10px;
+          margin-bottom: 15px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .chat-message {
+          padding: 8px 12px;
+          border-radius: 15px;
+          margin-bottom: 8px;
+          max-width: 70%;
+          font-size: 14px;
+          position: relative;
+          animation: fadeIn 0.5s ease;
+        }
+        
+        .chat-message.sent {
+          background: var(--accent);
+          color: white;
+          align-self: flex-end;
+          text-align: right;
+        }
+        
+        .chat-message.received {
+            background: #e9e9eb;
+            color: #2a2530;
+            align-self: flex-start;
+            text-align: left;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+        
+        .message-author {
+            font-size: 10px;
+            font-weight: bold;
+            color: var(--accent-light);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .chat-input-area {
+          display: flex;
+          gap: 10px;
+          margin-top: 15px;
+        }
+        
+        .recipient-selection {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+        }
+
+        #recipientSelect {
+            border: 2px solid rgba(255, 100, 150, 0.2);
+            border-radius: 10px;
+            padding: 8px;
+            font-family: 'Delius', cursive;
+            font-size: 12px;
+        }
+
+        #chatInput {
+          flex: 1;
+          border: 2px solid rgba(255, 100, 150, 0.2);
+          border-radius: 10px;
+          padding: 10px;
+          font-family: 'Delius', cursive;
+          font-size: 14px;
+        }
+
+        #chatInput:focus, #recipientSelect:focus {
+          outline: none;
+          border-color: var(--accent);
+        }
+
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.5s;
+        }
+
+        #loginBox {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: floatPopup 1s ease;
+        }
+        
+        @keyframes floatPopup {
+          from { transform: scale(0.9); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+
+        #usernameInput {
+            border: 2px solid rgba(255, 100, 150, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+            font-family: 'Delius', cursive;
+            font-size: 16px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        #usernameError {
+            color: red;
+            font-size: 12px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        #logoutBtn {
+            background: #ff73a7;
+            font-size: 12px;
+            padding: 8px 12px;
+            margin-top: 15px;
+        }
+        
+        .countdown-section {
+            margin-top: 30px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 15px;
+            min-width: 100px;
+            box-shadow: 0 4px 10px rgba(255, 60, 140, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+            animation: cardAppear 0.5s ease-out backwards;
+            animation-delay: 0.2s;
+        }
+
+        .time-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 60, 140, 0.2);
+        }
+
+        .time-box span {
+            display: block;
+        }
+
+        .time-box .number {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 28px;
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(255, 80, 150, 0.2);
+            animation: pulse 2.5s infinite;
+        }
+
+        .time-box .label {
+            font-family: 'Delius', cursive;
+            font-size: 12px;
+            color: #6e6170;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .dark-theme .time-box {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-theme .time-box .label {
+            color: #a899ae;
+        }
+
+        /* --- ESTILOS PARA LA PIZARRA MÁGICA Y MODAL --- */
+        .drawing-section {
+            margin-top: 40px;
+            width: 100%;
+            text-align: center;
+        }
+        .drawing-container {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: var(--radius);
+            padding: 15px;
+            box-shadow: var(--shadow);
+            margin-top: 15px;
+            border: 1px solid rgba(255, 60, 130, 0.1);
+            transition: background 0.5s ease;
+        }
+        .dark-theme .drawing-container {
+            background: rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        #sharedCanvas {
+            width: 100%;
+            height: 400px;
+            cursor: crosshair;
+            background-color: #fff;
+            border-radius: 10px;
+            touch-action: none;
+        }
+        .dark-theme #sharedCanvas {
+            background-color: #e2dce4;
+        }
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            flex-wrap: wrap;
+        }
+        .color-btn, .tool-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .color-btn:hover, .tool-btn:hover {
+            transform: scale(1.1);
+        }
+        .color-btn.active, .tool-btn.active {
+            border-color: var(--accent);
+            transform: scale(1.15);
+        }
+        .tool-btn {
+            background-color: #f0f0f0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .dark-theme .tool-btn {
+            background-color: #4a4153;
+            color: var(--text-main);
+        }
+        #customColorPicker {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        #customColorPicker::-webkit-color-swatch {
+            border-radius: 50%;
+            border: 2px solid #ccc;
+        }
+        #customColorPicker::-moz-color-swatch {
+            border-radius: 50%;
+            border: 2px solid #ccc;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .modal-buttons .big-btn.cancel-btn {
+            background: linear-gradient(180deg, #d3c8d0, #b2a8b0);
+        }
+
+		/* === NUEVOS ESTILOS PARA LA PLAYLIST COMPARTIDA === */
+		.music-section {
+			margin-top: 30px;
+			width: 100%;
+		}
+		.music-search-card {
+			background: rgba(255, 255, 255, 0.7);
+			border-radius: var(--radius);
+			padding: 20px;
+			box-shadow: 0 4px 10px rgba(255, 60, 140, 0.1);
+			margin-top: 15px;
+			max-width: 800px;
+			margin-left: auto;
+			margin-right: auto;
+			transition: background 0.5s ease;
+			display: flex;
+			gap: 20px;
+			flex-wrap: wrap;
+		}
+		.search-column, .playlist-column {
+			flex: 1;
+			min-width: 300px;
+		}
+		.search-input {
+			width: 100%;
+			border: 2px solid rgba(255, 100, 150, 0.2);
+			border-radius: 10px;
+			padding: 10px;
+			font-family: 'Delius', cursive;
+			font-size: 14px;
+			margin-bottom: 15px;
+		}
+		.dark-theme .search-input {
+			background-color: #3c3542;
+			color: var(--text-main);
+			border-color: rgba(255, 138, 203, 0.4);
+		}
+		.search-input:focus {
+			outline: none;
+			border-color: var(--accent);
+		}
+		.search-results, .playlist-container {
+			height: 300px;
+			overflow-y: auto;
+			border: 2px dashed rgba(255, 100, 150, 0.2);
+			border-radius: 10px;
+			padding: 10px;
+		}
+		.song-item {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 8px;
+			border-radius: 8px;
+			margin-bottom: 8px;
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+		}
+		.song-item:hover {
+			background-color: rgba(255, 60, 130, 0.1);
+		}
+		.song-item.playing {
+			background-color: rgba(255, 60, 130, 0.2);
+			border-left: 4px solid var(--accent);
+		}
+		.song-item img.thumbnail {
+			width: 50px;
+			height: 50px;
+			border-radius: 6px;
+			object-fit: cover;
+		}
+		.song-info {
+			flex: 1;
+			overflow: hidden;
+		}
+		.song-info .title {
+			font-weight: bold;
+			font-size: 14px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.song-info .artist {
+			font-size: 12px;
+			color: #6e6170;
+		}
+		.dark-theme .song-info .artist { color: #a899ae; }
+		.add-btn, .remove-btn {
+			padding: 6px 10px;
+			font-size: 12px;
+			min-width: 40px;
+		}
+		.remove-btn {
+			background: #aaa;
+		}
+		#youtubePlayerContainer {
+			margin-top: 20px;
+			width: 100%;
+			aspect-ratio: 16/9;
+			border-radius: 12px;
+			overflow: hidden;
+			background: #000;
+			display: none; /* Oculto hasta que se reproduzca algo */
+		}
+		#youtubePlayer {
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+      </style>
+</head>
+
+<body>
+
+  <div id="loginOverlay">
+      <div id="loginBox">
+          <h2 class="reasons-title">Bienvenida <3</h2>
+          <p>olap pon un nombre de usuario para entrar :3 </p>
+          <input type="text" id="usernameInput" placeholder="Tu nombre...">
+          <p id="usernameError">Ese nombre ya está en uso. Intenta con otro.</p>
+          <button class="big-btn" id="loginBtn">Entrar</button>
+      </div>
+  </div>
+
+  <div id="lastUpdate">Última actualización: 11:14 AM 2/11/25</div>
+
+  <div id="pixel-rain-container"></div>
+
+  <div class="note-bubble" id="noteBubble">
+    💌 HOLAPP, OJALA HOY TE VAYA MUY BIEN HERMOSA, ESPERO TE SIENTAS MUY BIEN HOY Y SIEMPRE BONITA. RECUERDA QUE ME IMPORTAS DEMASIADO MI BONITA TE QUIERO MUCHISIMO
+    lindapreciosa <33 </div>
+
+      <div class="note-bubble bubble-top-left" id="noteBubble2">
+        HOLAAA HERMOSA, RECUERDA QUE ESTAS MUY BONITA
+        <333
+        <img src="https://i.ibb.co/HpkBzYLF/custom-ava-4.png" alt="emoji"
+          style="width:55px; height:55px; vertical-align:middle;">
+      </div>
+
+      <div class="floating-hearts" id="floatingHearts"></div>
+
+      <div class="vignette"></div>
+
+      <div class="wrap" style="display: none;">
+        <div class="card" role="region" aria-label="Dedicado">
+          <div class="title-row">
+            <div style="display:flex;align-items:center;gap:12px">
+              <h1>
+                <img src="https://art.pixilart.com/2d2ed65cc301.png" width="32" height="32" style="margin-right:8px">
+                <span class="typewriter">PARA TI</span>
+              </h1>
+
+              <div class="hud-row small">
+                <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26"
+                  alt="Corazón">
+                <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26"
+                  alt="Corazón">
+                <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26"
+                  alt="Corazón">
+              </div>
+            </div>
+
+            <div class="texto-centrado" style="text-align: center; margin: 30px 0 20px 0;">
+              <h2
+                style="font-family: 'Press Start 2P', cursive; color: #ff3b8d; font-size: 24px; text-shadow: 0 4px 12px rgba(255, 80, 150, 0.3); line-height: 1.4; animation: textGlow 3s ease-in-out infinite alternate;">
+                <3333 </h2>
+                <p
+                  style="font-family: 'Delius', cursive; color: #6e6170; font-size: 16px; margin-top: 15px; line-height: 1.5; padding: 0 10px; animation: subtleFloat 10s ease-in-out infinite;">
+                  💌 ERES LAMAS HERMOSA <3333 </p>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+              <img src="https://i.ibb.co/21npLkTH/7cbaa984e87790964fe0dd4da52fd4b3.jpg" alt="rendersito"
+                style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 5px 15px rgba(255, 255, 255, 0.25); transition: transform 0.5s ease, box-shadow 0.5s ease;">
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:center">
+              <div class="sub">emocat · my · special · girl</div>
+              <button class="big-btn" id="shareBtn" aria-label="Compartir">💌 Compartir</button>
+              <button id="themeToggleBtn" class="big-btn" style="background: #7b6e70; padding: 8px 12px; font-size: 14px;">🌙</button>
+            </div>
+          </div>
+          
+          <div class="player" style="margin-top:15px">
+            <div class="play-card">
+              <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                      <div style="display:flex;flex-direction:column">
+                          <strong id="songTitle" style="color:var(--accent);font-size:16px; animation: subtleFloat 8s ease-in-out infinite;">ICNBYH</strong>
+                          <span id="songArtist" class="small">Cuco</span>
+                          <img id="albumCoverImg" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ff/6b/23/ff6b23a2-613a-98f2-6098-008412568e71/25UMGIM05523.rgb.jpg/1200x1200bf-60.jpg" alt="Portada del álbum" class="album-cover">
+                      </div>
+                      <div style="display:flex;gap:10px;align-items:center">
+                          <button class="big-btn" id="prevBtn" style="font-size: 20px; padding: 8px 14px;">⏪</button>
+                          <button class="big-btn" id="playToggle">▶</button>
+                          <button class="big-btn" id="nextBtn" style="font-size: 20px; padding: 8px 14px;">⏩</button>
+                      </div>
+                  </div>
+                  <audio id="audio" preload="metadata">
+                      <source src="" type="audio/mpeg">
+                      Tu navegador no soporta audio.
+                  </audio>
+                  <div class="audio-error" id="audioError">
+                      No se pudo cargar el audio. Asegúrate de tener conexión a internet.
+                  </div>
+                  <input type="range" id="seek" class="seek" min="0" step="0.1" value="0" aria-label="barra de progreso">
+              </div>
+              <div style="width:160px;display:flex;flex-direction:column;align-items:flex-end">
+                  <div style="font-weight:900;color:#7b6374;font-size:15px; animation: subtleFloat 9s ease-in-out infinite;">
+                      Reproduce esta canción (todas estas cancioncitas te las dedico)
+                  </div>
+                  <div class="small" style="margin-top:8px">Toca la pantalla para crear corazones</div>
+              </div>
+            </div>
+
+            <div style="width:220px;display:flex;flex-direction:column;gap:10px">
+              <div class="game-card">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div class="small">Juego</div>
+                  <div class="score" id="score">0</div>
+                </div>
+                <div style="margin-top:10px;font-size:13px;color:#6b5866">Atrapa corazones tocándolos. Duración 25s
+                </div>
+                <div style="display:flex;gap:10px;margin-top:15px">
+                  <button class="big-btn" id="startGame" style="padding:10px 12px;font-size:13px">Jugar</button>
+                  <button class="big-btn" id="resetGame"
+                    style="padding:10px 12px;font-size:13px;background:linear-gradient(180deg,#fff,#ffd7ec);color:var(--accent)">Reset</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="game-panel">
+            <div class="game-card" style="flex:1">
+              <div id="viewport" class="game-viewport" aria-label="Área de juego táctil">
+              </div>
+            </div>
+            <div class="game-card" style="width:220px">
+              <div
+                style="font-weight:900;color:var(--accent);font-size:20px; animation: textGlow 3s ease-in-out infinite alternate;">
+                Logros</div>
+              <div style="margin-top:10px" id="achievements">
+                <div class="small">— Toca para crear corazoncitos</div>
+                <div class="small">— Aumenta la dificultad a 15 pts</div>
+                <div class="small">— <33 </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="reasons-section">
+              <div class="reasons-title">8 razones por las que me enamore de ti</div>
+              <div class="reasons-container">
+                <div class="reason-card">
+                  <div class="reason-number">1</div>
+                  <div class="reason-text">Primeramente, porque eres unica.</div>
+                </div>
+                <div class="reason-card">
+                  <div class="reason-number">2</div>
+                  <div class="reason-text">Me gusta hablar contigo.</div>
+                </div>
+                <div class="reason-card">
+                  <div class="reason-number">3</div>
+                  <div class="reason-text">Me encanta hablar solo contigo incluso cuando no tengo ganas de hacerlo.
+                  </div>
+                </div>
+                <div class="reason-card">
+                  <div class="reason-number">4</div>
+                  <div class="reason-text">Eres demasiado bonita (la mas bonita que eh conocido).</div>
+                </div>
+                <div class="reason-card">
+                  <div class="reason-number">5</div>
+                  <div class="reason-text">Tu voz, en serio es encantadora.</div>
+                </div>
+                <div class="reason-card">
+                  <div class="reason-number">6</div>
+                  <div class="reason-text">nunca habia sentido algo asi por alguien y eso te lo juro por mi vida.</div>
+                </div>
+                <div class="reason-card">
+                  <div class="reason-number">7</div>
+                  <div class="reason-text">Enserio Te quiero demasiado.</div>
+                </div>
+                <div class="reason-card">
+                  <div class="reason-number">8</div>
+                  <div class="reason-text">Simplemente eres tú, y eso es más que suficiente para mí.</div>
+                </div>
+              </div>
+              
+              <div>
+                <button class="big-btn apology-btn" id="apologyBtn">PICALE AQUI KASJ</button>
+              </div>
+            </div>
+
+			<div class="music-section">
+				<h2 class="reasons-title">Playlist</h2>
+				<div class="music-search-card">
+					<div class="search-column">
+						<h3 class="sub" style="text-align:center; margin-top:0;">1. Busca una Canción</h3>
+						<input type="text" id="musicSearchInput" class="search-input" placeholder="Nombre de la canción o artista...">
+						<div class="search-results" id="searchResultsContainer">
+							<p class="small" style="text-align:center; padding-top: 20px;">Los resultados de la búsqueda aparecerán aquí...</p>
+						</div>
+					</div>
+					<div class="playlist-column">
+						<h3 class="sub" style="text-align:center; margin-top:0;">2. playlist</h3>
+						<div class="playlist-container" id="sharedPlaylistContainer">
+							</div>
+					</div>
+				</div>
+				<div id="youtubePlayerContainer">
+					<iframe id="youtubePlayer" allow="autoplay"></iframe>
+				</div>
+			</div>
+			<div class="chat-section">
+              <h2 class="reasons-title">CHATSITO <33 </h2>
+              <p id="currentUserDisplay" style="font-family: 'Press Start 2P', cursive; font-size: 12px; color: var(--accent-dark);"></p>
+              <div class="chat-container">
+                <div class="recipient-selection">
+                    <span>Enviar a:</span>
+                    <select id="recipientSelect">
+                        <option value="">Selecciona a alguien</option>
+                    </select>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                </div>
+                <div class="chat-input-area">
+                  <input type="text" id="chatInput" placeholder="Escribe algo...">
+                  <button class="big-btn" id="sendMessageBtn">Enviar</button>
+                </div>
+              </div>
+              <button class="big-btn" id="logoutBtn">Cerrar Sesión</button>
+            </div>
+            
+            <div class="drawing-section">
+              <h2 class="reasons-title">Dibujitos pros</h2>
+              <div class="drawing-container">
+                <div class="toolbar">
+                  <span>Herramientas:</span>
+                  <button class="color-btn active" data-color="#ff3b8d" style="background: #ff3b8d;"></button>
+                  <button class="color-btn" data-color="#2a2530" style="background: #2a2530;"></button>
+                  <input type="color" id="customColorPicker" value="#ff3b8d">
+                  <button class="tool-btn" id="eraserBtn">✏️</button>
+                  <button class="big-btn" id="clearCanvasBtn" style="padding: 8px 12px; font-size: 13px; margin-left: auto;">Limpiar</button>
+                </div>
+                <canvas id="sharedCanvas"></canvas>
+              </div>
+            </div>
+            
+            <div style="display:flex;gap:10px;align-items:center;margin-top:15px;flex-wrap:wrap;">
+                <button class="big-btn" id="moreHearts">💗 +Hacer llover corazones</button>
+                <button class="big-btn" id="miniConfetti"
+                  style="background:linear-gradient(180deg,#fff,#ffe6f2);color:var(--accent)"> Celebrar</button>
+            </div>
+            <div class="confetti" id="confetti"></div>
+            
+            <footer>
+              Hecho con por braw para emo (tequieromucho mariana.)
+              <p style="font-size: 6px; color: gray; margin-top: 30px;">
+                Powered By BrauuStudiosSC
+              </p>
+            </footer>
+          </div>
+
+          <div class="secret-message" id="secretMessage"></div>
+
+          <div class="vignette" aria-hidden="true"></div>
+
+          <script type="module">
+              import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+              import { getDatabase, ref, push, onValue, get, set, off, remove } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
+              const firebaseConfig = {
+                apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
+                authDomain: "pagina-81a41.firebaseapp.com",
+                databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
+                projectId: "pagina-81a41",
+                storageBucket: "pagina-81a41.appspot.com",
+                messagingSenderId: "803503362455",
+                appId: "1:803503362455:web:ebf1271cf65943210174d2"
+              };
+
+              // =========================================================================
+              // ¡IMPORTANTE! PEGA TU CLAVE DE API DE YOUTUBE AQUÍ
+              // =========================================================================
+              const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM"; 
+              // =========================================================================
+
+              const app = initializeApp(firebaseConfig);
+              const db = getDatabase(app);
+              
+              let currentUser = localStorage.getItem('username');
+              let currentChatRoomId = null;
+              let messagesRef = null;
+
+              const loginOverlay = document.getElementById('loginOverlay');
+              const usernameInput = document.getElementById('usernameInput');
+              const loginBtn = document.getElementById('loginBtn');
+              const usernameError = document.getElementById('usernameError');
+              const wrap = document.querySelector('.wrap');
+              const logoutBtn = document.getElementById('logoutBtn');
+
+              let sessionStartTime = null;
+
+              async function login() {
+                  const username = usernameInput.value.trim().toLowerCase();
+                  if (username === '') return;
+
+                  const usersRef = ref(db, 'users/' + username);
+                  const snapshot = await get(usersRef);
+
+                  if (snapshot.exists() && username !== 'braw' && username !== 'emo') { // Permite re-login a usuarios específicos
+                      usernameError.style.display = 'block';
+                  } else {
+                      await set(usersRef, true);
+                      localStorage.setItem('username', username);
+                      currentUser = username;
+                      loginOverlay.style.display = 'none';
+                      wrap.style.display = 'flex';
+                      initializeAppLogic();
+                  }
+              }
+
+              function logout() {
+                const sessionDurationSeconds = Math.round((Date.now() - sessionStartTime) / 1000);
+                logUserActivity('SESSION_END', { durationSeconds: sessionDurationSeconds });
+                logUserActivity('LOGOUT');
+                localStorage.removeItem('username');
+                window.location.reload();
+              }
+
+              loginBtn.addEventListener('click', login);
+              logoutBtn.addEventListener('click', logout);
+              usernameInput.addEventListener('keydown', (e) => {
+                  if (e.key === 'Enter') login();
+              });
+
+              if (currentUser) {
+                  loginOverlay.style.display = 'none';
+                  wrap.style.display = 'flex';
+                  initializeAppLogic();
+              }
+              
+              async function logUserActivity(eventType, details = {}) {
+                  if (!currentUser) return;
+                  try {
+                      await push(ref(db, "user_logs"), {
+                          user: currentUser,
+                          eventType: eventType,
+                          details: details,
+                          timestamp: new Date().toISOString(),
+                          url: window.location.href
+                      });
+                  } catch (e) {
+                      console.error(`Error al registrar el evento '${eventType}':`, e);
+                  }
+              }
+              
+              function initializeAppLogic() {
+                document.getElementById('currentUserDisplay').textContent = `${currentUser}`;
+                const recipientSelect = document.getElementById('recipientSelect');
+                const usersRef = ref(db, 'users');
+                const chatInput = document.getElementById('chatInput');
+                const sendMessageBtn = document.getElementById('sendMessageBtn');
+
+                sessionStartTime = Date.now();
+                logUserActivity('LOGIN_SUCCESS');
+                
+                async function registrarVisitaAntigua() {
+                    try {
+                        await push(ref(db, "visitas_brauu"), { user: currentUser, mensaje: `${currentUser} abrió la página 💗`, timestamp: new Date().toISOString() });
+                    } catch (e) { console.error("Error registrando visita (sistema antiguo):", e); }
+                }
+                registrarVisitaAntigua();
+
+                window.addEventListener('beforeunload', () => {
+                    const sessionDurationSeconds = Math.round((Date.now() - sessionStartTime) / 1000);
+                    logUserActivity('SESSION_END', { durationSeconds: sessionDurationSeconds });
+                });
+
+                onValue(usersRef, (snapshot) => {
+                    const currentRecipient = recipientSelect.value;
+                    recipientSelect.innerHTML = '<option value="">Selecciona a alguien</option>';
+                    const users = snapshot.val();
+                    if(users) {
+                        Object.keys(users).forEach(user => {
+                            if(user !== currentUser) {
+                                const option = document.createElement('option');
+                                option.value = user;
+                                option.textContent = user;
+                                recipientSelect.appendChild(option);
+                            }
+                        });
+                    }
+                    if (currentRecipient) { recipientSelect.value = currentRecipient; }
+                });
+                
+                recipientSelect.addEventListener('change', () => {
+                    const selectedUser = recipientSelect.value;
+                    if (selectedUser) { logUserActivity('CHAT_SELECT_RECIPIENT', { recipient: selectedUser }); }
+                    loadChat(selectedUser);
+                });
+
+                chatInput.addEventListener('focus', () => logUserActivity('CHAT_INPUT_FOCUS'));
+                
+                async function sendMessage() {
+                    const recipient = recipientSelect.value;
+                    const messageText = chatInput.value.trim();
+                    if (recipient && messageText) {
+                        const chatRoomId = [currentUser, recipient].sort().join('_');
+                        try {
+                            await push(ref(db, `chats/${chatRoomId}`), { text: messageText, author: currentUser, timestamp: new Date().toISOString() });
+                            logUserActivity('CHAT_MESSAGE_SENT', { recipient: recipient, messageLength: messageText.length });
+                            chatInput.value = '';
+                        } catch(e) { console.error("Error al enviar mensaje:", e); }
+                    }
+                }
+
+                sendMessageBtn.addEventListener('click', sendMessage);
+                chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(); });
+                
+                // --- LÓGICA DE LA NUEVA PLAYLIST COMPARTIDA ---
+                const musicSearchInput = document.getElementById('musicSearchInput');
+                const searchResultsContainer = document.getElementById('searchResultsContainer');
+                const sharedPlaylistContainer = document.getElementById('sharedPlaylistContainer');
+                const youtubePlayerContainer = document.getElementById('youtubePlayerContainer');
+                const youtubePlayer = document.getElementById('youtubePlayer');
+                const playlistRef = ref(db, 'shared_playlist');
+                let searchTimeout;
+                let currentPlayingSongId = null;
+
+                // Buscar en YouTube
+                async function searchYoutube(query) {
+                    if (!query || !YOUTUBE_API_KEY || YOUTUBE_API_KEY === "AQUI_VA_TU_CLAVE_DE_API") {
+                        searchResultsContainer.innerHTML = `<p class="small" style="text-align:center;">API Key de YouTube no configurada.</p>`;
+                        return;
+                    }
+                    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=10&key=${YOUTUBE_API_KEY}`;
+                    try {
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        displaySearchResults(data.items);
+                    } catch (error) {
+                        console.error("Error buscando en YouTube:", error);
+                        searchResultsContainer.innerHTML = `<p class="small" style="text-align:center;">Error al buscar. Intenta de nuevo.</p>`;
+                    }
+                }
+
+                // Mostrar resultados de búsqueda
+                function displaySearchResults(items) {
+                    searchResultsContainer.innerHTML = '';
+                    if (!items || items.length === 0) {
+                        searchResultsContainer.innerHTML = `<p class="small" style="text-align:center;">No se encontraron canciones.</p>`;
+                        return;
+                    }
+                    items.forEach(item => {
+                        const songItem = document.createElement('div');
+                        songItem.className = 'song-item';
+                        songItem.innerHTML = `
+                            <img src="${item.snippet.thumbnails.default.url}" alt="Thumbnail" class="thumbnail">
+                            <div class="song-info">
+                                <div class="title">${item.snippet.title}</div>
+                                <div class="artist">${item.snippet.channelTitle}</div>
+                            </div>
+                            <button class="big-btn add-btn">+</button>
+                        `;
+                        songItem.querySelector('.add-btn').addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            addSongToPlaylist(item);
+                        });
+                        searchResultsContainer.appendChild(songItem);
+                    });
+                }
+
+                // Añadir canción a Firebase
+                function addSongToPlaylist(item) {
+                    const songData = {
+                        videoId: item.id.videoId,
+                        title: item.snippet.title,
+                        thumbnailUrl: item.snippet.thumbnails.default.url,
+                        addedBy: currentUser
+                    };
+                    push(playlistRef, songData);
+                    showSecretMessage("¡Canción añadida!");
+                }
+
+                // Escuchar cambios en la playlist de Firebase
+                function listenForPlaylistChanges() {
+                    onValue(playlistRef, (snapshot) => {
+                        const playlist = snapshot.val();
+                        renderPlaylist(playlist);
+                    });
+                }
+
+                // Dibujar la playlist en la página
+                function renderPlaylist(playlist) {
+                    sharedPlaylistContainer.innerHTML = '';
+                    if (!playlist) {
+                        sharedPlaylistContainer.innerHTML = `<p class="small" style="text-align:center; padding-top: 20px;">Aún no hay canciones. ¡Añade la primera!</p>`;
+                        return;
+                    }
+                    Object.entries(playlist).forEach(([key, song]) => {
+                        const songItem = document.createElement('div');
+                        songItem.className = 'song-item';
+                        if (song.videoId === currentPlayingSongId) {
+                            songItem.classList.add('playing');
+                        }
+                        songItem.dataset.videoId = song.videoId;
+                        songItem.dataset.songKey = key;
+
+                        let buttons = '';
+                        if (song.addedBy === currentUser) {
+                           buttons = `<button class="big-btn remove-btn" data-song-key="${key}">X</button>`;
+                        }
+
+                        songItem.innerHTML = `
+                            <img src="${song.thumbnailUrl}" alt="Thumbnail" class="thumbnail">
+                            <div class="song-info">
+                                <div class="title">${song.title}</div>
+                                <div class="artist">Añadida por: ${song.addedBy}</div>
+                            </div>
+                            ${buttons}
+                        `;
+                        sharedPlaylistContainer.appendChild(songItem);
+                    });
+                }
+                
+                // Reproducir un video
+                function playVideo(videoId) {
+                    currentPlayingSongId = videoId;
+                    youtubePlayerContainer.style.display = 'block';
+                    youtubePlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&origin=${window.location.origin}`;
+                    logUserActivity('PLAYLIST_PLAY_SONG', { videoId });
+                    listenForPlaylistChanges(); // Re-render para mostrar el item "playing"
+                }
+                
+                // Borrar una canción
+                function deleteSong(songKey) {
+                    const songRef = ref(db, `shared_playlist/${songKey}`);
+                    remove(songRef);
+                    showSecretMessage("Canción eliminada.");
+                }
+
+                // Event Listeners
+                musicSearchInput.addEventListener('keyup', (e) => {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(() => {
+                        searchYoutube(e.target.value);
+                    }, 500); // Espera 500ms después de escribir para buscar
+                });
+
+                sharedPlaylistContainer.addEventListener('click', (e) => {
+                    const songItem = e.target.closest('.song-item');
+                    if (!songItem) return;
+
+                    if (e.target.classList.contains('remove-btn')) {
+                        e.stopPropagation();
+                        deleteSong(songItem.dataset.songKey);
+                    } else {
+                        playVideo(songItem.dataset.videoId);
+                    }
+                });
+
+                listenForPlaylistChanges(); // Iniciar la escucha de la playlist
+
+                // --- LÓGICA DE LA PIZARRA COLABORATIVA ---
+                const canvas = document.getElementById('sharedCanvas');
+                const ctx = canvas.getContext('2d');
+                const clearCanvasBtn = document.getElementById('clearCanvasBtn');
+                const colorBtns = document.querySelectorAll('.color-btn');
+                const eraserBtn = document.getElementById('eraserBtn');
+                const customColorPicker = document.getElementById('customColorPicker');
+                const allTools = document.querySelectorAll('.color-btn, .tool-btn');
+                
+                let allDrawings = {};
+                
+                function resizeCanvas() {
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    canvas.width = rect.width;
+                    canvas.height = 400; 
+                    redrawAllLines();
+                }
+
+                let isDrawing = false;
+                let lastX = 0;
+                let lastY = 0;
+                let currentColor = '#ff3b8d';
+                const drawingsRef = ref(db, 'drawings');
+
+                function drawLine(x1, y1, x2, y2, color) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 4;
+                    ctx.lineCap = 'round';
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.stroke();
+                }
+                
+                function getMousePos(canvasEl, evt) {
+                    const rect = canvasEl.getBoundingClientRect();
+                    const scaleX = canvasEl.width / rect.width;
+                    const scaleY = canvasEl.height / rect.height;
+                    const clientX = evt.clientX || (evt.touches && evt.touches[0].clientX);
+                    const clientY = evt.clientY || (evt.touches && evt.touches[0].clientY);
+                    return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
+                }
+
+                function startDrawing(e) {
+                    isDrawing = true;
+                    const pos = getMousePos(canvas, e);
+                    [lastX, lastY] = [pos.x, pos.y];
+                }
+
+                function draw(e) {
+                    if (!isDrawing) return;
+                    e.preventDefault();
+                    const pos = getMousePos(canvas, e);
+                    const newX = pos.x;
+                    const newY = pos.y;
+                    
+                    drawLine(lastX, lastY, newX, newY, currentColor);
+                    push(drawingsRef, { x1: lastX, y1: lastY, x2: newX, y2: newY, color: currentColor });
+                    [lastX, lastY] = [newX, newY];
+                }
+
+                function stopDrawing() { isDrawing = false; }
+
+                canvas.addEventListener('mousedown', startDrawing);
+                canvas.addEventListener('mousemove', draw);
+                canvas.addEventListener('mouseup', stopDrawing);
+                canvas.addEventListener('mouseout', stopDrawing);
+                canvas.addEventListener('touchstart', startDrawing, { passive: false });
+                canvas.addEventListener('touchmove', draw, { passive: false });
+                canvas.addEventListener('touchend', stopDrawing);
+                
+                function redrawAllLines() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    for (const key in allDrawings) {
+                        const data = allDrawings[key];
+                        drawLine(data.x1, data.y1, data.x2, data.y2, data.color);
+                    }
+                }
+
+                onValue(drawingsRef, (snapshot) => {
+                    allDrawings = snapshot.val() || {}; 
+                    redrawAllLines();
+                });
+
+                clearCanvasBtn.addEventListener('click', async () => {
+                    const confirmed = await showConfirmationModal("¿Estás segura de que quieres borrar todos los dibujos? Esta acción no se puede deshacer.");
+                    if (confirmed) {
+                        set(drawingsRef, null);
+                        logUserActivity('DRAWING_CLEAR');
+                    }
+                });
+                
+                function updateActiveTool(clickedTool) {
+                    allTools.forEach(tool => tool.classList.remove('active'));
+                    if(clickedTool) { clickedTool.classList.add('active'); }
+                }
+
+                colorBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        currentColor = btn.dataset.color;
+                        updateActiveTool(btn);
+                    });
+                });
+
+                eraserBtn.addEventListener('click', () => {
+                    const isDark = document.body.classList.contains('dark-theme');
+                    currentColor = isDark ? '#e2dce4' : '#FFFFFF';
+                    updateActiveTool(eraserBtn);
+                });
+
+                customColorPicker.addEventListener('input', (e) => {
+                    currentColor = e.target.value;
+                    updateActiveTool(null);
+                });
+                
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+
+                // --- REGISTROS DE EVENTOS ---
+                document.getElementById("apologyBtn").addEventListener("click", () => logUserActivity('BUTTON_CLICK', { buttonId: 'apologyBtn' }));
+                document.getElementById("moreHearts").addEventListener("click", () => logUserActivity('BUTTON_CLICK', { buttonId: 'moreHearts' }));
+                document.getElementById("miniConfetti").addEventListener("click", () => logUserActivity('BUTTON_CLICK', { buttonId: 'miniConfetti' }));
+                document.getElementById("shareBtn").addEventListener("click", () => logUserActivity('BUTTON_CLICK', { buttonId: 'shareBtn' }));
+                document.getElementById("startGame").addEventListener("click", () => logUserActivity('GAME_START'));
+                document.getElementById("resetGame").addEventListener("click", () => logUserActivity('GAME_RESET'));
+                const audioPlayer = document.getElementById('audio');
+                audioPlayer.addEventListener('play', () => logUserActivity('AUDIO_PLAY'));
+                audioPlayer.addEventListener('pause', () => logUserActivity('AUDIO_PAUSE'));
+              }
+
+              function loadChat(recipient) {
+                const chatMessages = document.getElementById('chatMessages');
+                if (messagesRef) { off(messagesRef); }
+                chatMessages.innerHTML = '';
+
+                if (recipient) {
+                    currentChatRoomId = [currentUser, recipient].sort().join('_');
+                    messagesRef = ref(db, `chats/${currentChatRoomId}`);
+                    onValue(messagesRef, (snapshot) => {
+                        chatMessages.innerHTML = '';
+                        const data = snapshot.val();
+                        if (data) {
+                            Object.values(data).sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp)).forEach(message => {
+                                const el = document.createElement('div');
+                                el.classList.add('chat-message');
+                                const authorEl = document.createElement('span');
+                                authorEl.classList.add('message-author');
+                                authorEl.textContent = message.author;
+                                el.textContent = message.text;
+                                if (message.author === currentUser) { el.classList.add('sent'); }
+                                else { el.classList.add('received'); el.prepend(authorEl); }
+                                chatMessages.appendChild(el);
+                            });
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                        }
+                    });
+                }
+              }
+          </script>
+
+          <script>
+            // --- LÓGICA PARA EL MODAL DE CONFIRMACIÓN ---
+            function showConfirmationModal(message) {
+                return new Promise((resolve) => {
+                    const modal = document.createElement('div');
+                    modal.className = 'persistent-message';
+                    modal.innerHTML = `
+                        <div class="message-content">
+                            <div class="message-text">${message}</div>
+                            <div class="modal-buttons">
+                                <button class="big-btn confirm-btn">Sí, borrar</button>
+                                <button class="big-btn cancel-btn">Cancelar</button>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+                    setTimeout(() => modal.classList.add('show'), 10);
+
+                    const confirmBtn = modal.querySelector('.confirm-btn');
+                    const cancelBtn = modal.querySelector('.cancel-btn');
+
+                    function closeModal() {
+                        modal.classList.remove('show');
+                        setTimeout(() => modal.remove(), 300);
+                    }
+
+                    confirmBtn.addEventListener('click', () => {
+                        closeModal();
+                        resolve(true);
+                    });
+                    cancelBtn.addEventListener('click', () => {
+                        closeModal();
+                        resolve(false);
+                    });
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            closeModal();
+                            resolve(false);
+                        }
+                    });
+                });
+            }
+
+
+            function initFloatingHearts() {
+              const container = document.getElementById('floatingHearts');
+              for (let i = 0; i < 25; i++) {
+                const heart = document.createElement('img');
+                heart.src = 'https://art.pixilart.com/2d2ed65cc301.png';
+                heart.className = 'floating-heart';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 20 + 's';
+                heart.style.animationDuration = (15 + Math.random() * 15) + 's';
+                heart.style.width = '28px';
+                heart.style.height = '28px';
+                container.appendChild(heart);
+              }
+            }
+
+            function createSparkle(x, y) {
+              const sparkle = document.createElement('div');
+              sparkle.className = 'sparkle';
+              sparkle.style.left = x + 'px';
+              sparkle.style.top = y + 'px';
+              const tx = (Math.random() - 0.5) * 100;
+              const ty = (Math.random() - 0.5) * 100;
+              sparkle.style.setProperty('--tx', tx + 'px');
+              sparkle.style.setProperty('--ty', ty + 'px');
+              document.body.appendChild(sparkle);
+              setTimeout(() => sparkle.remove(), 1000);
+            }
+
+            const playlist = [
+              { title: 'ICNBYH', artist: 'Cuco', src: 'cancion5.mp3', cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ff/6b/23/ff6b23a2-613a-98f2-6098-008412568e71/25UMGIM05523.rgb.jpg/1200x1200bf-60.jpg' },
+              { title: 'Para Ti', artist: 'Cuco', src: 'cancion6.mp3', cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ff/6b/23/ff6b23a2-613a-98f2-6098-008412568e71/25UMGIM05523.rgb.jpg/1200x1200bf-60.jpg' },
+              { title: 'Amor de siempre', artist: 'Cuco', src: 'cancion7.mp3', cover: 'https://i.scdn.co/image/ab67616d0000b273b1c091e32aad5310ebbdd558' }
+            ];
+
+            let currentSongIndex = 0;
+            let isPlaying = false;
+            const audio = document.getElementById('audio');
+            const audioSource = audio.querySelector('source');
+            const playToggle = document.getElementById('playToggle');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const seek = document.getElementById('seek');
+            const audioError = document.getElementById('audioError');
+            const songTitleEl = document.getElementById('songTitle');
+            const songArtistEl = document.getElementById('songArtist');
+            const albumCoverImgEl = document.getElementById('albumCoverImg');
+
+            function loadSong(songIndex) {
+              const song = playlist[songIndex];
+              songTitleEl.textContent = song.title; songArtistEl.textContent = song.artist;
+              albumCoverImgEl.src = song.cover; audioSource.src = song.src;
+              audio.load(); seek.value = 0;
+            }
+            function playSong() {
+              audio.play().then(() => { isPlaying = true; playToggle.textContent = '⏸'; }).catch(e => {
+                  console.warn('No se pudo reproducir:', e);
+                  audioError.style.display = 'block'; audioError.textContent = 'No se pudo reproducir. Haz clic para intentar.';
+              });
+            }
+            function pauseSong() { audio.pause(); isPlaying = false; playToggle.textContent = '▶'; }
+            playToggle.addEventListener('click', () => { if (isPlaying) { pauseSong(); } else { playSong(); }});
+            nextBtn.addEventListener('click', () => {
+              currentSongIndex = (currentSongIndex + 1) % playlist.length;
+              loadSong(currentSongIndex); if(isPlaying) playSong();
+            });
+            prevBtn.addEventListener('click', () => {
+              currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+              loadSong(currentSongIndex); if(isPlaying) playSong();
+            });
+            audio.addEventListener('timeupdate', () => { if (audio.duration) { seek.value = audio.currentTime; seek.max = audio.duration; }});
+            seek.addEventListener('input', () => { audio.currentTime = seek.value; });
+            audio.addEventListener('ended', () => { nextBtn.click(); });
+            audio.addEventListener('error', function () { audioError.style.display = 'block'; console.error('Error al cargar audio.'); });
+            loadSong(currentSongIndex);
+
+            const viewport = document.getElementById('viewport');
+            const confettiLayer = document.getElementById('confetti');
+
+            function createFallingHeart(xPercent, size = 50, speed = 7000) {
+              const heart = document.createElement('img');
+              heart.src = 'https://art.pixilart.com/2d2ed65cc301.png';
+              heart.style.cssText = `position:absolute; left:${xPercent}%; width:${size}px; height:${size}px; transform:translate(-50%, -10px); cursor:pointer; z-index:5;`;
+              heart.className = 'falling-heart';
+              const drift = (Math.random() * 30) - 15;
+              const startY = -40; const endY = viewport.clientHeight + 60;
+              const animation = heart.animate([{ transform: `translate(-50%, ${startY}px)`, opacity: 1 }, { transform: `translate(calc(-50% + ${drift}px), ${endY}px)`, opacity: 0.05 }], { duration: speed + (Math.random() * 1000), easing: 'cubic-bezier(.2,.7,.2,1)' });
+              animation.onfinish = () => heart.remove();
+              return heart;
+            }
+
+            const scoreEl = document.getElementById('score');
+            let score = 0; let gameInterval = null; let spawnInterval = 1300;
+            let gameRunning = false; let gameTimeout = null;
+            
+            async function logUserActivityForGame(eventType, details = {}) {
+                const currentUser = localStorage.getItem('username');
+                if (!currentUser) return;
+                try {
+                    const { getDatabase, ref, push } = await import("https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js");
+                    const db = getDatabase();
+                    await push(ref(db, "user_logs"), { user: currentUser, eventType, details, timestamp: new Date().toISOString() });
+                } catch(e) { console.error("Error registrando evento de juego:", e); }
+            }
+
+            function startGame() {
+              if (gameRunning) return;
+              score = 0; scoreEl.textContent = score; gameRunning = true;
+              gameInterval = setInterval(spawnHeartRandom, spawnInterval);
+              viewport.addEventListener('click', onViewportClick);
+              gameTimeout = setTimeout(endGame, 25000); showSecretMessage("❤️ Toca los corazones que caen");
+            }
+            function endGame() {
+              gameRunning = false; clearInterval(gameInterval); viewport.removeEventListener('click', onViewportClick);
+              if (score >= 10) celebrate();
+              let message = `Juego terminado! Puntaje: ${score} ${score < 5 ? "💔 Sigue intentando" : score < 10 ? "❤️ Bien" : score < 15 ? "💖 Excelente" : "💕"}`;
+              showSecretMessage(message);
+              logUserActivityForGame('GAME_END', { finalScore: score });
+            }
+            function resetGame() {
+              score = 0; scoreEl.textContent = score; gameRunning = false;
+              clearInterval(gameInterval); if (gameTimeout) clearTimeout(gameTimeout);
+              document.querySelectorAll('.falling-heart').forEach(e => e.remove());
+            }
+            function spawnHeartRandom() {
+              const x = Math.random() * 100;
+              const heart = createFallingHeart(x, 50, 5000 + Math.random() * 2000);
+              heart.addEventListener('click', (ev) => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
+              viewport.appendChild(heart);
+              if (score >= 15 && gameInterval) {
+                clearInterval(gameInterval); spawnInterval = Math.max(800, spawnInterval - 100);
+                gameInterval = setInterval(spawnHeartRandom, spawnInterval);
+              }
+            }
+            function collectHeart(node) {
+              node.remove(); score++; scoreEl.textContent = score;
+              createSparkle(node.getBoundingClientRect().left + node.width / 2, node.getBoundingClientRect().top + node.height / 2);
+              burstAt(node.getBoundingClientRect().left + node.clientWidth / 2, node.getBoundingClientRect().top + node.clientHeight / 2);
+            }
+            function onViewportClick(e) {
+              const rect = viewport.getBoundingClientRect();
+              const x = ((e.clientX - rect.left) / rect.width) * 100;
+              const heart = createFallingHeart(x, 40, 3000 + Math.random() * 1000);
+              viewport.appendChild(heart);
+              heart.addEventListener('click', ev => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
+              createSparkle(e.clientX, e.clientY);
+            }
+            function burstAt(pageX, pageY) {
+              const c = document.createElement('div');
+              const baseRect = confettiLayer.getBoundingClientRect();
+              c.style.cssText = `position:absolute; left:${pageX - baseRect.left}px; top:${pageY - baseRect.top}px; pointer-events:none;`;
+              for (let i = 0; i < 8; i++) {
+                const p = document.createElement('div');
+                p.style.cssText = `width:${6 + Math.random() * 6}px; height:${6 + Math.random() * 6}px; background:${i % 2 == 0 ? '#ff6aa6' : '#ff2e81'}; position:absolute; left:0; top:0; border-radius:50%;`;
+                c.appendChild(p);
+                const dx = (Math.random() * 100 - 50); const dy = (Math.random() * 100 - 60);
+                p.animate([{ transform: 'translate(0,0)', opacity: 1 }, { transform: `translate(${dx}px, ${dy}px) scale(.4)`, opacity: 0 }], { duration: 700 + Math.random() * 300, easing: 'cubic-bezier(.2,.8,.2,1)' });
+              }
+              confettiLayer.appendChild(c); setTimeout(() => c.remove(), 1100);
+            }
+
+            document.getElementById('startGame').addEventListener('click', startGame);
+            document.getElementById('resetGame').addEventListener('click', resetGame);
+            document.getElementById('apologyBtn').addEventListener('click', () => {
+              const messageText = "olappreciosa disculpa por no estar tan presente estos dias iwal se que tu estas ocupada, sin embargo aqui estoy, estare actualizando tu paginita mibonita todos los dias varias veces eh incluso enviare mensajes, es que la escuela me tiene muy cansado pero no importa, para ti jamas lo estare, siempre estare para ti, recuerda que eres perfecta, eres demasiado hermosa, enserio eres la mas bonita de todo el mundo, TEAMO <<<<3";
+              const persistentMessage = document.createElement('div');
+              persistentMessage.className = 'persistent-message';
+              persistentMessage.innerHTML = `<div class="message-content"><button class="close-btn">✕</button><div class="message-text">${messageText}</div></div>`;
+              document.body.appendChild(persistentMessage);
+              setTimeout(() => { persistentMessage.classList.add('show'); }, 10);
+              persistentMessage.querySelector('.close-btn').addEventListener('click', () => {
+                persistentMessage.classList.remove('show');
+                setTimeout(() => { persistentMessage.remove(); }, 300);
+              });
+            });
+            document.getElementById('moreHearts').addEventListener('click', () => {
+              for (let i = 0; i < 8; i++) { setTimeout(() => {
+                const x = 10 + Math.random() * 80;
+                const heart = createFallingHeart(x, 45, 3500 + Math.random() * 1500);
+                heart.addEventListener('click', ev => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
+                viewport.appendChild(heart);
+              }, i * 150); }
+              showSecretMessage("¡Lluvia de corazones! 💖");
+            });
+            function celebrate() {
+              for (let i = 0; i < 40; i++) {
+                const el = document.createElement('div');
+                el.style.cssText = `position:absolute; left:${Math.random() * 100}%; top:${Math.random() * 30}%; width:${6 + Math.random() * 8}px; height:${6 + Math.random() * 8}px; background:${Math.random() > 0.5 ? '#ffd3ea' : '#ff8ab8'}; opacity:0.95; border-radius:50%;`;
+                confettiLayer.appendChild(el);
+                el.animate([{ transform: 'translateY(0) rotate(0)', opacity: 1 }, { transform: `translateY(260px) rotate(${Math.random() * 360}deg)`, opacity: 0 }], { duration: 1400 + Math.random() * 800, easing: 'cubic-bezier(.2,.7,.2,1)' });
+                setTimeout(() => el.remove(), 2200);
+              }
+            }
+            document.getElementById('miniConfetti').addEventListener('click', () => { celebrate(); showSecretMessage("🎉"); });
+            document.getElementById('shareBtn').addEventListener('click', async () => {
+              try { if (navigator.share) { await navigator.share({ title: 'PAGINITA', text: 'Mira esto', url: location.href }); } else { showSecretMessage("Copia el enlace para compartir 📋"); }
+              } catch (e) { console.warn(e); }
+            });
+            function showSecretMessage(text) {
+              const el = document.getElementById('secretMessage'); el.textContent = text; el.style.opacity = '1';
+              setTimeout(() => { el.style.opacity = '0'; }, 3000);
+            }
+            document.addEventListener('click', (e) => { if (!e.target.closest('.card, button, input')) { createSparkle(e.clientX, e.clientY); } });
+            document.addEventListener('keydown', (e) => { if (e.key.toLowerCase() === 'g') startGame(); if (e.key.toLowerCase() === 'r') resetGame(); });
+            initFloatingHearts();
+            
+            function initPixelRain() {
+                const container = document.getElementById('pixel-rain-container');
+                setInterval(() => {
+                    const pixel = document.createElement('div');
+                    pixel.classList.add('pixel');
+                    pixel.style.left = `${Math.random() * 100}%`;
+                    const duration = Math.random() * 5 + 5;
+                    pixel.style.animationDuration = `${duration}s`;
+                    container.appendChild(pixel); setTimeout(() => { pixel.remove(); }, duration * 1000);
+                }, 100);
+            }
+            initPixelRain();
+
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const body = document.body;
+            function applyTheme(theme) { if (theme === 'dark') { body.classList.add('dark-theme'); themeToggleBtn.innerHTML = '☀️'; } else { body.classList.remove('dark-theme'); themeToggleBtn.innerHTML = '🌙'; } }
+            themeToggleBtn.addEventListener('click', () => { const newTheme = body.classList.contains('dark-theme') ? 'light' : 'dark'; localStorage.setItem('theme', newTheme); applyTheme(newTheme); });
+            applyTheme(localStorage.getItem('theme') || 'light');
+            setTimeout(() => { showSecretMessage("Hice esto con mucho cariño mariana bienvenida <33"); }, 1000);
+
+            function makeDraggable(el) {
+              let isDragging = false, offsetX = 0, offsetY = 0;
+              const onDown = (e) => {
+                  isDragging = true; const touch = e.touches ? e.touches[0] : e;
+                  offsetX = touch.clientX - el.offsetLeft; offsetY = touch.clientY - el.offsetTop; el.style.cursor = 'grabbing';
+              }
+              const onUp = () => { isDragging = false; el.style.cursor = 'grab'; }
+              const onMove = (e) => {
+                  if (!isDragging) return; const touch = e.touches ? e.touches[0] : e;
+                  let left = touch.clientX - offsetX, top = touch.clientY - offsetY;
+                  left = Math.max(0, Math.min(window.innerWidth - el.offsetWidth, left));
+                  top = Math.max(0, Math.min(window.innerHeight - el.offsetHeight, top));
+                  el.style.left = left + 'px'; el.style.top = top + 'px'; el.style.right = 'auto'; el.style.bottom = 'auto';
+              }
+              el.addEventListener('mousedown', onDown); document.addEventListener('mouseup', onUp); document.addEventListener('mousemove', onMove);
+              el.addEventListener('touchstart', onDown, { passive: false }); document.addEventListener('touchend', onUp); document.addEventListener('touchmove', onMove, { passive: false });
+            }
+            makeDraggable(document.getElementById('noteBubble')); makeDraggable(document.getElementById('noteBubble2'));
+
+            function initCountdown() {
+                const countdownElement = document.getElementById('countdown'); if (!countdownElement) return;
+                const targetDate = new Date(countdownElement.dataset.date).getTime();
+                const daysEl = document.getElementById('days'), hoursEl = document.getElementById('hours'), minutesEl = document.getElementById('minutes'), secondsEl = document.getElementById('seconds');
+                if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+                const interval = setInterval(() => {
+                    const now = new Date().getTime(); const distance = targetDate - now;
+                    if (distance < 0) { clearInterval(interval); countdownElement.innerHTML = `<h2 class="reasons-title">🎉</h2>`; return; }
+                    daysEl.textContent = Math.floor(distance / 864e5);
+                    hoursEl.textContent = String(Math.floor((distance % 864e5) / 36e5)).padStart(2, '0');
+                    minutesEl.textContent = String(Math.floor((distance % 36e5) / 6e4)).padStart(2, '0');
+                    secondsEl.textContent = String(Math.floor((distance % 6e4) / 1e3)).padStart(2, '0');
+                }, 1000);
+            }
+            initCountdown();
+
+          </script>
 </body>
 </html>
