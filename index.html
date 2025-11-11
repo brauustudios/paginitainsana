@@ -1225,10 +1225,12 @@
 
                 .tool-btn {
                     background-color: #f0f0f0;
-                    font-size: 16px;
+                    font-size: 14px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    font-family: 'Press Start 2P', cursive;
+                    font-weight: bold;
                 }
 
                 .dark-theme .tool-btn {
@@ -1655,6 +1657,7 @@
                                         style="background: #2a2530;"></button>
                                     <input type="color" id="customColorPicker" value="#ff3b8d">
                                     <button class="tool-btn" id="eraserBtn">✏️</button>
+                                    <button class="tool-btn" id="textBtn">Tᵗ</button>
                                     <button class="big-btn" id="clearCanvasBtn"
                                         style="padding: 8px 12px; font-size: 13px; margin-left: auto;">Limpiar</button>
                                 </div>
@@ -1986,6 +1989,11 @@
                             const colorBtns = document.querySelectorAll('.color-btn');
                             const eraserBtn = document.getElementById('eraserBtn');
                             const customColorPicker = document.getElementById('customColorPicker');
+                            
+                            // ▼▼ MODIFICACIÓN ▼▼
+                            const textBtn = document.getElementById('textBtn'); // El nuevo botón
+                            let currentTool = 'draw'; // Para saber qué herramienta usamos
+
                             const allTools = document.querySelectorAll('.color-btn, .tool-btn');
 
                             let allDrawings = {};
@@ -2003,16 +2011,6 @@
                             let currentColor = '#ff3b8d';
                             const drawingsRef = ref(db, 'drawings');
 
-                            function drawLine(x1, y1, x2, y2, color) {
-                                ctx.beginPath();
-                                ctx.strokeStyle = color;
-                                ctx.lineWidth = 4;
-                                ctx.lineCap = 'round';
-                                ctx.moveTo(x1, y1);
-                                ctx.lineTo(x2, y2);
-                                ctx.stroke();
-                            }
-
                             function getMousePos(canvasEl, evt) {
                                 const rect = canvasEl.getBoundingClientRect();
                                 const scaleX = canvasEl.width / rect.width;
@@ -2022,14 +2020,20 @@
                                 return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
                             }
 
+                            // ▼▼ MODIFICACIÓN: Esta función ahora decide qué hacer ▼▼
                             function startDrawing(e) {
-                                isDrawing = true;
-                                const pos = getMousePos(canvas, e);
-                                [lastX, lastY] = [pos.x, pos.y];
+                                if (currentTool === 'draw') {
+                                    isDrawing = true;
+                                    const pos = getMousePos(canvas, e);
+                                    [lastX, lastY] = [pos.x, pos.y];
+                                } else if (currentTool === 'text') {
+                                    addTextToCanvas(e); // Llamamos a la nueva función de texto
+                                }
                             }
 
+                            // ▼▼ MODIFICACIÓN: Solo dibuja si la herramienta es 'draw' ▼▼
                             function draw(e) {
-                                if (!isDrawing) return;
+                                if (!isDrawing || currentTool !== 'draw') return;
                                 e.preventDefault();
                                 const pos = getMousePos(canvas, e);
                                 const newX = pos.x;
@@ -2041,6 +2045,28 @@
                             }
 
                             function stopDrawing() { isDrawing = false; }
+                            
+                            // ▼▼ NUEVA FUNCIÓN: Para añadir texto ▼▼
+                            function addTextToCanvas(e) {
+                                const text = prompt("Escribe tu nota:");
+                                if (text) {
+                                    const pos = getMousePos(canvas, e);
+                                    
+                                    // Guardamos el texto en Firebase
+                                    const textData = {
+                                        type: 'text',
+                                        text: text,
+                                        x: pos.x,
+                                        y: pos.y,
+                                        color: currentColor, // Usa el color seleccionado
+                                        font: "18px 'Delius', cursive" // Fuente de la página
+                                    };
+                                    push(drawingsRef, textData);
+                                    
+                                    logUserActivity('DRAWING_ADD_TEXT', { textLength: text.length });
+                                }
+                            }
+
 
                             canvas.addEventListener('mousedown', startDrawing);
                             canvas.addEventListener('mousemove', draw);
@@ -2050,11 +2076,36 @@
                             canvas.addEventListener('touchmove', draw, { passive: false });
                             canvas.addEventListener('touchend', stopDrawing);
 
+                            // ▼▼ MODIFICACIÓN: Estas funciones ahora dibujan líneas Y texto ▼▼
+                            function drawLine(x1, y1, x2, y2, color) {
+                                ctx.beginPath();
+                                ctx.strokeStyle = color;
+                                ctx.lineWidth = 4;
+                                ctx.lineCap = 'round';
+                                ctx.moveTo(x1, y1);
+                                ctx.lineTo(x2, y2);
+                                ctx.stroke();
+                            }
+
+                            // Nueva función para dibujar el texto guardado
+                            function drawText(text, x, y, color, font) {
+                                ctx.fillStyle = color;
+                                ctx.font = font;
+                                ctx.fillText(text, x, y);
+                            }
+
                             function redrawAllLines() {
                                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                                 for (const key in allDrawings) {
                                     const data = allDrawings[key];
-                                    drawLine(data.x1, data.y1, data.x2, data.y2, data.color);
+
+                                    if (data.type === 'text') {
+                                        // Es un objeto de texto
+                                        drawText(data.text, data.x, data.y, data.color, data.font || "18px 'Delius', cursive");
+                                    } else if (data.x1 !== undefined) {
+                                        // Es un objeto de línea (o dato antiguo)
+                                        drawLine(data.x1, data.y1, data.x2, data.y2, data.color);
+                                    }
                                 }
                             }
 
@@ -2079,6 +2130,7 @@
                             colorBtns.forEach(btn => {
                                 btn.addEventListener('click', () => {
                                     currentColor = btn.dataset.color;
+                                    currentTool = 'draw'; // <-- MODIFICACIÓN
                                     updateActiveTool(btn);
                                 });
                             });
@@ -2086,12 +2138,20 @@
                             eraserBtn.addEventListener('click', () => {
                                 const isDark = document.body.classList.contains('dark-theme');
                                 currentColor = isDark ? '#e2dce4' : '#FFFFFF';
+                                currentTool = 'draw'; // <-- MODIFICACIÓN
                                 updateActiveTool(eraserBtn);
                             });
 
                             customColorPicker.addEventListener('input', (e) => {
                                 currentColor = e.target.value;
+                                currentTool = 'draw'; // <-- MODIFICACIÓN
                                 updateActiveTool(null);
+                            });
+
+                            // ▼▼ NUEVO Event Listener para el botón de texto ▼▼
+                            textBtn.addEventListener('click', () => {
+                                currentTool = 'text';
+                                updateActiveTool(textBtn);
                             });
 
                             window.addEventListener('resize', resizeCanvas);
