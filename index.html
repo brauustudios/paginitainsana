@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -1305,7 +1306,48 @@
                     border: 1px solid rgba(255, 60, 130, 0.1);
                     transition: background 0.5s ease;
                 }
+/* --- ESTILOS DE LA LÁMPARA --- */
+.lamp-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: -10px; /* Para pegar el cable arriba */
+    transition: transform 0.1s ease;
+}
 
+.lamp-container:active {
+    transform: scale(0.95); /* Efecto de click */
+}
+
+.lamp-wire {
+    width: 2px;
+    height: 40px;
+    background: #555;
+    margin: 0 auto;
+}
+
+.lamp-bulb {
+    font-size: 60px;
+    line-height: 1;
+    filter: grayscale(100%) opacity(0.5); /* Apagada: gris y opaca */
+    transition: all 0.4s ease;
+}
+
+/* Estado ENCENDIDA */
+.lamp-bulb.on {
+    filter: grayscale(0%) opacity(1) drop-shadow(0 0 30px #ffd700); /* Brillo dorado */
+    transform: rotate(5deg); /* Un pequeño movimiento */
+    animation: swing 3s infinite ease-in-out alternate;
+}
+
+@keyframes swing {
+    from { transform: rotate(3deg); }
+    to { transform: rotate(-3deg); }
+}
+
+.dark-theme .lamp-bulb.on {
+    filter: grayscale(0%) opacity(1) drop-shadow(0 0 50px #ffeb3b); /* Brillo más fuerte en modo oscuro */
+}
                 .dark-theme .drawing-container {
                     background: rgba(0, 0, 0, 0.2);
                     border-color: rgba(255, 255, 255, 0.1);
@@ -1538,92 +1580,7 @@
                 }
 
               /* --- ESTILOS BARRA TERMÓMETRO --- */
-.thermometer-section {
-    margin-top: 40px;
-    width: 100%;
-    text-align: center;
-    padding: 0 20px;
-}
 
-.thermo-container {
-    max-width: 300px;
-    margin: 15px auto;
-}
-
-input[type=range].thermo-slider {
-    -webkit-appearance: none; /* Para Chrome, Safari, Edge antiguos */
-    appearance: none;         /* Estándar moderno (Firefox, Chrome nuevo) */
-    width: 100%;
-    height: 20px;
-    /* Degradado: Azul (frío) -> Morado (medio) -> Rosa (calor) */
-    background: linear-gradient(90deg, #a2c2e0 0%, #b39ddb 50%, #ff73a7 100%);
-    border-radius: 20px;
-    outline: none;
-    border: 3px solid rgba(255,255,255,0.8);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* El círculo que mueves */
-input[type=range].thermo-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;       /* Agregado aquí también */
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #fff;
-    border: 3px solid var(--accent);
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    transition: transform 0.2s;
-}
-
-/* Para Firefox (el thumb necesita su propio selector estándar) */
-input[type=range].thermo-slider::-moz-range-thumb {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #fff;
-    border: 3px solid var(--accent);
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    transition: transform 0.2s;
-    border: none; /* Firefox a veces agrega borde extra */
-}
-
-input[type=range].thermo-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.1);
-}
-
-/* Estado deshabilitado (así lo ve ella) */
-input[type=range].thermo-slider:disabled {
-    cursor: default;
-    opacity: 0.9;
-}
-
-.status-emoji-display {
-    font-size: 45px;
-    margin-bottom: 5px;
-    animation: float 6s ease-in-out infinite;
-    height: 60px;
-    display: block;
-}
-
-.minimal-desc {
-    font-size: 10px;
-    color: #888;
-    font-family: 'Press Start 2P', cursive;
-    margin-top: 10px;
-    letter-spacing: 1px;
-}
-
-.percent-text {
-    font-family: 'Press Start 2P', cursive; /* O usa 'Delius' si prefieres */
-    font-size: 14px;
-    color: var(--accent); /* Color rosa/rojizo */
-    margin-bottom: 10px;
-    font-weight: bold;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
             </style>
 </head>
 
@@ -1643,7 +1600,7 @@ input[type=range].thermo-slider:disabled {
         💌 HOLAAA SABIAS QUE ERES HERMOSA VV? DIOS TE QUIERO MUCHISISMO, Y TAMBIEN ERES MUY BONITA MUY BONITA, QUIERO
         LLENARTE BESITOS, ESPERO ESTES MUY MUY BIEN MIBONITAAA </div>
     <div class="note-bubble bubble-top-left" id="noteBubble2">
-        HOLA HERMOSAAA, ERES INCREIBLE, ERES HERMOSA, ERES MUY ESPECIAL PARA MI, ERES PERFECTA HERMOSA.
+        ola hermosa, sabias q estasbienhermosa si sabias? estasmuibonita
         <333 <img src="https://i.ibb.co/HpkBzYLF/custom-ava-4.png" alt="emoji"
             style="width:55px; height:55px; vertical-align:middle;">
     </div>
@@ -1675,7 +1632,7 @@ input[type=range].thermo-slider:disabled {
                         <3333 </h2>
                             <p
                                 style="font-family: 'Delius', cursive; color: #6e6170; font-size: 16px; margin-top: 15px; line-height: 1.5; padding: 0 10px; animation: subtleFloat 10s ease-in-out infinite;">
-                                💌 ERES LAMAS HERMOSA <3333 </p>
+                                💌 ERES LAMASHERMOSAAA, ME ENCANTAS, DIOSMIO <3333 </p>
                 </div>
 
                 <div style="text-align: center; margin: 20px 0;">
@@ -2254,21 +2211,18 @@ input[type=range].thermo-slider:disabled {
                         style="background:linear-gradient(180deg,#fff,#ffd7ec);color:var(--accent)">
                         Celebrar</button>
                 </div>
-
-              <div class="thermometer-section">
-    <h2 class="reasons-title"></h2>
+<div class="lamp-section" style="margin-top: 40px; text-align: center;">
+    <h2 class="reasons-title">Señal de Luz</h2>
+    <p class="small">luz prosita.</p>
     
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <div id="statusEmoji" class="status-emoji-display">🧊</div>
-        <span id="percentDisplay" class="percent-text">50%</span>
+    <div class="lamp-container" onclick="toggleLamp()">
+        <div class="lamp-wire"></div>
+        <div id="lampIcon" class="lamp-bulb">💡</div>
     </div>
-
-    <div class="thermo-container">
-        <input type="range" min="1" max="100" value="50" class="thermo-slider" id="moodSlider" disabled>
-    </div>
-
-    <p class="minimal-desc" id="statusText">Sincronizando...</p>
+    
+    <p id="lampStatusText" class="minimal-desc" style="margin-top: 20px;">Apagada</p>
 </div>
+
                 <div class="confetti" id="confetti"></div>
 
                 <footer>
@@ -2298,8 +2252,8 @@ input[type=range].thermo-slider:disabled {
                                 alt="Foto">
                         </div>
                         <p class="typing-text">
-                            yasabía que llegarías aquí ASJSKADJSAD. Solo quería recordarte una vez más, de una forma especial,
-                            que eres la más bonita que eh conocido. Gracias por existir y por simplemente ser tu <3.
+                            ola ola ola ola ola ola, eres mui hermosa y me gustas mucho, sabias???? me gustas mucho, espero que te recuperes pronto mibonita, sabes
+                            quetequieromuchisimo, perdon por ser tan tonto algunas veces :3 <3.
                             <br><br>
                             <strong>Teamo.<3</strong>
                         </p>
@@ -2310,626 +2264,360 @@ input[type=range].thermo-slider:disabled {
                 </div>
             </div>
 
-            <script type="module">
-                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-                import { getDatabase, ref, push, onValue, get, set, off, remove } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+           <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+        import { getDatabase, ref, push, onValue, get, set, off, remove } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 
-                const firebaseConfig = {
-                    apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
-                    authDomain: "pagina-81a41.firebaseapp.com",
-                    databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
-                    projectId: "pagina-81a41",
-                    storageBucket: "pagina-81a41.appspot.com",
-                    messagingSenderId: "803503362455",
-                    appId: "1:803503362455:web:ebf1271cf65943210174d2"
-                };
+        // 1. CONFIGURACIÓN
+        const firebaseConfig = {
+            apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
+            authDomain: "pagina-81a41.firebaseapp.com",
+            databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
+            projectId: "pagina-81a41",
+            storageBucket: "pagina-81a41.appspot.com",
+            messagingSenderId: "803503362455",
+            appId: "1:803503362455:web:ebf1271cf65943210174d2"
+        };
 
-                // =========================================================================
-                // ¡IMPORTANTE! PEGA TU CLAVE DE API DE YOUTUBE AQUÍ
-                // =========================================================================
-                const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
-                // =========================================================================
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
-                const app = initializeApp(firebaseConfig);
-                const db = getDatabase(app);
+        let currentUser = localStorage.getItem('username');
+        let messagesRef = null;
 
-                let currentUser = localStorage.getItem('username');
-                let currentChatRoomId = null;
-                let messagesRef = null;
+        // Elementos DOM Globales
+        const loginOverlay = document.getElementById('loginOverlay');
+        const usernameInput = document.getElementById('usernameInput');
+        const loginBtn = document.getElementById('loginBtn');
+        const usernameError = document.getElementById('usernameError');
+        const wrap = document.querySelector('.wrap');
+        const logoutBtn = document.getElementById('logoutBtn');
 
-                const loginOverlay = document.getElementById('loginOverlay');
-                const usernameInput = document.getElementById('usernameInput');
-                const loginBtn = document.getElementById('loginBtn');
-                const usernameError = document.getElementById('usernameError');
-                const wrap = document.querySelector('.wrap');
-                const logoutBtn = document.getElementById('logoutBtn');
+        // --- LOGIN ---
+        async function login() {
+            const username = usernameInput.value.trim().toLowerCase();
+            if (username === '') return;
+            const usersRef = ref(db, 'users/' + username);
+            const snapshot = await get(usersRef);
 
-                let sessionStartTime = null;
-
-                async function login() {
-                    const username = usernameInput.value.trim().toLowerCase();
-                    if (username === '') return;
-
-                    const usersRef = ref(db, 'users/' + username);
-                    const snapshot = await get(usersRef);
-
-                    if (snapshot.exists() && username !== 'braw' && username !== 'emo') { // Permite re-login a usuarios específicos
-                        usernameError.style.display = 'block';
-                    } else {
-                        await set(usersRef, true);
-                        localStorage.setItem('username', username);
-                        currentUser = username;
-                        loginOverlay.style.display = 'none';
-                        wrap.style.display = 'flex';
-                        initializeAppLogic();
-                    }
-                }
-
-                function logout() {
-                    const sessionDurationSeconds = Math.round((Date.now() - sessionStartTime) / 1000);
-                    logUserActivity('SESSION_END', { durationSeconds: sessionDurationSeconds });
-                    logUserActivity('LOGOUT');
-                    localStorage.removeItem('username');
-                    window.location.reload();
-                }
-
-                loginBtn.addEventListener('click', login);
-                logoutBtn.addEventListener('click', logout);
-                usernameInput.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') login();
-                });
-
-                if (currentUser) {
-                    loginOverlay.style.display = 'none';
-                    wrap.style.display = 'flex';
-                    initializeAppLogic();
-                }
-
-                async function logUserActivity(eventType, details = {}) {
-                    if (!currentUser) return;
-                    try {
-                        await push(ref(db, "user_logs"), {
-                            user: currentUser,
-                            eventType: eventType,
-                            details: details,
-                            timestamp: new Date().toISOString(),
-                            url: window.location.href
-                        });
-                    } catch (e) {
-                        console.error(`Error al registrar el evento '${eventType}':`, e);
-                    }
-                }
-
-                function initializeAppLogic() {
-                    document.getElementById('currentUserDisplay').textContent = `${currentUser}`;
-                    const recipientSelect = document.getElementById('recipientSelect');
-                    const usersRef = ref(db, 'users');
-                    const chatInput = document.getElementById('chatInput');
-                    const sendMessageBtn = document.getElementById('sendMessageBtn');
-
-                    sessionStartTime = Date.now();
-                    logUserActivity('LOGIN_SUCCESS');
-
-                    async function registrarVisitaAntigua() {
-                        try {
-                            await push(ref(db, "visitas_brauu"), { user: currentUser, mensaje: `${currentUser} abrió la página 💗`, timestamp: new Date().toISOString() });
-                        } catch (e) { console.error("Error registrando visita (sistema antiguo):", e); }
-                    }
-                    registrarVisitaAntigua();
-
-                    window.addEventListener('beforeunload', () => {
-                        const sessionDurationSeconds = Math.round((Date.now() - sessionStartTime) / 1000);
-                        logUserActivity('SESSION_END', { durationSeconds: sessionDurationSeconds });
-                    });
-
-                    onValue(usersRef, (snapshot) => {
-                        const currentRecipient = recipientSelect.value;
-                        recipientSelect.innerHTML = '<option value="">Selecciona a alguien</option>';
-                        const users = snapshot.val();
-                        if (users) {
-                            Object.keys(users).forEach(user => {
-                                if (user !== currentUser) {
-                                    const option = document.createElement('option');
-                                    option.value = user;
-                                    option.textContent = user;
-                                    recipientSelect.appendChild(option);
-                                }
-                            });
-                        }
-                        if (currentRecipient) { recipientSelect.value = currentRecipient; }
-                    });
-
-                    recipientSelect.addEventListener('change', () => {
-                        const selectedUser = recipientSelect.value;
-                        if (selectedUser) { logUserActivity('CHAT_SELECT_RECIPIENT', { recipient: selectedUser }); }
-                        loadChat(selectedUser);
-                    });
-
-                    chatInput.addEventListener('focus', () => logUserActivity('CHAT_INPUT_FOCUS'));
-
-                    async function sendMessage() {
-                        const recipient = recipientSelect.value;
-                        const messageText = chatInput.value.trim();
-                        if (recipient && messageText) {
-                            const chatRoomId = [currentUser, recipient].sort().join('_');
-                            try {
-                                await push(ref(db, `chats/${chatRoomId}`), { text: messageText, author: currentUser, timestamp: new Date().toISOString() });
-                                logUserActivity('CHAT_MESSAGE_SENT', { recipient: recipient, messageLength: messageText.length });
-                                chatInput.value = '';
-                            } catch (e) { console.error("Error al enviar mensaje:", e); }
-                        }
-                    }
-
-                    sendMessageBtn.addEventListener('click', sendMessage);
-                    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(); });
-
-                    // --- LÓGICA DE LA NUEVA PLAYLIST COMPARTIDA ---
-                    const musicSearchInput = document.getElementById('musicSearchInput');
-                    const searchResultsContainer = document.getElementById('searchResultsContainer');
-                    const sharedPlaylistContainer = document.getElementById('sharedPlaylistContainer');
-                    const youtubePlayerContainer = document.getElementById('youtubePlayerContainer');
-                    const youtubePlayer = document.getElementById('youtubePlayer');
-                    const playlistRef = ref(db, 'shared_playlist');
-                    let searchTimeout;
-                    let currentPlayingSongId = null;
-
-                    // Buscar en YouTube
-                    async function searchYoutube(query) {
-                        if (!query || !YOUTUBE_API_KEY || YOUTUBE_API_KEY === "AQUI_VA_TU_CLAVE_DE_API") {
-                            searchResultsContainer.innerHTML = `<p class="small" style="text-align:center;">API Key de YouTube no configurada.</p>`;
-                            return;
-                        }
-                        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=10&key=${YOUTUBE_API_KEY}`;
-                        try {
-                            const response = await fetch(url);
-                            const data = await response.json();
-                            displaySearchResults(data.items);
-                        } catch (error) {
-                            console.error("Error buscando en YouTube:", error);
-                            searchResultsContainer.innerHTML = `<p class="small" style="text-align:center;">Error al buscar. Intenta de nuevo.</p>`;
-                        }
-                    }
-
-                    // Mostrar resultados de búsqueda
-                    function displaySearchResults(items) {
-                        searchResultsContainer.innerHTML = '';
-                        if (!items || items.length === 0) {
-                            searchResultsContainer.innerHTML = `<p class="small" style="text-align:center;">No se encontraron canciones.</p>`;
-                            return;
-                        }
-                        items.forEach(item => {
-                            const songItem = document.createElement('div');
-                            songItem.className = 'song-item';
-                            songItem.innerHTML = `
-                            <img src="${item.snippet.thumbnails.default.url}" alt="Thumbnail" class="thumbnail">
-                            <div class="song-info">
-                                <div class="title">${item.snippet.title}</div>
-                                <div class="artist">${item.snippet.channelTitle}</div>
-                            </div>
-                            <button class="big-btn add-btn">+</button>
-                        `;
-                            songItem.querySelector('.add-btn').addEventListener('click', (e) => {
-                                e.stopPropagation();
-                                addSongToPlaylist(item);
-                            });
-                            searchResultsContainer.appendChild(songItem);
-                        });
-                    }
-
-
-// === LÓGICA DEL TERMÓMETRO + PORCENTAJE ===
-            const moodSlider = document.getElementById('moodSlider');
-            const statusEmoji = document.getElementById('statusEmoji');
-            const statusText = document.getElementById('statusText');
-            const percentDisplay = document.getElementById('percentDisplay'); // <--- NUEVO ELEMENTO
-            
-            const thermometerRef = ref(db, 'status_thermometer');
-
-            function getMoodVisuals(value) {
-                if (value <= 20) return { emoji: "", text: "..." }; 
-                if (value <= 80) return { emoji: "", text: "..." }; 
-                return { emoji: "", text: ":3" };
-            }
-
-            // 1. SI ERES TÚ (BRAW)
-            if (currentUser === 'braw') { 
-                moodSlider.disabled = false;
-                statusText.textContent = "Desliza para ajustar";
-                
-                // Al mover la barra (Feedback visual inmediato)
-                moodSlider.addEventListener('input', () => {
-                    const val = moodSlider.value;
-                    const visuals = getMoodVisuals(val);
-                    
-                    statusEmoji.textContent = visuals.emoji;
-                    percentDisplay.textContent = val + '%'; // <--- ACTUALIZA EL NÚMERO
-                });
-
-                // Al soltar (Guardar en Firebase)
-                moodSlider.addEventListener('change', () => {
-                    set(thermometerRef, {
-                        value: moodSlider.value,
-                        timestamp: new Date().toISOString()
-                    });
-                });
+            if (snapshot.exists() && username !== 'braw' && username !== 'emo') {
+                usernameError.style.display = 'block';
             } else {
-                // SI ES ELLA (Solo lectura)
-                moodSlider.disabled = true; 
-                statusText.textContent = "Estado actual";
+                await set(usersRef, true);
+                localStorage.setItem('username', username);
+                currentUser = username;
+                loginOverlay.style.display = 'none';
+                wrap.style.display = 'flex';
+                initializeAppLogic();
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.reload();
+        }
+
+        if(loginBtn) loginBtn.addEventListener('click', login);
+        if(logoutBtn) logoutBtn.addEventListener('click', logout);
+        if(usernameInput) usernameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') login(); });
+
+        if (currentUser) {
+            if(loginOverlay) loginOverlay.style.display = 'none';
+            if(wrap) wrap.style.display = 'flex';
+            initializeAppLogic();
+        }
+
+        async function logUserActivity(eventType) {
+            if (!currentUser) return;
+            try { await push(ref(db, "user_logs"), { user: currentUser, eventType, timestamp: new Date().toISOString() }); } catch (e) {}
+        }
+
+        // --- LÓGICA PRINCIPAL ---
+        function initializeAppLogic() {
+            const userDisplay = document.getElementById('currentUserDisplay');
+            if(userDisplay) userDisplay.textContent = `${currentUser}`;
+            logUserActivity('LOGIN_SUCCESS');
+            
+            // === 1. LÁMPARA DE COMPAÑÍA ===
+            const lampRef = ref(db, 'status_lamp');
+            const lampIcon = document.getElementById('lampIcon');
+            const lampText = document.getElementById('lampStatusText');
+            let isLampOn = false;
+
+            window.toggleLamp = function() {
+                const newState = !isLampOn;
+                set(lampRef, { isOn: newState, user: currentUser, timestamp: new Date().toISOString() })
+                .catch(e => console.log("Error lámpara:", e));
+            };
+
+            if (lampIcon) {
+                onValue(lampRef, (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        isLampOn = data.isOn;
+                        if (isLampOn) {
+                            lampIcon.classList.add('on');
+                            if(lampText) {
+                                lampText.textContent = `Encendida por ${data.user === currentUser ? 'ti' : data.user} ✨`;
+                                lampText.style.color = "#ffb300";
+                            }
+                        } else {
+                            lampIcon.classList.remove('on');
+                            if(lampText) {
+                                lampText.textContent = "Apagada 🌑";
+                                lampText.style.color = "#888";
+                            }
+                        }
+                    }
+                });
             }
 
-            // 2. ESCUCHAR CAMBIOS DE LA BASE DE DATOS
-            onValue(thermometerRef, (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    moodSlider.value = data.value;
-                    const visuals = getMoodVisuals(data.value);
-                    
-                    statusEmoji.textContent = visuals.emoji;
-                    percentDisplay.textContent = data.value + '%'; // <--- ACTUALIZA EL NÚMERO AL CARGAR
-                    
-                    if (currentUser !== 'braw') {
-                        statusText.textContent = visuals.text;
+            // === 2. CHAT ===
+            const recipientSelect = document.getElementById('recipientSelect');
+            const sendMessageBtn = document.getElementById('sendMessageBtn');
+            const chatInput = document.getElementById('chatInput');
+
+            if(recipientSelect) {
+                const usersRef = ref(db, 'users');
+                onValue(usersRef, (snapshot) => {
+                    const currentRecipient = recipientSelect.value;
+                    recipientSelect.innerHTML = '<option value="">Selecciona a alguien</option>';
+                    const users = snapshot.val();
+                    if (users) {
+                        Object.keys(users).forEach(user => {
+                            if (user !== currentUser) {
+                                const option = document.createElement('option');
+                                option.value = user;
+                                option.textContent = user;
+                                recipientSelect.appendChild(option);
+                            }
+                        });
                     }
+                    if (currentRecipient) recipientSelect.value = currentRecipient;
+                });
+
+                recipientSelect.addEventListener('change', () => loadChat(recipientSelect.value));
+                
+                if(sendMessageBtn && chatInput) {
+                    sendMessageBtn.addEventListener('click', () => {
+                        const recipient = recipientSelect.value;
+                        const text = chatInput.value.trim();
+                        if (recipient && text) {
+                            const chatRoomId = [currentUser, recipient].sort().join('_');
+                            push(ref(db, `chats/${chatRoomId}`), { text, author: currentUser, timestamp: new Date().toISOString() });
+                            chatInput.value = '';
+                        }
+                    });
+                    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessageBtn.click(); });
                 }
-            });
-                    // Añadir canción a Firebase
-                    function addSongToPlaylist(item) {
-                        const songData = {
-                            videoId: item.id.videoId,
-                            title: item.snippet.title,
-                            thumbnailUrl: item.snippet.thumbnails.default.url,
-                            addedBy: currentUser
-                        };
-                        push(playlistRef, songData);
-                        showSecretMessage("¡Canción añadida!");
-                    }
+            }
 
-                    // Escuchar cambios en la playlist de Firebase
-                    function listenForPlaylistChanges() {
-                        onValue(playlistRef, (snapshot) => {
-                            const playlist = snapshot.val();
-                            renderPlaylist(playlist);
-                        });
-                    }
-
-                    // Dibujar la playlist en la página
-                    function renderPlaylist(playlist) {
-                        sharedPlaylistContainer.innerHTML = '';
-                        if (!playlist) {
-                            sharedPlaylistContainer.innerHTML = `<p class="small" style="text-align:center; padding-top: 20px;">Aún no hay canciones. ¡Añade la primera!</p>`;
-                            return;
-                        }
-                        Object.entries(playlist).forEach(([key, song]) => {
-                            const songItem = document.createElement('div');
-                            songItem.className = 'song-item';
-                            if (song.videoId === currentPlayingSongId) {
-                                songItem.classList.add('playing');
-                            }
-                            songItem.dataset.videoId = song.videoId;
-                            songItem.dataset.songKey = key;
-
-                            let buttons = '';
-                            if (song.addedBy === currentUser) {
-                                buttons = `<button class="big-btn remove-btn" data-song-key="${key}">X</button>`;
-                            }
-
-                            songItem.innerHTML = `
-                            <img src="${song.thumbnailUrl}" alt="Thumbnail" class="thumbnail">
-                            <div class="song-info">
-                                <div class="title">${song.title}</div>
-                                <div class="artist">Añadida por: ${song.addedBy}</div>
-                            </div>
-                            ${buttons}
-                        `;
-                            sharedPlaylistContainer.appendChild(songItem);
-                        });
-                    }
-
-                    // Reproducir un video
-                    function playVideo(videoId) {
-                        currentPlayingSongId = videoId;
-                        youtubePlayerContainer.style.display = 'block';
-                        youtubePlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&origin=${window.location.origin}`;
-                        logUserActivity('PLAYLIST_PLAY_SONG', { videoId });
-                        listenForPlaylistChanges(); // Re-render para mostrar el item "playing"
-                    }
-
-                    // Borrar una canción
-                    function deleteSong(songKey) {
-                        const songRef = ref(db, `shared_playlist/${songKey}`);
-                        remove(songRef);
-                        showSecretMessage("Canción eliminada.");
-                    }
-
-                    // Event Listeners
-                    musicSearchInput.addEventListener('keyup', (e) => {
-                        clearTimeout(searchTimeout);
-                        searchTimeout = setTimeout(() => {
-                            searchYoutube(e.target.value);
-                        }, 500); // Espera 500ms después de escribir para buscar
-                    });
-
-                    sharedPlaylistContainer.addEventListener('click', (e) => {
-                        const songItem = e.target.closest('.song-item');
-                        if (!songItem) return;
-
-                        if (e.target.classList.contains('remove-btn')) {
-                            e.stopPropagation();
-                            deleteSong(songItem.dataset.songKey);
-                        } else {
-                            playVideo(songItem.dataset.videoId);
-                        }
-                    });
-
-                    listenForPlaylistChanges(); // Iniciar la escucha de la playlist
-
-                    // --- LÓGICA DE LA PIZARRA COLABORATIVA ---
-                    const canvas = document.getElementById('sharedCanvas');
-                    const ctx = canvas.getContext('2d');
-                    const clearCanvasBtn = document.getElementById('clearCanvasBtn');
-                    const colorBtns = document.querySelectorAll('.color-btn');
-                    const eraserBtn = document.getElementById('eraserBtn');
-                    const customColorPicker = document.getElementById('customColorPicker');
-
-                    // ▼▼ MODIFICACIÓN ▼▼
-                    const textBtn = document.getElementById('textBtn'); // El nuevo botón
-                    let currentTool = 'draw'; // Para saber qué herramienta usamos
-
-                    const allTools = document.querySelectorAll('.color-btn, .tool-btn');
-
-                    let allDrawings = {};
-
-                    function resizeCanvas() {
-                        const rect = canvas.parentElement.getBoundingClientRect();
-                        canvas.width = rect.width;
-                        canvas.height = 400;
-                        redrawAllLines();
-                    }
-
-                    let isDrawing = false;
-                    let lastX = 0;
-                    let lastY = 0;
-                    let currentColor = '#ff3b8d';
-                    const drawingsRef = ref(db, 'drawings');
-
-                    function getMousePos(canvasEl, evt) {
-                        const rect = canvasEl.getBoundingClientRect();
-                        const scaleX = canvasEl.width / rect.width;
-                        const scaleY = canvasEl.height / rect.height;
-                        const clientX = evt.clientX || (evt.touches && evt.touches[0].clientX);
-                        const clientY = evt.clientY || (evt.touches && evt.touches[0].clientY);
-                        return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
-                    }
-
-                    // ▼▼ MODIFICACIÓN: Esta función ahora decide qué hacer ▼▼
-                    function startDrawing(e) {
-                        if (currentTool === 'draw') {
-                            isDrawing = true;
-                            const pos = getMousePos(canvas, e);
-                            [lastX, lastY] = [pos.x, pos.y];
-                        } else if (currentTool === 'text') {
-                            addTextToCanvas(e); // Llamamos a la nueva función de texto
-                        }
-                    }
-
-                    // ▼▼ MODIFICACIÓN: Solo dibuja si la herramienta es 'draw' ▼▼
-                    function draw(e) {
-                        if (!isDrawing || currentTool !== 'draw') return;
-                        e.preventDefault();
-                        const pos = getMousePos(canvas, e);
-                        const newX = pos.x;
-                        const newY = pos.y;
-
-                        drawLine(lastX, lastY, newX, newY, currentColor);
-                        push(drawingsRef, { x1: lastX, y1: lastY, x2: newX, y2: newY, color: currentColor });
-                        [lastX, lastY] = [newX, newY];
-                    }
-
-                    function stopDrawing() { isDrawing = false; }
-
-                    // ▼▼ NUEVA FUNCIÓN: Para añadir texto ▼▼
-                    function addTextToCanvas(e) {
-                        const text = prompt("Escribe tu nota:");
-                        if (text) {
-                            const pos = getMousePos(canvas, e);
-
-                            // Guardamos el texto en Firebase
-                            const textData = {
-                                type: 'text',
-                                text: text,
-                                x: pos.x,
-                                y: pos.y,
-                                color: currentColor, // Usa el color seleccionado
-                                font: "18px 'Delius', cursive" // Fuente de la página
-                            };
-                            push(drawingsRef, textData);
-
-                            logUserActivity('DRAWING_ADD_TEXT', { textLength: text.length });
-                        }
-                    }
-
-                    canvas.addEventListener('mousedown', startDrawing);
-                    canvas.addEventListener('mousemove', draw);
-                    canvas.addEventListener('mouseup', stopDrawing);
-                    canvas.addEventListener('mouseout', stopDrawing);
-                    canvas.addEventListener('touchstart', startDrawing, { passive: false });
-                    canvas.addEventListener('touchmove', draw, { passive: false });
-                    canvas.addEventListener('touchend', stopDrawing);
-
-                    // ▼▼ MODIFICACIÓN: Estas funciones ahora dibujan líneas Y texto ▼▼
-                    function drawLine(x1, y1, x2, y2, color) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = color;
-                        ctx.lineWidth = 4;
-                        ctx.lineCap = 'round';
-                        ctx.moveTo(x1, y1);
-                        ctx.lineTo(x2, y2);
-                        ctx.stroke();
-                    }
-
-                    // Nueva función para dibujar el texto guardado
-                    function drawText(text, x, y, color, font) {
-                        ctx.fillStyle = color;
-                        ctx.font = font;
-                        ctx.fillText(text, x, y);
-                    }
-
-                    function redrawAllLines() {
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        for (const key in allDrawings) {
-                            const data = allDrawings[key];
-
-                            if (data.type === 'text') {
-                                // Es un objeto de texto
-                                drawText(data.text, data.x, data.y, data.color, data.font || "18px 'Delius', cursive");
-                            } else if (data.x1 !== undefined) {
-                                // Es un objeto de línea (o dato antiguo)
-                                drawLine(data.x1, data.y1, data.x2, data.y2, data.color);
-                            }
-                        }
-                    }
-
-                    onValue(drawingsRef, (snapshot) => {
-                        allDrawings = snapshot.val() || {};
-                        redrawAllLines();
-                    });
-
-                    clearCanvasBtn.addEventListener('click', async () => {
-                        const confirmed = await showConfirmationModal("¿Estás segura de que quieres borrar todos los dibujos? Esta acción no se puede deshacer.");
-                        if (confirmed) {
-                            set(drawingsRef, null);
-                            logUserActivity('DRAWING_CLEAR');
-                        }
-                    });
-
-                    function updateActiveTool(clickedTool) {
-                        allTools.forEach(tool => tool.classList.remove('active'));
-                        if (clickedTool) { clickedTool.classList.add('active'); }
-                    }
-
-                    colorBtns.forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            currentColor = btn.dataset.color;
-                            currentTool = 'draw'; // <-- MODIFICACIÓN
-                            updateActiveTool(btn);
-                        });
-                    });
-
-                    eraserBtn.addEventListener('click', () => {
-                        const isDark = document.body.classList.contains('dark-theme');
-                        currentColor = isDark ? '#e2dce4' : '#FFFFFF';
-                        currentTool = 'draw'; // <-- MODIFICACIÓN
-                        updateActiveTool(eraserBtn);
-                    });
-
-                    customColorPicker.addEventListener('input', (e) => {
-                        currentColor = e.target.value;
-                        currentTool = 'draw'; // <-- MODIFICACIÓN
-                        updateActiveTool(null);
-                    });
-
-                    // ▼▼ NUEVO Event Listener para el botón de texto ▼▼
-                    textBtn.addEventListener('click', () => {
-                        currentTool = 'text';
-                        updateActiveTool(textBtn);
-                    });
-
-                    window.addEventListener('resize', resizeCanvas);
-                    resizeCanvas();
-
-                    // --- REGISTROS DE EVENTOS ---
-                    document.getElementById("apologyBtn").addEventListener("click", () => logUserActivity('BUTTON_CLICK', { buttonId: 'apologyBtn' }));
-                    document.getElementById("moreHearts").addEventListener("click", () => logUserActivity('BUTTON_CLICK', { buttonId: 'moreHearts' }));
-                    document.getElementById("miniConfetti").addEventListener("click", () => logUserActivity('BUTTON_CLICK', { buttonId: 'miniConfetti' }));
-                    document.getElementById("shareBtn").addEventListener("click", () => logUserActivity('BUTTON_CLICK', { buttonId: 'shareBtn' }));
-                    document.getElementById("startGame").addEventListener("click", () => logUserActivity('GAME_START'));
-                    document.getElementById("resetGame").addEventListener("click", () => logUserActivity('GAME_RESET'));
-                    const audioPlayer = document.getElementById('audio');
-                    audioPlayer.addEventListener('play', () => logUserActivity('AUDIO_PLAY'));
-                    audioPlayer.addEventListener('pause', () => logUserActivity('AUDIO_PAUSE'));
-
-
-                    // --- LÓGICA DE LA SORPRESA ESPECIAL (NUEVO) ---
-                    const specialBtn = document.getElementById('specialGiftBtn');
-                    const specialOverlay = document.getElementById('specialOverlay');
-                    const closeSpecialBtn = document.getElementById('closeSpecialBtn');
-
-                    if (specialBtn && specialOverlay) {
-                        specialBtn.addEventListener('click', () => {
-                            specialOverlay.classList.add('active');
-                            createFlowerRain(); // Llama a la lluvia de flores
-                            // ▼▼▼ AQUÍ ESTÁ EL REGISTRO NUEVO ▼▼▼
-                            logUserActivity('SPECIAL_GIFT_OPENED', { action: 'Clicked on Para Ti button' });
-                        });
-
-                        closeSpecialBtn.addEventListener('click', () => {
-                            specialOverlay.classList.remove('active');
-                        });
-
-                        // Cerrar si hace clic fuera de la tarjeta
-                        specialOverlay.addEventListener('click', (e) => {
-                            if (e.target === specialOverlay) {
-                                specialOverlay.classList.remove('active');
-                            }
-                        });
-                    }
-
-                    function createFlowerRain() {
-                        const flowers = ['🌸', '🌹', '💐', '🌺', '🌷', '✨', '💖'];
-                        const container = document.body;
-
-                        // Crear 30 flores
-                        for (let i = 0; i < 30; i++) {
-                            setTimeout(() => {
-                                if (!specialOverlay.classList.contains('active')) return;
-
+            function loadChat(recipient) {
+                const chatMessages = document.getElementById('chatMessages');
+                if(!chatMessages) return;
+                if (messagesRef) off(messagesRef);
+                chatMessages.innerHTML = '';
+                if (recipient) {
+                    const chatRoomId = [currentUser, recipient].sort().join('_');
+                    messagesRef = ref(db, `chats/${chatRoomId}`);
+                    onValue(messagesRef, (snapshot) => {
+                        chatMessages.innerHTML = '';
+                        const data = snapshot.val();
+                        if (data) {
+                            Object.values(data).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)).forEach(msg => {
                                 const el = document.createElement('div');
-                                el.classList.add('falling-flower');
-                                el.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-                                el.style.left = Math.random() * 100 + 'vw';
-                                el.style.animationDuration = (Math.random() * 3 + 2) + 's'; // Entre 2 y 5 segundos
-                                el.style.opacity = Math.random();
-                                el.style.fontSize = (Math.random() * 20 + 15) + 'px';
-
-                                container.appendChild(el);
-
-                                // Eliminar elemento al terminar animación
-                                setTimeout(() => el.remove(), 5000);
-                            }, i * 150);
+                                el.className = `chat-message ${msg.author === currentUser ? 'sent' : 'received'}`;
+                                el.textContent = msg.text;
+                                if(msg.author !== currentUser) {
+                                    const s = document.createElement('span'); s.className = 'message-author'; s.textContent = msg.author; el.prepend(s);
+                                }
+                                chatMessages.appendChild(el);
+                            });
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
                         }
-                    }
+                    });
+                }
+            }
+
+            // === 3. PIZARRA ===
+            const canvas = document.getElementById('sharedCanvas');
+            if(canvas) {
+                const ctx = canvas.getContext('2d');
+                const drawingsRef = ref(db, 'drawings');
+                let isDrawing = false, lastX = 0, lastY = 0, currentColor = '#ff3b8d', currentTool = 'draw';
+
+                function resizeCanvas() { 
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    canvas.width = rect.width; 
+                    canvas.height = 400; 
+                }
+                window.addEventListener('resize', resizeCanvas); 
+                resizeCanvas();
+
+                function getMousePos(evt) {
+                    const rect = canvas.getBoundingClientRect();
+                    const clientX = evt.clientX || (evt.touches && evt.touches[0].clientX);
+                    const clientY = evt.clientY || (evt.touches && evt.touches[0].clientY);
+                    return { 
+                        x: (clientX - rect.left) * (canvas.width / rect.width), 
+                        y: (clientY - rect.top) * (canvas.height / rect.height) 
+                    };
                 }
 
-                function loadChat(recipient) {
-                    const chatMessages = document.getElementById('chatMessages');
-                    if (messagesRef) { off(messagesRef); }
-                    chatMessages.innerHTML = '';
-
-                    if (recipient) {
-                        currentChatRoomId = [currentUser, recipient].sort().join('_');
-                        messagesRef = ref(db, `chats/${currentChatRoomId}`);
-                        onValue(messagesRef, (snapshot) => {
-                            chatMessages.innerHTML = '';
-                            const data = snapshot.val();
-                            if (data) {
-                                Object.values(data).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)).forEach(message => {
-                                    const el = document.createElement('div');
-                                    el.classList.add('chat-message');
-                                    const authorEl = document.createElement('span');
-                                    authorEl.classList.add('message-author');
-                                    authorEl.textContent = message.author;
-                                    el.textContent = message.text;
-                                    if (message.author === currentUser) { el.classList.add('sent'); }
-                                    else { el.classList.add('received'); el.prepend(authorEl); }
-                                    chatMessages.appendChild(el);
-                                });
-                                chatMessages.scrollTop = chatMessages.scrollHeight;
-                            }
-                        });
+                function startDrawing(e) {
+                    if (currentTool === 'draw') { isDrawing = true; const pos = getMousePos(e); [lastX, lastY] = [pos.x, pos.y]; }
+                    else if (currentTool === 'text') {
+                        const text = prompt("Nota:");
+                        if (text) { const pos = getMousePos(e); push(drawingsRef, { type: 'text', text, x: pos.x, y: pos.y, color: currentColor }); }
                     }
                 }
-            </script>
+                function draw(e) {
+                    if (!isDrawing || currentTool !== 'draw') return;
+                    e.preventDefault(); const pos = getMousePos(e);
+                    push(drawingsRef, { x1: lastX, y1: lastY, x2: pos.x, y2: pos.y, color: currentColor });
+                    [lastX, lastY] = [pos.x, pos.y];
+                }
+
+                canvas.addEventListener('mousedown', startDrawing); canvas.addEventListener('mousemove', draw);
+                canvas.addEventListener('mouseup', () => isDrawing = false); 
+                canvas.addEventListener('touchstart', startDrawing, {passive:false}); canvas.addEventListener('touchmove', draw, {passive:false});
+                
+                document.querySelectorAll('.color-btn').forEach(btn => btn.addEventListener('click', () => { currentColor = btn.dataset.color; currentTool = 'draw'; }));
+                document.getElementById('eraserBtn')?.addEventListener('click', () => { currentColor = '#fff'; currentTool = 'draw'; });
+                document.getElementById('textBtn')?.addEventListener('click', () => currentTool = 'text');
+                document.getElementById('clearCanvasBtn')?.addEventListener('click', () => set(drawingsRef, null));
+
+                onValue(drawingsRef, (snapshot) => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    const data = snapshot.val();
+                    if(data) Object.values(data).forEach(d => {
+                        if(d.type === 'text') { ctx.fillStyle = d.color; ctx.font = "18px 'Delius'"; ctx.fillText(d.text, d.x, d.y); }
+                        else if(d.x1 !== undefined) { ctx.beginPath(); ctx.strokeStyle = d.color; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.moveTo(d.x1, d.y1); ctx.lineTo(d.x2, d.y2); ctx.stroke(); }
+                    });
+                });
+            }
+        }
+
+        // === 4. LÓGICA DEL REGALO ===
+        const specialBtn = document.getElementById('specialGiftBtn');
+        const specialOverlay = document.getElementById('specialOverlay');
+        const closeSpecialBtn = document.getElementById('closeSpecialBtn');
+
+        if (specialBtn && specialOverlay) {
+            specialBtn.addEventListener('click', () => {
+                specialOverlay.classList.add('active');
+                createFlowerRain();
+                logUserActivity('GIFT_OPENED');
+            });
+            closeSpecialBtn.addEventListener('click', () => specialOverlay.classList.remove('active'));
+            specialOverlay.addEventListener('click', (e) => { if (e.target === specialOverlay) specialOverlay.classList.remove('active'); });
+        }
+
+        function createFlowerRain() {
+            const flowers = ['🌸', '🌹', '✨', '💖'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    if (!specialOverlay.classList.contains('active')) return;
+                    const el = document.createElement('div');
+                    el.className = 'falling-flower';
+                    el.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                    el.style.left = Math.random() * 100 + 'vw';
+                    el.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), 5000);
+                }, i * 150);
+            }
+        }
+
+        // === 5. EXTRAS: MÚSICA Y MODAL ===
+        
+        // Playlist corregida (¡Una sola vez!)
+        
+        
+        const audio = document.getElementById('audio');
+        if(audio) {
+            let isPlaying = false;
+            document.getElementById('songTitle').textContent = playlist[0].title;
+            document.getElementById('songArtist').textContent = playlist[0].artist;
+            document.getElementById('albumCoverImg').src = playlist[0].cover;
+            audio.querySelector('source').src = playlist[0].src;
+            audio.load();
+
+            document.getElementById('playToggle')?.addEventListener('click', function() {
+                if(isPlaying) { audio.pause(); this.textContent = '▶'; }
+                else { audio.play(); this.textContent = '⏸'; }
+                isPlaying = !isPlaying;
+            });
+        }
+
+        // Corrección del modal doble: Usamos .onclick para evitar duplicados
+        const apologyBtn = document.getElementById('apologyBtn');
+        if (apologyBtn) {
+            apologyBtn.onclick = () => {
+                // Si ya existe uno, no abras otro
+                if(document.querySelector('.persistent-message')) return;
+
+                const msg = document.createElement('div'); 
+                msg.className = 'persistent-message show';
+                msg.innerHTML = `<div class="message-content"><button class="close-btn">✕</button><div class="message-text">OMG SI LE PICASTE HERMOSA, DIOS ES QUE ENSERIO ERES TAN BONITA, ERES DEMASIADO HERMOSA, QUISIERA DARTE BESITOS, ES Q ME GUSTAS TANTO QUE TODAS LAS PERSONAS SON TAN MEH, A COMPARACION CONTIG NO IMPORTA COMO SEAS, NO IMPORTA LO QUE PASE, ME ENCANTAS, DIOS ES QUE ERES MUY MUY BONITA <<<3333</div></div>`;
+                document.body.appendChild(msg);
+                msg.querySelector('.close-btn').onclick = () => msg.remove();
+            };
+        }
+
+        function showSecretMessage(text) {
+            const el = document.getElementById('secretMessage');
+            if(el) { el.textContent = text; el.style.opacity = '1'; setTimeout(() => el.style.opacity = '0', 3000); }
+        }
+        
+        document.getElementById('shareBtn')?.addEventListener('click', () => {
+            if(navigator.share) navigator.share({title:'Para ti', url:window.location.href});
+            else showSecretMessage("Link copiado 📋");
+        });
+
+        // Theme Toggle
+        const themeBtn = document.getElementById('themeToggleBtn');
+        if(themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+                const isDark = document.body.classList.contains('dark-theme');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                themeBtn.innerHTML = isDark ? '☀️' : '🌙';
+            });
+            if(localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeBtn.innerHTML = '☀️';
+            }
+        }
+
+        function makeDraggable(el) {
+            if(!el) return;
+            let isDragging = false, offsetX, offsetY;
+            el.addEventListener('mousedown', e => { isDragging = true; offsetX = e.clientX - el.offsetLeft; offsetY = e.clientY - el.offsetTop; });
+            document.addEventListener('mouseup', () => isDragging = false);
+            document.addEventListener('mousemove', e => { if(isDragging) { el.style.left = (e.clientX - offsetX) + 'px'; el.style.top = (e.clientY - offsetY) + 'px'; }});
+            el.addEventListener('touchstart', e => { isDragging = true; const t=e.touches[0]; offsetX = t.clientX - el.offsetLeft; offsetY = t.clientY - el.offsetTop; }, {passive:false});
+            document.addEventListener('touchmove', e => { if(isDragging) { const t=e.touches[0]; el.style.left = (t.clientX - offsetX) + 'px'; el.style.top = (t.clientY - offsetY) + 'px'; } }, {passive:false});
+        }
+        makeDraggable(document.getElementById('noteBubble'));
+        makeDraggable(document.getElementById('noteBubble2'));
+
+        // Mini juego corazones
+        document.getElementById('startGame')?.addEventListener('click', () => {
+            showSecretMessage("Toca la pantalla 💖");
+            const vp = document.getElementById('viewport');
+            if(vp) vp.onclick = () => {
+                const s = document.getElementById('score'); 
+                if(s) s.textContent = parseInt(s.textContent) + 1;
+            };
+        });
+        document.getElementById('resetGame')?.addEventListener('click', () => {
+             const s = document.getElementById('score'); if(s) s.textContent = 0;
+        });
+        document.getElementById('moreHearts')?.addEventListener('click', () => showSecretMessage("💖"));
+        document.getElementById('miniConfetti')?.addEventListener('click', () => showSecretMessage("🎉"));
+
+    </script>
 
             <script>
                 // --- LÓGICA PARA EL MODAL DE CONFIRMACIÓN ---
@@ -3010,7 +2698,7 @@ input[type=range].thermo-slider:disabled {
 
                 let currentSongIndex = 0;
                 let isPlaying = false;
-                const audio = document.getElementById('audio');
+              
                 const audioSource = audio.querySelector('source');
                 const playToggle = document.getElementById('playToggle');
                 const prevBtn = document.getElementById('prevBtn');
