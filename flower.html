@@ -1306,6 +1306,7 @@
                     border: 1px solid rgba(255, 60, 130, 0.1);
                     transition: background 0.5s ease;
                 }
+                
 /* --- ESTILOS DE LA LÁMPARA --- */
 .lamp-container {
     position: relative;
@@ -1578,9 +1579,146 @@
                     height: 100%;
                     border: none;
                 }
+/* --- ARREGLO PARA CELULAR (Playlist) --- */
+@media (max-width: 768px) {
+    /* Esto hace que la búsqueda y la lista se pongan una abajo de la otra */
+    .music-search-card {
+        flex-direction: column !important; 
+        gap: 20px;
+        padding: 15px;
+    }
 
+    /* Esto hace que ocupen todo el ancho de la pantalla */
+    .search-column, 
+    .playlist-column {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex: none !important;
+    }
+
+    /* Ajuste para que los inputs no se salgan */
+    .search-input {
+        width: 100%;
+        box-sizing: border-box; /* Vital para que el padding no rompa el ancho */
+    }
+
+    /* Limita la altura para que puedas hacer scroll si la lista es larga */
+    .playlist-container, 
+    .search-results {
+        max-height: 250px;
+        overflow-y: auto;
+    }
+}
               /* --- ESTILOS BARRA TERMÓMETRO --- */
+/* --- 🎭 ANIMACIONES NUEVAS 🎭 --- */
 
+/* 1. Definición de las animaciones */
+
+/* Aparición suave hacia arriba (Fade In Up) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Aparición lateral (Slide In) - Ideal para chats o listas */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Latido suave (Pulse) - Para botones importantes */
+@keyframes pulseSoft {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(255, 60, 140, 0.4); }
+    100% { transform: scale(1); }
+}
+
+/* Flotar (Float) - Para imágenes o stickers */
+@keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* --- 2. Aplicación a tus elementos --- */
+
+/* Animar la entrada de la tarjeta principal */
+.card {
+    animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Animar la entrada de la Playlist y Chat */
+.music-search-card, .chat-container {
+    animation: fadeInUp 1s ease-out backwards;
+    animation-delay: 0.3s; /* Aparecen un poco después */
+}
+
+/* Animar los items de la Playlist cuando aparecen */
+.song-item {
+    animation: slideInLeft 0.5s ease-out forwards;
+    opacity: 0; /* Oculto al inicio */
+    animation-delay: calc(var(--i) * 0.1s); /* Efecto cascada si usas JS, si no, es genérico */
+}
+/* Truco: Forzar que se vean si no usamos variables */
+.song-item:nth-child(1) { animation-delay: 0.1s; }
+.song-item:nth-child(2) { animation-delay: 0.2s; }
+.song-item:nth-child(3) { animation-delay: 0.3s; }
+.song-item:nth-child(4) { animation-delay: 0.4s; }
+.song-item:nth-child(n) { animation-fill-mode: forwards; }
+
+
+/* Botones más interactivos */
+.big-btn {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.big-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(255, 60, 140, 0.3);
+    filter: brightness(1.1);
+}
+
+.big-btn:active {
+    transform: scale(0.95);
+}
+
+/* Botón de "Pícale aquí" con latido */
+#apologyBtn {
+    animation: pulseSoft 2s infinite;
+}
+
+/* Imágenes y burbujas flotando */
+.note-bubble, .photo-circle img {
+    animation: floaty 6s ease-in-out infinite;
+}
+
+.note-bubble:nth-child(2) {
+    animation-delay: 1s; /* Para que no floten al mismo tiempo */
+}
+
+/* Chat mensajes aparición */
+.chat-message {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* Inputs más suaves al seleccionarlos */
+input:focus, select:focus {
+    transform: scale(1.02);
+    border-color: var(--accent);
+    box-shadow: 0 4px 15px rgba(255, 60, 140, 0.15);
+    transition: all 0.3s ease;
+}
             </style>
 </head>
 
@@ -2268,6 +2406,9 @@
         import { getDatabase, ref, push, onValue, get, set, off, remove } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 
         // 1. CONFIGURACIÓN
+        // --- PEGA ESTO AL PRINCIPIO DEL SCRIPT, ANTES DE FIREBASECONFIG ---
+const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM"; 
+// ------------------------------------------------------------------
         const firebaseConfig = {
             apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
             authDomain: "pagina-81a41.firebaseapp.com",
@@ -2496,20 +2637,44 @@
                 });
             }
         }
-
-        // === 4. LÓGICA DEL REGALO ===
+// === 4. LÓGICA DEL REGALO (Con Música Especial) ===
         const specialBtn = document.getElementById('specialGiftBtn');
         const specialOverlay = document.getElementById('specialOverlay');
         const closeSpecialBtn = document.getElementById('closeSpecialBtn');
+        
+        // Aquí definimos la canción del regalo
+        const giftMusic = new Audio('cancion6.mp3'); 
+        giftMusic.volume = 0.5; // Volumen al 50% para que no asuste
 
         if (specialBtn && specialOverlay) {
+            
+            // AL ABRIR EL REGALO
             specialBtn.addEventListener('click', () => {
                 specialOverlay.classList.add('active');
                 createFlowerRain();
                 logUserActivity('GIFT_OPENED');
+                
+                // Reproducir canción del regalo
+                giftMusic.currentTime = 0; // Reiniciar canción
+                giftMusic.play().catch(e => console.log("No se pudo reproducir audio regalo:", e));
+                
+                // Opcional: Pausar la música de fondo si estaba sonando
+                const mainAudio = document.getElementById('audio');
+                if(mainAudio && !mainAudio.paused) mainAudio.pause();
             });
-            closeSpecialBtn.addEventListener('click', () => specialOverlay.classList.remove('active'));
-            specialOverlay.addEventListener('click', (e) => { if (e.target === specialOverlay) specialOverlay.classList.remove('active'); });
+
+            // AL CERRAR EL REGALO
+            const closeGift = () => {
+                specialOverlay.classList.remove('active');
+                giftMusic.pause(); // Pausar canción del regalo
+            };
+
+            closeSpecialBtn.addEventListener('click', closeGift);
+            
+            // Cerrar si toca fuera de la tarjeta
+            specialOverlay.addEventListener('click', (e) => { 
+                if (e.target === specialOverlay) closeGift(); 
+            });
         }
 
         function createFlowerRain() {
@@ -2528,7 +2693,120 @@
             }
         }
 
-        // === 5. EXTRAS: MÚSICA Y MODAL ===
+        // === LÓGICA DE LA PLAYLIST (ARREGLADA) ===
+            const musicInput = document.getElementById('musicSearchInput');
+            const resultCont = document.getElementById('searchResultsContainer');
+            const playlistCont = document.getElementById('sharedPlaylistContainer');
+            const playerContainer = document.getElementById('youtubePlayerContainer');
+            const iframe = document.getElementById('youtubePlayer');
+            
+            // Referencia a la base de datos
+            const playlistRef = ref(db, 'shared_playlist');
+            let searchTimeout;
+
+            // 1. BUSCADOR DE YOUTUBE
+            if (musicInput) {
+                musicInput.addEventListener('keyup', (e) => {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(async () => {
+                        const q = e.target.value.trim();
+                        if (!q) { resultCont.innerHTML = ''; return; }
+
+                        try {
+                            // Usamos la API Key global
+                            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(q)}&type=video&maxResults=4&key=${YOUTUBE_API_KEY}`;
+                            const res = await fetch(url);
+                            const data = await res.json();
+
+                            resultCont.innerHTML = '';
+                            if (data.items) {
+                                data.items.forEach(item => {
+                                    const div = document.createElement('div');
+                                    div.className = 'song-item';
+                                    div.innerHTML = `
+                                        <img src="${item.snippet.thumbnails.default.url}" style="width:40px; height:40px; border-radius:5px; object-fit:cover;">
+                                        <div style="flex:1; margin-left:10px;">
+                                            <div style="font-size:11px; font-weight:bold;">${item.snippet.title.substring(0, 40)}</div>
+                                            <div style="font-size:9px; color:#666;">${item.snippet.channelTitle}</div>
+                                        </div>
+                                        <button class="big-btn" style="padding:5px 10px; font-size:12px;">+</button>
+                                    `;
+                                    
+                                    // Click en el botón "+"
+                                    div.querySelector('button').onclick = (e) => {
+                                        e.stopPropagation();
+                                        push(playlistRef, {
+                                            videoId: item.id.videoId,
+                                            title: item.snippet.title,
+                                            thumbnailUrl: item.snippet.thumbnails.default.url,
+                                            addedBy: currentUser
+                                        });
+                                        // Feedback visual
+                                        const btn = e.target;
+                                        btn.textContent = '✔';
+                                        btn.style.background = '#4CAF50';
+                                    };
+                                    resultCont.appendChild(div);
+                                });
+                            }
+                        } catch (err) {
+                            console.error("Error YouTube:", err);
+                            resultCont.innerHTML = '<p class="small" style="text-align:center; color:red;">Error de conexión API</p>';
+                        }
+                    }, 600); // Espera 600ms al escribir
+                });
+            }
+
+            // 2. LISTA COMPARTIDA (FIREBASE)
+            if (playlistCont) {
+                onValue(playlistRef, (snapshot) => {
+                    playlistCont.innerHTML = '';
+                    const data = snapshot.val();
+
+                    if (data) {
+                        Object.entries(data).forEach(([key, song]) => {
+                            const div = document.createElement('div');
+                            div.className = 'song-item';
+                            
+                            // Botón de borrar (Solo si tú la agregaste)
+                            const deleteBtn = song.addedBy === currentUser 
+                                ? `<button class="del-btn" style="background:none; border:none; color:red; font-weight:bold; padding:5px;">✕</button>` 
+                                : '';
+
+                            div.innerHTML = `
+                                <img src="${song.thumbnailUrl}" style="width:35px; height:35px; border-radius:5px;">
+                                <div style="flex:1; margin-left:10px; overflow:hidden;">
+                                    <div style="font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${song.title}</div>
+                                    <div style="font-size:9px; color:#888;">Agregada por: ${song.addedBy}</div>
+                                </div>
+                                ${deleteBtn}
+                            `;
+
+                            // Click para reproducir
+                            div.addEventListener('click', () => {
+                                playerContainer.style.display = 'block';
+                                iframe.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1`;
+                                // Scroll suave hacia el video
+                                playerContainer.scrollIntoView({ behavior: 'smooth' });
+                            });
+
+                            // Click para borrar
+                            if (song.addedBy === currentUser) {
+                                div.querySelector('.del-btn').addEventListener('click', (e) => {
+                                    e.stopPropagation(); // Evita que se reproduzca al borrar
+                                    if(confirm("¿Borrar canción?")) {
+                                        remove(ref(db, `shared_playlist/${key}`));
+                                    }
+                                });
+                            }
+
+                            playlistCont.appendChild(div);
+                        });
+                    } else {
+                        playlistCont.innerHTML = '<div style="text-align:center; padding:20px; color:#888; font-size:12px;">La lista está vacía...<br>¡Agrega una canción! 🎶</div>';
+                    }
+                });
+            }
         
         // Playlist corregida (¡Una sola vez!)
         
