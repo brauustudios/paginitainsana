@@ -1834,6 +1834,58 @@ body.theme-sunset {
     opacity: 0;
     visibility: hidden;
 }
+/* --- ESTILOS DE LA MASCOTA --- */
+.pixel-pet-container {
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+    z-index: 6000;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.pixel-pet-container:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.pet-img {
+    width: 60px;
+    image-rendering: pixelated; /* Truco para que se vea retro */
+    filter: drop-shadow(2px 2px 0 rgba(255,255,255,0.5));
+}
+
+.pet-bubble {
+    position: absolute;
+    top: -45px;
+    left: 10px;
+    background: #fff;
+    padding: 6px 12px;
+    border-radius: 15px;
+    border-bottom-left-radius: 2px; /* Estilo globo de cómic */
+    font-size: 11px;
+    font-family: 'Press Start 2P', cursive;
+    color: var(--text-main);
+    border: 2px solid var(--accent);
+    opacity: 0; /* Invisible por defecto */
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.pet-bubble.show {
+    opacity: 1;
+    transform: translateY(-10px);
+}
+
+/* Ajuste para celular para que no tape botones */
+@media (max-width: 768px) {
+    .pixel-pet-container {
+        bottom: 5px;
+        left: 5px;
+    }
+    .pet-img { width: 50px; }
+}
             </style>
 </head>
 
@@ -1865,6 +1917,7 @@ body.theme-sunset {
     <div class="floating-hearts" id="floatingHearts"></div>
     <div class="vignette"></div>
     <div class="wrap" style="display: none;">
+        
         <div class="card" role="region" aria-label="Dedicado">
             <div class="title-row">
                 <div style="display:flex;align-items:center;gap:12px">
@@ -2489,9 +2542,12 @@ body.theme-sunset {
     
     <p id="lampStatusText" class="minimal-desc" style="margin-top: 20px;">Apagada</p>
 </div>
+<div class="confetti" id="confetti"></div>
 
-                <div class="confetti" id="confetti"></div>
-
+               <div class="pixel-pet-container" id="pixelPet" onclick="petInteraction()">
+                    <div class="pet-bubble" id="petBubble">Zzz... </div>
+                    <img src="https://i.pinimg.com/originals/7c/1f/11/7c1f1122e45db07bdeaf3faddbf4b86e.gif" class="pet-img" alt="Pochi el perrito">
+                </div>
                 <footer>
                     Hecho con por braw para emo (tequieromucho mariana.)
                     <p style="font-size: 6px; color: gray; margin-top: 30px;">
@@ -3503,6 +3559,32 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
                 });
             }, 150);
         });
+
+       // === LÓGICA DE POCHI (LA MASCOTA) ===
+        window.petInteraction = function() {
+            const bubble = document.getElementById('petBubble');
+            // Frases nuevas para Pochi
+            const sounds = [
+                "Guau! 🐶", 
+                "!", 
+                "*Mueve la colita*",   
+                "Zzz...", 
+                "J🎾", 
+                "🐾"
+            ];
+            const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+            
+            bubble.textContent = randomSound;
+            bubble.classList.add('show');
+            
+            // Registramos que interactuó con Pochi
+            logUserActivity('PET_CLICKED', { said: randomSound, petName: 'Pochi' });
+
+            // Ocultar burbuja después de 2.5 segundos
+            setTimeout(() => {
+                bubble.classList.remove('show');
+            }, 2500);
+        };
             </script>
 </body>
 
