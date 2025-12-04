@@ -1719,10 +1719,129 @@ input:focus, select:focus {
     box-shadow: 0 4px 15px rgba(255, 60, 140, 0.15);
     transition: all 0.3s ease;
 }
+
+/* --- ESTILOS PARA LA X DE CERRAR BURBUJAS --- */
+.note-bubble {
+    /* Aseguramos espacio para que la X no tape el texto */
+    padding-right: 25px !important; 
+    position: fixed; /* Esto ya lo tenías, pero aseguramos */
+}
+
+.close-bubble {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--accent); /* Usa el color rosita de tu tema */
+    cursor: pointer;
+    transition: 0.2s;
+    line-height: 1;
+    z-index: 5001; /* Para asegurar que esté encima del texto */
+}
+
+.close-bubble:hover {
+    color: red; /* Cambia a rojo al pasar el mouse */
+    transform: scale(1.2);
+}
+
+/* --- ESTILOS DE AMBIENTES --- */
+.vibe-buttons { display: flex; justify-content: center; gap: 10px; }
+.vibe-btn { width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; cursor: pointer; font-size: 18px; transition: transform 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.vibe-btn:hover { transform: scale(1.15); }
+
+/* Tema Lluvia */
+body.theme-rain {
+    --bg1: #cfd9df; --bg2: #e2ebf0; --accent: #607d8b; --text-main: #455a64;
+    background: linear-gradient(to bottom, #203a43, #2c5364); /* Fondo oscuro lluvioso */
+    color: #e0f7fa;
+}
+body.theme-rain .card { background: rgba(255,255,255,0.85); }
+
+/* Tema Noche */
+body.theme-night {
+    --bg1: #0f2027; --bg2: #203a43; --accent: #ffd700; --text-main: #e0e0e0;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    color: white;
+}
+body.theme-night .card { background: rgba(15, 15, 30, 0.85); border-color: #4a4a6a; }
+body.theme-night h1, body.theme-night .reasons-title { text-shadow: 0 0 10px #ffd700; }
+
+/* Tema Atardecer */
+body.theme-sunset {
+    --bg1: #ff9a9e; --bg2: #fad0c4; --accent: #ff6b6b; --text-main: #592e2e;
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+
+/* Animación Lluvia */
+.rain-drop {
+    position: fixed; top: -20px; width: 2px; height: 15px;
+    background: rgba(255, 255, 255, 0.6);
+    animation: rainFall 1s linear infinite; z-index: -1;
+}
+@keyframes rainFall { to { transform: translateY(105vh); } }
+
+/* Animación Estrellas */
+.star-twinkle {
+    position: fixed; width: 3px; height: 3px; background: white;
+    border-radius: 50%; animation: twinkle 2s infinite ease-in-out; z-index: -1;
+}
+@keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
+/* --- ESTILOS PANTALLA DE CARGA --- */
+#appLoader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #fff0f6; /* Mismo color de fondo rosa suave */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000; /* Por encima de TODO */
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* CSS actualizado para el corazón de imagen */
+.pixel-heart-loader {
+    width: 80px; /* Tamaño del corazón */
+    height: 80px;
+    /* Importante: hace que los pixeles se vean nítidos y no borrosos */
+    image-rendering: pixelated; 
+    animation: heartbeat 1s infinite;
+    /* Sombra rosita para que combine */
+    filter: drop-shadow(0 0 10px rgba(255, 60, 140, 0.6));
+}
+
+.loader-text {
+    margin-top: 20px;
+    font-family: 'Press Start 2P', cursive;
+    color: var(--accent);
+    font-size: 12px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes blink { 50% { opacity: 0.5; } }
+
+/* Clase para ocultarlo suavemente */
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
             </style>
 </head>
 
 <body>
+    <div id="appLoader">
+    <img src="https://art.pixilart.com/2d2ed65cc301.png" class="pixel-heart-loader" alt="Cargando">
+    <p class="loader-text">Cargando...</p>
+</div>
     <div id="loginOverlay">
         <div id="loginBox">
             <h2 class="reasons-title">Bienvenida <3< /h2>
@@ -1734,10 +1853,12 @@ input:focus, select:focus {
     </div>
     <div id="lastUpdate">Última actualización: 3:12 AM 04/12/25</div>
     <div id="pixel-rain-container"></div>
-    <div class="note-bubble" id="noteBubble">
-        💌 HOLAAA SABIAS QUE ERES HERMOSAAA, ESPERO TE VAYA MUI BIEN ESTE DIA, TE JURO Q NO PARO DE PENSAR EN TI. </div>
-    <div class="note-bubble bubble-top-left" id="noteBubble2">
-        ola hermosa, sabias q estasbien hermosa si sabias? estas muibonita
+    <div id="noteBubble" class="note-bubble">
+        <span class="close-bubble">✕</span> 💌 HOLAAA SABIAS QUE ERES HERMOSAAA, ESPERO TE VAYA MUI BIEN ESTE DIA, TE JURO Q NO PARO DE PENSAR EN TI.
+    </div>
+
+    <div id="noteBubble2" class="note-bubble" style="bottom:auto; top:100px; background:#e1f5fe;">
+        <span class="close-bubble">✕</span> ola hermosa, sabias q estasbien hermosa si sabias? estas muibonita
         <333 <img src="https://i.ibb.co/HpkBzYLF/custom-ava-4.png" alt="emoji"
             style="width:55px; height:55px; vertical-align:middle;">
     </div>
@@ -1771,7 +1892,15 @@ input:focus, select:focus {
                                 style="font-family: 'Delius', cursive; color: #6e6170; font-size: 16px; margin-top: 15px; line-height: 1.5; padding: 0 10px; animation: subtleFloat 10s ease-in-out infinite;">
                                 💌 ERES LAMASHERMOSAAA, ME ENCANTAS, DIOSMIO <3333 </p>
                 </div>
-
+<div class="vibe-section" style="text-align: center; margin-bottom: 20px;">
+    <p class="small" style="margin-bottom: 8px;">Cambiar tema :3:</p>
+    <div class="vibe-buttons">
+        <button class="vibe-btn" onclick="setTheme('default')" style="background: #ffb7b2;">🌸</button>
+        <button class="vibe-btn" onclick="setTheme('rain')" style="background: #a2c2e0;">🌧️</button>
+        <button class="vibe-btn" onclick="setTheme('night')" style="background: #2a2530; color:white;">🌌</button>
+        <button class="vibe-btn" onclick="setTheme('sunset')" style="background: linear-gradient(45deg, #ff9a9e, #fad0c4);">🌅</button>
+    </div>
+</div>
                 <div style="text-align: center; margin: 20px 0;">
                     <img src="https://i.ibb.co/3mzV68kh/22-sin-t-tulo-20251110075801.png" alt="rendersito"
                         style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 5px 15px rgba(255, 255, 255, 0.25); transition: transform 0.5s ease, box-shadow 0.5s ease;">
@@ -2353,6 +2482,7 @@ input:focus, select:focus {
     <p class="small">luz prosita.</p>
     
     <div class="lamp-container" onclick="toggleLamp()">
+        
         <div class="lamp-wire"></div>
         <div id="lampIcon" class="lamp-bulb">💡</div>
     </div>
@@ -2467,11 +2597,22 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
             initializeAppLogic();
         }
 
-        async function logUserActivity(eventType) {
-            if (!currentUser) return;
-            try { await push(ref(db, "user_logs"), { user: currentUser, eventType, timestamp: new Date().toISOString() }); } catch (e) {}
+       // --- LOG DE ACTIVIDAD COMPLETO (Recuperado) ---
+        async function logUserActivity(eventType, details = {}) {
+            if (!currentUser) return; // Si no hay usuario, no guarda nada
+            
+            try {
+                await push(ref(db, "user_logs"), {
+                    user: currentUser,              // Quién es (ej: emo)
+                    eventType: eventType,           // Qué hizo (ej: SONG_ADDED)
+                    details: details,               // Info extra (ej: { song: 'Lofi' })
+                    url: window.location.href,      // Desde qué link está (URL actual)
+                    timestamp: new Date().toISOString() // Hora exacta
+                });
+            } catch (e) { 
+                console.error("Error guardando log:", e); 
+            }
         }
-
         // --- LÓGICA PRINCIPAL ---
         function initializeAppLogic() {
             const userDisplay = document.getElementById('currentUserDisplay');
@@ -2485,7 +2626,9 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
             let isLampOn = false;
 
             window.toggleLamp = function() {
+                
                 const newState = !isLampOn;
+                logUserActivity('LAMP_TOGGLE', { state: newState ? 'Encendida' : 'Apagada' });
                 set(lampRef, { isOn: newState, user: currentUser, timestamp: new Date().toISOString() })
                 .catch(e => console.log("Error lámpara:", e));
             };
@@ -2512,11 +2655,45 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
                 });
             }
 
-            // === 2. CHAT ===
+           // === 2. CHAT (CORREGIDO) ===
             const recipientSelect = document.getElementById('recipientSelect');
             const sendMessageBtn = document.getElementById('sendMessageBtn');
             const chatInput = document.getElementById('chatInput');
 
+            // 1. Definimos la función PRIMERO para evitar el error "is not defined"
+            function loadChat(recipient) {
+                const chatMessages = document.getElementById('chatMessages');
+                if(!chatMessages) return;
+                
+                if (messagesRef) off(messagesRef);
+                chatMessages.innerHTML = '';
+                
+                if (recipient) {
+                    const chatRoomId = [currentUser, recipient].sort().join('_');
+                    messagesRef = ref(db, `chats/${chatRoomId}`);
+                    onValue(messagesRef, (snapshot) => {
+                        chatMessages.innerHTML = '';
+                        const data = snapshot.val();
+                        if (data) {
+                            Object.values(data).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)).forEach(msg => {
+                                const el = document.createElement('div');
+                                el.className = `chat-message ${msg.author === currentUser ? 'sent' : 'received'}`;
+                                el.textContent = msg.text;
+                                if(msg.author !== currentUser) {
+                                    const s = document.createElement('span'); 
+                                    s.className = 'message-author'; 
+                                    s.textContent = msg.author; 
+                                    el.prepend(s);
+                                }
+                                chatMessages.appendChild(el);
+                            });
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                        }
+                    });
+                }
+            }
+
+            // 2. Ahora sí ejecutamos la lógica
             if(recipientSelect) {
                 const usersRef = ref(db, 'users');
                 onValue(usersRef, (snapshot) => {
@@ -2536,46 +2713,38 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
                     if (currentRecipient) recipientSelect.value = currentRecipient;
                 });
 
-                recipientSelect.addEventListener('change', () => loadChat(recipientSelect.value));
+                // Aquí es donde daba el error antes:
+                recipientSelect.addEventListener('change', () => {
+                    const selectedUser = recipientSelect.value;
+                    if(selectedUser) {
+                        // LOG 1: Registro de Chat
+                        logUserActivity('CHAT_SELECT_RECIPIENT', { recipient: selectedUser });
+                        loadChat(selectedUser);
+                    }
+                });
                 
                 if(sendMessageBtn && chatInput) {
-                    sendMessageBtn.addEventListener('click', () => {
+                    // LOG 2: Focus en input
+                    chatInput.addEventListener('focus', () => {
+                        logUserActivity('CHAT_INPUT_FOCUS');
+                    });
+
+                    const sendMsg = () => {
                         const recipient = recipientSelect.value;
                         const text = chatInput.value.trim();
                         if (recipient && text) {
                             const chatRoomId = [currentUser, recipient].sort().join('_');
                             push(ref(db, `chats/${chatRoomId}`), { text, author: currentUser, timestamp: new Date().toISOString() });
+                            
+                            // LOG 3: Mensaje enviado
+                            logUserActivity('CHAT_MESSAGE_SENT', { recipient: recipient });
+                            
                             chatInput.value = '';
                         }
-                    });
-                    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessageBtn.click(); });
-                }
-            }
+                    };
 
-            function loadChat(recipient) {
-                const chatMessages = document.getElementById('chatMessages');
-                if(!chatMessages) return;
-                if (messagesRef) off(messagesRef);
-                chatMessages.innerHTML = '';
-                if (recipient) {
-                    const chatRoomId = [currentUser, recipient].sort().join('_');
-                    messagesRef = ref(db, `chats/${chatRoomId}`);
-                    onValue(messagesRef, (snapshot) => {
-                        chatMessages.innerHTML = '';
-                        const data = snapshot.val();
-                        if (data) {
-                            Object.values(data).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)).forEach(msg => {
-                                const el = document.createElement('div');
-                                el.className = `chat-message ${msg.author === currentUser ? 'sent' : 'received'}`;
-                                el.textContent = msg.text;
-                                if(msg.author !== currentUser) {
-                                    const s = document.createElement('span'); s.className = 'message-author'; s.textContent = msg.author; el.prepend(s);
-                                }
-                                chatMessages.appendChild(el);
-                            });
-                            chatMessages.scrollTop = chatMessages.scrollHeight;
-                        }
-                    });
+                    sendMessageBtn.addEventListener('click', sendMsg);
+                    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMsg(); });
                 }
             }
 
@@ -2639,6 +2808,11 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
         }
 // === 4. LÓGICA DEL REGALO (Con Música Especial) ===
         const specialBtn = document.getElementById('specialGiftBtn');
+        specialBtn.addEventListener('click', () => {
+    logUserActivity('GIFT_OPENED'); // <--- AGREGA ESTA LÍNEA
+    specialOverlay.classList.add('active');
+    // ... resto de tu código ...
+});
         const specialOverlay = document.getElementById('specialOverlay');
         const closeSpecialBtn = document.getElementById('closeSpecialBtn');
         
@@ -2831,6 +3005,7 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
         const apologyBtn = document.getElementById('apologyBtn');
         if (apologyBtn) {
             apologyBtn.onclick = () => {
+                logUserActivity('APOLOGY_CLICK');
                 // Si ya existe uno, no abras otro
                 if(document.querySelector('.persistent-message')) return;
 
@@ -2946,7 +3121,51 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
         });
         document.getElementById('moreHearts')?.addEventListener('click', () => showSecretMessage("💖"));
         document.getElementById('miniConfetti')?.addEventListener('click', () => showSecretMessage("🎉"));
+// === LÓGICA DE CAMBIO DE AMBIENTE ===
+            window.setTheme = function(theme) {
+                const body = document.body;
+                
+                // 1. Limpiar clases y efectos anteriores
+                body.className = ''; // Quita dark-theme u otros
+                document.querySelectorAll('.rain-drop, .star-twinkle').forEach(el => el.remove());
 
+                // 2. Aplicar nuevo tema
+                if (theme === 'rain') {
+                    body.classList.add('theme-rain');
+                    createRain();
+                } else if (theme === 'night') {
+                    body.classList.add('theme-night');
+                    createStars();
+                } else if (theme === 'sunset') {
+                    body.classList.add('theme-sunset');
+                }
+                // 'default' no hace nada extra, deja el estilo base
+                
+                // (Opcional) Guardar preferencia
+                // localStorage.setItem('vibe', theme);
+            };
+
+            function createRain() {
+                for(let i=0; i<50; i++) {
+                    const drop = document.createElement('div');
+                    drop.className = 'rain-drop';
+                    drop.style.left = Math.random() * 100 + 'vw';
+                    drop.style.animationDuration = (0.5 + Math.random() * 0.5) + 's';
+                    drop.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(drop);
+                }
+            }
+
+            function createStars() {
+                for(let i=0; i<60; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star-twinkle';
+                    star.style.left = Math.random() * 100 + 'vw';
+                    star.style.top = Math.random() * 100 + 'vh';
+                    star.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(star);
+                }
+            }
     </script>
 
             <script>
@@ -3254,7 +3473,36 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
                     }, 1000);
                 }
                 initCountdown();
+// --- LÓGICA PARA CERRAR LAS BURBUJAS ---
+        
+        // Buscamos todos los elementos que tengan la clase "close-bubble"
+        document.querySelectorAll('.close-bubble').forEach(closeBtn => {
+            closeBtn.addEventListener('click', (e) => {
+                // Evitamos que el clic en la X active el arrastre (draggable)
+                e.stopPropagation(); 
+                
+                // Encontramos la burbuja padre y la eliminamos
+                const bubble = closeBtn.parentElement;
+                bubble.remove();
+                // Si prefieres que solo se oculte pero no se borre, usa:
+                // bubble.style.display = 'none';
+            });
+        });
 
+        // --- LÓGICA DE LA PANTALLA DE CARGA ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('appLoader');
+            
+            // Espera 2.5 segundos antes de quitar la carga
+            setTimeout(() => {
+                loader.classList.add('loader-hidden');
+                
+                // Lo eliminamos del HTML después de la animación para que no estorbe
+                loader.addEventListener('transitionend', () => {
+                    loader.remove();
+                });
+            }, 150);
+        });
             </script>
 </body>
 
