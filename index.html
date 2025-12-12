@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -2481,27 +2482,42 @@ body.theme-sunset {
                     </div>
                 </div>
 
-                <div class="chat-section">
-                    <h2 class="reasons-title">CHATSITO <33 </h2>
-                            <p id="currentUserDisplay"
-                                style="font-family: 'Press Start 2P', cursive; font-size: 12px; color: var(--accent-dark);">
-                            </p>
-                            <div class="chat-container">
-                                <div class="recipient-selection">
-                                    <span>Enviar a:</span>
-                                    <select id="recipientSelect">
-                                        <option value="">Selecciona a alguien</option>
-                                    </select>
-                                </div>
-                                <div class="chat-messages" id="chatMessages">
-                                </div>
-                                <div class="chat-input-area">
-                                    <input type="text" id="chatInput" placeholder="Escribe algo...">
-                                    <button class="big-btn" id="sendMessageBtn">Enviar</button>
-                                </div>
-                            </div>
-                            <button class="big-btn" id="logoutBtn">Cerrar Sesión</button>
+             <div class="chat-section">
+                <h2 class="reasons-title" id="chatTitle">Chatsito</h2>
+                
+                <p id="currentUserDisplay" class="small" style="margin-bottom: 15px; font-weight: bold; color: var(--accent);"></p>
+
+                <div class="chat-container">
+                    <div class="recipient-selection">
+                        <span>Enviar a:</span>
+                        <select id="recipientSelect">
+                            <option value="">Selecciona a alguien</option>
+                        </select>
+                    </div>
+
+                    <div class="chat-messages" id="chatMessages">
+                    </div>
+
+                    <div id="replyPreview" class="reply-preview-bar">
+                        <div id="replyContent">
+                            <div style="font-weight:bold; color:var(--accent);">Respondiendo a:</div>
+                            <span id="replyText" style="font-style:italic; font-size:10px;">...</span>
+                        </div>
+                        <button onclick="cancelReply()" style="border:none; background:transparent; font-size:16px; color:#999; cursor:pointer;">✕</button>
+                    </div>
+
+                    <div class="chat-input-area" style="display: flex; gap: 5px;">
+                        <input type="text" id="chatInput" placeholder="mensaje">
+                        <button class="big-btn" id="sendMessageBtn">Enviar</button>
+                    </div>
+                </div> 
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="big-btn" id="logoutBtn" style="background: #ff73a7; font-size: 12px; padding: 8px 15px;">
+                        ⬅ Cerrar Sesión
+                    </button>
                 </div>
+            </div>
+            
 
                 <div class="drawing-section">
                     <h2 class="reasons-title">Dibujitos pros</h2>
@@ -2670,6 +2686,7 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
         function initializeAppLogic() {
             const userDisplay = document.getElementById('currentUserDisplay');
             if(userDisplay) userDisplay.textContent = `${currentUser}`;
+            
             logUserActivity('LOGIN_SUCCESS');
             
             // === 1. LÁMPARA DE COMPAÑÍA ===
@@ -2709,21 +2726,42 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
             }
 
            // === 2. CHAT (CORREGIDO) ===
+           // === 2. CHAT (FINAL: CON LOGS, HORA Y RESPUESTAS) ===
             const recipientSelect = document.getElementById('recipientSelect');
             const sendMessageBtn = document.getElementById('sendMessageBtn');
             const chatInput = document.getElementById('chatInput');
+            
+            // Variables para respuesta
+            let replyingTo = null;
+            const replyPreview = document.getElementById('replyPreview');
+            const replyTextDisplay = document.getElementById('replyText');
 
-            // 1. Definimos la función PRIMERO para evitar el error "is not defined"
+            // Funciones Globales para respuesta
+            window.setReply = function(text, author) {
+                replyingTo = { text, author };
+                replyPreview.style.display = 'flex';
+                replyTextDisplay.innerHTML = `<span style="color:#ff3b8d">${author}</span>: ${text.substring(0, 25)}...`;
+                chatInput.focus();
+            };
+
+            window.cancelReply = function() {
+                replyingTo = null;
+                replyPreview.style.display = 'none';
+            };
+
+            // Función para cargar mensajes (definida antes para evitar errores)
+           // 1. Definimos loadChat (CON SOPORTE PARA CELULAR 📱)
             function loadChat(recipient) {
                 const chatMessages = document.getElementById('chatMessages');
-                if(!chatMessages) return;
-                
+                if (!chatMessages) return;
+
                 if (messagesRef) off(messagesRef);
                 chatMessages.innerHTML = '';
-                
+
                 if (recipient) {
                     const chatRoomId = [currentUser, recipient].sort().join('_');
                     messagesRef = ref(db, `chats/${chatRoomId}`);
+
                     onValue(messagesRef, (snapshot) => {
                         chatMessages.innerHTML = '';
                         const data = snapshot.val();
@@ -2731,13 +2769,47 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
                             Object.values(data).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)).forEach(msg => {
                                 const el = document.createElement('div');
                                 el.className = `chat-message ${msg.author === currentUser ? 'sent' : 'received'}`;
-                                el.textContent = msg.text;
-                                if(msg.author !== currentUser) {
-                                    const s = document.createElement('span'); 
-                                    s.className = 'message-author'; 
-                                    s.textContent = msg.author; 
+                                
+                                // 1. CONTENIDO (Cita + Texto + Hora)
+                                let replyHTML = '';
+                                if (msg.replyData) {
+                                    replyHTML = `<div class="quoted-message"><span class="quoted-author">${msg.replyData.author}</span><span>${msg.replyData.text}</span></div>`;
+                                }
+
+                                let timeString = "";
+                                if (msg.timestamp) {
+                                    const dateObj = new Date(msg.timestamp);
+                                    timeString = `<span class="message-time">${dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
+                                }
+
+                                el.innerHTML = `
+                                    ${replyHTML}
+                                    ${msg.text}
+                                    ${timeString}
+                                `;
+
+                                // Nombre del autor
+                                if (msg.author !== currentUser) {
+                                    const s = document.createElement('span');
+                                    s.className = 'message-author';
+                                    s.textContent = msg.author;
                                     el.prepend(s);
                                 }
+
+                                // 2. LÓGICA DE DOBLE TOQUE (Funciona en Celular y PC)
+                                let lastTap = 0;
+                                el.addEventListener('click', (e) => {
+                                    const currentTime = new Date().getTime();
+                                    const tapLength = currentTime - lastTap;
+                                    
+                                    // Si tocas 2 veces en menos de medio segundo (500ms)
+                                    if (tapLength < 500 && tapLength > 0) {
+                                        e.preventDefault(); // Evita zoom en algunos cels
+                                        window.setReply(msg.text, msg.author);
+                                    }
+                                    lastTap = currentTime;
+                                });
+
                                 chatMessages.appendChild(el);
                             });
                             chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -2746,13 +2818,13 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
                 }
             }
 
-            // 2. Ahora sí ejecutamos la lógica
+            // Ejecución Lógica Chat
             if(recipientSelect) {
                 const usersRef = ref(db, 'users');
                 onValue(usersRef, (snapshot) => {
-                    const currentRecipient = recipientSelect.value;
-                    recipientSelect.innerHTML = '<option value="">Selecciona a alguien</option>';
                     const users = snapshot.val();
+                    const currentVal = recipientSelect.value;
+                    recipientSelect.innerHTML = '<option value="">Selecciona a alguien</option>';
                     if (users) {
                         Object.keys(users).forEach(user => {
                             if (user !== currentUser) {
@@ -2763,21 +2835,18 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
                             }
                         });
                     }
-                    if (currentRecipient) recipientSelect.value = currentRecipient;
+                    if(currentVal) recipientSelect.value = currentVal;
                 });
 
-                // Aquí es donde daba el error antes:
                 recipientSelect.addEventListener('change', () => {
                     const selectedUser = recipientSelect.value;
                     if(selectedUser) {
-                        // LOG 1: Registro de Chat
                         logUserActivity('CHAT_SELECT_RECIPIENT', { recipient: selectedUser });
                         loadChat(selectedUser);
                     }
                 });
                 
                 if(sendMessageBtn && chatInput) {
-                    // LOG 2: Focus en input
                     chatInput.addEventListener('focus', () => {
                         logUserActivity('CHAT_INPUT_FOCUS');
                     });
@@ -2787,12 +2856,16 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
                         const text = chatInput.value.trim();
                         if (recipient && text) {
                             const chatRoomId = [currentUser, recipient].sort().join('_');
-                            push(ref(db, `chats/${chatRoomId}`), { text, author: currentUser, timestamp: new Date().toISOString() });
+                            const payload = { text: text, author: currentUser, timestamp: new Date().toISOString() };
                             
-                            // LOG 3: Mensaje enviado
+                            if (replyingTo) payload.replyData = replyingTo; // Adjuntar cita
+
+                            push(ref(db, `chats/${chatRoomId}`), payload);
+                            
                             logUserActivity('CHAT_MESSAGE_SENT', { recipient: recipient });
                             
                             chatInput.value = '';
+                            window.cancelReply();
                         }
                     };
 
@@ -2858,7 +2931,7 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
                     });
                 });
             }
-        }
+        
 // === 4. LÓGICA DEL REGALO (Con Música Especial) ===
         const specialBtn = document.getElementById('specialGiftBtn');
         specialBtn.addEventListener('click', () => {
@@ -3209,7 +3282,7 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
                 }
             }
 
-            function createStars() {
+           function createStars() {
                 for(let i=0; i<60; i++) {
                     const star = document.createElement('div');
                     star.className = 'star-twinkle';
@@ -3219,6 +3292,8 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
                     document.body.appendChild(star);
                 }
             }
+
+        } // <--- ¡ESTA ES LA LLAVE QUE FALTA! (Cierra initializeAppLogic)
     </script>
 
             <script>
@@ -3557,32 +3632,84 @@ const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
             }, 150);
         });
 
-       // === LÓGICA DE POCHI (LA MASCOTA) ===
+       // === LÓGICA DE POCHI (CORREGIDA) ===
         window.petInteraction = function() {
             const bubble = document.getElementById('petBubble');
-            // Frases nuevas para Pochi
+            
+            // ESTO ES LO NUEVO: Si no encuentra la burbuja, no hace nada (evita el error rojo)
+            if (!bubble) return; 
+
             const sounds = [
                 "Guau! 🐶", 
-                "!", 
-                "*Mueve la colita*",   
+                "Soy Pochi! 🖤", 
+                "*Mueve la colita*", 
                 "Zzz...", 
-                "J🎾", 
-                "🐾"
+                "Jugamos? 🎾", 
+                "Patitas! 🐾"
             ];
             const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
             
             bubble.textContent = randomSound;
             bubble.classList.add('show');
             
-            // Registramos que interactuó con Pochi
-            logUserActivity('PET_CLICKED', { said: randomSound, petName: 'Pochi' });
+            // Verificamos si existe la función de logs antes de llamarla
+            if(typeof logUserActivity === 'function') {
+                logUserActivity('PET_CLICKED', { said: randomSound, petName: 'Pochi' });
+            }
 
-            // Ocultar burbuja después de 2.5 segundos
             setTimeout(() => {
-                bubble.classList.remove('show');
+                if(bubble) bubble.classList.remove('show');
             }, 2500);
         };
             </script>
+
+
+<style>/* --- ESTILO DE LA HORA EN EL CHAT --- */
+.message-time {
+    display: block;        /* Pone la hora en una línea nueva */
+    font-size: 9px;        /* Letra chiquita */
+    margin-top: 4px;
+    text-align: right;     /* Alineado a la derecha */
+    opacity: 0.7;          /* Un poco transparente */
+}
+
+/* Color de la hora según quien envía */
+.sent .message-time { color: rgba(255,255,255,0.8); } /* Blanco en tus mensajes */
+.received .message-time { color: #888; }              /* Gris en los de ella */
+/* --- ESTILOS DE RESPUESTA (REPLY) --- */
+/* --- ESTILOS DE RESPUESTA --- */
+.reply-preview-bar {
+    background: rgba(255, 255, 255, 0.95);
+    border-left: 4px solid #ff3b8d;
+    padding: 8px 12px;
+    margin: 0 10px 10px 10px;
+    border-radius: 8px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #555;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+    animation: slideInLeft 0.2s;
+}
+
+.quoted-message {
+    background: rgba(0, 0, 0, 0.1);
+    border-left: 3px solid #ff73a7;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0.9;
+}
+
+.quoted-author {
+    font-weight: bold;
+    color: #ff3b8d;
+    margin-bottom: 2px;
+}</style>
 </body>
 
 </html>
