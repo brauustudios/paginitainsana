@@ -1,235 +1,3723 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=0" />
-    <title>Para Mariana ❤️</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg1: #ffdeeb;
-            --bg2: #f9a8d4;
-            --accent: #ff3b8d;
-            --accent-light: #ff85b3;
-            --accent-dark: #d4005d;
-            --text-main: #4a041a;
-            --glass: rgba(255, 255, 255, 0.75);
-        }
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pagina para emo <3 </title>
+            <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+            <link rel="icon" type="image/x-icon"
+                href="https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png">
+            <style>
+                :root {
+                    --bg1: #fff0f6;
+                    --bg2: #ffd7eb;
+                    --accent: #ff3b8d;
+                    --accent-light: #ff73a7;
+                    --accent-dark: #e5005e;
+                    --soft: rgba(255, 255, 255, 0.6);
+                    --glass: rgba(255, 255, 255, 0.18);
+                    --shadow: 0 10px 30px rgba(255, 60, 130, 0.15);
+                    --radius: 20px;
+                    --ui-pad: 14px;
+                    --text-main: #2a2530;
+                }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+                * {
+                    box-sizing: border-box;
+                }
 
-        body {
-            margin: 0; padding: 0;
-            font-family: 'Delius', cursive;
-            background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
-            overflow-x: hidden;
-        }
+                html,
+                body {
+                    height: 100%;
+                    margin: 0;
+                    font-family: 'Delius', cursive;
+                    background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+                    color: var(--text-main);
+                    overflow-x: hidden;
+                    position: relative;
+                    transition: background 0.5s ease, color 0.5s ease;
+                }
 
-        .bg-gradient {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 0%, transparent 80%);
-            z-index: -1;
-        }
+                body::before {
+                    content: "";
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image:
+                        radial-gradient(circle at 15% 50%, rgba(255, 182, 193, 0.2) 0%, transparent 25%),
+                        radial-gradient(circle at 85% 30%, rgba(255, 192, 203, 0.2) 0%, transparent 25%),
+                        radial-gradient(circle at 50% 80%, rgba(255, 182, 193, 0.2) 0%, transparent 25%);
+                    pointer-events: none;
+                    z-index: -1;
+                }
 
-        .container {
-            width: 92%; max-width: 420px; padding: 30px 0; z-index: 1;
-            display: flex; flex-direction: column; gap: 20px;
-        }
+                /* --- TEMA OSCURO --- */
+                body.dark-theme {
+                    --bg1: #2a2530;
+                    --bg2: #3c3542;
+                    --accent: #ff8acb;
+                    --accent-light: #ffacec;
+                    --accent-dark: #e560a8;
+                    --soft: rgba(0, 0, 0, 0.4);
+                    --glass: rgba(50, 40, 60, 0.25);
+                    --shadow: 0 10px 30px rgba(255, 138, 203, 0.1);
+                    --text-main: #e2dce4;
+                }
 
-        .header-title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 13px; color: white; text-align: center;
-            line-height: 1.6; text-shadow: 2px 2px 0px var(--accent);
-            background: var(--accent-light); padding: 18px;
-            border-radius: 20px; border: 3px solid white;
-            box-shadow: 0 8px 20px rgba(255, 59, 141, 0.3);
-        }
+                .dark-theme .card {
+                    background: linear-gradient(135deg, rgba(48, 42, 58, 0.85), rgba(40, 35, 49, 0.85));
+                    border-color: rgba(255, 138, 203, 0.2);
+                    box-shadow: var(--shadow), 0 0 0 1px rgba(0, 0, 0, 0.4);
+                }
 
-        .music-card {
-            background: var(--glass); backdrop-filter: blur(15px);
-            border-radius: 30px; padding: 20px; display: flex;
-            align-items: center; gap: 15px; border: 2px solid white;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.08); position: relative;
-        }
+                .dark-theme .sub,
+                .dark-theme .small {
+                    color: #a899ae;
+                }
 
-        .album-wrapper { position: relative; width: 70px; height: 70px; }
+                .dark-theme .play-card,
+                .dark-theme .game-card,
+                .dark-theme .reason-card,
+                .dark-theme .chat-container,
+                .dark-theme .music-search-card {
+                    background: rgba(0, 0, 0, 0.2);
+                    border-color: rgba(255, 255, 255, 0.1);
+                }
 
-        .album-art {
-            width: 100%; height: 100%; border-radius: 50%;
-            background: url('https://img.youtube.com/vi/M0YKOq_lWSQ/0.jpg') no-repeat center;
-            background-size: cover; border: 3px solid var(--accent);
-            animation: rotate 8s linear infinite; animation-play-state: paused;
-        }
+                .dark-theme .note-bubble {
+                    background: rgba(60, 53, 66, 0.9);
+                    border-color: var(--accent);
+                    color: #e2dce4;
+                }
 
-        .playing .album-art { animation-play-state: running; }
-        @keyframes rotate { 100% { transform: rotate(360deg); } }
+                .dark-theme #resetGame {
+                    background: linear-gradient(180deg, #4d4554, #3c3542);
+                    color: var(--accent);
+                }
 
-        .song-info { flex: 1; }
-        .song-info p { margin: 0; font-size: 15px; font-weight: bold; color: var(--accent-dark); }
-        .song-info span { font-size: 12px; color: #777; }
+                .dark-theme .chat-message.received {
+                    background: #4a4153;
+                    color: #e2dce4;
+                }
 
-        .message-box {
-            background: white; padding: 30px; border-radius: 35px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1); line-height: 1.9;
-            font-size: 17px; position: relative; max-height: 55vh;
-            overflow-y: auto; border: 1px solid rgba(0,0,0,0.05);
-        }
+                .dark-theme #usernameInput,
+                .dark-theme #chatInput,
+                .dark-theme #recipientSelect,
+                .dark-theme .form-input {
+                    background-color: #3c3542;
+                    color: var(--text-main);
+                    border-color: rgba(255, 138, 203, 0.4);
+                }
 
-        .perdon-badge {
-            display: table; background: linear-gradient(to right, var(--accent), var(--accent-light));
-            color: white; padding: 6px 18px; border-radius: 50px;
-            font-family: 'Press Start 2P'; font-size: 9px;
-            margin: 0 auto 20px auto; box-shadow: 0 4px 10px rgba(255, 59, 141, 0.3);
-        }
+                /* --- ESTILOS DE LA SORPRESA MÁGICA --- */
+                .special-overlay {
+                    position: fixed;
+                    top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(10, 5, 10, 0.95);
+                    z-index: 20000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: opacity 0.8s ease;
+                    backdrop-filter: blur(8px);
+                }
 
-        #play-btn {
-            background: var(--accent); border: none; color: white;
-            border-radius: 50%; width: 55px; height: 55px;
-            cursor: pointer; font-size: 22px; display: flex;
-            align-items: center; justify-content: center;
-            box-shadow: 0 5px 15px rgba(255, 59, 141, 0.4);
-            transition: 0.3s;
-        }
+                .special-overlay.active {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
 
-        #play-btn:active { transform: scale(0.9); }
+                .magic-card {
+                    width: 90%;
+                    max-width: 450px;
+                    background: linear-gradient(160deg, #fff0f6, #ffd1e8);
+                    border-radius: 30px;
+                    padding: 30px;
+                    text-align: center;
+                    box-shadow: 0 0 50px rgba(255, 60, 140, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.8);
+                    border: 3px solid rgba(255, 255, 255, 0.8);
+                    transform: scale(0.8) translateY(50px);
+                    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+                    position: relative;
+                    overflow: hidden;
+                }
 
-        .footer-text { text-align: center; font-size: 11px; opacity: 0.7; margin-top: 10px; margin-bottom: 20px; font-weight: bold; }
-        .bg-hearts { position: fixed; z-index: 0; pointer-events: none; }
-        
-        /* Estilo de la barra de scroll */
-        .message-box::-webkit-scrollbar { width: 5px; }
-        .message-box::-webkit-scrollbar-thumb { background: var(--bg2); border-radius: 10px; }
-    </style>
+                .special-overlay.active .magic-card {
+                    transform: scale(1) translateY(0);
+                }
+
+                .dark-theme .magic-card {
+                    background: linear-gradient(160deg, #2a2530, #3c3542);
+                    border-color: #ff3b8d;
+                    box-shadow: 0 0 40px rgba(255, 60, 140, 0.3);
+                }
+
+                .magic-header {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 15px;
+                    margin-bottom: 20px;
+                }
+
+                .magic-header h2 {
+                    font-family: 'Press Start 2P', cursive;
+                    font-size: 16px;
+                    color: var(--accent);
+                    line-height: 1.5;
+                    margin: 0;
+                    text-shadow: 0 2px 5px rgba(255, 60, 130, 0.3);
+                }
+
+                .floating-icon {
+                    width: 25px;
+                    animation: float 3s ease-in-out infinite;
+                }
+
+                .photo-circle {
+                    width: 150px;
+                    height: 150px;
+                    margin: 0 auto 20px;
+                    border-radius: 50%;
+                    border: 4px dashed var(--accent);
+                    padding: 5px;
+                    background: rgba(255,255,255,0.5);
+                }
+
+                .photo-circle img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                }
+
+                .typing-text {
+                    font-family: 'Delius', cursive;
+                    font-size: 16px;
+                    line-height: 1.6;
+                    color: var(--text-main);
+                    min-height: 100px;
+                }
+
+                .close-overlay-btn {
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                    background: transparent;
+                    border: none;
+                    font-size: 20px;
+                    color: var(--accent);
+                    cursor: pointer;
+                    transition: transform 0.3s;
+                }
+
+                .close-overlay-btn:hover {
+                    transform: rotate(90deg) scale(1.2);
+                }
+
+                .magic-footer {
+                    margin-top: 20px;
+                    font-size: 12px;
+                    color: #888;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                }
+
+                .falling-flower {
+                    position: absolute;
+                    top: -50px;
+                    font-size: 24px;
+                    animation: fallRotate linear forwards;
+                    z-index: 19999;
+                    pointer-events: none;
+                }
+
+                @keyframes fallRotate {
+                    to {
+                        transform: translateY(110vh) rotate(360deg);
+                    }
+                }
+
+
+                /* --- EFECTO LLUVIA DE PIXELES --- */
+                #pixel-rain-container {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: -2;
+                    overflow: hidden;
+                }
+
+                .pixel {
+                    position: absolute;
+                    background-color: var(--accent-light);
+                    width: 3px;
+                    height: 3px;
+                    border-radius: 50%;
+                    animation: fall linear infinite;
+                    opacity: 0;
+                }
+
+                @keyframes fall {
+                    to {
+                        transform: translateY(100vh);
+                        opacity: 0;
+                    }
+
+                    from {
+                        opacity: 0.7;
+                    }
+                }
+
+                .wrap {
+                    min-height: 100dvh;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;
+                    padding: 20px;
+                    gap: 20px;
+                }
+
+                .card {
+                    width: min(900px, 96%);
+                    background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 245, 250, 0.85) 100%);
+                    border-radius: var(--radius);
+                    padding: clamp(18px, 4vw, 28px);
+                    box-shadow: var(--shadow), 0 0 0 1px rgba(255, 255, 255, 0.5);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 20, 90, 0.1);
+                    position: relative;
+                    overflow: hidden;
+                    transition: background 0.5s ease, border-color 0.5s ease;
+                }
+
+                .card::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 6px;
+                    background: linear-gradient(90deg, #ff9ebb, #ff73a7, #ff3b8d);
+                    border-radius: 10px 10px 0 0;
+                }
+
+                .title-row {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    margin-bottom: 15px;
+                }
+
+                h1 {
+                    font-size: clamp(24px, 6vw, 38px);
+                    margin: 0;
+                    color: var(--accent);
+                    letter-spacing: .02em;
+                    display: flex;
+                    align-items: center;
+                    gap: .6rem;
+                    transform-origin: center;
+                    animation: titlePop 1s ease, textGlow 3s ease-in-out infinite alternate;
+                    text-shadow: 0 4px 12px rgba(255, 80, 150, 0.2);
+                    font-family: 'Press Start 2P', cursive;
+                    position: relative;
+                }
+
+                @keyframes titlePop {
+                    0% {
+                        transform: scale(.96);
+                        opacity: 0;
+                    }
+
+                    70% {
+                        transform: scale(1.05);
+                    }
+
+                    100% {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+
+                @keyframes textGlow {
+                    0% {
+                        text-shadow: 0 4px 12px rgba(255, 80, 150, 0.2);
+                    }
+
+                    100% {
+                        text-shadow: 0 4px 20px rgba(255, 80, 150, 0.5), 0 0 10px rgba(255, 100, 180, 0.3);
+                    }
+                }
+
+                .sub {
+                    color: #6e6170;
+                    font-weight: 700;
+                    font-size: 12px;
+                    font-family: 'Press Start 2P', cursive;
+                    animation: subtleFloat 6s ease-in-out infinite;
+                }
+
+                @keyframes subtleFloat {
+
+                    0%,
+                    100% {
+                        transform: translateY(0);
+                    }
+
+                    50% {
+                        transform: translateY(-3px);
+                    }
+                }
+
+                .player {
+                    display: grid;
+                    grid-template-columns: 1fr auto;
+                    gap: 16px;
+                    align-items: center;
+                    margin-top: 15px;
+                }
+
+                .play-card {
+                    background: rgba(255, 255, 255, 0.6);
+                    padding: 16px;
+                    border-radius: 16px;
+                    display: flex;
+                    gap: 16px;
+                    align-items: center;
+                    box-shadow: 0 6px 16px rgba(255, 50, 130, 0.08);
+                    border: 1px solid rgba(255, 255, 255, 0.6);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+                }
+
+                .play-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 25px rgba(255, 50, 130, 0.15);
+                }
+
+                .big-btn {
+                    background: linear-gradient(180deg, var(--accent-light), var(--accent));
+                    color: white;
+                    border: 0;
+                    padding: 12px 16px;
+                    border-radius: 14px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 5px 15px rgba(255, 60, 140, 0.25);
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    transition: all 0.2s ease;
+                    font-family: 'Delius', cursive;
+                    font-size: 15px;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .big-btn:disabled {
+                    background: #c7a9b6;
+                    cursor: not-allowed;
+                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+                    transform: translateY(1px);
+                }
+
+                .big-btn::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                    transition: left 0.5s;
+                }
+
+                .big-btn:hover::before {
+                    left: 100%;
+                }
+
+                .big-btn:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 8px 20px rgba(255, 60, 140, 0.35);
+                }
+
+                .big-btn:active {
+                    transform: translateY(1px);
+                    box-shadow: 0 3px 10px rgba(255, 60, 140, 0.2);
+                }
+
+                .seek {
+                    width: 100%;
+                    appearance: none;
+                    height: 8px;
+                    border-radius: 999px;
+                    background: linear-gradient(90deg, #ffd3ea, #ff9fd4);
+                    border: 1px solid rgba(255, 255, 255, 0.6);
+                    cursor: pointer;
+                    margin-top: 8px;
+                    transition: all 0.3s ease;
+                }
+
+                .seek:hover {
+                    height: 10px;
+                }
+
+                .seek::-webkit-slider-thumb {
+                    appearance: none;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background: white;
+                    border: 3px solid var(--accent);
+                    box-shadow: 0 3px 10px rgba(255, 60, 130, 0.3);
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+
+                .seek::-webkit-slider-thumb:hover {
+                    transform: scale(1.15);
+                    box-shadow: 0 5px 15px rgba(255, 60, 130, 0.5);
+                }
+
+                .game-panel {
+                    margin-top: 20px;
+                    display: flex;
+                    gap: 16px;
+                    align-items: stretch;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                }
+
+                .game-card {
+                    flex: 1;
+                    min-width: 200px;
+                    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3));
+                    padding: 18px;
+                    border-radius: 16px;
+                    border: 1px solid rgba(255, 255, 255, 0.4);
+                    box-shadow: 0 6px 16px rgba(255, 50, 130, 0.08);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+                }
+
+                .game-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 25px rgba(255, 50, 130, 0.15);
+                }
+
+                .score {
+                    font-size: 24px;
+                    font-weight: 900;
+                    color: var(--accent);
+                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    animation: pulse 2s infinite;
+                }
+
+                @keyframes pulse {
+                    0% {
+                        transform: scale(1);
+                    }
+
+                    50% {
+                        transform: scale(1.05);
+                    }
+
+                    100% {
+                        transform: scale(1);
+                    }
+                }
+
+                .small {
+                    font-size: 13px;
+                    color: #7b6e78;
+                    font-weight: 600;
+                    line-height: 1.5;
+                    animation: subtleFloat 8s ease-in-out infinite;
+                }
+
+                .game-viewport {
+                    width: 100%;
+                    height: 380px;
+                    border-radius: 16px;
+                    overflow: hidden;
+                    position: relative;
+                    background: linear-gradient(135deg, rgba(255, 230, 240, 0.9), rgba(255, 240, 246, 0.8));
+                    border: 2px dashed rgba(255, 100, 150, 0.2);
+                    margin-top: 15px;
+                    -webkit-tap-highlight-color: transparent;
+                    box-shadow: inset 0 0 20px rgba(255, 100, 150, 0.1);
+                    transition: all 0.3s ease;
+                }
+
+                .game-viewport:hover {
+                    box-shadow: inset 0 0 30px rgba(255, 100, 150, 0.2);
+                }
+
+                .hud-row {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                }
+
+                .pixel-heart {
+                    width: 26px;
+                    height: 26px;
+                    display: inline-block;
+                    filter: drop-shadow(0 4px 8px rgba(255, 90, 160, 0.2));
+                    transform: translateY(0);
+                    animation: heartLift 3s ease-in-out infinite;
+                }
+
+                .pixel-heart:nth-child(2) {
+                    animation-delay: .4s;
+                }
+
+                .pixel-heart:nth-child(3) {
+                    animation-delay: .8s;
+                }
+
+                @keyframes heartLift {
+                    0% {
+                        transform: translateY(0) scale(.98);
+                    }
+
+                    50% {
+                        transform: translateY(-6px) scale(1.03);
+                    }
+
+                    100% {
+                        transform: translateY(0) scale(.98);
+                    }
+                }
+
+                footer {
+                    width: 100%;
+                    text-align: center;
+                    color: #856f80;
+                    font-weight: 700;
+                    font-size: 13px;
+                    margin-top: 20px;
+                    font-family: 'Press Start 2P', cursive;
+                    animation: subtleFloat 10s ease-in-out infinite;
+                }
+
+                .confetti {
+                    position: absolute;
+                    inset: 0;
+                    pointer-events: none;
+                    overflow: visible;
+                }
+
+                .vignette {
+                    position: fixed;
+                    inset: 0;
+                    pointer-events: none;
+                    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.03) 100%);
+                }
+
+                .floating-hearts {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: -1;
+                }
+
+                .floating-heart {
+                    position: absolute;
+                    width: 28px;
+                    height: 28px;
+                    opacity: 0.6;
+                    animation: float 18s infinite linear;
+                }
+
+                @keyframes float {
+                    0% {
+                        transform: translateY(100vh) rotate(0deg);
+                        opacity: 0.7;
+                    }
+
+                    100% {
+                        transform: translateY(-100px) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+
+                .audio-error {
+                    display: none;
+                    background: rgba(255, 200, 200, 0.8);
+                    border-radius: 8px;
+                    padding: 8px 12px;
+                    margin-top: 8px;
+                    font-size: 11px;
+                    color: #d32f2f;
+                }
+
+                .secret-message {
+                    position: fixed;
+                    bottom: 15px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(255, 255, 255, 0.95);
+                    padding: 12px 18px;
+                    border-radius: 24px;
+                    font-size: 13px;
+                    color: #ff3b8d;
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                    opacity: 0;
+                    transition: opacity 0.5s;
+                    z-index: 1000;
+                    text-align: center;
+                    max-width: 90%;
+                    font-weight: 600;
+                    border: 1px solid rgba(255, 100, 150, 0.2);
+                    animation: messageFloat 3s ease-in-out infinite;
+                }
+
+                @keyframes messageFloat {
+
+                    0%,
+                    100% {
+                        transform: translateX(-50%) translateY(0);
+                    }
+
+                    50% {
+                        transform: translateX(-50%) translateY(-5px);
+                    }
+                }
+
+                .note-bubble {
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    width: 170px;
+                    min-height: 45px;
+                    max-height: 200px;
+                    background: rgba(255, 223, 235, 0.9);
+                    border: 2px dashed #ff3b8d;
+                    border-radius: 18px;
+                    padding: 10px;
+                    font-family: 'Press Start 2P', monospace;
+                    font-size: 11px;
+                    color: #2a2530;
+                    overflow-y: auto;
+                    box-shadow: 0 6px 18px rgba(255, 50, 130, 0.2);
+                    z-index: 9999;
+                    cursor: grab;
+                    line-height: 1.4;
+                    animation: bubbleFloat 8s ease-in-out infinite;
+                    transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+                }
+
+                @keyframes bubbleFloat {
+
+                    0%,
+                    100% {
+                        transform: translateY(0) rotate(-1deg);
+                    }
+
+                    50% {
+                        transform: translateY(-10px) rotate(1deg);
+                    }
+                }
+
+                .sparkle {
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    background: #fff;
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 100;
+                    animation: sparkle 1s forwards;
+                }
+
+                @keyframes sparkle {
+                    0% {
+                        transform: translate(0, 0) scale(0);
+                        opacity: 1;
+                    }
+
+                    100% {
+                        transform: translate(var(--tx), var(--ty)) scale(1.5);
+                        opacity: 0;
+                    }
+                }
+
+                .reasons-section {
+                    margin-top: 30px;
+                    text-align: center;
+                }
+
+                .reasons-title {
+                    font-family: 'Press Start 2P', cursive;
+                    color: var(--accent);
+                    font-size: 18px;
+                    margin-bottom: 20px;
+                    text-shadow: 0 2px 4px rgba(255, 80, 150, 0.2);
+                    animation: textGlow 3s ease-in-out infinite alternate, subtleFloat 7s ease-in-out infinite;
+                }
+
+                .reasons-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 15px;
+                    margin-top: 15px;
+                }
+
+                .reason-card {
+                    background: rgba(255, 255, 255, 0.7);
+                    border-radius: 12px;
+                    padding: 15px;
+                    width: calc(50% - 15px);
+                    min-width: 250px;
+                    box-shadow: 0 4px 10px rgba(255, 60, 140, 0.1);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+                    animation: cardAppear 0.5s ease-out;
+                }
+
+                @keyframes cardAppear {
+                    0% {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+
+                    100% {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                .reason-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 20px rgba(255, 60, 140, 0.2);
+                }
+
+                .reason-number {
+                    background: var(--accent);
+                    color: white;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto 10px;
+                    font-weight: bold;
+                    font-family: 'Press Start 2P', cursive;
+                    font-size: 10px;
+                    animation: pulse 2s infinite;
+                }
+
+                .reason-text {
+                    font-size: 14px;
+                    line-height: 1.4;
+                    animation: subtleFloat 9s ease-in-out infinite;
+                }
+
+                .apology-btn {
+                    margin-top: 20px;
+                    background: linear-gradient(180deg, #ff9ebb, #ff73a7);
+                }
+
+                .bubble-top-left {
+                    top: 50px;
+                    right: auto;
+                    left: 50px;
+                    bottom: auto;
+                    width: 160px;
+                    background: rgba(255, 236, 245, 0.9);
+                    border: 2px dashed #ff73a7;
+                    animation: bubbleFloat 7s ease-in-out infinite reverse;
+                }
+
+                #lastUpdate {
+                    position: fixed;
+                    top: 10px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(255, 182, 193, 0.85);
+                    color: white;
+                    font-family: 'Arial', sans-serif;
+                    font-size: 11px;
+                    padding: 6px 12px;
+                    border-radius: 20px;
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+                    z-index: 2000;
+                    animation: fadeIn 2s ease-in-out;
+                }
+
+                @keyframes fadeIn {
+                    0% {
+                        opacity: 0;
+                    }
+
+                    100% {
+                        opacity: 1;
+                    }
+                }
+
+                .typewriter {
+                    overflow: hidden;
+                    border-right: 2px solid var(--accent);
+                    white-space: nowrap;
+                    margin: 0 auto;
+                    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+                }
+
+                @keyframes typing {
+                    from {
+                        width: 0
+                    }
+
+                    to {
+                        width: 100%
+                    }
+                }
+
+                @keyframes blink-caret {
+
+                    from,
+                    to {
+                        border-color: transparent
+                    }
+
+                    50% {
+                        border-color: var(--accent);
+                    }
+                }
+
+                .falling-heart {
+                    transition: transform 0.3s ease, filter 0.3s ease;
+                }
+
+                .falling-heart:hover {
+                    transform: scale(1.2) !important;
+                    filter: brightness(1.2) drop-shadow(0 0 8px rgba(255, 100, 180, 0.5));
+                }
+
+                @media (max-width: 768px) {
+                    .player {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .play-card {
+                        flex-direction: column;
+                        text-align: center;
+                        gap: 12px;
+                    }
+
+                    .game-panel {
+                        flex-direction: column;
+                    }
+
+                    .game-viewport {
+                        height: 300px;
+                    }
+
+                    h1 {
+                        font-size: 20px;
+                    }
+
+                    .reason-card {
+                        width: 100%;
+                    }
+
+                    .note-bubble {
+                        width: 140px;
+                        font-size: 9px;
+                        right: 10px;
+                        bottom: 10px;
+                    }
+
+                    .bubble-top-left {
+                        left: 10px;
+                        top: 10px;
+                        width: 130px;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .game-viewport {
+                        height: 250px;
+                    }
+
+                    .note-bubble {
+                        width: 130px;
+                        font-size: 8px;
+                        right: 5px;
+                        bottom: 5px;
+                    }
+
+                    .big-btn {
+                        padding: 10px 12px;
+                        font-size: 14px;
+                    }
+
+                    .reason-card {
+                        min-width: 100%;
+                    }
+
+                    .bubble-top-left {
+                        left: 5px;
+                        top: 5px;
+                        width: 120px;
+                    }
+                }
+
+                .persistent-message {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                    pointer-events: none;
+                }
+
+                .persistent-message.show {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+
+                .message-content {
+                    background: rgba(255, 255, 255, 0.95);
+                    padding: 30px;
+                    border-radius: 20px;
+                    max-width: 500px;
+                    width: 90%;
+                    box-shadow: 0 15px 35px rgba(255, 60, 140, 0.3);
+                    border: 3px solid #ff73a7;
+                    position: relative;
+                    transform: scale(0.8);
+                    transition: transform 0.3s ease;
+                }
+
+                .persistent-message.show .message-content {
+                    transform: scale(1);
+                }
+
+                .close-btn {
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                    background: #ff3b8d;
+                    color: white;
+                    border: none;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    font-size: 16px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease;
+                }
+
+                .close-btn:hover {
+                    background: #e5005e;
+                    transform: scale(1.1);
+                }
+
+                .message-text {
+                    font-family: 'Delius', cursive;
+                    color: #2a2530;
+                    font-size: 16px;
+                    line-height: 1.6;
+                    text-align: left;
+                    /* <-- CAMBIADO: Texto largo centrado es difícil de leer */
+                    margin-top: 10px;
+                    margin-bottom: 20px;
+                    max-height: 60vh;
+                    /* <-- NUEVO: Limita la altura al 60% de la pantalla */
+                    overflow-y: auto;
+                    /* <-- NUEVO: Agrega scroll si el texto se pasa */
+                    padding-right: 10px;
+                    /* <-- NUEVO: Espacio para que la barra de scroll no tape el texto */
+                }
+
+                .album-cover {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 12px;
+                    object-fit: cover;
+                    margin-top: 8px;
+                    align-self: flex-start;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+                    animation: subtleFloat 10s ease-in-out infinite;
+                }
+
+                .chat-section {
+                    margin-top: 30px;
+                    text-align: center;
+                    width: 100%;
+                }
+
+                .chat-container {
+                    background: rgba(255, 255, 255, 0.7);
+                    border-radius: 12px;
+                    padding: 20px;
+                    box-shadow: 0 4px 10px rgba(255, 60, 140, 0.1);
+                    margin-top: 15px;
+                    max-width: 600px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    transition: background 0.5s ease;
+                }
+
+                .chat-messages {
+                    height: 200px;
+                    overflow-y: auto;
+                    border: 2px dashed rgba(255, 100, 150, 0.2);
+                    border-radius: 10px;
+                    padding: 10px;
+                    margin-bottom: 15px;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .chat-message {
+                    padding: 8px 12px;
+                    border-radius: 15px;
+                    margin-bottom: 8px;
+                    max-width: 70%;
+                    font-size: 14px;
+                    position: relative;
+                    animation: fadeIn 0.5s ease;
+                }
+
+                .chat-message.sent {
+                    background: var(--accent);
+                    color: white;
+                    align-self: flex-end;
+                    text-align: right;
+                }
+
+                .chat-message.received {
+                    background: #e9e9eb;
+                    color: #2a2530;
+                    align-self: flex-start;
+                    text-align: left;
+                    transition: background 0.5s ease, color 0.5s ease;
+                }
+
+                .message-author {
+                    font-size: 10px;
+                    font-weight: bold;
+                    color: var(--accent-light);
+                    display: block;
+                    margin-bottom: 4px;
+                }
+
+                .chat-input-area {
+                    display: flex;
+                    gap: 10px;
+                    margin-top: 15px;
+                }
+
+                .recipient-selection {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    margin-bottom: 10px;
+                    font-family: 'Press Start 2P', cursive;
+                    font-size: 12px;
+                }
+
+                #recipientSelect {
+                    border: 2px solid rgba(255, 100, 150, 0.2);
+                    border-radius: 10px;
+                    padding: 8px;
+                    font-family: 'Delius', cursive;
+                    font-size: 12px;
+                }
+
+                #chatInput {
+                    flex: 1;
+                    border: 2px solid rgba(255, 100, 150, 0.2);
+                    border-radius: 10px;
+                    padding: 10px;
+                    font-family: 'Delius', cursive;
+                    font-size: 14px;
+                }
+
+                #chatInput:focus,
+                #recipientSelect:focus {
+                    outline: none;
+                    border-color: var(--accent);
+                }
+
+                #loginOverlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.7);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10001;
+                    backdrop-filter: blur(5px);
+                    transition: opacity 0.5s;
+                }
+
+                #loginBox {
+                    background: rgba(255, 255, 255, 0.95);
+                    padding: 30px;
+                    border-radius: 20px;
+                    text-align: center;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                    animation: floatPopup 1s ease;
+                }
+
+                @keyframes floatPopup {
+                    from {
+                        transform: scale(0.9);
+                        opacity: 0;
+                    }
+
+                    to {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+
+                #usernameInput {
+                    border: 2px solid rgba(255, 100, 150, 0.2);
+                    border-radius: 10px;
+                    padding: 10px;
+                    font-family: 'Delius', cursive;
+                    font-size: 16px;
+                    margin-top: 15px;
+                    margin-bottom: 15px;
+                }
+
+                #usernameError {
+                    color: red;
+                    font-size: 12px;
+                    margin-bottom: 10px;
+                    display: none;
+                }
+
+                #logoutBtn {
+                    background: #ff73a7;
+                    font-size: 12px;
+                    padding: 8px 12px;
+                    margin-top: 15px;
+                }
+
+                .countdown-section {
+                    margin-top: 30px;
+                    text-align: center;
+                    width: 100%;
+                }
+
+                .countdown-container {
+                    display: flex;
+                    justify-content: center;
+                    gap: 15px;
+                    margin-top: 20px;
+                    flex-wrap: wrap;
+                }
+
+                .time-box {
+                    background: rgba(255, 255, 255, 0.7);
+                    border-radius: 12px;
+                    padding: 15px;
+                    min-width: 100px;
+                    box-shadow: 0 4px 10px rgba(255, 60, 140, 0.1);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+                    animation: cardAppear 0.5s ease-out backwards;
+                    animation-delay: 0.2s;
+                }
+
+                .time-box:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 20px rgba(255, 60, 140, 0.2);
+                }
+
+                .time-box span {
+                    display: block;
+                }
+
+                .time-box .number {
+                    font-family: 'Press Start 2P', cursive;
+                    font-size: 28px;
+                    color: var(--accent);
+                    text-shadow: 0 2px 4px rgba(255, 80, 150, 0.2);
+                    animation: pulse 2.5s infinite;
+                }
+
+                .time-box .label {
+                    font-family: 'Delius', cursive;
+                    font-size: 12px;
+                    color: #6e6170;
+                    margin-top: 5px;
+                    font-weight: bold;
+                }
+
+                .dark-theme .time-box {
+                    background: rgba(0, 0, 0, 0.2);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                }
+
+                .dark-theme .time-box .label {
+                    color: #a899ae;
+                }
+
+                /* --- ESTILOS PARA LA PIZARRA MÁGICA Y MODAL --- */
+                .drawing-section {
+                    margin-top: 40px;
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .drawing-container {
+                    background: rgba(255, 255, 255, 0.85);
+                    border-radius: var(--radius);
+                    padding: 15px;
+                    box-shadow: var(--shadow);
+                    margin-top: 15px;
+                    border: 1px solid rgba(255, 60, 130, 0.1);
+                    transition: background 0.5s ease;
+                }
+                
+/* --- ESTILOS DE LA LÁMPARA --- */
+.lamp-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: -10px; /* Para pegar el cable arriba */
+    transition: transform 0.1s ease;
+}
+
+.lamp-container:active {
+    transform: scale(0.95); /* Efecto de click */
+}
+
+.lamp-wire {
+    width: 2px;
+    height: 40px;
+    background: #555;
+    margin: 0 auto;
+}
+
+.lamp-bulb {
+    font-size: 60px;
+    line-height: 1;
+    filter: grayscale(100%) opacity(0.5); /* Apagada: gris y opaca */
+    transition: all 0.4s ease;
+}
+
+/* Estado ENCENDIDA */
+.lamp-bulb.on {
+    filter: grayscale(0%) opacity(1) drop-shadow(0 0 30px #ffd700); /* Brillo dorado */
+    transform: rotate(5deg); /* Un pequeño movimiento */
+    animation: swing 3s infinite ease-in-out alternate;
+}
+
+@keyframes swing {
+    from { transform: rotate(3deg); }
+    to { transform: rotate(-3deg); }
+}
+
+.dark-theme .lamp-bulb.on {
+    filter: grayscale(0%) opacity(1) drop-shadow(0 0 50px #ffeb3b); /* Brillo más fuerte en modo oscuro */
+}
+                .dark-theme .drawing-container {
+                    background: rgba(0, 0, 0, 0.2);
+                    border-color: rgba(255, 255, 255, 0.1);
+                }
+
+                #sharedCanvas {
+                    width: 100%;
+                    height: 400px;
+                    cursor: crosshair;
+                    background-color: #fff;
+                    border-radius: 10px;
+                    touch-action: none;
+                }
+
+                .dark-theme #sharedCanvas {
+                    background-color: #e2dce4;
+                }
+
+                .toolbar {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    margin-bottom: 10px;
+                    font-family: 'Press Start 2P', cursive;
+                    font-size: 12px;
+                    flex-wrap: wrap;
+                }
+
+                .color-btn,
+                .tool-btn {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    border: 2px solid transparent;
+                    cursor: pointer;
+                    transition: transform 0.2s ease, border-color 0.2s ease;
+                }
+
+                .color-btn:hover,
+                .tool-btn:hover {
+                    transform: scale(1.1);
+                }
+
+                .color-btn.active,
+                .tool-btn.active {
+                    border-color: var(--accent);
+                    transform: scale(1.15);
+                }
+
+                .tool-btn {
+                    background-color: #f0f0f0;
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: 'Press Start 2P', cursive;
+                    font-weight: bold;
+                }
+
+                .dark-theme .tool-btn {
+                    background-color: #4a4153;
+                    color: var(--text-main);
+                }
+
+                #customColorPicker {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    width: 32px;
+                    height: 32px;
+                    padding: 0;
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                }
+
+                #customColorPicker::-webkit-color-swatch {
+                    border-radius: 50%;
+                    border: 2px solid #ccc;
+                }
+
+                #customColorPicker::-moz-color-swatch {
+                    border-radius: 50%;
+                    border: 2px solid #ccc;
+                }
+
+                .modal-buttons {
+                    display: flex;
+                    gap: 15px;
+                    justify-content: center;
+                    margin-top: 20px;
+                }
+
+                .modal-buttons .big-btn.cancel-btn {
+                    background: linear-gradient(180deg, #d3c8d0, #b2a8b0);
+                }
+
+                /* === NUEVOS ESTILOS PARA LA PLAYLIST COMPARTIDA === */
+                .music-section {
+                    margin-top: 30px;
+                    width: 100%;
+                }
+
+                .music-search-card {
+                    background: rgba(255, 255, 255, 0.7);
+                    border-radius: var(--radius);
+                    padding: 20px;
+                    box-shadow: 0 4px 10px rgba(255, 60, 140, 0.1);
+                    margin-top: 15px;
+                    max-width: 800px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    transition: background 0.5s ease;
+                    display: flex;
+                    gap: 20px;
+                    flex-wrap: wrap;
+                }
+
+                .search-column,
+                .playlist-column {
+                    flex: 1;
+                    min-width: 300px;
+                }
+
+                .search-input {
+                    width: 100%;
+                    border: 2px solid rgba(255, 100, 150, 0.2);
+                    border-radius: 10px;
+                    padding: 10px;
+                    font-family: 'Delius', cursive;
+                    font-size: 14px;
+                    margin-bottom: 15px;
+                }
+
+                .dark-theme .search-input {
+                    background-color: #3c3542;
+                    color: var(--text-main);
+                    border-color: rgba(255, 138, 203, 0.4);
+                }
+
+                .search-input:focus {
+                    outline: none;
+                    border-color: var(--accent);
+                }
+
+                .search-results,
+                .playlist-container {
+                    height: 300px;
+                    overflow-y: auto;
+                    border: 2px dashed rgba(255, 100, 150, 0.2);
+                    border-radius: 10px;
+                    padding: 10px;
+                }
+
+                .song-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 8px;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                    cursor: pointer;
+                    transition: background-color 0.2s ease;
+                }
+
+                .song-item:hover {
+                    background-color: rgba(255, 60, 130, 0.1);
+                }
+
+                .song-item.playing {
+                    background-color: rgba(255, 60, 130, 0.2);
+                    border-left: 4px solid var(--accent);
+                }
+
+                .song-item img.thumbnail {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 6px;
+                    object-fit: cover;
+                }
+
+                .song-info {
+                    flex: 1;
+                    overflow: hidden;
+                }
+
+                .song-info .title {
+                    font-weight: bold;
+                    font-size: 14px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .song-info .artist {
+                    font-size: 12px;
+                    color: #6e6170;
+                }
+
+                .dark-theme .song-info .artist {
+                    color: #a899ae;
+                }
+
+                .add-btn,
+                .remove-btn {
+                    padding: 6px 10px;
+                    font-size: 12px;
+                    min-width: 40px;
+                }
+
+                .remove-btn {
+                    background: #aaa;
+                }
+
+                #youtubePlayerContainer {
+                    margin-top: 20px;
+                    width: 100%;
+                    aspect-ratio: 16/9;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    background: #000;
+                    display: none;
+                    /* Oculto hasta que se reproduzca algo */
+                }
+
+                #youtubePlayer {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                }
+/* --- ARREGLO PARA CELULAR (Playlist) --- */
+@media (max-width: 768px) {
+    /* Esto hace que la búsqueda y la lista se pongan una abajo de la otra */
+    .music-search-card {
+        flex-direction: column !important; 
+        gap: 20px;
+        padding: 15px;
+    }
+
+    /* Esto hace que ocupen todo el ancho de la pantalla */
+    .search-column, 
+    .playlist-column {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex: none !important;
+    }
+
+    /* Ajuste para que los inputs no se salgan */
+    .search-input {
+        width: 100%;
+        box-sizing: border-box; /* Vital para que el padding no rompa el ancho */
+    }
+
+    /* Limita la altura para que puedas hacer scroll si la lista es larga */
+    .playlist-container, 
+    .search-results {
+        max-height: 250px;
+        overflow-y: auto;
+    }
+}
+              /* --- ESTILOS BARRA TERMÓMETRO --- */
+/* --- 🎭 ANIMACIONES NUEVAS 🎭 --- */
+
+/* 1. Definición de las animaciones */
+
+/* Aparición suave hacia arriba (Fade In Up) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Aparición lateral (Slide In) - Ideal para chats o listas */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Latido suave (Pulse) - Para botones importantes */
+@keyframes pulseSoft {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(255, 60, 140, 0.4); }
+    100% { transform: scale(1); }
+}
+
+/* Flotar (Float) - Para imágenes o stickers */
+@keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* --- 2. Aplicación a tus elementos --- */
+
+/* Animar la entrada de la tarjeta principal */
+.card {
+    animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Animar la entrada de la Playlist y Chat */
+.music-search-card, .chat-container {
+    animation: fadeInUp 1s ease-out backwards;
+    animation-delay: 0.3s; /* Aparecen un poco después */
+}
+
+/* Animar los items de la Playlist cuando aparecen */
+.song-item {
+    animation: slideInLeft 0.5s ease-out forwards;
+    opacity: 0; /* Oculto al inicio */
+    animation-delay: calc(var(--i) * 0.1s); /* Efecto cascada si usas JS, si no, es genérico */
+}
+/* Truco: Forzar que se vean si no usamos variables */
+.song-item:nth-child(1) { animation-delay: 0.1s; }
+.song-item:nth-child(2) { animation-delay: 0.2s; }
+.song-item:nth-child(3) { animation-delay: 0.3s; }
+.song-item:nth-child(4) { animation-delay: 0.4s; }
+.song-item:nth-child(n) { animation-fill-mode: forwards; }
+
+
+/* Botones más interactivos */
+.big-btn {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.big-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(255, 60, 140, 0.3);
+    filter: brightness(1.1);
+}
+
+.big-btn:active {
+    transform: scale(0.95);
+}
+
+/* Botón de "Pícale aquí" con latido */
+#apologyBtn {
+    animation: pulseSoft 2s infinite;
+}
+
+/* Imágenes y burbujas flotando */
+.note-bubble, .photo-circle img {
+    animation: floaty 6s ease-in-out infinite;
+}
+
+.note-bubble:nth-child(2) {
+    animation-delay: 1s; /* Para que no floten al mismo tiempo */
+}
+
+/* Chat mensajes aparición */
+.chat-message {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* Inputs más suaves al seleccionarlos */
+input:focus, select:focus {
+    transform: scale(1.02);
+    border-color: var(--accent);
+    box-shadow: 0 4px 15px rgba(255, 60, 140, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* --- ESTILOS PARA LA X DE CERRAR BURBUJAS --- */
+.note-bubble {
+    /* Aseguramos espacio para que la X no tape el texto */
+    padding-right: 25px !important; 
+    position: fixed; /* Esto ya lo tenías, pero aseguramos */
+}
+
+.close-bubble {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--accent); /* Usa el color rosita de tu tema */
+    cursor: pointer;
+    transition: 0.2s;
+    line-height: 1;
+    z-index: 5001; /* Para asegurar que esté encima del texto */
+}
+
+.close-bubble:hover {
+    color: red; /* Cambia a rojo al pasar el mouse */
+    transform: scale(1.2);
+}
+
+/* --- ESTILOS DE AMBIENTES --- */
+.vibe-buttons { display: flex; justify-content: center; gap: 10px; }
+.vibe-btn { width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; cursor: pointer; font-size: 18px; transition: transform 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.vibe-btn:hover { transform: scale(1.15); }
+
+/* Tema Lluvia */
+body.theme-rain {
+    --bg1: #cfd9df; --bg2: #e2ebf0; --accent: #607d8b; --text-main: #455a64;
+    background: linear-gradient(to bottom, #203a43, #2c5364); /* Fondo oscuro lluvioso */
+    color: #e0f7fa;
+}
+body.theme-rain .card { background: rgba(255,255,255,0.85); }
+
+/* Tema Noche */
+body.theme-night {
+    --bg1: #0f2027; --bg2: #203a43; --accent: #ffd700; --text-main: #e0e0e0;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    color: white;
+}
+body.theme-night .card { background: rgba(15, 15, 30, 0.85); border-color: #4a4a6a; }
+body.theme-night h1, body.theme-night .reasons-title { text-shadow: 0 0 10px #ffd700; }
+
+/* Tema Atardecer */
+body.theme-sunset {
+    --bg1: #ff9a9e; --bg2: #fad0c4; --accent: #ff6b6b; --text-main: #592e2e;
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+
+/* Animación Lluvia */
+.rain-drop {
+    position: fixed; top: -20px; width: 2px; height: 15px;
+    background: rgba(255, 255, 255, 0.6);
+    animation: rainFall 1s linear infinite; z-index: -1;
+}
+@keyframes rainFall { to { transform: translateY(105vh); } }
+
+/* Animación Estrellas */
+.star-twinkle {
+    position: fixed; width: 3px; height: 3px; background: white;
+    border-radius: 50%; animation: twinkle 2s infinite ease-in-out; z-index: -1;
+}
+@keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
+/* --- ESTILOS PANTALLA DE CARGA --- */
+#appLoader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #fff0f6; /* Mismo color de fondo rosa suave */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000; /* Por encima de TODO */
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* CSS actualizado para el corazón de imagen */
+.pixel-heart-loader {
+    width: 80px; /* Tamaño del corazón */
+    height: 80px;
+    /* Importante: hace que los pixeles se vean nítidos y no borrosos */
+    image-rendering: pixelated; 
+    animation: heartbeat 1s infinite;
+    /* Sombra rosita para que combine */
+    filter: drop-shadow(0 0 10px rgba(255, 60, 140, 0.6));
+}
+
+.loader-text {
+    margin-top: 20px;
+    font-family: 'Press Start 2P', cursive;
+    color: var(--accent);
+    font-size: 12px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes blink { 50% { opacity: 0.5; } }
+
+/* Clase para ocultarlo suavemente */
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+/* --- ESTILOS DE LA MASCOTA --- */
+.pixel-pet-container {
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+    z-index: 6000;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.pixel-pet-container:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.pet-img {
+    width: 60px;
+    image-rendering: pixelated; /* Truco para que se vea retro */
+    filter: drop-shadow(2px 2px 0 rgba(255,255,255,0.5));
+}
+
+.pet-bubble {
+    position: absolute;
+    top: -45px;
+    left: 10px;
+    background: #fff;
+    padding: 6px 12px;
+    border-radius: 15px;
+    border-bottom-left-radius: 2px; /* Estilo globo de cómic */
+    font-size: 11px;
+    font-family: 'Press Start 2P', cursive;
+    color: var(--text-main);
+    border: 2px solid var(--accent);
+    opacity: 0; /* Invisible por defecto */
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.pet-bubble.show {
+    opacity: 1;
+    transform: translateY(-10px);
+}
+
+/* Ajuste para celular para que no tape botones */
+@media (max-width: 768px) {
+    .pixel-pet-container {
+        bottom: 5px;
+        left: 5px;
+    }
+    .pet-img { width: 50px; }
+}
+            </style>
 </head>
+
 <body>
-
-    <div class="bg-gradient"></div>
-    <div id="hearts-container"></div>
-
-    <div class="container">
-        <div class="header-title">Perdoname <br> bonita.</div>
-
-        <div class="music-card" id="card">
-            <div class="album-wrapper">
-                <div class="album-art"></div>
-            </div>
-            <div class="song-info">
-                <p>Acurrucar</p>
-                <span>Ed Maverick</span>
-                <br>
-                <small id="statusText" style="color: var(--accent-light); font-weight: bold;">escuchala y puede que comprendas un poquito mas del como me siento, recuerda que yo te amo.</small>
-            </div>
-            <button id="play-btn">▶</button>
+    
+    <div id="loginOverlay">
+        <div id="loginBox">
+            <h2 class="reasons-title">Bienvenida <3< /h2>
+                    <p>olap pon un nombre de usuario para entrar :3 </p>
+                    <input type="text" id="usernameInput" placeholder="Tu nombre...">
+                    <p id="usernameError">Ese nombre ya está en uso. Intenta con otro.</p>
+                    <button class="big-btn" id="loginBtn">Entrar</button>
         </div>
-
-        <audio id="miAudio" src="cancion6.mp3" loop></audio>
-
-        <div class="message-box">
-            <div class="perdon-badge">una promesa.</div>
-            holapp yo se que tu ya no quieres seguir con nuestra relacion, pero quiero que me escuches porfavor y comprendas, tomame enserio, no estoy jugando para nada, todo lo que te he dicho hasta el momento lo hare, solo dame tu concentimiento y te juro que yo lo hare, tenlo por seguro, no me dare por vencido mariana, yo te amo, y yo cuando amo a alguien puedo hacer lo que sea por ella y mas si es por ti, que se q igual puede que no sientas lo que yo siento cuando te veo, te ves tan linda, aunque estes asi conmigo me gustas mucho y creo que jamas podre quitarme este sentimiento, entiendo si lo que quieres es que seamos amigos, pero quiero demostrarte que puedo hacer todo por ti, no habra ningun obstaculo, yo en verdad quiero algo formal contigo y perdoname por ser tan insistente pero es que yo se que lo puedo lograr, aunque tu tengas tus planes a futuro se podran cruzar con los mios, yo me encargare de eso, te lo juro por mi mismo. 
-
-            Te amo mucho, no olvides eso mariana, te amo con todo lo que eres tu, eres tan linda en todo sentido, he incluso me gusta mirarte y apreciar lo hermosa que eres, pero quiero que entendieras eso mariana porfavor, no dejemos esto asi. Te lo juro que todo saldra bien, porfavor bonita yo te amo mucho y yo hare lo que sea por estar contigo, cambiar es lo de menos, porque seria mejor para ti y para mi y yo quiero que tu estes bien, te juro que no te faltara nada conmigo ni actualmente ni en un futuro, yo puedo hacer de todo contigo lo unico que no podria seria ir a un antro pero solo eso, de ahi en mas mariana puedo hacer todo, ya ahorita busque mi pasaporte, mi curp, mi acta y mis constancias de estudios, solo me faltaria los recibos y lo del formulario ds 160 o algo asi era pero por eso en esta semana ire me apurare con eso en verdad necesito apurarme con todo eso, no te quedaras estancada conmigo mariana porque yo no soy un conformista, yo quiero salir adelante y no vivir aqui tampoco, yo se que ganare mucho dinero y eso tambien te lo puedo jurar porque se que lo que hago es mucha experiencia y muy bien pagado, no me han aceptado en trabajos donde pagan bien de los que son remotamente por mi edad pero cuando falte unos 4 meses para cumplir los 18 ya me aceptan en trabajos mas complicados y asi, sin embargo por el momento yo hare mas cosas para ganar mas e ir ahorrando para comprar un departamento en un año o un año y medio probablemente ya pueda comprar uno, estuve investigando y cuestan aldrededor de 100,000 dolares y mensualmente pagaria 1000 asi que no es tanto pedo yo estare estudiando, trabajando y viviendo en el paso estoy completamente seguro de eso incluso si tu planeas irte a otro lugar no hay problema yo podre ir, voy a hacer todo desde ahora y veras que pronto todo saldra bien, y cuando tu lo puedas ver que lo estoy haciendo espero podamos seguir porque te entiedno ahora mismo, se que ahorita no me tomaras en serio pero yo estoy diciendote esto con toda mi alma, tampoco me gusta contar mis planes pero mirap contigo yo los comparto porque se que tu tienes planes asi y tu tambien quieres salir adelante, mientras los dos querarramos salir adelante, lo lograremos, para todo hay solucion. 
-
-            Te amo mariana, te amo y se que no me quieres lastimar pero no lo haces bonita, yo en verdad quiero seguir contigo y quiero que todo salga bien, porfavor dejame serlo, dejame ser ese que te de todo el amor y la vida que te mereces, creeme que conmigo nada te faltara, todo te lo dare mi bonita, ni siquiera tendrias q trabajar, solo dame tiempo mariana, dame tiempo y veras que todo saldra bien.
-        </div>
-        
-        <div class="footer-text">Hecho por brau para mariana <3 </div>
+    </div>
+    <div id="lastUpdate">Última actualización: 3:41 PM 12/12/25</div>
+    <div id="pixel-rain-container"></div>
+    <div id="noteBubble" class="note-bubble">
+        <span class="close-bubble">✕</span> 💌 HOLAAA SABIAS QUE ERES HERMOSAAA, ESPERO TE VAYA MUI BIEN ESTE DIA, TE JURO Q NO PARO DE PENSAR EN TI.
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <div id="noteBubble2" class="note-bubble" style="bottom:auto; top:100px; background:#e1f5fe;">
+        <span class="close-bubble">✕</span> ola hermosa, sabias q estasbien hermosa si sabias? estas muibonita
+        <333 <img src="https://i.ibb.co/HpkBzYLF/custom-ava-4.png" alt="emoji"
+            style="width:55px; height:55px; vertical-align:middle;">
+    </div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="vignette"></div>
+    <div class="wrap" style="display: none;">
+        
+        <div class="card" role="region" aria-label="Dedicado">
+            <div class="title-row">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <h1>
+                        <img src="https://art.pixilart.com/2d2ed65cc301.png" width="32" height="32"
+                            style="margin-right:8px">
+                        <span class="typewriter">PARA TI</span>
+                    </h1>
 
-    <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-    import { getDatabase, ref, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+                    <div class="hud-row small">
+                        <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26"
+                            alt="Corazón">
+                        <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26"
+                            alt="Corazón">
+                        <img class="pixel-heart" src="https://art.pixilart.com/2d2ed65cc301.png" width="26" height="26"
+                            alt="Corazón">
+                    </div>
+                </div>
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
-        authDomain: "pagina-81a41.firebaseapp.com",
-        databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
-        projectId: "pagina-81a41",
-        storageBucket: "pagina-81a41.appspot.com",
-        messagingSenderId: "803503362455",
-        appId: "1:803503362455:web:ebf1271cf65943210174d2"
-    };
+                <div class="texto-centrado" style="text-align: center; margin: 30px 0 20px 0;">
+                    <h2
+                        style="font-family: 'Press Start 2P', cursive; color: #ff3b8d; font-size: 24px; text-shadow: 0 4px 12px rgba(255, 80, 150, 0.3); line-height: 1.4; animation: textGlow 3s ease-in-out infinite alternate;">
+                        <3333 </h2>
+                            <p
+                                style="font-family: 'Delius', cursive; color: #6e6170; font-size: 16px; margin-top: 15px; line-height: 1.5; padding: 0 10px; animation: subtleFloat 10s ease-in-out infinite;">
+                                💌 ERES LAMASHERMOSAAA, ME ENCANTAS, DIOSMIO <3333 </p>
+                </div>
+<div class="vibe-section" style="text-align: center; margin-bottom: 20px;">
+    <p class="small" style="margin-bottom: 8px;">Cambiar tema :3:</p>
+    <div class="vibe-buttons">
+        <button class="vibe-btn" onclick="setTheme('default')" style="background: #ffb7b2;">🌸</button>
+        <button class="vibe-btn" onclick="setTheme('rain')" style="background: #a2c2e0;">🌧️</button>
+        <button class="vibe-btn" onclick="setTheme('night')" style="background: #2a2530; color:white;">🌌</button>
+        <button class="vibe-btn" onclick="setTheme('sunset')" style="background: linear-gradient(45deg, #ff9a9e, #fad0c4);">🌅</button>
+    </div>
+</div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <img src="https://i.ibb.co/3mzV68kh/22-sin-t-tulo-20251110075801.png" alt="rendersito"
+                        style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 5px 15px rgba(255, 255, 255, 0.25); transition: transform 0.5s ease, box-shadow 0.5s ease;">
+                </div>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+                <div style="display:flex;gap:10px;align-items:center">
+                    <div class="sub">emocat · my · special · girl</div>
+                    <button class="big-btn" id="specialGiftBtn" style="background: linear-gradient(45deg, #ff3b8d, #ff9ebb); color: white; border: 2px solid white;">
+                        🎁 omgggg
+                    </button>
+                    <button class="big-btn" id="shareBtn" aria-label="Compartir">💌 Compartir</button>
+                    <button id="themeToggleBtn" class="big-btn"
+                        style="background: #7b6e70; padding: 8px 12px; font-size: 14px;">🌙</button>
+                </div>
+            </div>
 
-    // --- IDENTIFICACIÓN SILENCIOSA ---
-    // Busca 'username' en la caché del navegador de Mariana
-    const identificadoComo = localStorage.getItem('username') || 'Alguien (Sin caché)';
+            <div class="player" style="margin-top:15px">
+                <div class="play-card">
+                    <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                            <div style="display:flex;flex-direction:column">
+                                <strong id="songTitle"
+                                    style="color:var(--accent);font-size:16px; animation: subtleFloat 8s ease-in-out infinite;">ICNBYH</strong>
+                                <span id="songArtist" class="small">Cuco</span>
+                                <img id="albumCoverImg"
+                                    src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ff/6b/23/ff6b23a2-613a-98f2-6098-008412568e71/25UMGIM05523.rgb.jpg/1200x1200bf-60.jpg"
+                                    alt="Portada del álbum" class="album-cover">
+                            </div>
+                            <div style="display:flex;gap:10px;align-items:center">
+                                <button class="big-btn" id="prevBtn"
+                                    style="font-size: 20px; padding: 8px 14px;">⏪</button>
+                                <button class="big-btn" id="playToggle">▶</button>
+                                <button class="big-btn" id="nextBtn"
+                                    style="font-size: 20px; padding: 8px 14px;">⏩</button>
+                            </div>
+                        </div>
+                        <audio id="audio" preload="metadata">
+                            <source src="" type="audio/mpeg">
+                            Tu navegador no soporta audio.
+                        </audio>
+                        <div class="audio-error" id="audioError">
+                            No se pudo cargar el audio. Asegúrate de tener conexión a internet.
+                        </div>
+                        <input type="range" id="seek" class="seek" min="0" step="0.1" value="0"
+                            aria-label="barra de progreso">
+                    </div>
+                    <div style="width:160px;display:flex;flex-direction:column;align-items:flex-end">
+                        <div
+                            style="font-weight:900;color:#7b6374;font-size:15px; animation: subtleFloat 9s ease-in-out infinite;">
+                            Reproduce esta canción (todas estas cancioncitas te las dedico)
+                        </div>
+                        <div class="small" style="margin-top:8px">Toca la pantalla para crear corazones</div>
+                    </div>
+                </div>
 
-    function registrarEvento(tipo) {
-        const rutaRef = ref(db, 'apology_page_events');
-        push(rutaRef, {
-            visitor: identificadoComo, // Aquí saldrá "Mariana" si ya entró a tus otros sitios
-            eventType: tipo,
-            timestamp: serverTimestamp(),
-            horaLocal: new Date().toLocaleString()
-        }).catch(e => console.error("Error log:", e));
-    }
+                <div style="width:220px;display:flex;flex-direction:column;gap:10px">
+                    <div class="game-card">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <div class="small">Juego</div>
+                            <div class="score" id="score">0</div>
+                        </div>
+                        <div style="margin-top:10px;font-size:13px;color:#6b5866">Atrapa corazones tocándolos.
+                            Duración 25s
+                        </div>
+                        <div style="display:flex;gap:10px;margin-top:15px">
+                            <button class="big-btn" id="startGame"
+                                style="padding:10px 12px;font-size:13px">Jugar</button>
+                            <button class="big-btn" id="resetGame"
+                                style="padding:10px 12px;font-size:13px;background:linear-gradient(180deg,#fff,#ffd7ec);color:var(--accent)">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="game-panel">
+                <div class="game-card" style="flex:1">
+                    <div id="viewport" class="game-viewport" aria-label="Área de juego táctil">
+                    </div>
+                </div>
+                <div class="game-card" style="width:220px">
+                    <div
+                        style="font-weight:900;color:var(--accent);font-size:20px; animation: textGlow 3s ease-in-out infinite alternate;">
+                        Logros</div>
+                    <div style="margin-top:10px" id="achievements">
+                        <div class="small">— Toca para crear corazoncitos</div>
+                        <div class="small">— Aumenta la dificultad a 15 pts</div>
+                        <div class="small">— <33 </div>
+                        </div>
+                    </div>
+                </div>
 
-    // Log automático al abrir
-    window.addEventListener('load', () => {
-        registrarEvento("Abrió la página de Mariana");
-    });
+                <div class="reasons-section">
+                    <h2 class="reasons-title">100 razones por las que me encantas</h2>
+                    <p class="small" style="margin-bottom: 20px;">(Y me faltan muchas mas mibonita)</p>
 
-    // --- LÓGICA DEL REPRODUCTOR ---
-    const audio = document.getElementById('miAudio');
-    const btn = document.getElementById('play-btn');
-    const card = document.getElementById('card');
-    const status = document.getElementById('statusText');
+                    <div class="reasons-container"
+                        style="max-height: 500px; overflow-y: auto; padding: 10px; border: 2px dashed rgba(255,100,150,0.3); border-radius: 15px;">
 
-    btn.addEventListener('click', function() {
-        if (audio.paused) {
-            audio.play().then(() => {
-                btn.innerText = '⏸';
-                card.classList.add('playing');
-                status.innerText = "Escuchando contigo...";
-                registrarEvento("Dio PLAY a la canción");
-            });
-        } else {
-            audio.pause();
-            btn.innerText = '▶';
-            card.classList.remove('playing');
-            status.innerText = "Pausó la música";
-            registrarEvento("Pausó la canción");
+                        <div class="reason-card">
+                            <div class="reason-number">1</div>
+                            <div class="reason-text">Porque eres mibonita.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">2</div>
+                            <div class="reason-text">Por tus ojos que me gustaria ver todos los dias.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">3</div>
+                            <div class="reason-text">Por tu sonrisa hermosa.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">4</div>
+                            <div class="reason-text">Por tu cuerpo que es perfecto.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">5</div>
+                            <div class="reason-text">Por tus labios que sueño con besar.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">6</div>
+                            <div class="reason-text">Por tu cintura.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">7</div>
+                            <div class="reason-text">Por tus piernas lindas.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">8</div>
+                            <div class="reason-text">Por tus manos suaves.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">9</div>
+                            <div class="reason-text">Por tu cabello hermoso.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">10</div>
+                            <div class="reason-text">Por tu naricita preciosa.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">11</div>
+                            <div class="reason-text">Por como te ves con cualquier ropa.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">12</div>
+                            <div class="reason-text">Por tu cuello (me gustaría besarlo todo el tiempo).</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">13</div>
+                            <div class="reason-text">Por el amor que te tengo.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">14</div>
+                            <div class="reason-text">Por las inmensas ganas que tengo de besarte.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">15</div>
+                            <div class="reason-text">Por tu piel.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">16</div>
+                            <div class="reason-text">Por tu silueta.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">17</div>
+                            <div class="reason-text">Por tus curvas mibonita.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">18</div>
+                            <div class="reason-text">Por tu abdomen.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">19</div>
+                            <div class="reason-text">Por tus lunares (me encantaría besar cada uno de ellos).</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">20</div>
+                            <div class="reason-text">Por tus cejas lindas.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">21</div>
+                            <div class="reason-text">Por tus pestañas.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">22</div>
+                            <div class="reason-text">Por como te ves en cualquier momento.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">23</div>
+                            <div class="reason-text">Por como te ves tan guapa.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">24</div>
+                            <div class="reason-text">Por tu estatura.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">25</div>
+                            <div class="reason-text">Por tu espalda.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">26</div>
+                            <div class="reason-text">Por tus hombros.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">27</div>
+                            <div class="reason-text">Por lo hermosa que te veías en el cine.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">28</div>
+                            <div class="reason-text">Por como te ves cuando te ríes.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">29</div>
+                            <div class="reason-text">Por como te ves despeinada.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">30</div>
+                            <div class="reason-text">Por tu carita.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">31</div>
+                            <div class="reason-text">Por tus labios lindos.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">32</div>
+                            <div class="reason-text">Por tus orejitas.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">33</div>
+                            <div class="reason-text">Por tu mirada intensa.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">34</div>
+                            <div class="reason-text">Por como te mirabas.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">35</div>
+                            <div class="reason-text">Por como me senti al abrazarte.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">36</div>
+                            <div class="reason-text">Por lo que me hace sentir.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">37</div>
+                            <div class="reason-text">Por tus manos.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">38</div>
+                            <div class="reason-text">Por como se te ve el pelo.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">39</div>
+                            <div class="reason-text">Por como te imagino.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">40</div>
+                            <div class="reason-text">Porque físicamente eres mi ideal.</div>
+                        </div>
+
+                        <div class="reason-card">
+                            <div class="reason-number">41</div>
+                            <div class="reason-text">Porque eres única.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">42</div>
+                            <div class="reason-text">Por tu inteligencia.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">43</div>
+                            <div class="reason-text">Por tu sentido del humor.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">44</div>
+                            <div class="reason-text">Por tu risa contagiosa.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">45</div>
+                            <div class="reason-text">Por tu voz que es mi sonido favorito.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">46</div>
+                            <div class="reason-text">Porque aunque no tenga ganas de hablar siempre aunque sea un poco me
+                                gusta hablar contigo.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">47</div>
+                            <div class="reason-text">Porque me permites escucharte.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">48</div>
+                            <div class="reason-text">Porque me tienes paciencia ya que soy muy tonto.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">49</div>
+                            <div class="reason-text">Porque eres tierna.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">50</div>
+                            <div class="reason-text">Porque eres fuerte.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">51</div>
+                            <div class="reason-text">Porque eres valiente.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">52</div>
+                            <div class="reason-text">Porque confías en mí.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">53</div>
+                            <div class="reason-text">Porque me haces sentir seguro.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">54</div>
+                            <div class="reason-text">Por tus ataques de amor.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">55</div>
+                            <div class="reason-text">Por tus celos (me gustan).</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">56</div>
+                            <div class="reason-text">Porque me encantas.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">57</div>
+                            <div class="reason-text">Porque eres divertida.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">58</div>
+                            <div class="reason-text">Porque nunca me aburro contigo.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">59</div>
+                            <div class="reason-text">Porque me entiendes.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">60</div>
+                            <div class="reason-text">Por tus mensajes bonitos.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">61</div>
+                            <div class="reason-text">Por como se ven tus ojos.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">62</div>
+                            <div class="reason-text">Porque eres trabajadora.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">63</div>
+                            <div class="reason-text">Porque eres creativa.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">64</div>
+                            <div class="reason-text">Porque tienes un gusto precioso para la musica.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">65</div>
+                            <div class="reason-text">Porque me aceptas como soy.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">66</div>
+                            <div class="reason-text">Porque me haces querer ser mejor.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">67</div>
+                            <div class="reason-text">Porque eres muy pero muy bonita.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">68</div>
+                            <div class="reason-text">Porque eres sincera.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">69</div>
+                            <div class="reason-text">Por eso que me encanta.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">70</div>
+                            <div class="reason-text">Porque eres mibonitalindahermosa.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">71</div>
+                            <div class="reason-text">Porque eres apasionada.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">72</div>
+                            <div class="reason-text">Porque no te das por vencida.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">73</div>
+                            <div class="reason-text">Por tu forma de ser tan tú.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">74</div>
+                            <div class="reason-text">Porque aguantas mis tonterías.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">75</div>
+                            <div class="reason-text">Porque eres la más bonita del mundo.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">76</div>
+                            <div class="reason-text">Porque tu voz me da paz.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">77</div>
+                            <div class="reason-text">Porque me alegras los días malos.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">78</div>
+                            <div class="reason-text">Porque hablar contigo es lo mejor.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">79</div>
+                            <div class="reason-text">Porque te extraño cuando no estás.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">80</div>
+                            <div class="reason-text">Porque sueño contigo.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">81</div>
+                            <div class="reason-text">Porque eres mi prioridad.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">82</div>
+                            <div class="reason-text">Porque me complementas.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">83</div>
+                            <div class="reason-text">Porque eres mi todo.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">84</div>
+                            <div class="reason-text">Porque me gusta presumirte.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">85</div>
+                            <div class="reason-text">Porque me gusta cuidarte.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">86</div>
+                            <div class="reason-text">Por lo mucho que me gustas.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">87</div>
+                            <div class="reason-text">Por nuestros chistes rancios.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">88</div>
+                            <div class="reason-text">Por las ganas que tengo de verte de nuevo.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">89</div>
+                            <div class="reason-text">Porque eres mi debilidad.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">90</div>
+                            <div class="reason-text">Porque contigo aprendi a querer.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">91</div>
+                            <div class="reason-text">Porque eres irresistible.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">92</div>
+                            <div class="reason-text">Porque cada día me gustas más.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">93</div>
+                            <div class="reason-text">Porque no hay nadie como tú.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">94</div>
+                            <div class="reason-text">Porque eres auténtica.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">95</div>
+                            <div class="reason-text">Porque eres tan hermosa.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">96</div>
+                            <div class="reason-text">Porque eres bonita.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">97</div>
+                            <div class="reason-text">Porque me inspiras.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">98</div>
+                            <div class="reason-text">Porque te admiro.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">99</div>
+                            <div class="reason-text">Porque me haces feliz.</div>
+                        </div>
+                        <div class="reason-card">
+                            <div class="reason-number">100</div>
+                            <div class="reason-text">Simplemente porque te amo mibonita.</div>
+                        </div>
+                    </div>
+                    <div>
+
+                        <button class="big-btn apology-btn" id="apologyBtn">PICALE AQUI KASJ</button>
+                    </div>
+
+                </div>
+
+                <div class="music-section">
+                    <h2 class="reasons-title">Playlist</h2>
+                    <div class="music-search-card">
+                        <div class="search-column">
+                            <h3 class="sub" style="text-align:center; margin-top:0;">1. Busca una Canción</h3>
+                            <input type="text" id="musicSearchInput" class="search-input"
+                                placeholder="Nombre de la canción o artista...">
+                            <div class="search-results" id="searchResultsContainer">
+                                <p class="small" style="text-align:center; padding-top: 20px;">Los resultados de
+                                    la búsqueda aparecerán aquí...</p>
+                            </div>
+                        </div>
+                        <div class="playlist-column">
+                            <h3 class="sub" style="text-align:center; margin-top:0;">2. playlist</h3>
+                            <div class="playlist-container" id="sharedPlaylistContainer">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="youtubePlayerContainer">
+                        <iframe id="youtubePlayer" allow="autoplay"></iframe>
+                    </div>
+                </div>
+
+             <div class="chat-section">
+                <h2 class="reasons-title" id="chatTitle">Chatsito</h2>
+                
+                <p id="currentUserDisplay" class="small" style="margin-bottom: 15px; font-weight: bold; color: var(--accent);"></p>
+
+                <div class="chat-container">
+                    <div class="recipient-selection">
+                        <span>Enviar a:</span>
+                        <select id="recipientSelect">
+                            <option value="">Selecciona a alguien</option>
+                        </select>
+                    </div>
+
+                    <div class="chat-messages" id="chatMessages">
+                    </div>
+
+                    <div id="replyPreview" class="reply-preview-bar">
+                        <div id="replyContent">
+                            <div style="font-weight:bold; color:var(--accent);">Respondiendo a:</div>
+                            <span id="replyText" style="font-style:italic; font-size:10px;">...</span>
+                        </div>
+                        <button onclick="cancelReply()" style="border:none; background:transparent; font-size:16px; color:#999; cursor:pointer;">✕</button>
+                    </div>
+
+                    <div class="chat-input-area" style="display: flex; gap: 5px;">
+                        <input type="text" id="chatInput" placeholder="mensaje">
+                        <button class="big-btn" id="sendMessageBtn">Enviar</button>
+                    </div>
+                </div> 
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="big-btn" id="logoutBtn" style="background: #ff73a7; font-size: 12px; padding: 8px 15px;">
+                        ⬅ Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+            
+
+                <div class="drawing-section">
+                    <h2 class="reasons-title">Dibujitos pros</h2>
+                    <div class="drawing-container">
+                        <div class="toolbar">
+                            <span>Herramientas:</span>
+                            <button class="color-btn active" data-color="#ff3b8d"
+                                style="background: #ff3b8d;"></button>
+                            <button class="color-btn" data-color="#2a2530" style="background: #2a2530;"></button>
+                            <input type="color" id="customColorPicker" value="#ff3b8d">
+                            <button class="tool-btn" id="eraserBtn">✏️</button>
+                            <button class="tool-btn" id="textBtn">Tᵗ</button>
+                            <button class="big-btn" id="clearCanvasBtn"
+                                style="padding: 8px 12px; font-size: 13px; margin-left: auto;">Limpiar</button>
+                        </div>
+                        <canvas id="sharedCanvas"></canvas>
+                    </div>
+                </div>
+
+                <div style="display:flex;gap:10px;align-items:center;margin-top:15px;flex-wrap:wrap;">
+                    <button class="big-btn" id="moreHearts">💗 +Hacer llover corazones</button>
+                    <button class="big-btn" id="miniConfetti"
+                        style="background:linear-gradient(180deg,#fff,#ffd7ec);color:var(--accent)">
+                        Celebrar</button>
+                </div>
+<div class="lamp-section" style="margin-top: 40px; text-align: center;">
+    <h2 class="reasons-title">Señal de Luz</h2>
+    <p class="small">luz prosita.</p>
+    
+    <div class="lamp-container" onclick="toggleLamp()">
+        
+        <div class="lamp-wire"></div>
+        <div id="lampIcon" class="lamp-bulb">💡</div>
+    </div>
+    
+    <p id="lampStatusText" class="minimal-desc" style="margin-top: 20px;">Apagada</p>
+</div>
+<div class="confetti" id="confetti"></div>
+
+               <div class="pixel-pet-container" id="pixelPet" onclick="petInteraction()">
+                    <div class="pet-bubble" id="petBubble">Zzz... </div>
+                    <img src="https://i.pinimg.com/originals/7c/1f/11/7c1f1122e45db07bdeaf3faddbf4b86e.gif" class="pet-img" alt="Pochi el perrito">
+                </div>
+                <footer>
+                    Hecho con por braw para emo (tequieromucho mariana.)
+                    <p style="font-size: 6px; color: gray; margin-top: 30px;">
+                        Powered By BrauuStudiosSC
+                    </p>
+                </footer>
+            </div>
+
+            <div class="secret-message" id="secretMessage"></div>
+            <div class="vignette" aria-hidden="true"></div>
+
+            <div id="specialOverlay" class="special-overlay">
+                <div class="stars-bg"></div>
+                <div class="magic-card">
+                    <button class="close-overlay-btn" id="closeSpecialBtn">✕</button>
+                    <div class="magic-header">
+                        <img src="https://art.pixilart.com/2d2ed65cc301.png" class="floating-icon">
+                        <h2>Mibonita.</h2>
+                        <img src="https://art.pixilart.com/2d2ed65cc301.png" class="floating-icon"
+                            style="animation-delay: 1s;">
+                    </div>
+                    <div class="magic-body">
+                        <div class="photo-circle">
+                            <img src="https://i.ibb.co/4ypWdNc/4-sin-titulo-20251123170921.png"
+                                alt="Foto">
+                        </div>
+                        <p class="typing-text">
+
+                            hola perdon por ser un tonto, no queria que te molestaras conmigo, perdoname enserio, tu sabes q t
+                            <br><br>
+                            <strong>Teamo.<3</strong>
+                        </p>
+                    </div>
+                    <div class="magic-footer">
+                        <span>💌</span>
+                    </div>
+                </div>
+            </div>
+
+           <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+        import { getDatabase, ref, push, onValue, get, set, off, remove } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
+        // 1. CONFIGURACIÓN
+        // --- PEGA ESTO AL PRINCIPIO DEL SCRIPT, ANTES DE FIREBASECONFIG ---
+const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM"; 
+// ------------------------------------------------------------------
+        const firebaseConfig = {
+            apiKey: "AIzaSyDj2tNpNgiZPWtTYKotGq3ULALzJltHOKM",
+            authDomain: "pagina-81a41.firebaseapp.com",
+            databaseURL: "https://pagina-81a41-default-rtdb.firebaseio.com",
+            projectId: "pagina-81a41",
+            storageBucket: "pagina-81a41.appspot.com",
+            messagingSenderId: "803503362455",
+            appId: "1:803503362455:web:ebf1271cf65943210174d2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        let currentUser = localStorage.getItem('username');
+        let messagesRef = null;
+
+        // Elementos DOM Globales
+        const loginOverlay = document.getElementById('loginOverlay');
+        const usernameInput = document.getElementById('usernameInput');
+        const loginBtn = document.getElementById('loginBtn');
+        const usernameError = document.getElementById('usernameError');
+        const wrap = document.querySelector('.wrap');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // --- LOGIN ---
+        async function login() {
+            const username = usernameInput.value.trim().toLowerCase();
+            if (username === '') return;
+            const usersRef = ref(db, 'users/' + username);
+            const snapshot = await get(usersRef);
+
+            if (snapshot.exists() && username !== 'braw' && username !== 'emo') {
+                usernameError.style.display = 'block';
+            } else {
+                await set(usersRef, true);
+                localStorage.setItem('username', username);
+                currentUser = username;
+                loginOverlay.style.display = 'none';
+                wrap.style.display = 'flex';
+                initializeAppLogic();
+            }
         }
-    });
-</script>
 
-<script>
-    // Animación de corazones (Javascript normal)
-    function createHeart() {
-        const container = document.getElementById('hearts-container') || document.body;
-        const heart = document.createElement('div');
-        heart.innerHTML = '❤️';
-        heart.className = 'bg-hearts';
-        heart.style.cssText = `
-            position: fixed;
-            left: ${Math.random() * 100}vw;
-            top: 110vh;
-            font-size: ${Math.random() * 20 + 10}px;
-            opacity: ${Math.random() * 0.5 + 0.3};
-            z-index: 0;
-            pointer-events: none;
-            transition: transform 6s linear, opacity 6s;
-        `;
-        container.appendChild(heart);
-        setTimeout(() => {
-            heart.style.transform = `translateY(-120vh) rotate(${Math.random() * 360}deg)`;
-            heart.style.opacity = '0';
-        }, 50);
-        setTimeout(() => heart.remove(), 7000);
-    }
-    setInterval(createHeart, 400);
-</script>
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.reload();
+        }
+
+        if(loginBtn) loginBtn.addEventListener('click', login);
+        if(logoutBtn) logoutBtn.addEventListener('click', logout);
+        if(usernameInput) usernameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') login(); });
+
+        if (currentUser) {
+            if(loginOverlay) loginOverlay.style.display = 'none';
+            if(wrap) wrap.style.display = 'flex';
+            initializeAppLogic();
+        }
+
+       // --- LOG DE ACTIVIDAD COMPLETO (Recuperado) ---
+        async function logUserActivity(eventType, details = {}) {
+            if (!currentUser) return; // Si no hay usuario, no guarda nada
+            
+            try {
+                await push(ref(db, "user_logs"), {
+                    user: currentUser,              // Quién es (ej: emo)
+                    eventType: eventType,           // Qué hizo (ej: SONG_ADDED)
+                    details: details,               // Info extra (ej: { song: 'Lofi' })
+                    url: window.location.href,      // Desde qué link está (URL actual)
+                    timestamp: new Date().toISOString() // Hora exacta
+                });
+            } catch (e) { 
+                console.error("Error guardando log:", e); 
+            }
+        }
+        // --- LÓGICA PRINCIPAL ---
+        function initializeAppLogic() {
+            const userDisplay = document.getElementById('currentUserDisplay');
+            if(userDisplay) userDisplay.textContent = `${currentUser}`;
+            
+            logUserActivity('LOGIN_SUCCESS');
+            
+            // === 1. LÁMPARA DE COMPAÑÍA ===
+            const lampRef = ref(db, 'status_lamp');
+            const lampIcon = document.getElementById('lampIcon');
+            const lampText = document.getElementById('lampStatusText');
+            let isLampOn = false;
+
+            window.toggleLamp = function() {
+                
+                const newState = !isLampOn;
+                logUserActivity('LAMP_TOGGLE', { state: newState ? 'Encendida' : 'Apagada' });
+                set(lampRef, { isOn: newState, user: currentUser, timestamp: new Date().toISOString() })
+                .catch(e => console.log("Error lámpara:", e));
+            };
+
+            if (lampIcon) {
+                onValue(lampRef, (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        isLampOn = data.isOn;
+                        if (isLampOn) {
+                            lampIcon.classList.add('on');
+                            if(lampText) {
+                                lampText.textContent = `Encendida por ${data.user === currentUser ? 'ti' : data.user} ✨`;
+                                lampText.style.color = "#ffb300";
+                            }
+                        } else {
+                            lampIcon.classList.remove('on');
+                            if(lampText) {
+                                lampText.textContent = "Apagada 🌑";
+                                lampText.style.color = "#888";
+                            }
+                        }
+                    }
+                });
+            }
+
+           // === 2. CHAT (CORREGIDO) ===
+           // === 2. CHAT (FINAL: CON LOGS, HORA Y RESPUESTAS) ===
+            const recipientSelect = document.getElementById('recipientSelect');
+            const sendMessageBtn = document.getElementById('sendMessageBtn');
+            const chatInput = document.getElementById('chatInput');
+            
+            // Variables para respuesta
+            let replyingTo = null;
+            const replyPreview = document.getElementById('replyPreview');
+            const replyTextDisplay = document.getElementById('replyText');
+
+            // Funciones Globales para respuesta
+            window.setReply = function(text, author) {
+                replyingTo = { text, author };
+                replyPreview.style.display = 'flex';
+                replyTextDisplay.innerHTML = `<span style="color:#ff3b8d">${author}</span>: ${text.substring(0, 25)}...`;
+                chatInput.focus();
+            };
+
+            window.cancelReply = function() {
+                replyingTo = null;
+                replyPreview.style.display = 'none';
+            };
+
+            // Función para cargar mensajes (definida antes para evitar errores)
+           // 1. Definimos loadChat (CON SOPORTE PARA CELULAR 📱)
+            function loadChat(recipient) {
+                const chatMessages = document.getElementById('chatMessages');
+                if (!chatMessages) return;
+
+                if (messagesRef) off(messagesRef);
+                chatMessages.innerHTML = '';
+
+                if (recipient) {
+                    const chatRoomId = [currentUser, recipient].sort().join('_');
+                    messagesRef = ref(db, `chats/${chatRoomId}`);
+
+                    onValue(messagesRef, (snapshot) => {
+                        chatMessages.innerHTML = '';
+                        const data = snapshot.val();
+                        if (data) {
+                            Object.values(data).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)).forEach(msg => {
+                                const el = document.createElement('div');
+                                el.className = `chat-message ${msg.author === currentUser ? 'sent' : 'received'}`;
+                                
+                                // 1. CONTENIDO (Cita + Texto + Hora)
+                                let replyHTML = '';
+                                if (msg.replyData) {
+                                    replyHTML = `<div class="quoted-message"><span class="quoted-author">${msg.replyData.author}</span><span>${msg.replyData.text}</span></div>`;
+                                }
+
+                                let timeString = "";
+                                if (msg.timestamp) {
+                                    const dateObj = new Date(msg.timestamp);
+                                    timeString = `<span class="message-time">${dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
+                                }
+
+                                el.innerHTML = `
+                                    ${replyHTML}
+                                    ${msg.text}
+                                    ${timeString}
+                                `;
+
+                                // Nombre del autor
+                                if (msg.author !== currentUser) {
+                                    const s = document.createElement('span');
+                                    s.className = 'message-author';
+                                    s.textContent = msg.author;
+                                    el.prepend(s);
+                                }
+
+                                // 2. LÓGICA DE DOBLE TOQUE (Funciona en Celular y PC)
+                                let lastTap = 0;
+                                el.addEventListener('click', (e) => {
+                                    const currentTime = new Date().getTime();
+                                    const tapLength = currentTime - lastTap;
+                                    
+                                    // Si tocas 2 veces en menos de medio segundo (500ms)
+                                    if (tapLength < 500 && tapLength > 0) {
+                                        e.preventDefault(); // Evita zoom en algunos cels
+                                        window.setReply(msg.text, msg.author);
+                                    }
+                                    lastTap = currentTime;
+                                });
+
+                                chatMessages.appendChild(el);
+                            });
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                        }
+                    });
+                }
+            }
+
+            // Ejecución Lógica Chat
+            if(recipientSelect) {
+                const usersRef = ref(db, 'users');
+                onValue(usersRef, (snapshot) => {
+                    const users = snapshot.val();
+                    const currentVal = recipientSelect.value;
+                    recipientSelect.innerHTML = '<option value="">Selecciona a alguien</option>';
+                    if (users) {
+                        Object.keys(users).forEach(user => {
+                            if (user !== currentUser) {
+                                const option = document.createElement('option');
+                                option.value = user;
+                                option.textContent = user;
+                                recipientSelect.appendChild(option);
+                            }
+                        });
+                    }
+                    if(currentVal) recipientSelect.value = currentVal;
+                });
+
+                recipientSelect.addEventListener('change', () => {
+                    const selectedUser = recipientSelect.value;
+                    if(selectedUser) {
+                        logUserActivity('CHAT_SELECT_RECIPIENT', { recipient: selectedUser });
+                        loadChat(selectedUser);
+                    }
+                });
+                
+                if(sendMessageBtn && chatInput) {
+                    chatInput.addEventListener('focus', () => {
+                        logUserActivity('CHAT_INPUT_FOCUS');
+                    });
+
+                    const sendMsg = () => {
+                        const recipient = recipientSelect.value;
+                        const text = chatInput.value.trim();
+                        if (recipient && text) {
+                            const chatRoomId = [currentUser, recipient].sort().join('_');
+                            const payload = { text: text, author: currentUser, timestamp: new Date().toISOString() };
+                            
+                            if (replyingTo) payload.replyData = replyingTo; // Adjuntar cita
+
+                            push(ref(db, `chats/${chatRoomId}`), payload);
+                            
+                            logUserActivity('CHAT_MESSAGE_SENT', { recipient: recipient });
+                            
+                            chatInput.value = '';
+                            window.cancelReply();
+                        }
+                    };
+
+                    sendMessageBtn.addEventListener('click', sendMsg);
+                    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMsg(); });
+                }
+            }
+
+            // === 3. PIZARRA ===
+            const canvas = document.getElementById('sharedCanvas');
+            if(canvas) {
+                const ctx = canvas.getContext('2d');
+                const drawingsRef = ref(db, 'drawings');
+                let isDrawing = false, lastX = 0, lastY = 0, currentColor = '#ff3b8d', currentTool = 'draw';
+
+                function resizeCanvas() { 
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    canvas.width = rect.width; 
+                    canvas.height = 400; 
+                }
+                window.addEventListener('resize', resizeCanvas); 
+                resizeCanvas();
+
+                function getMousePos(evt) {
+                    const rect = canvas.getBoundingClientRect();
+                    const clientX = evt.clientX || (evt.touches && evt.touches[0].clientX);
+                    const clientY = evt.clientY || (evt.touches && evt.touches[0].clientY);
+                    return { 
+                        x: (clientX - rect.left) * (canvas.width / rect.width), 
+                        y: (clientY - rect.top) * (canvas.height / rect.height) 
+                    };
+                }
+
+                function startDrawing(e) {
+                    if (currentTool === 'draw') { isDrawing = true; const pos = getMousePos(e); [lastX, lastY] = [pos.x, pos.y]; }
+                    else if (currentTool === 'text') {
+                        const text = prompt("Nota:");
+                        if (text) { const pos = getMousePos(e); push(drawingsRef, { type: 'text', text, x: pos.x, y: pos.y, color: currentColor }); }
+                    }
+                }
+                function draw(e) {
+                    if (!isDrawing || currentTool !== 'draw') return;
+                    e.preventDefault(); const pos = getMousePos(e);
+                    push(drawingsRef, { x1: lastX, y1: lastY, x2: pos.x, y2: pos.y, color: currentColor });
+                    [lastX, lastY] = [pos.x, pos.y];
+                }
+
+                canvas.addEventListener('mousedown', startDrawing); canvas.addEventListener('mousemove', draw);
+                canvas.addEventListener('mouseup', () => isDrawing = false); 
+                canvas.addEventListener('touchstart', startDrawing, {passive:false}); canvas.addEventListener('touchmove', draw, {passive:false});
+                
+                document.querySelectorAll('.color-btn').forEach(btn => btn.addEventListener('click', () => { currentColor = btn.dataset.color; currentTool = 'draw'; }));
+                document.getElementById('eraserBtn')?.addEventListener('click', () => { currentColor = '#fff'; currentTool = 'draw'; });
+                document.getElementById('textBtn')?.addEventListener('click', () => currentTool = 'text');
+                document.getElementById('clearCanvasBtn')?.addEventListener('click', () => set(drawingsRef, null));
+
+                onValue(drawingsRef, (snapshot) => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    const data = snapshot.val();
+                    if(data) Object.values(data).forEach(d => {
+                        if(d.type === 'text') { ctx.fillStyle = d.color; ctx.font = "18px 'Delius'"; ctx.fillText(d.text, d.x, d.y); }
+                        else if(d.x1 !== undefined) { ctx.beginPath(); ctx.strokeStyle = d.color; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.moveTo(d.x1, d.y1); ctx.lineTo(d.x2, d.y2); ctx.stroke(); }
+                    });
+                });
+            }
+        
+// === 4. LÓGICA DEL REGALO (Con Música Especial) ===
+        const specialBtn = document.getElementById('specialGiftBtn');
+        specialBtn.addEventListener('click', () => {
+    logUserActivity('GIFT_OPENED'); // <--- AGREGA ESTA LÍNEA
+    specialOverlay.classList.add('active');
+    // ... resto de tu código ...
+});
+        const specialOverlay = document.getElementById('specialOverlay');
+        const closeSpecialBtn = document.getElementById('closeSpecialBtn');
+        
+        // Aquí definimos la canción del regalo
+        const giftMusic = new Audio('cancion6.mp3'); 
+        giftMusic.volume = 0.5; // Volumen al 50% para que no asuste
+
+        if (specialBtn && specialOverlay) {
+            
+            // AL ABRIR EL REGALO
+            specialBtn.addEventListener('click', () => {
+                specialOverlay.classList.add('active');
+                createFlowerRain();
+                logUserActivity('GIFT_OPENED');
+                
+                // Reproducir canción del regalo
+                giftMusic.currentTime = 0; // Reiniciar canción
+                giftMusic.play().catch(e => console.log("No se pudo reproducir audio regalo:", e));
+                
+                // Opcional: Pausar la música de fondo si estaba sonando
+                const mainAudio = document.getElementById('audio');
+                if(mainAudio && !mainAudio.paused) mainAudio.pause();
+            });
+
+            // AL CERRAR EL REGALO
+            const closeGift = () => {
+                specialOverlay.classList.remove('active');
+                giftMusic.pause(); // Pausar canción del regalo
+            };
+
+            closeSpecialBtn.addEventListener('click', closeGift);
+            
+            // Cerrar si toca fuera de la tarjeta
+            specialOverlay.addEventListener('click', (e) => { 
+                if (e.target === specialOverlay) closeGift(); 
+            });
+        }
+
+        function createFlowerRain() {
+            const flowers = ['🌸', '🌹', '✨', '💖'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    if (!specialOverlay.classList.contains('active')) return;
+                    const el = document.createElement('div');
+                    el.className = 'falling-flower';
+                    el.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                    el.style.left = Math.random() * 100 + 'vw';
+                    el.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), 5000);
+                }, i * 150);
+            }
+        }
+
+        // === LÓGICA DE LA PLAYLIST (ARREGLADA) ===
+            const musicInput = document.getElementById('musicSearchInput');
+            const resultCont = document.getElementById('searchResultsContainer');
+            const playlistCont = document.getElementById('sharedPlaylistContainer');
+            const playerContainer = document.getElementById('youtubePlayerContainer');
+            const iframe = document.getElementById('youtubePlayer');
+            
+            // Referencia a la base de datos
+            const playlistRef = ref(db, 'shared_playlist');
+            let searchTimeout;
+
+            // 1. BUSCADOR DE YOUTUBE
+            if (musicInput) {
+                musicInput.addEventListener('keyup', (e) => {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(async () => {
+                        const q = e.target.value.trim();
+                        if (!q) { resultCont.innerHTML = ''; return; }
+
+                        try {
+                            // Usamos la API Key global
+                            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(q)}&type=video&maxResults=4&key=${YOUTUBE_API_KEY}`;
+                            const res = await fetch(url);
+                            const data = await res.json();
+
+                            resultCont.innerHTML = '';
+                            if (data.items) {
+                                data.items.forEach(item => {
+                                    const div = document.createElement('div');
+                                    div.className = 'song-item';
+                                    div.innerHTML = `
+                                        <img src="${item.snippet.thumbnails.default.url}" style="width:40px; height:40px; border-radius:5px; object-fit:cover;">
+                                        <div style="flex:1; margin-left:10px;">
+                                            <div style="font-size:11px; font-weight:bold;">${item.snippet.title.substring(0, 40)}</div>
+                                            <div style="font-size:9px; color:#666;">${item.snippet.channelTitle}</div>
+                                        </div>
+                                        <button class="big-btn" style="padding:5px 10px; font-size:12px;">+</button>
+                                    `;
+                                    
+                                    // Click en el botón "+"
+                                    div.querySelector('button').onclick = (e) => {
+                                        e.stopPropagation();
+                                        push(playlistRef, {
+                                            videoId: item.id.videoId,
+                                            title: item.snippet.title,
+                                            thumbnailUrl: item.snippet.thumbnails.default.url,
+                                            addedBy: currentUser
+                                        });
+                                        // Feedback visual
+                                        const btn = e.target;
+                                        btn.textContent = '✔';
+                                        btn.style.background = '#4CAF50';
+                                    };
+                                    resultCont.appendChild(div);
+                                });
+                            }
+                        } catch (err) {
+                            console.error("Error YouTube:", err);
+                            resultCont.innerHTML = '<p class="small" style="text-align:center; color:red;">Error de conexión API</p>';
+                        }
+                    }, 600); // Espera 600ms al escribir
+                });
+            }
+
+            // 2. LISTA COMPARTIDA (FIREBASE)
+            if (playlistCont) {
+                onValue(playlistRef, (snapshot) => {
+                    playlistCont.innerHTML = '';
+                    const data = snapshot.val();
+
+                    if (data) {
+                        Object.entries(data).forEach(([key, song]) => {
+                            const div = document.createElement('div');
+                            div.className = 'song-item';
+                            
+                            // Botón de borrar (Solo si tú la agregaste)
+                            const deleteBtn = song.addedBy === currentUser 
+                                ? `<button class="del-btn" style="background:none; border:none; color:red; font-weight:bold; padding:5px;">✕</button>` 
+                                : '';
+
+                            div.innerHTML = `
+                                <img src="${song.thumbnailUrl}" style="width:35px; height:35px; border-radius:5px;">
+                                <div style="flex:1; margin-left:10px; overflow:hidden;">
+                                    <div style="font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${song.title}</div>
+                                    <div style="font-size:9px; color:#888;">Agregada por: ${song.addedBy}</div>
+                                </div>
+                                ${deleteBtn}
+                            `;
+
+                            // Click para reproducir
+                            div.addEventListener('click', () => {
+                                playerContainer.style.display = 'block';
+                                iframe.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1`;
+                                // Scroll suave hacia el video
+                                playerContainer.scrollIntoView({ behavior: 'smooth' });
+                            });
+
+                            // Click para borrar
+                            if (song.addedBy === currentUser) {
+                                div.querySelector('.del-btn').addEventListener('click', (e) => {
+                                    e.stopPropagation(); // Evita que se reproduzca al borrar
+                                    if(confirm("¿Borrar canción?")) {
+                                        remove(ref(db, `shared_playlist/${key}`));
+                                    }
+                                });
+                            }
+
+                            playlistCont.appendChild(div);
+                        });
+                    } else {
+                        playlistCont.innerHTML = '<div style="text-align:center; padding:20px; color:#888; font-size:12px;">La lista está vacía...<br>¡Agrega una canción! 🎶</div>';
+                    }
+                });
+            }
+        
+        // Playlist corregida (¡Una sola vez!)
+        
+        
+        const audio = document.getElementById('audio');
+        if(audio) {
+            let isPlaying = false;
+            document.getElementById('songTitle').textContent = playlist[0].title;
+            document.getElementById('songArtist').textContent = playlist[0].artist;
+            document.getElementById('albumCoverImg').src = playlist[0].cover;
+            audio.querySelector('source').src = playlist[0].src;
+            audio.load();
+
+            document.getElementById('playToggle')?.addEventListener('click', function() {
+                if(isPlaying) { audio.pause(); this.textContent = '▶'; }
+                else { audio.play(); this.textContent = '⏸'; }
+                isPlaying = !isPlaying;
+            });
+        }
+
+        // Corrección del modal doble: Usamos .onclick para evitar duplicados
+        const apologyBtn = document.getElementById('apologyBtn');
+        if (apologyBtn) {
+            apologyBtn.onclick = () => {
+                logUserActivity('APOLOGY_CLICK');
+                // Si ya existe uno, no abras otro
+                if(document.querySelector('.persistent-message')) return;
+
+                const msg = document.createElement('div'); 
+                msg.className = 'persistent-message show';
+                msg.innerHTML = `<div class="message-content"><button class="close-btn">✕</button><div class="message-text">ola si ves esto, me gustas mucho, eres tan hermosa. Me gustas totalmente, perdon si algunas veces me cuesta decir las cosas, pero siempre te recordare lo hermosa que estass <33. ERESMUY HERMOSA, quisiera poder besarte, poder tenerte conmigo y que puedas ver todo el amor que te puedo dar :33</div></div>`;
+                document.body.appendChild(msg);
+                msg.querySelector('.close-btn').onclick = () => msg.remove();
+            };
+        }
+
+        function showSecretMessage(text) {
+            const el = document.getElementById('secretMessage');
+            if(el) { el.textContent = text; el.style.opacity = '1'; setTimeout(() => el.style.opacity = '0', 3000); }
+        }
+        
+        document.getElementById('shareBtn')?.addEventListener('click', () => {
+            if(navigator.share) navigator.share({title:'Para ti', url:window.location.href});
+            else showSecretMessage("Link copiado 📋");
+        });
+
+        // Theme Toggle
+        const themeBtn = document.getElementById('themeToggleBtn');
+        if(themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+                const isDark = document.body.classList.contains('dark-theme');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                themeBtn.innerHTML = isDark ? '☀️' : '🌙';
+            });
+            if(localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeBtn.innerHTML = '☀️';
+            }
+        }
+// Función corregida para Arrastrar (Sin saltos en táctil)
+        function makeDraggable(el) {
+            if (!el) return;
+
+            let isDragging = false;
+            let startX, startY, initialLeft, initialTop;
+
+            // 1. AL TOCAR (Guardamos dónde empezó todo)
+            const dragStart = (e) => {
+                // Detectar si es touch o mouse
+                const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+
+                startX = clientX;
+                startY = clientY;
+                
+                // Guardamos la posición actual de la nota
+                initialLeft = el.offsetLeft;
+                initialTop = el.offsetTop;
+                
+                isDragging = true;
+                el.style.cursor = 'grabbing';
+            };
+
+            // 2. AL SOLTAR
+            const dragEnd = () => {
+                isDragging = false;
+                el.style.cursor = 'grab';
+            };
+
+            // 3. AL MOVER (Calculamos la diferencia)
+            const drag = (e) => {
+                if (!isDragging) return;
+
+                // Evitar que la pantalla haga scroll mientras arrastras la nota
+                if (e.type === 'touchmove') {
+                    e.preventDefault(); 
+                }
+
+                const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+
+                // Cuánto se movió el dedo desde el inicio
+                const deltaX = clientX - startX;
+                const deltaY = clientY - startY;
+
+                // Nueva posición = Posición Original + Lo que te moviste
+                el.style.left = (initialLeft + deltaX) + "px";
+                el.style.top = (initialTop + deltaY) + "px";
+            };
+
+            // Eventos para Mouse (PC)
+            el.addEventListener('mousedown', dragStart);
+            window.addEventListener('mouseup', dragEnd);
+            window.addEventListener('mousemove', drag);
+
+            // Eventos para Táctil (Celular) - passive: false es vital para evitar el scroll
+            el.addEventListener('touchstart', dragStart, { passive: false });
+            window.addEventListener('touchend', dragEnd);
+            window.addEventListener('touchmove', drag, { passive: false });
+        }
+
+        // Aplicamos la función a las notas
+        makeDraggable(document.getElementById('noteBubble'));
+        makeDraggable(document.getElementById('noteBubble2'));
+
+        // Mini juego corazones
+        document.getElementById('startGame')?.addEventListener('click', () => {
+            showSecretMessage("Toca la pantalla 💖");
+            const vp = document.getElementById('viewport');
+            if(vp) vp.onclick = () => {
+                const s = document.getElementById('score'); 
+                if(s) s.textContent = parseInt(s.textContent) + 1;
+            };
+        });
+        document.getElementById('resetGame')?.addEventListener('click', () => {
+             const s = document.getElementById('score'); if(s) s.textContent = 0;
+        });
+        document.getElementById('moreHearts')?.addEventListener('click', () => showSecretMessage("💖"));
+        document.getElementById('miniConfetti')?.addEventListener('click', () => showSecretMessage("🎉"));
+// === LÓGICA DE CAMBIO DE AMBIENTE ===
+            window.setTheme = function(theme) {
+                const body = document.body;
+                
+                // 1. Limpiar clases y efectos anteriores
+                body.className = ''; // Quita dark-theme u otros
+                document.querySelectorAll('.rain-drop, .star-twinkle').forEach(el => el.remove());
+
+                // 2. Aplicar nuevo tema
+                if (theme === 'rain') {
+                    body.classList.add('theme-rain');
+                    createRain();
+                } else if (theme === 'night') {
+                    body.classList.add('theme-night');
+                    createStars();
+                } else if (theme === 'sunset') {
+                    body.classList.add('theme-sunset');
+                }
+                // 'default' no hace nada extra, deja el estilo base
+                
+                // (Opcional) Guardar preferencia
+                // localStorage.setItem('vibe', theme);
+            };
+
+            function createRain() {
+                for(let i=0; i<50; i++) {
+                    const drop = document.createElement('div');
+                    drop.className = 'rain-drop';
+                    drop.style.left = Math.random() * 100 + 'vw';
+                    drop.style.animationDuration = (0.5 + Math.random() * 0.5) + 's';
+                    drop.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(drop);
+                }
+            }
+
+           function createStars() {
+                for(let i=0; i<60; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star-twinkle';
+                    star.style.left = Math.random() * 100 + 'vw';
+                    star.style.top = Math.random() * 100 + 'vh';
+                    star.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(star);
+                }
+            }
+
+        } // <--- ¡ESTA ES LA LLAVE QUE FALTA! (Cierra initializeAppLogic)
+    </script>
+
+            <script>
+                // --- LÓGICA PARA EL MODAL DE CONFIRMACIÓN ---
+                function showConfirmationModal(message) {
+                    return new Promise((resolve) => {
+                        const modal = document.createElement('div');
+                        modal.className = 'persistent-message';
+                        modal.innerHTML = `
+                        <div class="message-content">
+                            <div class="message-text">${message}</div>
+                            <div class="modal-buttons">
+                                <button class="big-btn confirm-btn">Sí, borrar</button>
+                                <button class="big-btn cancel-btn">Cancelar</button>
+                            </div>
+                        </div>
+                    `;
+                        document.body.appendChild(modal);
+                        setTimeout(() => modal.classList.add('show'), 10);
+
+                        const confirmBtn = modal.querySelector('.confirm-btn');
+                        const cancelBtn = modal.querySelector('.cancel-btn');
+
+                        function closeModal() {
+                            modal.classList.remove('show');
+                            setTimeout(() => modal.remove(), 300);
+                        }
+
+                        confirmBtn.addEventListener('click', () => {
+                            closeModal();
+                            resolve(true);
+                        });
+                        cancelBtn.addEventListener('click', () => {
+                            closeModal();
+                            resolve(false);
+                        });
+                        modal.addEventListener('click', (e) => {
+                            if (e.target === modal) {
+                                closeModal();
+                                resolve(false);
+                            }
+                        });
+                    });
+                }
+
+                function initFloatingHearts() {
+                    const container = document.getElementById('floatingHearts');
+                    for (let i = 0; i < 25; i++) {
+                        const heart = document.createElement('img');
+                        heart.src = 'https://art.pixilart.com/2d2ed65cc301.png';
+                        heart.className = 'floating-heart';
+                        heart.style.left = Math.random() * 100 + '%';
+                        heart.style.animationDelay = Math.random() * 20 + 's';
+                        heart.style.animationDuration = (15 + Math.random() * 15) + 's';
+                        heart.style.width = '28px';
+                        heart.style.height = '28px';
+                        container.appendChild(heart);
+                    }
+                }
+
+                function createSparkle(x, y) {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = x + 'px';
+                    sparkle.style.top = y + 'px';
+                    const tx = (Math.random() - 0.5) * 100;
+                    const ty = (Math.random() - 0.5) * 100;
+                    sparkle.style.setProperty('--tx', tx + 'px');
+                    sparkle.style.setProperty('--ty', ty + 'px');
+                    document.body.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 1000);
+                }
+
+                const playlist = [
+                    { title: 'ICNBYH', artist: 'Cuco', src: 'cancion5.mp3', cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ff/6b/23/ff6b23a2-613a-98f2-6098-008412568e71/25UMGIM05523.rgb.jpg/1200x1200bf-60.jpg' },
+                    { title: 'Para Ti', artist: 'Cuco', src: 'cancion6.mp3', cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ff/6b/23/ff6b23a2-613a-98f2-6098-008412568e71/25UMGIM05523.rgb.jpg/1200x1200bf-60.jpg' },
+                    { title: 'Amor de siempre', artist: 'Cuco', src: 'cancion7.mp3', cover: 'https://i.scdn.co/image/ab67616d0000b273b1c091e32aad5310ebbdd558' }
+                ];
+
+                let currentSongIndex = 0;
+                let isPlaying = false;
+              
+                const audioSource = audio.querySelector('source');
+                const playToggle = document.getElementById('playToggle');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const seek = document.getElementById('seek');
+                const audioError = document.getElementById('audioError');
+                const songTitleEl = document.getElementById('songTitle');
+                const songArtistEl = document.getElementById('songArtist');
+                const albumCoverImgEl = document.getElementById('albumCoverImg');
+
+                function loadSong(songIndex) {
+                    const song = playlist[songIndex];
+                    songTitleEl.textContent = song.title; songArtistEl.textContent = song.artist;
+                    albumCoverImgEl.src = song.cover; audioSource.src = song.src;
+                    audio.load(); seek.value = 0;
+                }
+                function playSong() {
+                    audio.play().then(() => { isPlaying = true; playToggle.textContent = '⏸'; }).catch(e => {
+                        console.warn('No se pudo reproducir:', e);
+                        audioError.style.display = 'block'; audioError.textContent = 'No se pudo reproducir. Haz clic para intentar.';
+                    });
+                }
+                function pauseSong() { audio.pause(); isPlaying = false; playToggle.textContent = '▶'; }
+                playToggle.addEventListener('click', () => { if (isPlaying) { pauseSong(); } else { playSong(); } });
+                nextBtn.addEventListener('click', () => {
+                    currentSongIndex = (currentSongIndex + 1) % playlist.length;
+                    loadSong(currentSongIndex); if (isPlaying) playSong();
+                });
+                prevBtn.addEventListener('click', () => {
+                    currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+                    loadSong(currentSongIndex); if (isPlaying) playSong();
+                });
+                audio.addEventListener('timeupdate', () => { if (audio.duration) { seek.value = audio.currentTime; seek.max = audio.duration; } });
+                seek.addEventListener('input', () => { audio.currentTime = seek.value; });
+                audio.addEventListener('ended', () => { nextBtn.click(); });
+                audio.addEventListener('error', function () { audioError.style.display = 'block'; console.error('Error al cargar audio.'); });
+                loadSong(currentSongIndex);
+
+                const viewport = document.getElementById('viewport');
+                const confettiLayer = document.getElementById('confetti');
+
+                function createFallingHeart(xPercent, size = 50, speed = 7000) {
+                    const heart = document.createElement('img');
+                    heart.src = 'https://art.pixilart.com/2d2ed65cc301.png';
+                    heart.style.cssText = `position:absolute; left:${xPercent}%; width:${size}px; height:${size}px; transform:translate(-50%, -10px); cursor:pointer; z-index:5;`;
+                    heart.className = 'falling-heart';
+                    const drift = (Math.random() * 30) - 15;
+                    const startY = -40; const endY = viewport.clientHeight + 60;
+                    const animation = heart.animate([{ transform: `translate(-50%, ${startY}px)`, opacity: 1 }, { transform: `translate(calc(-50% + ${drift}px), ${endY}px)`, opacity: 0.05 }], { duration: speed + (Math.random() * 1000), easing: 'cubic-bezier(.2,.7,.2,1)' });
+                    animation.onfinish = () => heart.remove();
+                    return heart;
+                }
+
+                const scoreEl = document.getElementById('score');
+                let score = 0; let gameInterval = null; let spawnInterval = 1300;
+                let gameRunning = false; let gameTimeout = null;
+
+                async function logUserActivityForGame(eventType, details = {}) {
+                    const currentUser = localStorage.getItem('username');
+                    if (!currentUser) return;
+                    try {
+                        const { getDatabase, ref, push } = await import("https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js");
+                        const db = getDatabase();
+                        await push(ref(db, "user_logs"), { user: currentUser, eventType, details, timestamp: new Date().toISOString() });
+                    } catch (e) { console.error("Error registrando evento de juego:", e); }
+                }
+
+                function startGame() {
+                    if (gameRunning) return;
+                    score = 0; scoreEl.textContent = score; gameRunning = true;
+                    gameInterval = setInterval(spawnHeartRandom, spawnInterval);
+                    viewport.addEventListener('click', onViewportClick);
+                    gameTimeout = setTimeout(endGame, 25000); showSecretMessage("❤️ Toca los corazones que caen");
+                }
+                function endGame() {
+                    gameRunning = false; clearInterval(gameInterval); viewport.removeEventListener('click', onViewportClick);
+                    if (score >= 10) celebrate();
+                    let message = `Juego terminado! Puntaje: ${score} ${score < 5 ? "💔 Sigue intentando" : score < 10 ? "❤️ Bien" : score < 15 ? "💖 Excelente" : "💕"}`;
+                    showSecretMessage(message);
+                    logUserActivityForGame('GAME_END', { finalScore: score });
+                }
+                function resetGame() {
+                    score = 0; scoreEl.textContent = score; gameRunning = false;
+                    clearInterval(gameInterval); if (gameTimeout) clearTimeout(gameTimeout);
+                    document.querySelectorAll('.falling-heart').forEach(e => e.remove());
+                }
+                function spawnHeartRandom() {
+                    const x = Math.random() * 100;
+                    const heart = createFallingHeart(x, 50, 5000 + Math.random() * 2000);
+                    heart.addEventListener('click', (ev) => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
+                    viewport.appendChild(heart);
+                    if (score >= 15 && gameInterval) {
+                        clearInterval(gameInterval); spawnInterval = Math.max(800, spawnInterval - 100);
+                        gameInterval = setInterval(spawnHeartRandom, spawnInterval);
+                    }
+                }
+                function collectHeart(node) {
+                    node.remove(); score++; scoreEl.textContent = score;
+                    createSparkle(node.getBoundingClientRect().left + node.width / 2, node.getBoundingClientRect().top + node.height / 2);
+                    burstAt(node.getBoundingClientRect().left + node.clientWidth / 2, node.getBoundingClientRect().top + node.clientHeight / 2);
+                }
+                function onViewportClick(e) {
+                    const rect = viewport.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const heart = createFallingHeart(x, 40, 3000 + Math.random() * 1000);
+                    viewport.appendChild(heart);
+                    heart.addEventListener('click', ev => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
+                    createSparkle(e.clientX, e.clientY);
+                }
+                function burstAt(pageX, pageY) {
+                    const c = document.createElement('div');
+                    const baseRect = confettiLayer.getBoundingClientRect();
+                    c.style.cssText = `position:absolute; left:${pageX - baseRect.left}px; top:${pageY - baseRect.top}px; pointer-events:none;`;
+                    for (let i = 0; i < 8; i++) {
+                        const p = document.createElement('div');
+                        p.style.cssText = `width:${6 + Math.random() * 6}px; height:${6 + Math.random() * 6}px; background:${i % 2 == 0 ? '#ff6aa6' : '#ff2e81'}; position:absolute; left:0; top:0; border-radius:50%;`;
+                        c.appendChild(p);
+                        const dx = (Math.random() * 100 - 50); const dy = (Math.random() * 100 - 60);
+                        p.animate([{ transform: 'translate(0,0)', opacity: 1 }, { transform: `translate(${dx}px, ${dy}px) scale(.4)`, opacity: 0 }], { duration: 700 + Math.random() * 300, easing: 'cubic-bezier(.2,.8,.2,1)' });
+                    }
+                    confettiLayer.appendChild(c); setTimeout(() => c.remove(), 1100);
+                }
+
+                document.getElementById('startGame').addEventListener('click', startGame);
+                document.getElementById('resetGame').addEventListener('click', resetGame);
+                document.getElementById('apologyBtn').addEventListener('click', () => {
+                    const messageText = 'Hola hermosa, sabias que eres mui bonita y me gustas mucho? me encantas. quisiera poder besarte, acariciarte, tocarte, decirte lo hermosa que eres mientras te veo y que sepas lo mucho que me gustas y puedas ver todo el amor que te tengo, eres tan bonita, quiero poder besarte ahora mismo, weno siempre aunque ahora tengo demasiadas ganas de besar tus labios, necesito que estes conmigo, me gustas demasiado, es que eres tan hermosa, me gusta cada parte de ti, QUIERO BESARTE, NO AGUANTO ESTAS GANAS, solo poder imaginar no es suficiente, quiero estar contigo, me gustas demasiado mibonita <3333.';
+                    const persistentMessage = document.createElement('div');
+                    persistentMessage.className = 'persistent-message';
+                    persistentMessage.innerHTML = `<div class="message-content"><button class="close-btn">✕</button><div class="message-text">${messageText}</div></div>`;
+                    document.body.appendChild(persistentMessage);
+                    setTimeout(() => { persistentMessage.classList.add('show'); }, 10);
+                    persistentMessage.querySelector('.close-btn').addEventListener('click', () => {
+                        persistentMessage.classList.remove('show');
+                        setTimeout(() => { persistentMessage.remove(); }, 300);
+                    });
+                });
+                document.getElementById('moreHearts').addEventListener('click', () => {
+                    for (let i = 0; i < 8; i++) {
+                        setTimeout(() => {
+                            const x = 10 + Math.random() * 80;
+                            const heart = createFallingHeart(x, 45, 3500 + Math.random() * 1500);
+                            heart.addEventListener('click', ev => { ev.stopPropagation(); collectHeart(heart); }, { passive: false });
+                            viewport.appendChild(heart);
+                        }, i * 150);
+                    }
+                    showSecretMessage("¡Lluvia de corazones! 💖");
+                });
+                function celebrate() {
+                    for (let i = 0; i < 40; i++) {
+                        const el = document.createElement('div');
+                        el.style.cssText = `position:absolute; left:${Math.random() * 100}%; top:${Math.random() * 30}%; width:${6 + Math.random() * 8}px; height:${6 + Math.random() * 8}px; background:${Math.random() > 0.5 ? '#ffd3ea' : '#ff8ab8'}; opacity:0.95; border-radius:50%;`;
+                        confettiLayer.appendChild(el);
+                        el.animate([{ transform: 'translateY(0) rotate(0)', opacity: 1 }, { transform: `translateY(260px) rotate(${Math.random() * 360}deg)`, opacity: 0 }], { duration: 1400 + Math.random() * 800, easing: 'cubic-bezier(.2,.7,.2,1)' });
+                        setTimeout(() => el.remove(), 2200);
+                    }
+                }
+                document.getElementById('miniConfetti').addEventListener('click', () => { celebrate(); showSecretMessage("🎉"); });
+                document.getElementById('shareBtn').addEventListener('click', async () => {
+                    try {
+                        if (navigator.share) { await navigator.share({ title: 'PAGINITA', text: 'Mira esto', url: location.href }); } else { showSecretMessage("Copia el enlace para compartir 📋"); }
+                    } catch (e) { console.warn(e); }
+                });
+                function showSecretMessage(text) {
+                    const el = document.getElementById('secretMessage'); el.textContent = text; el.style.opacity = '1';
+                    setTimeout(() => { el.style.opacity = '0'; }, 3000);
+                }
+                document.addEventListener('click', (e) => { if (!e.target.closest('.card, button, input')) { createSparkle(e.clientX, e.clientY); } });
+                document.addEventListener('keydown', (e) => { if (e.key.toLowerCase() === 'g') startGame(); if (e.key.toLowerCase() === 'r') resetGame(); });
+                initFloatingHearts();
+
+                function initPixelRain() {
+                    const container = document.getElementById('pixel-rain-container');
+                    setInterval(() => {
+                        const pixel = document.createElement('div');
+                        pixel.classList.add('pixel');
+                        pixel.style.left = `${Math.random() * 100}%`;
+                        const duration = Math.random() * 5 + 5;
+                        pixel.style.animationDuration = `${duration}s`;
+                        container.appendChild(pixel); setTimeout(() => { pixel.remove(); }, duration * 1000);
+                    }, 100);
+                }
+                initPixelRain();
+
+                const themeToggleBtn = document.getElementById('themeToggleBtn');
+                const body = document.body;
+                function applyTheme(theme) { if (theme === 'dark') { body.classList.add('dark-theme'); themeToggleBtn.innerHTML = '☀️'; } else { body.classList.remove('dark-theme'); themeToggleBtn.innerHTML = '🌙'; } }
+                themeToggleBtn.addEventListener('click', () => { const newTheme = body.classList.contains('dark-theme') ? 'light' : 'dark'; localStorage.setItem('theme', newTheme); applyTheme(newTheme); });
+                applyTheme(localStorage.getItem('theme') || 'light');
+                setTimeout(() => { showSecretMessage("Hice esto con mucho cariño mariana bienvenida <33"); }, 1000);
+
+                function makeDraggable(el) {
+                    let isDragging = false, offsetX = 0, offsetY = 0;
+                    const onDown = (e) => {
+                        isDragging = true; const touch = e.touches ? e.touches[0] : e;
+                        offsetX = touch.clientX - el.offsetLeft; offsetY = touch.clientY - el.offsetTop; el.style.cursor = 'grabbing';
+                    }
+                    const onUp = () => { isDragging = false; el.style.cursor = 'grab'; }
+                    const onMove = (e) => {
+                        if (!isDragging) return; const touch = e.touches ? e.touches[0] : e;
+                        let left = touch.clientX - offsetX, top = touch.clientY - offsetY;
+                        left = Math.max(0, Math.min(window.innerWidth - el.offsetWidth, left));
+                        top = Math.max(0, Math.min(window.innerHeight - el.offsetHeight, top));
+                        el.style.left = left + 'px'; el.style.top = top + 'px'; el.style.right = 'auto'; el.style.bottom = 'auto';
+                    }
+                    el.addEventListener('mousedown', onDown); document.addEventListener('mouseup', onUp); document.addEventListener('mousemove', onMove);
+                    el.addEventListener('touchstart', onDown, { passive: false }); document.addEventListener('touchend', onUp); document.addEventListener('touchmove', onMove, { passive: false });
+                }
+                makeDraggable(document.getElementById('noteBubble')); makeDraggable(document.getElementById('noteBubble2'));
+
+                function initCountdown() {
+                    const countdownElement = document.getElementById('countdown'); if (!countdownElement) return;
+                    const targetDate = new Date(countdownElement.dataset.date).getTime();
+                    const daysEl = document.getElementById('days'), hoursEl = document.getElementById('hours'), minutesEl = document.getElementById('minutes'), secondsEl = document.getElementById('seconds');
+                    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+                    const interval = setInterval(() => {
+                        const now = new Date().getTime(); const distance = targetDate - now;
+                        if (distance < 0) { clearInterval(interval); countdownElement.innerHTML = `<h2 class="reasons-title">🎉</h2>`; return; }
+                        daysEl.textContent = Math.floor(distance / 864e5);
+                        hoursEl.textContent = String(Math.floor((distance % 864e5) / 36e5)).padStart(2, '0');
+                        minutesEl.textContent = String(Math.floor((distance % 36e5) / 6e4)).padStart(2, '0');
+                        secondsEl.textContent = String(Math.floor((distance % 6e4) / 1e3)).padStart(2, '0');
+                    }, 1000);
+                }
+                initCountdown();
+// --- LÓGICA PARA CERRAR LAS BURBUJAS ---
+        
+        // Buscamos todos los elementos que tengan la clase "close-bubble"
+        document.querySelectorAll('.close-bubble').forEach(closeBtn => {
+            closeBtn.addEventListener('click', (e) => {
+                // Evitamos que el clic en la X active el arrastre (draggable)
+                e.stopPropagation(); 
+                
+                // Encontramos la burbuja padre y la eliminamos
+                const bubble = closeBtn.parentElement;
+                bubble.remove();
+                // Si prefieres que solo se oculte pero no se borre, usa:
+                // bubble.style.display = 'none';
+            });
+        });
+
+        // --- LÓGICA DE LA PANTALLA DE CARGA ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('appLoader');
+            
+            // Espera 2.5 segundos antes de quitar la carga
+            setTimeout(() => {
+                loader.classList.add('loader-hidden');
+                
+                // Lo eliminamos del HTML después de la animación para que no estorbe
+                loader.addEventListener('transitionend', () => {
+                    loader.remove();
+                });
+            }, 150);
+        });
+
+       // === LÓGICA DE POCHI (CORREGIDA) ===
+        window.petInteraction = function() {
+            const bubble = document.getElementById('petBubble');
+            
+            // ESTO ES LO NUEVO: Si no encuentra la burbuja, no hace nada (evita el error rojo)
+            if (!bubble) return; 
+
+            const sounds = [
+                "Guau! 🐶", 
+                "Soy Pochi! 🖤", 
+                "*Mueve la colita*", 
+                "Zzz...", 
+                "Jugamos? 🎾", 
+                "Patitas! 🐾"
+            ];
+            const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+            
+            bubble.textContent = randomSound;
+            bubble.classList.add('show');
+            
+            // Verificamos si existe la función de logs antes de llamarla
+            if(typeof logUserActivity === 'function') {
+                logUserActivity('PET_CLICKED', { said: randomSound, petName: 'Pochi' });
+            }
+
+            setTimeout(() => {
+                if(bubble) bubble.classList.remove('show');
+            }, 2500);
+        };
+            </script>
+
+
+<style>/* --- ESTILO DE LA HORA EN EL CHAT --- */
+.message-time {
+    display: block;        /* Pone la hora en una línea nueva */
+    font-size: 9px;        /* Letra chiquita */
+    margin-top: 4px;
+    text-align: right;     /* Alineado a la derecha */
+    opacity: 0.7;          /* Un poco transparente */
+}
+
+/* Color de la hora según quien envía */
+.sent .message-time { color: rgba(255,255,255,0.8); } /* Blanco en tus mensajes */
+.received .message-time { color: #888; }              /* Gris en los de ella */
+/* --- ESTILOS DE RESPUESTA (REPLY) --- */
+/* --- ESTILOS DE RESPUESTA --- */
+.reply-preview-bar {
+    background: rgba(255, 255, 255, 0.95);
+    border-left: 4px solid #ff3b8d;
+    padding: 8px 12px;
+    margin: 0 10px 10px 10px;
+    border-radius: 8px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #555;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+    animation: slideInLeft 0.2s;
+}
+
+.quoted-message {
+    background: rgba(0, 0, 0, 0.1);
+    border-left: 3px solid #ff73a7;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0.9;
+}
+
+.quoted-author {
+    font-weight: bold;
+    color: #ff3b8d;
+    margin-bottom: 2px;
+}</style>
 </body>
+
 </html>
+
+
+
+
+
+
+
