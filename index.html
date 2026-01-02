@@ -1187,28 +1187,36 @@
 
                 /* Reproductor de audio personalizado */
                 .audio-msg-wrapper {
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    min-width: 200px;
-                }
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 150px; /* Ancho mínimo para que se vean los botones de Play */
+    max-width: 220px; /* Ancho máximo para que no se vea gigante */
+    padding: 5px 0;
+    overflow: hidden; /* Corta cualquier cosa que intente salirse */
+}
 
                 /* Hacemos el reproductor nativo más lindo */
-                audio::-webkit-media-controls-panel {
-                    background-color: rgba(255, 255, 255, 0.8);
-                }
+               /* 4. Estilo para el reproductor en modo oscuro/claro (opcional) */
+audio::-webkit-media-controls-panel {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.chat-message {
+    max-width: 80%; /* Evita que la burbuja toque los bordes del cel */
+    box-sizing: border-box;
+}
 
                 .sent audio::-webkit-media-controls-panel {
                     background-color: rgba(255, 255, 255, 0.4);
                 }
 
-                audio {
-                    height: 35px;
-                    border-radius: 20px;
-                    outline: none;
-                    width: 100%;
-                    max-width: 250px;
-                }
+                /* 2. El reproductor se adapta al contenedor */
+audio {
+    width: 100%;
+    height: 32px;
+    outline: none;
+}
 
                 .recipient-selection {
                     display: flex;
