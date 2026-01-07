@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -3016,67 +3017,88 @@ audio {
                     // Función para cargar mensajes (definida antes para evitar errores)
                     // 1. Definimos loadChat (CON SOPORTE PARA CELULAR 📱)
                     window.loadChat = function (recipient) {
-                    const chatRoomId = [currentUser, recipient].sort().join('_');
-                    const chatRef = ref(db, `chats/${chatRoomId}`);
+    const chatRoomId = [currentUser, recipient].sort().join('_');
+    const chatRef = ref(db, `chats/${chatRoomId}`);
 
-                    onValue(chatRef, (snapshot) => {
-                        chatMessages.innerHTML = '';
-                        if (snapshot.exists()) {
-                            snapshot.forEach((childSnapshot) => {
-                                const msg = childSnapshot.val();
-                                const el = document.createElement('div');
-                                el.className = `chat-message ${msg.author === currentUser ? 'sent' : 'received'}`;
+    onValue(chatRef, (snapshot) => {
+        chatMessages.innerHTML = '';
+        if (snapshot.exists()) {
+            snapshot.forEach((childSnapshot) => {
+                const msg = childSnapshot.val();
+                const el = document.createElement('div');
+                el.className = `chat-message ${msg.author === currentUser ? 'sent' : 'received'}`;
 
-                                // --- 1. Lógica de Respuesta (Reply) ---
-                                let replyHTML = '';
-                                if (msg.replyData) {
-                                    replyHTML = `<div class="quoted-message"><span class="quoted-author">${msg.replyData.author}</span><span>${msg.replyData.text}</span></div>`;
-                                }
+                // --- 1. Lógica de Respuesta ---
+                let replyHTML = '';
+                if (msg.replyData) {
+                    replyHTML = `<div class="quoted-message"><span class="quoted-author">${msg.replyData.author}</span><span>${msg.replyData.text}</span></div>`;
+                }
 
-                                // --- 2. Lógica de Contenido (Texto vs Audio) ---
-                                let contentHTML = '';
-                                if (msg.type === 'audio' && msg.audioUrl) {
-                                    contentHTML = `<div class="audio-msg-wrapper"><audio controls src="${msg.audioUrl}"></audio></div>`;
-                                } else {
-                                    contentHTML = msg.text || '';
-                                }
+                // --- 2. Lógica de Contenido + YT MUSIC ---
+                let contentHTML = msg.text || '';
+                
+                if (msg.type === 'audio' && msg.audioUrl) {
+                    contentHTML = `<div class="audio-msg-wrapper"><audio controls src="${msg.audioUrl}"></audio></div>`;
+           } else if (msg.text) {
+    const ytReg = /(?:https?:\/\/)?(?:music\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/;
+    const match = msg.text.match(ytReg);
+    
+    // ... dentro de tu detección de link ...
+if (match) {
+    const videoId = match[1];
+    const thumb = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+    const cleanText = msg.text.replace(match[0], '').trim();
 
-                                // --- 3. Timestamp ---
-                                let timeString = "";
-                                if (msg.timestamp) {
-                                    const dateObj = new Date(msg.timestamp);
-                                    timeString = `<span class="message-time">${dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
-                                }
+    contentHTML = `
+        ${cleanText ? `<div class="msg-text">${cleanText}</div>` : ''}
+        <div class="music-sticker">
+            <img src="${thumb}" class="album-cover">
+            <div class="music-details">
+                <span style="color:white; font-size:10px; display:block;">YouTube Music</span>
+                <button class="btn-play-sticker" onclick="playSong('${videoId}', this)">▶</button>
+            </div>
+            <div id="player-${videoId}" class="hidden-player"></div>
+        </div>`;
+} else {
+        contentHTML = msg.text;
+    }
+}
 
-                                el.innerHTML = `${replyHTML}${contentHTML}${timeString}`;
+                // --- 3. Timestamp ---
+                let timeString = "";
+                if (msg.timestamp) {
+                    const dateObj = new Date(msg.timestamp);
+                    timeString = `<span class="message-time">${dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
+                }
 
-                                // --- 4. Autor ---
-                                if (msg.author !== currentUser) {
-                                    const s = document.createElement('span');
-                                    s.className = 'message-author';
-                                    s.textContent = msg.author;
-                                    el.prepend(s);
-                                }
+                el.innerHTML = `${replyHTML}${contentHTML}${timeString}`;
 
-                                // --- 5. Doble Toque para responder ---
-                                let lastTap = 0;
-                                el.addEventListener('click', (e) => {
-                                    const currentTime = new Date().getTime();
-                                    const tapLength = currentTime - lastTap;
-                                    if (tapLength < 500 && tapLength > 0) {
-                                        e.preventDefault();
-                                        window.setReply(msg.text, msg.author, msg.type);
-                                    }
-                                    lastTap = currentTime;
-                                });
+                // --- 4. Autor ---
+                if (msg.author !== currentUser) {
+                    const s = document.createElement('span');
+                    s.className = 'message-author';
+                    s.textContent = msg.author;
+                    el.prepend(s);
+                }
 
-                                // AÑADIR AL CHAT (Fuera del click para que se vea siempre)
-                                chatMessages.appendChild(el);
-                            });
-                            chatMessages.scrollTop = chatMessages.scrollHeight;
-                        }
-                    });
-                };
+                // --- 5. Doble Toque ---
+                let lastTap = 0;
+                el.addEventListener('click', (e) => {
+                    const currentTime = new Date().getTime();
+                    const tapLength = currentTime - lastTap;
+                    if (tapLength < 500 && tapLength > 0) {
+                        e.preventDefault();
+                        window.setReply(msg.text, msg.author, msg.type);
+                    }
+                    lastTap = currentTime;
+                });
+
+                chatMessages.appendChild(el);
+            });
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    });
+};
 
                     // Ejecución Lógica Chat
                     if (recipientSelect) {
@@ -4045,7 +4067,48 @@ audio {
                         if (bubble) bubble.classList.remove('show');
                     }, 2500);
                 };
-            </script>
+
+         let activePlayer = null;
+
+window.playSong = function(id, btn) {
+    const containerId = `player-${id}`;
+    
+    // Si ya está sonando esta misma canción, la pausamos
+    if (activePlayer && btn.innerHTML === "⏸") {
+        activePlayer.stopVideo();
+        btn.innerHTML = "▶";
+        return;
+    }
+
+    // Limpiamos cualquier reproductor anterior
+    if (activePlayer) { activePlayer.destroy(); }
+    
+    // Cambiamos todos los botones a Play antes de empezar el nuevo
+    document.querySelectorAll('.btn-play-sticker').forEach(b => b.innerHTML = "▶");
+
+    // Creamos el nuevo reproductor de la API
+    activePlayer = new YT.Player(containerId, {
+        height: '1',
+        width: '1',
+        videoId: id,
+        playerVars: {
+            'autoplay': 1,
+            'controls': 0,
+            'disablekb': 1,
+            'modestbranding': 1
+        },
+        events: {
+            'onReady': (event) => {
+                event.target.playVideo();
+                btn.innerHTML = "⏸";
+            },
+            'onStateChange': (event) => {
+                if (event.data === YT.PlayerState.ENDED) btn.innerHTML = "▶";
+            }
+        }
+    });
+};
+                </script>
 
 
             <style>
@@ -4107,7 +4170,51 @@ audio {
                     color: #ff3b8d;
                     margin-bottom: 2px;
                 }
-            </style>
+/* Tarjeta Estilo Instagram */
+.music-sticker {
+    background: #111;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--accent);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    max-width: 260px;
+    margin-top: 10px;
+}
+
+.album-cover {
+    width: 55px;
+    height: 55px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.btn-play-sticker {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* El reproductor NO puede ser display:none, debe ser un puntito invisible */
+.hidden-player {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0.01;
+    pointer-events: none;
+}     </style>
+
+<script src="https://www.youtube.com/iframe_api"></script>
 </body>
 
 </html>
