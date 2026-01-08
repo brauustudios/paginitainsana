@@ -4071,42 +4071,38 @@ if (match) {
          let activePlayer = null;
 
 window.playSong = function(id, btn) {
-    const containerId = `player-${id}`;
+    // Buscamos el contenedor de audio dentro de la misma tarjeta del botón
+    const sticker = btn.closest('.music-sticker');
+    const container = sticker.querySelector('.hidden-player-container');
     
-    // Si ya está sonando esta misma canción, la pausamos
-    if (activePlayer && btn.innerHTML === "⏸") {
-        activePlayer.stopVideo();
-        btn.innerHTML = "▶";
-        return;
+    if (btn.innerText === "⏸") {
+        // DETENER: Al vaciar el div, el iframe muere y la música para
+        container.innerHTML = "";
+        btn.innerText = "▶";
+        btn.style.background = "var(--accent)";
+        btn.style.color = "white";
+    } else {
+        // RESET: Detenemos cualquier otra canción que esté sonando en el chat
+        document.querySelectorAll('.btn-play-sticker').forEach(b => {
+            b.innerText = "▶";
+            b.style.background = "var(--accent)";
+            b.style.color = "white";
+        });
+        document.querySelectorAll('.hidden-player-container').forEach(c => c.innerHTML = "");
+
+        // REPRODUCIR: Insertamos el iframe con autoplay
+        // Usamos origin para que YouTube no bloquee la reproducción en GitHub
+        const currentOrigin = window.location.origin;
+        container.innerHTML = `
+            <iframe 
+                src="https://www.youtube.com/embed/${id}?autoplay=1&enablejsapi=1&origin=${currentOrigin}" 
+                allow="autoplay; encrypted-media">
+            </iframe>`;
+        
+        btn.innerText = "⏸";
+        btn.style.background = "white";
+        btn.style.color = "var(--accent)";
     }
-
-    // Limpiamos cualquier reproductor anterior
-    if (activePlayer) { activePlayer.destroy(); }
-    
-    // Cambiamos todos los botones a Play antes de empezar el nuevo
-    document.querySelectorAll('.btn-play-sticker').forEach(b => b.innerHTML = "▶");
-
-    // Creamos el nuevo reproductor de la API
-    activePlayer = new YT.Player(containerId, {
-        height: '1',
-        width: '1',
-        videoId: id,
-        playerVars: {
-            'autoplay': 1,
-            'controls': 0,
-            'disablekb': 1,
-            'modestbranding': 1
-        },
-        events: {
-            'onReady': (event) => {
-                event.target.playVideo();
-                btn.innerHTML = "⏸";
-            },
-            'onStateChange': (event) => {
-                if (event.data === YT.PlayerState.ENDED) btn.innerHTML = "▶";
-            }
-        }
-    });
 };
                 </script>
 
