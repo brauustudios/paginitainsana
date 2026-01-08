@@ -3044,21 +3044,23 @@ audio {
     const match = msg.text.match(ytReg);
     
     // ... dentro de tu detección de link ...
+// ... dentro de tu detección de link de YT ...
 if (match) {
-    const videoId = match[1];
-    const thumb = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-    const cleanText = msg.text.replace(match[0], '').trim();
+// ... dentro de la lógica de detección de link (match) ...
+const videoId = match[1];
+const thumb = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+const cleanText = msg.text.replace(match[0], '').trim();
 
-    contentHTML = `
-        ${cleanText ? `<div class="msg-text">${cleanText}</div>` : ''}
-        <div class="music-sticker">
-            <img src="${thumb}" class="album-cover">
-            <div class="music-details">
-                <span style="color:white; font-size:10px; display:block;">YouTube Music</span>
-                <button class="btn-play-sticker" onclick="playSong('${videoId}', this)">▶</button>
-            </div>
-            <div id="player-${videoId}" class="hidden-player"></div>
-        </div>`;
+contentHTML = `
+    ${cleanText ? `<div class="msg-text">${cleanText}</div>` : ''}
+    <div class="music-sticker">
+        <img src="${thumb}" class="album-cover">
+        <div class="music-details">
+            <span style="color:white; font-size:9px; display:block; margin-bottom:4px; font-family: 'Press Start 2P', cursive;">MUSIC</span>
+            <button class="btn-play-sticker" onclick="playSong('${videoId}', this)">▶</button>
+        </div>
+        <div class="yt-audio-container"></div>
+    </div>`;
 } else {
         contentHTML = msg.text;
     }
@@ -4069,35 +4071,31 @@ if (match) {
                 };
 
          let activePlayer = null;
-
-window.playSong = function(id, btn) {
-    // Buscamos el contenedor de audio dentro de la misma tarjeta del botón
-    const sticker = btn.closest('.music-sticker');
-    const container = sticker.querySelector('.hidden-player-container');
+         window.playSong = function(id, btn) {
+    if (!btn) return;
     
+    // Buscamos el contenedor dentro de la tarjeta
+    const card = btn.closest('.music-sticker');
+    if (!card) return;
+    
+    const playerDiv = card.querySelector('.yt-audio-container');
+    if (!playerDiv) return;
+
     if (btn.innerText === "⏸") {
-        // DETENER: Al vaciar el div, el iframe muere y la música para
-        container.innerHTML = "";
+        playerDiv.innerHTML = "";
         btn.innerText = "▶";
         btn.style.background = "var(--accent)";
-        btn.style.color = "white";
     } else {
-        // RESET: Detenemos cualquier otra canción que esté sonando en el chat
+        // Detener otras canciones
         document.querySelectorAll('.btn-play-sticker').forEach(b => {
             b.innerText = "▶";
             b.style.background = "var(--accent)";
-            b.style.color = "white";
         });
-        document.querySelectorAll('.hidden-player-container').forEach(c => c.innerHTML = "");
+        document.querySelectorAll('.yt-audio-container').forEach(c => c.innerHTML = "");
 
-        // REPRODUCIR: Insertamos el iframe con autoplay
-        // Usamos origin para que YouTube no bloquee la reproducción en GitHub
+        // Reproducir
         const currentOrigin = window.location.origin;
-        container.innerHTML = `
-            <iframe 
-                src="https://www.youtube.com/embed/${id}?autoplay=1&enablejsapi=1&origin=${currentOrigin}" 
-                allow="autoplay; encrypted-media">
-            </iframe>`;
+        playerDiv.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&enablejsapi=1&origin=${currentOrigin}" allow="autoplay"></iframe>`;
         
         btn.innerText = "⏸";
         btn.style.background = "white";
@@ -4166,18 +4164,19 @@ window.playSong = function(id, btn) {
                     color: #ff3b8d;
                     margin-bottom: 2px;
                 }
-/* Tarjeta Estilo Instagram */
+/* Tarjeta de Música Blindada */
 .music-sticker {
-    background: #111;
-    border-radius: 12px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border: 1px solid var(--accent);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    background: #111 !important;
+    border-radius: 12px !important;
+    padding: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    border: 1px solid var(--accent) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
     max-width: 260px;
     margin-top: 10px;
+    position: relative;
 }
 
 .album-cover {
@@ -4188,10 +4187,10 @@ window.playSong = function(id, btn) {
 }
 
 .btn-play-sticker {
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 50%;
+    background: var(--accent) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50% !important;
     width: 35px;
     height: 35px;
     cursor: pointer;
@@ -4201,14 +4200,15 @@ window.playSong = function(id, btn) {
     justify-content: center;
 }
 
-/* El reproductor NO puede ser display:none, debe ser un puntito invisible */
-.hidden-player {
+/* Contenedor invisible para el audio */
+.yt-audio-container {
     position: absolute;
     width: 1px;
     height: 1px;
     opacity: 0.01;
+    overflow: hidden;
     pointer-events: none;
-}     </style>
+} </style>
 
 <script src="https://www.youtube.com/iframe_api"></script>
 </body>
