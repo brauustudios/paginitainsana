@@ -2139,15 +2139,15 @@ audio {
                     <button class="big-btn" id="loginBtn">Entrar</button>
         </div>
     </div>
-    <div id="lastUpdate">Última actualización: 04:26 AM 22/1/26</div>
+    <div id="lastUpdate">Última actualización: 12:08 AM 22/1/26</div>
     <div id="pixel-rain-container"></div>
    <div id="noteBubble" class="note-bubble">
-    <span class="close-bubble">✕</span> 💌 ola bonitap, solo paso a dejarte algo bonito hoy. espero q tengas un día tranquilo y q te pasen cosas lindas. sabes q te quiero mucho y q siempre voy a desearte lo mejor <33
+    <span class="close-bubble">✕</span> 💌 ola bonitap, solo paso a dejarte algo bonito hoy. espero q tengas un día tranquilo y q te pasen cosas lindas. sabes q te quiero mucho y q siempre voy a desearte lo mejor. <33
 </div>
 
 
     <div id="noteBubble2" class="note-bubble" style="bottom:auto; top:100px; background:#e1f5fe;">
-    <span class="close-bubble">✕</span> ola ola bonitaaa, para mí tú siempre vas a ser la más bonita de todas, la q tiene algo diferente. eso es lo q siempre voy a pensar de ti. te quiero muchisimo y perdoname por mis tonterias :(( <33
+    <span class="close-bubble">✕</span> ola ola bonitaaa, para mí tú siempre vas a ser la más bonita de todas, la q tiene algo diferente. eso es lo q siempre voy a pensar de ti. te quiero muchisimo y perdoname por mis tonterias. <33
     <img src="https://media.tenor.com/_8knL5sTPQoAAAAM/good-morning.gif" alt="emoji"
 
             style="width:55px; height:55px; vertical-align:middle;">
@@ -2794,6 +2794,37 @@ audio {
                         style="background:linear-gradient(180deg,#fff,#ffd7ec);color:var(--accent)">
                         Celebrar</button>
                 </div>
+<div class="card">
+    <div class="title-row">
+        <h5><span class="pixel-heart">ESTADO DE ANIMOP</span> </h5>
+    </div>
+    <div class="game-panel" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: space-around;">
+        
+        <div class="game-card" style="flex: 1; min-width: 140px; text-align: center;">
+            <div class="score" id="val-braw">0%</div>
+            <div class="thermometer-track">
+                <div class="thermometer-fill" id="fill-braw"></div>
+            </div>
+            <input type="range" id="range-braw" min="0" max="100" value="0" class="seek" disabled>
+            <input type="text" id="status-text-braw" class="chat-input" placeholder="estado" 
+                   style="font-size: 11px; padding: 5px; margin-top: 10px; width: 90%;" disabled>
+            <div class="small" style="margin-top: 5px; font-weight: bold; color: var(--accent);">braw</div>
+        </div>
+
+        <div class="game-card" style="flex: 1; min-width: 140px; text-align: center;">
+            <div class="score" id="val-emocat">0%</div>
+            <div class="thermometer-track">
+                <div class="thermometer-fill" id="fill-emocat"></div>
+            </div>
+            <input type="range" id="range-emocat" min="0" max="100" value="0" class="seek" disabled>
+            <input type="text" id="status-text-emocat" class="chat-input" placeholder="estado" 
+                   style="font-size: 11px; padding: 5px; margin-top: 10px; width: 90%;" disabled>
+            <div class="small" style="margin-top: 5px; font-weight: bold; color: var(--accent-light);">emocat</div>
+        </div>
+
+    </div>
+</div>
+                
                 <div class="lamp-section" style="margin-top: 40px; text-align: center;">
                     <h2 class="reasons-title">Señal de Luz</h2>
                     <p class="small">luz prosita.</p>
@@ -2857,7 +2888,7 @@ pero si lo haces…
 solo quería que supieras
 que aquí sigo.
 
-<strong> te amo.</strong>
+<strong>te amo.</strong>
                         </p>
                     </div>
                     <div class="magic-footer">
@@ -2870,6 +2901,8 @@ que aquí sigo.
                 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
                 import { getDatabase, ref, push, onValue, get, set, off, remove } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 
+
+                
                 // 1. CONFIGURACIÓN
                 // --- PEGA ESTO AL PRINCIPIO DEL SCRIPT, ANTES DE FIREBASECONFIG ---
                 const YOUTUBE_API_KEY = "AIzaSyBEn7oGHPZeXjHEsvUQtXXSJqyYZ3boGjM";
@@ -2897,26 +2930,43 @@ que aquí sigo.
                 const usernameError = document.getElementById('usernameError');
                 const wrap = document.querySelector('.wrap');
                 const logoutBtn = document.getElementById('logoutBtn');
+async function login() {
+    const username = usernameInput.value.trim().toLowerCase();
+    if (username === '') return;
 
-                // --- LOGIN ---
-                async function login() {
-                    const username = usernameInput.value.trim().toLowerCase();
-                    if (username === '') return;
-                    const usersRef = ref(db, 'users/' + username);
-                    const snapshot = await get(usersRef);
+    // 1. DEFINIR LAS CONTRASEÑAS (Cámbialas por las que tú quieras)
+    const PASSWORDS = {
+        'braw': '1234',    // Elige una clave para braw
+        'emocat': '1234'   // Elige una clave para emocat
+    };
 
-                    if (snapshot.exists() && username !== 'braw' && username !== 'emo') {
-                        usernameError.style.display = 'block';
-                    } else {
-                        await set(usersRef, true);
-                        localStorage.setItem('username', username);
-                        currentUser = username;
-                        loginOverlay.style.display = 'none';
-                        wrap.style.display = 'flex';
-                        initializeAppLogic();
-                    }
-                }
+    const usersRef = ref(db, 'users/' + username);
+    const snapshot = await get(usersRef);
 
+    // 2. SI EL NOMBRE ES UNO DE LOS "PROHIBIDOS" (USTEDES)
+    if (username === 'braw' || username === 'emocat') {
+        const passwordIngresada = prompt("🔐 Este perfil es privado. Introduce tu código de acceso:");
+        
+        if (passwordIngresada !== PASSWORDS[username]) {
+            alert("❌ Acceso denegado. No eres el dueño de esta cuenta.");
+            return; // Bloquea el paso completamente
+        }
+    } 
+    // 3. SI ES OTRA PERSONA INTENTANDO USAR UN NOMBRE QUE YA EXISTE
+    else if (snapshot.exists()) {
+        usernameError.textContent = "Este nombre ya está en uso ⛔";
+        usernameError.style.display = 'block';
+        return;
+    }
+
+    // --- SI PASÓ LAS PRUEBAS, ENTRA ---
+    await set(usersRef, true);
+    localStorage.setItem('username', username);
+    currentUser = username;
+    loginOverlay.style.display = 'none';
+    wrap.style.display = 'flex';
+    initializeAppLogic();
+}
                 function logout() {
                     localStorage.removeItem('username');
                     window.location.reload();
@@ -2955,6 +3005,9 @@ que aquí sigo.
 
                     logUserActivity('LOGIN_SUCCESS');
 
+
+
+                    
                     // === 1. LÁMPARA DE COMPAÑÍA ===
                     const lampRef = ref(db, 'status_lamp');
                     const lampIcon = document.getElementById('lampIcon');
@@ -2990,7 +3043,79 @@ que aquí sigo.
                             }
                         });
                     }
+// === LÓGICA DEL TERMÓMETRO Y ESTADO ===
+const moodRef = ref(db, 'status_thermometer');
 
+function initMoodTracker() {
+    // 1. Identificar quién es el usuario actual
+    // Tu código ya define 'currentUser' (puede ser 'braw' o 'emo')
+    if (!currentUser) return;
+
+    const miSlider = document.getElementById(`range-${currentUser}`);
+    const miTexto = document.getElementById(`status-text-${currentUser}`);
+
+    // 2. Desbloquear solo MIS controles
+    if (miSlider && miTexto) {
+        miSlider.disabled = false;
+        miTexto.disabled = false;
+
+        // Guardar nivel (slider) en Firebase
+        miSlider.oninput = (e) => {
+            const nivel = parseInt(e.target.value);
+            set(ref(db, `status_thermometer/${currentUser}/nivel`), nivel);
+        };
+
+        // Guardar emoción (texto) al presionar Enter
+        miTexto.onkeypress = (e) => {
+            if (e.key === 'Enter') {
+                const emocion = miTexto.value;
+                set(ref(db, `status_thermometer/${currentUser}/emocion`), emocion);
+                logUserActivity('MOOD_TEXT_UPDATE', { text: emocion });
+                alert("Estado guardado 💖");
+            }
+        };
+    }
+
+  // Función para obtener el sentimiento según el porcentaje
+function getMoodLabel(valor) {
+    if (valor <= 20) return " Triste";
+    if (valor <= 40) return " Mal";
+    if (valor <= 60) return " Normal";
+    if (valor <= 80) return " Feliz";
+    return "💖 ";
+}
+
+// Dentro de tu onValue del moodRef:
+onValue(moodRef, (snapshot) => {
+    const data = snapshot.val() || {};
+    // Ajustamos los IDs para que coincidan con tu HTML (braw y emo)
+    const usuarios = ['braw', 'emocat'];
+
+    usuarios.forEach(u => {
+        const info = data[u] || { nivel: 0, emocion: "" };
+        
+        const fill = document.getElementById(`fill-${u}`);
+        const score = document.getElementById(`val-${u}`);
+        const textInput = document.getElementById(`status-text-${u}`);
+        const rangeInput = document.getElementById(`range-${u}`);
+
+        if (fill) fill.style.height = info.nivel + "%";
+        
+        // AQUÍ CAMBIAMOS EL PORCENTAJE POR EL TEXTO DEL ÁNIMO
+        if (score) {
+            score.innerText = `${info.nivel}% ${getMoodLabel(info.nivel)}`;
+        }
+        
+        if (u !== currentUser) {
+            if (textInput) textInput.value = info.emocion || "";
+            if (rangeInput) rangeInput.value = info.nivel || 0;
+        }
+    });
+});
+}
+
+initMoodTracker();
+                    
                     // === 2. CHAT (CORREGIDO) ===
                     // === 2. CHAT (FINAL: CON LOGS, HORA Y RESPUESTAS) ===
                     const recipientSelect = document.getElementById('recipientSelect');
@@ -3719,6 +3844,8 @@ contentHTML = `
                     }
 
                 } // <--- ¡ESTA ES LA LLAVE QUE FALTA! (Cierra initializeAppLogic)
+
+                
             </script>
 
             <script>
@@ -3927,7 +4054,7 @@ contentHTML = `
                 document.getElementById('startGame').addEventListener('click', startGame);
                 document.getElementById('resetGame').addEventListener('click', resetGame);
                 document.getElementById('apologyBtn').addEventListener('click', () => {
-                   const messageText = 'ola, solo quería dejarte esto hoy bonitap. aunque quedemos así, quería que supieras q sigo aquí con el mismo cariño. también perdón por no poder ser a veces lo q tú esperabas, nunca fue por falta de amor, me importas más de lo q sabes y siempre voy a desearte cosas bonitas, tambien perdon por haber sido un completo idiota, nunca supe valorarte, lo intente pero perdoname, talvez ahora estes enojada por lo de anteayer pero no lo hice con mala intencion, yo quiero estar para ti aun asi, tu eres muy bonita y yo no quise hacer eso por eso mismo porque se que en ninguna sales menos bonita como tu dices pero perdoname, cualquier cosita yo estoy aqui y ojalá hoy te vaya bien. te actualizare la paginita cada dia, aqui tendras un lugar donde sepas que estare aqui amandote en silencio pero con todo mi amor, te amo, ten un muy buen diaaap <33';
+                   const messageText = 'ola, solo quería dejarte esto hoy. aunque quedemos así, como amigos, como tú me dijiste, quería que supieras q sigo aquí con el mismo cariño. también perdón por no poder ser a veces lo q tú esperabas, nunca fue por falta de amor, me importas más de lo q sabes y siempre voy a desearte cosas bonitas, tambien perdon por haber sido un completo idiota, nunca supe valorarte, lo intente pero perdoname, talvez ahora estes enojada por lo de anteayer pero no lo hice con mala intencion, yo quiero estar para ti aun asi, tu eres muy bonita y yo no quise hacer eso por eso mismo porque se que en ninguna sales menos bonita como tu dices pero perdoname, cualquier cosita yo estoy aqui y ojalá hoy te vaya bien. te actualizare la paginita cada dia, aqui tendras un lugar donde sepas que estare aqui amandote en silencio pero con todo mi amor, te amo, ten un muy buen diaaap <33';
 
                     const persistentMessage = document.createElement('div');
                     persistentMessage.className = 'persistent-message';
@@ -4226,13 +4353,73 @@ contentHTML = `
     opacity: 0.01;
     overflow: hidden;
     pointer-events: none;
-} </style>
+} 
+
+.thermometer-track {
+    width: 28px;
+    height: 180px;
+    background: rgba(255, 255, 255, 0.4); /* Fondo más claro para efecto cristal */
+    border-radius: 20px;
+    margin: 15px auto;
+    position: relative;
+    border: 3px solid var(--accent);
+    overflow: hidden;
+    box-shadow: 
+        inset 4px 0px 6px rgba(0,0,0,0.1), /* Sombra interna para profundidad */
+        0 4px 10px rgba(255, 59, 141, 0.2); /* Resplandor exterior */
+}
+
+.thermometer-fill {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    /* Degradado más vibrante */
+    background: linear-gradient(to top, var(--accent-dark), var(--accent), #ffb2d4);
+    transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efecto rebote suave */
+    height: 0%;
+    border-top: 2px solid white; /* Brillo en la punta del líquido */
+}
+
+/* Efecto de burbujas o reflejo de cristal */
+.thermometer-track::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 4px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3); /* Reflejo lateral */
+    border-radius: 10px;
+}
+
+.game-card .score {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px; /* Un poco más grande */
+    color: var(--accent);
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+    margin-bottom: 12px;
+    background: var(--soft);
+    padding: 5px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+/* Mejora para el input de texto (Estado) */
+.chat-input {
+    border: 2px solid var(--bg2) !important;
+    border-radius: 15px !important;
+    transition: all 0.3s ease;
+    background: white !important;
+}
+
+.chat-input:focus {
+    border-color: var(--accent) !important;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(255, 59, 141, 0.15);
+}</style>
 
 <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 
 </html>
-
-
-
 
