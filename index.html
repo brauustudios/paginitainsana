@@ -2125,6 +2125,29 @@ audio {
                         width: 50px;
                     }
                 }
+                .note-bubble {
+    /* ... tus estilos de color y borde ... */
+    
+    /* 1. Habilitar el scroll vertical */
+    overflow-y: auto !important;
+    display: block !important; /* Evita que flex bloquee el scroll */
+    
+    /* 2. Activar el toque táctil para el contenido */
+    touch-action: pan-y !important; 
+    -webkit-overflow-scrolling: touch; /* Scroll suave tipo iPhone */
+    
+    /* 3. Evitar que el scroll se pase a la página de atrás */
+    overscroll-behavior: contain;
+}
+
+/* Estilo de la barrita de scroll para que se vea bonita (opcional) */
+.note-bubble::-webkit-scrollbar {
+    width: 4px;
+}
+.note-bubble::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+}
             </style>
 </head>
 
@@ -2139,7 +2162,7 @@ audio {
                     <button class="big-btn" id="loginBtn">Entrar</button>
         </div>
     </div>
-    <div id="lastUpdate">Última actualización: 12:08 AM 22/1/26</div>
+    <div id="lastUpdate">Última actualización: 07:19 AM 22/1/26</div>
     <div id="pixel-rain-container"></div>
    <div id="noteBubble" class="note-bubble">
     <span class="close-bubble">✕</span> 💌 ola bonitap, solo paso a dejarte algo bonito hoy. espero q tengas un día tranquilo y q te pasen cosas lindas. sabes q te quiero mucho y q siempre voy a desearte lo mejor. <33
@@ -2796,7 +2819,7 @@ audio {
                 </div>
 <div class="card">
     <div class="title-row">
-        <h5><span class="pixel-heart">ESTADO DE ANIMOP</span> </h5>
+         <h2 class="reasons-title">ANIMOP :3</h2>
     </div>
     <div class="game-panel" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: space-around;">
         
@@ -3717,71 +3740,68 @@ contentHTML = `
                             themeBtn.innerHTML = '☀️';
                         }
                     }
-                    // Función corregida para Arrastrar (Sin saltos en táctil)
-                    function makeDraggable(el) {
-                        if (!el) return;
 
-                        let isDragging = false;
-                        let startX, startY, initialLeft, initialTop;
+                    
+                  function makeDraggable(el) {
+    if (!el) return;
 
-                        // 1. AL TOCAR (Guardamos dónde empezó todo)
-                        const dragStart = (e) => {
-                            // Detectar si es touch o mouse
-                            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-                            const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+    let isDragging = false;
+    let startX, startY, initialLeft, initialTop;
 
-                            startX = clientX;
-                            startY = clientY;
+    const dragStart = (e) => {
+        // Ignorar si se toca el botón de cerrar (X)
+        if (e.target.classList.contains('close-bubble')) return;
 
-                            // Guardamos la posición actual de la nota
-                            initialLeft = el.offsetLeft;
-                            initialTop = el.offsetTop;
+        const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
 
-                            isDragging = true;
-                            el.style.cursor = 'grabbing';
-                        };
+        startX = clientX;
+        startY = clientY;
+        initialLeft = el.offsetLeft;
+        initialTop = el.offsetTop;
+        isDragging = true;
+    };
 
-                        // 2. AL SOLTAR
-                        const dragEnd = () => {
-                            isDragging = false;
-                            el.style.cursor = 'grab';
-                        };
+    const dragEnd = () => {
+        isDragging = false;
+    };
 
-                        // 3. AL MOVER (Calculamos la diferencia)
-                        const drag = (e) => {
-                            if (!isDragging) return;
+    const drag = (e) => {
+        if (!isDragging) return;
 
-                            // Evitar que la pantalla haga scroll mientras arrastras la nota
-                            if (e.type === 'touchmove') {
-                                e.preventDefault();
-                            }
+        const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
 
-                            const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-                            const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+        const deltaX = clientX - startX;
+        const deltaY = clientY - startY;
 
-                            // Cuánto se movió el dedo desde el inicio
-                            const deltaX = clientX - startX;
-                            const deltaY = clientY - startY;
+        // --- EL TRUCO ESTÁ AQUÍ ---
+        // Si el movimiento es muy pequeño (como un tap o inicio de scroll), no hacemos nada
+        if (Math.abs(deltaX) < 5 && Math.abs(deltaY) < 5) return;
 
-                            // Nueva posición = Posición Original + Lo que te moviste
-                            el.style.left = (initialLeft + deltaX) + "px";
-                            el.style.top = (initialTop + deltaY) + "px";
-                        };
+        // Si el usuario está moviendo el dedo más hacia ARRIBA/ABAJO que hacia los lados,
+        // asumimos que quiere LEER EL TEXTO y NO mover la caja.
+        if (e.type === 'touchmove' && Math.abs(deltaY) > Math.abs(deltaX)) {
+            // No ejecutamos e.preventDefault(), así el scroll interno funciona
+            return; 
+        }
 
-                        // Eventos para Mouse (PC)
-                        el.addEventListener('mousedown', dragStart);
-                        window.addEventListener('mouseup', dragEnd);
-                        window.addEventListener('mousemove', drag);
+        // Si llegamos aquí, es porque el usuario quiere MOVER la nota
+        if (e.type === 'touchmove') e.preventDefault(); 
 
-                        // Eventos para Táctil (Celular) - passive: false es vital para evitar el scroll
-                        el.addEventListener('touchstart', dragStart, { passive: false });
-                        window.addEventListener('touchend', dragEnd);
-                        window.addEventListener('touchmove', drag, { passive: false });
-                    }
+        el.style.left = (initialLeft + deltaX) + "px";
+        el.style.top = (initialTop + deltaY) + "px";
+        el.style.bottom = "auto"; // Vital para que no pelee con el bottom original
+    };
 
-                    // Aplicamos la función a las notas
-                    makeDraggable(document.getElementById('noteBubble'));
-                    makeDraggable(document.getElementById('noteBubble2'));
+    el.addEventListener('mousedown', dragStart);
+    window.addEventListener('mouseup', dragEnd);
+    window.addEventListener('mousemove', drag);
+
+    el.addEventListener('touchstart', dragStart, { passive: true });
+    window.addEventListener('touchend', dragEnd);
+    window.addEventListener('touchmove', drag, { passive: false });
+}
 
                     // Mini juego corazones
                     document.getElementById('startGame')?.addEventListener('click', () => {
