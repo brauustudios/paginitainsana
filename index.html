@@ -2845,6 +2845,19 @@ audio {
                    style="font-size: 11px; padding: 5px; margin-top: 10px; width: 90%;" disabled>
             <div class="small" style="margin-top: 5px; font-weight: bold; color: var(--accent-light);">emocat</div>
         </div>
+        <div id="apoyo-emocat" style="
+    display: none; 
+    background: white; 
+    border: 2px solid var(--accent); 
+    border-radius: 15px; 
+    padding: 10px; 
+    margin-top: 10px; 
+    text-align: center; 
+    animation: pulse 2s infinite;">
+    <p style="font-family: 'Delius', cursive; color: var(--accent-dark); font-size: 14px; margin: 0;">
+        <b></b> <span id="texto-apoyo"></span>
+    </p>
+</div>
 
     </div>
 </div>
@@ -3102,6 +3115,25 @@ function initMoodTracker() {
         };
     }
 
+// Escuchar el nivel de emocat para mostrar mensaje de apoyo
+onValue(ref(db, 'status_thermometer/emocat'), (snapshot) => {
+    const data = snapshot.val();
+    const contenedor = document.getElementById('apoyo-emocat');
+    const textoMsg = document.getElementById('texto-apoyo');
+
+    if (data && data.nivel <= 25) {
+        // Mostramos el contenedor
+        contenedor.style.display = 'block';
+        
+        // Si hay un mensaje personalizado en el estado de Braw, lo usamos
+        // Si no, ponemos uno por defecto
+        textoMsg.innerText = "olap, vi que tu barrita esta poquito baja y dice que estas mal, recuerda que eres muy especial para mi y eres la mejor, te quiero demasiado, eres hermosa en cada sentido, si quieres hablar o algop aqui estare :3";
+    } else {
+        // Si el nivel sube de 25, el mensaje desaparece solo
+        contenedor.style.display = 'none';
+    }
+});
+    
     // 3. ESCUCHAR CAMBIOS (Para que se cargue al recargar y se vea en tiempo real)
 onValue(moodRef, (snapshot) => {
     const data = snapshot.val();
