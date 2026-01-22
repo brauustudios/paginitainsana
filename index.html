@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -2162,7 +2163,7 @@ audio {
                     <button class="big-btn" id="loginBtn">Entrar</button>
         </div>
     </div>
-    <div id="lastUpdate">Última actualización: 07:19 AM 22/1/26</div>
+    <div id="lastUpdate">Última actualización: 04:02 PM 22/1/26</div>
     <div id="pixel-rain-container"></div>
    <div id="noteBubble" class="note-bubble">
     <span class="close-bubble">✕</span> 💌 ola bonitap, solo paso a dejarte algo bonito hoy. espero q tengas un día tranquilo y q te pasen cosas lindas. sabes q te quiero mucho y q siempre voy a desearte lo mejor. <33
@@ -2847,6 +2848,8 @@ audio {
 
     </div>
 </div>
+
+
                 
                 <div class="lamp-section" style="margin-top: 40px; text-align: center;">
                     <h2 class="reasons-title">Señal de Luz</h2>
@@ -3099,6 +3102,37 @@ function initMoodTracker() {
         };
     }
 
+    // 3. ESCUCHAR CAMBIOS (Para que se cargue al recargar y se vea en tiempo real)
+onValue(moodRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+        if (data.braw) {
+            updateUI('braw', data.braw.nivel, data.braw.emocion);
+        }
+        // Actualizar datos de Ella (emo)
+        if (data.emo) {
+            updateUI('emocat', data.emocat.nivel, data.emocat.emocion);
+        }
+    }
+});
+
+// Función auxiliar para pintar los cambios en la pantalla
+function updateUI(user, nivel, emocion) {
+    const bar = document.getElementById(`bar-${user}`);
+    const textInput = document.getElementById(`status-text-${user}`);
+    const percentageLabel = document.getElementById(`perc-${user}`);
+
+    if (bar) bar.style.width = (nivel || 0) + '%';
+    if (percentageLabel) percentageLabel.innerText = (nivel || 0) + '%';
+    
+    // Solo actualizamos el texto si NO es nuestro propio input (para no interrumpir lo que escribes)
+    if (textInput && user !== currentUser) {
+        textInput.value = emocion || "";
+    } else if (textInput && !textInput.value) { 
+        // Si es nuestro input pero está vacío al cargar, le ponemos lo que dice la DB
+        textInput.value = emocion || "";
+    }
+}
   // Función para obtener el sentimiento según el porcentaje
 function getMoodLabel(valor) {
     if (valor <= 20) return " Triste";
